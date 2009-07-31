@@ -1,0 +1,408 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0C251C3C10235C7100C05768 /* bkgnd_mapnote2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C251C3B10235C7100C05768 /* bkgnd_mapnote2.png */; };
+		0C251C4A10236C0900C05768 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C251C4510236C0900C05768 /* Photo.m */; };
+		0C251C4B10236C0900C05768 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C251C4710236C0900C05768 /* Note.m */; };
+		0C251C4C10236C0900C05768 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C251C4910236C0900C05768 /* Group.m */; };
+		0C251C6C10236C4800C05768 /* UIImageToDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C251C6B10236C4800C05768 /* UIImageToDataTransformer.m */; };
+		0C251CA71023891F00C05768 /* bkgnd_mapnote-default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C251CA61023891F00C05768 /* bkgnd_mapnote-default.png */; };
+		0C251CB81023894200C05768 /* img_map-quicknote.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C251CAD1023894200C05768 /* img_map-quicknote.png */; };
+		0C251CB91023894200C05768 /* img_accuracy_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C251CAE1023894200C05768 /* img_accuracy_green.png */; };
+		0C251CBA1023894200C05768 /* img_map-blank.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C251CAF1023894200C05768 /* img_map-blank.png */; };
+		0C251CBB1023894200C05768 /* img_accuracy_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C251CB01023894200C05768 /* img_accuracy_red.png */; };
+		0C251CBC1023894200C05768 /* img_accuracy_bkgnd.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C251CB11023894200C05768 /* img_accuracy_bkgnd.png */; };
+		0C251CBD1023894200C05768 /* img_map-refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C251CB21023894200C05768 /* img_map-refresh.png */; };
+		0C251CBE1023894200C05768 /* img_photo-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C251CB31023894200C05768 /* img_photo-add.png */; };
+		0C251CBF1023894200C05768 /* img_accuracy_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C251CB41023894200C05768 /* img_accuracy_yellow.png */; };
+		0C251CC01023894200C05768 /* img_button-glossy.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C251CB51023894200C05768 /* img_button-glossy.png */; };
+		0C251CC11023894200C05768 /* img_map-node.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C251CB61023894200C05768 /* img_map-node.png */; };
+		0C251CC21023894200C05768 /* img_map-crosshairs.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C251CB71023894200C05768 /* img_map-crosshairs.png */; };
+		0C251D081023935B00C05768 /* img_carrot-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C251D071023935B00C05768 /* img_carrot-white.png */; };
+		0C3551F71020D690006C7ED7 /* NoteDetailHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C3551F61020D690006C7ED7 /* NoteDetailHeader.xib */; };
+		0CB2F13F101A3B600087C6F6 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB2F13D101A3B600087C6F6 /* RootViewController.m */; };
+		0CB2F140101A3B600087C6F6 /* RootView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CB2F13E101A3B600087C6F6 /* RootView.xib */; };
+		0CB2F165101A3DE10087C6F6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB2F164101A3DE10087C6F6 /* CoreLocation.framework */; };
+		0CB2F167101A3DE60087C6F6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB2F166101A3DE60087C6F6 /* MapKit.framework */; };
+		1D3623260D0F684500981E51 /* MapNotesAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* MapNotesAppDelegate.m */; };
+		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		28860B770F44E54D00985440 /* MapNotes.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 28860B760F44E54D00985440 /* MapNotes.xcdatamodel */; };
+		28860BE50F44EE6400985440 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28860BE40F44EE6400985440 /* CoreData.framework */; };
+		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
+		2899E5600DE3E45000AC0155 /* NotesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E55F0DE3E45000AC0155 /* NotesView.xib */; };
+		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
+		28C286E10D94DF7D0034E888 /* NotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* NotesViewController.m */; };
+		D345E74C10229C4B0070C491 /* NoteDetailFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = D345E74B10229C4B0070C491 /* NoteDetailFooter.xib */; };
+		D345E7541022A07C0070C491 /* RoundedRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = D345E7531022A07C0070C491 /* RoundedRectView.m */; };
+		D345E81B1022B1A30070C491 /* NoteAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D345E81A1022B1A30070C491 /* NoteAnnotation.m */; };
+		D360D124101D246B0095ED7B /* NoteDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = D360D123101D246B0095ED7B /* NoteDetailController.m */; };
+		D37E96C310215F6F00D6509A /* temp_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D37E96C210215F6F00D6509A /* temp_icon.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0C251C3B10235C7100C05768 /* bkgnd_mapnote2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bkgnd_mapnote2.png; sourceTree = "<group>"; };
+		0C251C4410236C0900C05768 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Photo.h; path = "Model Classes/Photo.h"; sourceTree = "<group>"; };
+		0C251C4510236C0900C05768 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Photo.m; path = "Model Classes/Photo.m"; sourceTree = "<group>"; };
+		0C251C4610236C0900C05768 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Note.h; path = "Model Classes/Note.h"; sourceTree = "<group>"; };
+		0C251C4710236C0900C05768 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Note.m; path = "Model Classes/Note.m"; sourceTree = "<group>"; };
+		0C251C4810236C0900C05768 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Group.h; path = "Model Classes/Group.h"; sourceTree = "<group>"; };
+		0C251C4910236C0900C05768 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Group.m; path = "Model Classes/Group.m"; sourceTree = "<group>"; };
+		0C251C6A10236C4800C05768 /* UIImageToDataTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageToDataTransformer.h; sourceTree = "<group>"; };
+		0C251C6B10236C4800C05768 /* UIImageToDataTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageToDataTransformer.m; sourceTree = "<group>"; };
+		0C251CA61023891F00C05768 /* bkgnd_mapnote-default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bkgnd_mapnote-default.png"; sourceTree = "<group>"; };
+		0C251CAD1023894200C05768 /* img_map-quicknote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_map-quicknote.png"; sourceTree = "<group>"; };
+		0C251CAE1023894200C05768 /* img_accuracy_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_accuracy_green.png; sourceTree = "<group>"; };
+		0C251CAF1023894200C05768 /* img_map-blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_map-blank.png"; sourceTree = "<group>"; };
+		0C251CB01023894200C05768 /* img_accuracy_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_accuracy_red.png; sourceTree = "<group>"; };
+		0C251CB11023894200C05768 /* img_accuracy_bkgnd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_accuracy_bkgnd.png; sourceTree = "<group>"; };
+		0C251CB21023894200C05768 /* img_map-refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_map-refresh.png"; sourceTree = "<group>"; };
+		0C251CB31023894200C05768 /* img_photo-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_photo-add.png"; sourceTree = "<group>"; };
+		0C251CB41023894200C05768 /* img_accuracy_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_accuracy_yellow.png; sourceTree = "<group>"; };
+		0C251CB51023894200C05768 /* img_button-glossy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_button-glossy.png"; sourceTree = "<group>"; };
+		0C251CB61023894200C05768 /* img_map-node.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_map-node.png"; sourceTree = "<group>"; };
+		0C251CB71023894200C05768 /* img_map-crosshairs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_map-crosshairs.png"; sourceTree = "<group>"; };
+		0C251D071023935B00C05768 /* img_carrot-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_carrot-white.png"; sourceTree = "<group>"; };
+		0C3551F61020D690006C7ED7 /* NoteDetailHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteDetailHeader.xib; sourceTree = "<group>"; };
+		0CB2F13C101A3B600087C6F6 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		0CB2F13D101A3B600087C6F6 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		0CB2F13E101A3B600087C6F6 /* RootView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = RootView.xib; path = Classes/RootView.xib; sourceTree = "<group>"; };
+		0CB2F164101A3DE10087C6F6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		0CB2F166101A3DE60087C6F6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D3623240D0F684500981E51 /* MapNotesAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapNotesAppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* MapNotesAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapNotesAppDelegate.m; sourceTree = "<group>"; };
+		1D6058910D05DD3D006BFB54 /* MapNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		28860B760F44E54D00985440 /* MapNotes.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = MapNotes.xcdatamodel; sourceTree = "<group>"; };
+		28860BE40F44EE6400985440 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2899E55F0DE3E45000AC0155 /* NotesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotesView.xib; sourceTree = "<group>"; };
+		28A0AAE50D9B0CCF005BE974 /* MapNotes_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapNotes_Prefix.pch; sourceTree = "<group>"; };
+		28AD735F0D9D9599002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		28C286DF0D94DF7D0034E888 /* NotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesViewController.h; sourceTree = "<group>"; };
+		28C286E00D94DF7D0034E888 /* NotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesViewController.m; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* MapNotes-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MapNotes-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		D345E74B10229C4B0070C491 /* NoteDetailFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteDetailFooter.xib; sourceTree = "<group>"; };
+		D345E7521022A07C0070C491 /* RoundedRectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedRectView.h; sourceTree = "<group>"; };
+		D345E7531022A07C0070C491 /* RoundedRectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedRectView.m; sourceTree = "<group>"; };
+		D345E8191022B1A30070C491 /* NoteAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteAnnotation.h; sourceTree = "<group>"; };
+		D345E81A1022B1A30070C491 /* NoteAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteAnnotation.m; sourceTree = "<group>"; };
+		D360D122101D246B0095ED7B /* NoteDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteDetailController.h; sourceTree = "<group>"; };
+		D360D123101D246B0095ED7B /* NoteDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteDetailController.m; sourceTree = "<group>"; };
+		D37E96C210215F6F00D6509A /* temp_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = temp_icon.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
+				28860BE50F44EE6400985440 /* CoreData.framework in Frameworks */,
+				0CB2F165101A3DE10087C6F6 /* CoreLocation.framework in Frameworks */,
+				0CB2F167101A3DE60087C6F6 /* MapKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				1D3623240D0F684500981E51 /* MapNotesAppDelegate.h */,
+				1D3623250D0F684500981E51 /* MapNotesAppDelegate.m */,
+				0CB2F13C101A3B600087C6F6 /* RootViewController.h */,
+				0CB2F13D101A3B600087C6F6 /* RootViewController.m */,
+				28C286DF0D94DF7D0034E888 /* NotesViewController.h */,
+				28C286E00D94DF7D0034E888 /* NotesViewController.m */,
+				D360D122101D246B0095ED7B /* NoteDetailController.h */,
+				D360D123101D246B0095ED7B /* NoteDetailController.m */,
+				D345E8191022B1A30070C491 /* NoteAnnotation.h */,
+				D345E81A1022B1A30070C491 /* NoteAnnotation.m */,
+				D345E7521022A07C0070C491 /* RoundedRectView.h */,
+				D345E7531022A07C0070C491 /* RoundedRectView.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		0C251CA81023893200C05768 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				0C251D071023935B00C05768 /* img_carrot-white.png */,
+				D37E96C210215F6F00D6509A /* temp_icon.png */,
+				0C251CA61023891F00C05768 /* bkgnd_mapnote-default.png */,
+				0C251C3B10235C7100C05768 /* bkgnd_mapnote2.png */,
+				0C251CAD1023894200C05768 /* img_map-quicknote.png */,
+				0C251CAE1023894200C05768 /* img_accuracy_green.png */,
+				0C251CAF1023894200C05768 /* img_map-blank.png */,
+				0C251CB01023894200C05768 /* img_accuracy_red.png */,
+				0C251CB11023894200C05768 /* img_accuracy_bkgnd.png */,
+				0C251CB21023894200C05768 /* img_map-refresh.png */,
+				0C251CB31023894200C05768 /* img_photo-add.png */,
+				0C251CB41023894200C05768 /* img_accuracy_yellow.png */,
+				0C251CB51023894200C05768 /* img_button-glossy.png */,
+				0C251CB61023894200C05768 /* img_map-node.png */,
+				0C251CB71023894200C05768 /* img_map-crosshairs.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		0CB2F123101A37420087C6F6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0C251C4410236C0900C05768 /* Photo.h */,
+				0C251C4510236C0900C05768 /* Photo.m */,
+				0C251C4610236C0900C05768 /* Note.h */,
+				0C251C4710236C0900C05768 /* Note.m */,
+				0C251C4810236C0900C05768 /* Group.h */,
+				0C251C4910236C0900C05768 /* Group.m */,
+				0C251C6A10236C4800C05768 /* UIImageToDataTransformer.h */,
+				0C251C6B10236C4800C05768 /* UIImageToDataTransformer.m */,
+				28860B760F44E54D00985440 /* MapNotes.xcdatamodel */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* MapNotes.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				0CB2F123101A37420087C6F6 /* Model */,
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+				0CB2F164101A3DE10087C6F6 /* CoreLocation.framework */,
+				0CB2F166101A3DE60087C6F6 /* MapKit.framework */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				28A0AAE50D9B0CCF005BE974 /* MapNotes_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0C251CA81023893200C05768 /* Images */,
+				0CB2F13E101A3B600087C6F6 /* RootView.xib */,
+				2899E55F0DE3E45000AC0155 /* NotesView.xib */,
+				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
+				8D1107310486CEB800E47090 /* MapNotes-Info.plist */,
+				0C3551F61020D690006C7ED7 /* NoteDetailHeader.xib */,
+				D345E74B10229C4B0070C491 /* NoteDetailFooter.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
+				28860BE40F44EE6400985440 /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* MapNotes */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "MapNotes" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MapNotes;
+			productName = MapNotes;
+			productReference = 1D6058910D05DD3D006BFB54 /* MapNotes.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "MapNotes" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				en,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* MapNotes */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */,
+				2899E5600DE3E45000AC0155 /* NotesView.xib in Resources */,
+				0CB2F140101A3B600087C6F6 /* RootView.xib in Resources */,
+				0C3551F71020D690006C7ED7 /* NoteDetailHeader.xib in Resources */,
+				D37E96C310215F6F00D6509A /* temp_icon.png in Resources */,
+				D345E74C10229C4B0070C491 /* NoteDetailFooter.xib in Resources */,
+				0C251C3C10235C7100C05768 /* bkgnd_mapnote2.png in Resources */,
+				0C251CA71023891F00C05768 /* bkgnd_mapnote-default.png in Resources */,
+				0C251CB81023894200C05768 /* img_map-quicknote.png in Resources */,
+				0C251CB91023894200C05768 /* img_accuracy_green.png in Resources */,
+				0C251CBA1023894200C05768 /* img_map-blank.png in Resources */,
+				0C251CBB1023894200C05768 /* img_accuracy_red.png in Resources */,
+				0C251CBC1023894200C05768 /* img_accuracy_bkgnd.png in Resources */,
+				0C251CBD1023894200C05768 /* img_map-refresh.png in Resources */,
+				0C251CBE1023894200C05768 /* img_photo-add.png in Resources */,
+				0C251CBF1023894200C05768 /* img_accuracy_yellow.png in Resources */,
+				0C251CC01023894200C05768 /* img_button-glossy.png in Resources */,
+				0C251CC11023894200C05768 /* img_map-node.png in Resources */,
+				0C251CC21023894200C05768 /* img_map-crosshairs.png in Resources */,
+				0C251D081023935B00C05768 /* img_carrot-white.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				1D3623260D0F684500981E51 /* MapNotesAppDelegate.m in Sources */,
+				28C286E10D94DF7D0034E888 /* NotesViewController.m in Sources */,
+				28860B770F44E54D00985440 /* MapNotes.xcdatamodel in Sources */,
+				0CB2F13F101A3B600087C6F6 /* RootViewController.m in Sources */,
+				D360D124101D246B0095ED7B /* NoteDetailController.m in Sources */,
+				D345E7541022A07C0070C491 /* RoundedRectView.m in Sources */,
+				D345E81B1022B1A30070C491 /* NoteAnnotation.m in Sources */,
+				0C251C4A10236C0900C05768 /* Photo.m in Sources */,
+				0C251C4B10236C0900C05768 /* Note.m in Sources */,
+				0C251C4C10236C0900C05768 /* Group.m in Sources */,
+				0C251C6C10236C4800C05768 /* UIImageToDataTransformer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = MapNotes_Prefix.pch;
+				INFOPLIST_FILE = "MapNotes-Info.plist";
+				PRODUCT_NAME = MapNotes;
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = MapNotes_Prefix.pch;
+				INFOPLIST_FILE = "MapNotes-Info.plist";
+				PRODUCT_NAME = MapNotes;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos3.0;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "MapNotes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "MapNotes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
