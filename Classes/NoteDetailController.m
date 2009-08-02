@@ -104,6 +104,9 @@
 		nameTextField.borderStyle = UITextBorderStyleNone;
     }
 	
+	// Update photo display accordingly
+	[self updatePhotoInfo];
+	
 	/*
 	 If editing is finished, save the managed object context.
 	 */
@@ -157,32 +160,36 @@
 	 * If the event already has a photo, delete it
 	 * If the event doesn't have a photo, show an image picker to allow the user to choose one
 	 */
-	
-	if (selectedNote.photo) {
-		/*
-		 Delete the Photo object and dispose of the thumbnail.
-		 Because the relationship was modeled in both directions, the event's relationship to the photo will automatically be set to nil.
-		 */
-		NSManagedObjectContext *context = selectedNote.managedObjectContext;
-		[context deleteObject:selectedNote.photo];
-		selectedNote.thumbnail = nil;
-		
-		// Commit the change.
-		NSError *error;
-		if (![selectedNote.managedObjectContext save:&error]) {
-			// Handle the error.
-			NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
+	if (self.editing) {
+		if (selectedNote.photo) {
+			/*
+			 Delete the Photo object and dispose of the thumbnail.
+			 Because the relationship was modeled in both directions, the event's relationship to the photo will automatically be set to nil.
+			 */
+			NSManagedObjectContext *context = selectedNote.managedObjectContext;
+			[context deleteObject:selectedNote.photo];
+			selectedNote.thumbnail = nil;
+			
+			// Commit the change.
+			NSError *error;
+			if (![selectedNote.managedObjectContext save:&error]) {
+				// Handle the error.
+				NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
+			}
+			
+			// Update the user interface appropriately.
+			[self updatePhotoInfo];
 		}
-		
-		// Update the user interface appropriately.
-		[self updatePhotoInfo];
+		else {
+			// Let the user choose a new photo.
+			UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+			imagePicker.delegate = self;
+			[self presentModalViewController:imagePicker animated:YES];
+			[imagePicker release];
+		}
 	}
 	else {
-		// Let the user choose a new photo.
-		UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-		imagePicker.delegate = self;
-		[self presentModalViewController:imagePicker animated:YES];
-		[imagePicker release];
+		// Display the photo in its own view
 	}
 }
 
@@ -194,9 +201,12 @@
 	if (image) {
 		[photoButton setImage:image forState:UIControlStateNormal];
 	}
-	else {
+	else if (self.editing) {
 		image = [UIImage imageNamed:@"img_photo-add.png"];
 		[photoButton setImage:image forState:UIControlStateNormal];
+	} else {
+		image = [UIImage imageNamed:@"img_photo-blank.png"];
+		[photoButton setImage:image forState:UIControlStateNormal];		
 	}
 }
 
@@ -213,18 +223,41 @@
 	
 	// Create a thumbnail version of the image for the event object.
 	CGSize size = selectedImage.size;
-	CGFloat ratio = 0;
+	CGFloat ratio = 64.0;
+	CGFloat offsetX = 0.0;
+	CGFloat offsetY = 0.0;
+	CGSize croppedSize;
+	
+	// check the size of the image, we want to make it a square with sides the size of the smallest end
 	if (size.width > size.height) {
-		ratio = 44.0 / size.width;
+		offsetX = (size.height - size.width) / 2;
+		croppedSize = CGSizeMake(size.height, size.height);
+	} else {
+		offsetY = (size.width - size.height) / 2;
+		croppedSize = CGSizeMake(size.width, size.width);
 	}
-	else {
-		ratio = 44.0 / size.height;
-	}
-	CGRect rect = CGRectMake(0.0, 0.0, ratio * size.width, ratio * size.height);
+	
+	// Crop the image before resize
+	CGRect clippedRect = CGRectMake(offsetX * -1, offsetY * -1, croppedSize.width, croppedSize.height);
+	CGImageRef imageRef = CGImageCreateWithImageInRect([selectedImage CGImage], clippedRect);
+	
+	UIImage *cropped = [UIImage imageWithCGImage:imageRef];
+	// Done cropping
+	
+	//NSLog(@"Offsets: %f, %f", offsetX * ratio, offsetY *ratio);
+	//NSLog(@"Ratio: %f", ratio);
+	//NSLog(@"Size: %f x %f", croppedSize.width, croppedSize.height);
+	
+	// Resize the image
+	CGRect rect = CGRectMake(0, 0, ratio, ratio);
 	
 	UIGraphicsBeginImageContext(rect.size);
-	[selectedImage drawInRect:rect];
+	[cropped drawInRect:rect];
 	selectedNote.thumbnail = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	// Done Resizing
+	
+	CGImageRelease(imageRef);
 	
 	// Commit the change.
 	NSError *error;

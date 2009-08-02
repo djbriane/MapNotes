@@ -8,7 +8,7 @@
 #define kDefaultStrokeColor         [UIColor redColor]
 #define kDefaultRectColor           [UIColor whiteColor]
 #define kDefaultStrokeWidth         1.0
-#define kDefaultCornerRadius        15.0
+#define kDefaultCornerRadius        10.0
 
 @interface RoundedRectView : UIView {
     UIColor     *strokeColor;
