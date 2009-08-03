@@ -24,6 +24,7 @@
 @synthesize photoButton;
 @synthesize nameTextField;
 
+
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
  - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -210,25 +211,16 @@
 	}
 }
 
-#pragma mark -
-#pragma mark Image Picker Delegate Methods
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)selectedImage editingInfo:(NSDictionary *)editingInfo {
-	
-	// Create a new photo object and associate it with the event.
-	Photo *photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:selectedNote.managedObjectContext];
-	selectedNote.photo = photo;
-	
-	// Set the image for the photo object.
-	photo.image = selectedImage;
-	
+- (UIImage *)generatePhotoThumbnail:(UIImage *)image {
 	// Create a thumbnail version of the image for the event object.
-	CGSize size = selectedImage.size;
+	CGSize size = image.size;
+	CGSize croppedSize;
 	CGFloat ratio = 64.0;
 	CGFloat offsetX = 0.0;
 	CGFloat offsetY = 0.0;
-	CGSize croppedSize;
 	
-	// check the size of the image, we want to make it a square with sides the size of the smallest end
+	// check the size of the image, we want to make it 
+	// a square with sides the size of the smallest dimension
 	if (size.width > size.height) {
 		offsetX = (size.height - size.width) / 2;
 		croppedSize = CGSizeMake(size.height, size.height);
@@ -239,26 +231,42 @@
 	
 	// Crop the image before resize
 	CGRect clippedRect = CGRectMake(offsetX * -1, offsetY * -1, croppedSize.width, croppedSize.height);
-	CGImageRef imageRef = CGImageCreateWithImageInRect([selectedImage CGImage], clippedRect);
+	CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], clippedRect);
 	
 	UIImage *cropped = [UIImage imageWithCGImage:imageRef];
 	// Done cropping
-	
-	//NSLog(@"Offsets: %f, %f", offsetX * ratio, offsetY *ratio);
-	//NSLog(@"Ratio: %f", ratio);
-	//NSLog(@"Size: %f x %f", croppedSize.width, croppedSize.height);
-	
+
 	// Resize the image
 	CGRect rect = CGRectMake(0, 0, ratio, ratio);
 	
 	UIGraphicsBeginImageContext(rect.size);
 	[cropped drawInRect:rect];
-	selectedNote.thumbnail = UIGraphicsGetImageFromCurrentImageContext();
+	UIImage *thumbnail = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 	// Done Resizing
 	
 	CGImageRelease(imageRef);
+	[cropped release];
+
+	return thumbnail;
+}
+
+#pragma mark -
+#pragma mark Image Picker Delegate Methods
+- (void)imagePickerController:(UIImagePickerController *)picker 
+		didFinishPickingImage:(UIImage *)selectedImage 
+				  editingInfo:(NSDictionary *)editingInfo {
 	
+	// Create a new photo object and associate it with the event.
+	Photo *photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:selectedNote.managedObjectContext];
+	selectedNote.photo = photo;
+	
+	// Set the image for the photo object.
+	photo.image = selectedImage;
+
+	// Generate and set a thumbnail for the note
+	selectedNote.thumbnail = [self generatePhotoThumbnail:selectedImage];
+
 	// Commit the change.
 	NSError *error;
 	if (![selectedNote.managedObjectContext save:&error]) {

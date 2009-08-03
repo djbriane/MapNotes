@@ -37,6 +37,7 @@
 @property (nonatomic, retain) IBOutlet UITextField *nameTextField;
 
 - (void)updatePhotoInfo;
+- (UIImage *)generatePhotoThumbnail:(UIImage *)image;
 - (IBAction)editPhoto;
 
 @end
