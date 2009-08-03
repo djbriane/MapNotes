@@ -224,7 +224,7 @@
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeBuildConfigurationName = Debug;
 		activeExecutable = D3857085101A9E4000949DAD /* MapNotes */;
-		activeSDKPreference = iphoneos3.0;
+		activeSDKPreference = iphonesimulator3.0;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* MapNotes */;
 		addToTargets = (
 			1D6058900D05DD3D006BFB54 /* MapNotes */,
@@ -312,6 +312,7 @@
 			D303F26C102643B000528192 /* PBXTextBookmark */ = D303F26C102643B000528192 /* PBXTextBookmark */;
 			D303F2721026459200528192 /* PBXTextBookmark */ = D303F2721026459200528192 /* PBXTextBookmark */;
 			D303F2741026461C00528192 /* PBXTextBookmark */ = D303F2741026461C00528192 /* PBXTextBookmark */;
+			D303F2891026AB8600528192 /* PBXTextBookmark */ = D303F2891026AB8600528192 /* PBXTextBookmark */;
 			D32FAF18101EC23400C4BA73 = D32FAF18101EC23400C4BA73 /* PBXTextBookmark */;
 			D32FAF19101EC23400C4BA73 = D32FAF19101EC23400C4BA73 /* PBXTextBookmark */;
 			D32FAF1D101EC23400C4BA73 = D32FAF1D101EC23400C4BA73 /* PBXTextBookmark */;
@@ -1635,6 +1636,16 @@
 		vrLen = 1418;
 		vrLoc = 2742;
 	};
+	D303F2891026AB8600528192 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
+		name = "NoteDetailController.m: 108";
+		rLen = 0;
+		rLoc = 3434;
+		rType = 0;
+		vrLen = 1319;
+		vrLoc = 4778;
+	};
 	D32FAED2101EA68200C4BA73 /* RootViewController.m:83 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
@@ -1649,7 +1660,7 @@
 		ignoreCount = 0;
 		lineNumber = 83;
 		location = MapNotes;
-		modificationTime = 270943832.476334;
+		modificationTime = 270969723.314458;
 		state = 2;
 	};
 	D32FAF18101EC23400C4BA73 /* PBXTextBookmark */ = {
@@ -1712,7 +1723,7 @@
 		ignoreCount = 0;
 		lineNumber = 102;
 		location = MapNotes;
-		modificationTime = 270943971.050322;
+		modificationTime = 270969723.314482;
 		state = 1;
 	};
 	D32FAF79101EC74400C4BA73 /* PBXTextBookmark */ = {
@@ -1988,7 +1999,7 @@
 		ignoreCount = 0;
 		lineNumber = 61;
 		location = MapNotes;
-		modificationTime = 270943971.050171;
+		modificationTime = 270969723.314498;
 		state = 1;
 	};
 	D345E8E31022BAFA0070C491 /* PBXTextBookmark */ = {
@@ -2270,9 +2281,9 @@
 	};
 	D360D123101D246B0095ED7B /* NoteDetailController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {2034, 5978}}";
-			sepNavSelRange = "{3409, 0}";
-			sepNavVisRange = "{2742, 1418}";
+			sepNavIntBoundsRect = "{{0, 0}, {2034, 5992}}";
+			sepNavSelRange = "{3434, 0}";
+			sepNavVisRange = "{4778, 1319}";
 		};
 	};
 	D360D12A101D28CC0095ED7B /* PBXTextBookmark */ = {
