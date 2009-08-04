@@ -12,7 +12,7 @@
 #import "NoteDetailController.h"
 #import "NoteAnnotation.h"
 #import "RoundedRectView.h"
-
+#import "ImageManipulator.h"
 
 @implementation NoteDetailController
 
@@ -162,32 +162,11 @@
 	 * If the event doesn't have a photo, show an image picker to allow the user to choose one
 	 */
 	if (self.editing) {
-		if (selectedNote.photo) {
-			/*
-			 Delete the Photo object and dispose of the thumbnail.
-			 Because the relationship was modeled in both directions, the event's relationship to the photo will automatically be set to nil.
-			 */
-			NSManagedObjectContext *context = selectedNote.managedObjectContext;
-			[context deleteObject:selectedNote.photo];
-			selectedNote.thumbnail = nil;
-			
-			// Commit the change.
-			NSError *error;
-			if (![selectedNote.managedObjectContext save:&error]) {
-				// Handle the error.
-				NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
-			}
-			
-			// Update the user interface appropriately.
-			[self updatePhotoInfo];
-		}
-		else {
-			// Let the user choose a new photo.
-			UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-			imagePicker.delegate = self;
-			[self presentModalViewController:imagePicker animated:YES];
-			[imagePicker release];
-		}
+		// Let the user choose a new photo.
+		UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+		imagePicker.delegate = self;
+		[self presentModalViewController:imagePicker animated:YES];
+		[imagePicker release];
 	}
 	else {
 		// Display the photo in its own view
@@ -211,52 +190,21 @@
 	}
 }
 
-- (UIImage *)generatePhotoThumbnail:(UIImage *)image {
-	// Create a thumbnail version of the image for the event object.
-	CGSize size = image.size;
-	CGSize croppedSize;
-	CGFloat ratio = 64.0;
-	CGFloat offsetX = 0.0;
-	CGFloat offsetY = 0.0;
-	
-	// check the size of the image, we want to make it 
-	// a square with sides the size of the smallest dimension
-	if (size.width > size.height) {
-		offsetX = (size.height - size.width) / 2;
-		croppedSize = CGSizeMake(size.height, size.height);
-	} else {
-		offsetY = (size.width - size.height) / 2;
-		croppedSize = CGSizeMake(size.width, size.width);
-	}
-	
-	// Crop the image before resize
-	CGRect clippedRect = CGRectMake(offsetX * -1, offsetY * -1, croppedSize.width, croppedSize.height);
-	CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], clippedRect);
-	
-	UIImage *cropped = [UIImage imageWithCGImage:imageRef];
-	// Done cropping
-
-	// Resize the image
-	CGRect rect = CGRectMake(0, 0, ratio, ratio);
-	
-	UIGraphicsBeginImageContext(rect.size);
-	[cropped drawInRect:rect];
-	UIImage *thumbnail = UIGraphicsGetImageFromCurrentImageContext();
-	UIGraphicsEndImageContext();
-	// Done Resizing
-	
-	CGImageRelease(imageRef);
-	[cropped release];
-
-	return thumbnail;
-}
-
 #pragma mark -
 #pragma mark Image Picker Delegate Methods
 - (void)imagePickerController:(UIImagePickerController *)picker 
 		didFinishPickingImage:(UIImage *)selectedImage 
 				  editingInfo:(NSDictionary *)editingInfo {
 	
+	if (selectedNote.photo) {			
+		/*
+		 Delete the Photo object and dispose of the thumbnail.
+		 Because the relationship was modeled in both directions, the event's relationship to the photo will automatically be set to nil.
+		 */
+		NSManagedObjectContext *context = selectedNote.managedObjectContext;
+		[context deleteObject:selectedNote.photo];
+		selectedNote.thumbnail = nil;
+	}
 	// Create a new photo object and associate it with the event.
 	Photo *photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:selectedNote.managedObjectContext];
 	selectedNote.photo = photo;
@@ -265,7 +213,7 @@
 	photo.image = selectedImage;
 
 	// Generate and set a thumbnail for the note
-	selectedNote.thumbnail = [self generatePhotoThumbnail:selectedImage];
+	selectedNote.thumbnail = [ImageManipulator generatePhotoThumbnail:selectedImage];
 
 	// Commit the change.
 	NSError *error;

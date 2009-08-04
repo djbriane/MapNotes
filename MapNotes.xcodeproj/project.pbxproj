@@ -46,6 +46,7 @@
 		D345E81B1022B1A30070C491 /* NoteAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D345E81A1022B1A30070C491 /* NoteAnnotation.m */; };
 		D360D124101D246B0095ED7B /* NoteDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = D360D123101D246B0095ED7B /* NoteDetailController.m */; };
 		D37E96C310215F6F00D6509A /* temp_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D37E96C210215F6F00D6509A /* temp_icon.png */; };
+		D3BEAE2E1027FDA2001BC385 /* ImageManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BEAE2D1027FDA2001BC385 /* ImageManipulator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,6 +102,8 @@
 		D360D122101D246B0095ED7B /* NoteDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteDetailController.h; sourceTree = "<group>"; };
 		D360D123101D246B0095ED7B /* NoteDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteDetailController.m; sourceTree = "<group>"; };
 		D37E96C210215F6F00D6509A /* temp_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = temp_icon.png; sourceTree = "<group>"; };
+		D3BEAE2C1027FDA2001BC385 /* ImageManipulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageManipulator.h; sourceTree = "<group>"; };
+		D3BEAE2D1027FDA2001BC385 /* ImageManipulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageManipulator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +138,8 @@
 				D345E81A1022B1A30070C491 /* NoteAnnotation.m */,
 				D345E7521022A07C0070C491 /* RoundedRectView.h */,
 				D345E7531022A07C0070C491 /* RoundedRectView.m */,
+				D3BEAE2C1027FDA2001BC385 /* ImageManipulator.h */,
+				D3BEAE2D1027FDA2001BC385 /* ImageManipulator.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -327,6 +332,7 @@
 				0C251C4B10236C0900C05768 /* Note.m in Sources */,
 				0C251C4C10236C0900C05768 /* Group.m in Sources */,
 				D303F2A61026ACE000528192 /* UIImageToDataTransformer.m in Sources */,
+				D3BEAE2E1027FDA2001BC385 /* ImageManipulator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
