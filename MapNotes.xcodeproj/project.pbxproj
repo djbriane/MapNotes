@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C251C4A10236C0900C05768 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C251C4510236C0900C05768 /* Photo.m */; };
 		0C251C4B10236C0900C05768 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C251C4710236C0900C05768 /* Note.m */; };
 		0C251C4C10236C0900C05768 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C251C4910236C0900C05768 /* Group.m */; };
 		0C3551F71020D690006C7ED7 /* NoteDetailHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C3551F61020D690006C7ED7 /* NoteDetailHeader.xib */; };
@@ -50,8 +49,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0C251C4410236C0900C05768 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Photo.h; path = "Model Classes/Photo.h"; sourceTree = "<group>"; };
-		0C251C4510236C0900C05768 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Photo.m; path = "Model Classes/Photo.m"; sourceTree = "<group>"; };
 		0C251C4610236C0900C05768 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Note.h; path = "Model Classes/Note.h"; sourceTree = "<group>"; };
 		0C251C4710236C0900C05768 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Note.m; path = "Model Classes/Note.m"; sourceTree = "<group>"; };
 		0C251C4810236C0900C05768 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Group.h; path = "Model Classes/Group.h"; sourceTree = "<group>"; };
@@ -172,8 +169,6 @@
 			children = (
 				D303F2A41026ACE000528192 /* UIImageToDataTransformer.m */,
 				D303F2A51026ACE000528192 /* UIImageToDataTransformer.h */,
-				0C251C4410236C0900C05768 /* Photo.h */,
-				0C251C4510236C0900C05768 /* Photo.m */,
 				0C251C4610236C0900C05768 /* Note.h */,
 				0C251C4710236C0900C05768 /* Note.m */,
 				0C251C4810236C0900C05768 /* Group.h */,
@@ -328,7 +323,6 @@
 				D360D124101D246B0095ED7B /* NoteDetailController.m in Sources */,
 				D345E7541022A07C0070C491 /* RoundedRectView.m in Sources */,
 				D345E81B1022B1A30070C491 /* NoteAnnotation.m in Sources */,
-				0C251C4A10236C0900C05768 /* Photo.m in Sources */,
 				0C251C4B10236C0900C05768 /* Note.m in Sources */,
 				0C251C4C10236C0900C05768 /* Group.m in Sources */,
 				D303F2A61026ACE000528192 /* UIImageToDataTransformer.m in Sources */,

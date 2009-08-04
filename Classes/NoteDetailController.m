@@ -7,7 +7,6 @@
 //
 
 #import "Note.h"
-#import "Photo.h"
 
 #import "NoteDetailController.h"
 #import "NoteAnnotation.h"
@@ -162,11 +161,30 @@
 	 * If the event doesn't have a photo, show an image picker to allow the user to choose one
 	 */
 	if (self.editing) {
-		// Let the user choose a new photo.
-		UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-		imagePicker.delegate = self;
-		[self presentModalViewController:imagePicker animated:YES];
-		[imagePicker release];
+		
+		if (nil != selectedNote.photo) {			
+			/*
+			 Delete the Photo object and dispose of the thumbnail.
+			 Because the relationship was modeled in both directions, the event's relationship to the photo will automatically be set to nil.
+			 */
+			[selectedNote.managedObjectContext deleteObject:selectedNote.photo];
+			selectedNote.thumbnail = nil;
+			
+			// Commit the change.
+			NSError *error;
+			if (![selectedNote.managedObjectContext save:&error]) {
+				// Handle the error.
+				NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
+			}
+			[self updatePhotoInfo];
+			
+		} else {
+			// Let the user choose a new photo.
+			UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+			imagePicker.delegate = self;
+			[self presentModalViewController:imagePicker animated:YES];
+			[imagePicker release];
+		}
 	}
 	else {
 		// Display the photo in its own view
@@ -192,29 +210,26 @@
 
 #pragma mark -
 #pragma mark Image Picker Delegate Methods
+/*
 - (void)imagePickerController:(UIImagePickerController *)picker 
 		didFinishPickingImage:(UIImage *)selectedImage 
 				  editingInfo:(NSDictionary *)editingInfo {
 	
-	if (selectedNote.photo) {			
-		/*
-		 Delete the Photo object and dispose of the thumbnail.
-		 Because the relationship was modeled in both directions, the event's relationship to the photo will automatically be set to nil.
-		 */
-		NSManagedObjectContext *context = selectedNote.managedObjectContext;
-		[context deleteObject:selectedNote.photo];
-		selectedNote.thumbnail = nil;
-	}
+
 	// Create a new photo object and associate it with the event.
 	Photo *photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:selectedNote.managedObjectContext];
-	selectedNote.photo = photo;
-	
+
 	// Set the image for the photo object.
 	photo.image = selectedImage;
+	
+	selectedNote.photo = photo;
+	[photo release];
 
 	// Generate and set a thumbnail for the note
-	selectedNote.thumbnail = [ImageManipulator generatePhotoThumbnail:selectedImage];
-
+	UIImage *thumbnail = [ImageManipulator generatePhotoThumbnail:selectedImage];
+	selectedNote.thumbnail = thumbnail;
+	[thumbnail release];
+	
 	// Commit the change.
 	NSError *error;
 	if (![selectedNote.managedObjectContext save:&error]) {
@@ -226,8 +241,45 @@
 	[self updatePhotoInfo];
 	
     [self dismissModalViewControllerAnimated:YES];
+	
 }
+*/
 
+// ORIGINAL 
+- (void)imagePickerController:(UIImagePickerController *)picker 
+		didFinishPickingImage:(UIImage *)selectedImage 
+				  editingInfo:(NSDictionary *)editingInfo {
+	
+	// Delete any existing image.
+	NSManagedObject *oldPhoto = selectedNote.photo;
+	if (oldPhoto != nil) {
+		[selectedNote.managedObjectContext deleteObject:oldPhoto];
+	}
+	
+    // Create an image object for the new image.
+	NSManagedObject *photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:selectedNote.managedObjectContext];
+	selectedNote.photo = photo;
+	
+	// Set the image for the image managed object.
+	[photo setValue:selectedImage forKey:@"photo"];
+	
+	// Create a thumbnail version of the image for the recipe object.
+	CGSize size = selectedImage.size;
+	CGFloat ratio = 0;
+	if (size.width > size.height) {
+		ratio = 44.0 / size.width;
+	} else {
+		ratio = 44.0 / size.height;
+	}
+	CGRect rect = CGRectMake(0.0, 0.0, ratio * size.width, ratio * size.height);
+	
+	UIGraphicsBeginImageContext(rect.size);
+	[selectedImage drawInRect:rect];
+	selectedNote.thumbnail = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	
+    [self dismissModalViewControllerAnimated:YES];
+}
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
 	// The user canceled -- simply dismiss the image picker.

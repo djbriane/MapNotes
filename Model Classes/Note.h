@@ -8,7 +8,10 @@
 
 #import <CoreData/CoreData.h>
 
-@class Photo;
+@interface ImageToDataTransformer : NSValueTransformer {
+}
+@end
+
 @class Group;
 
 @interface Note :  NSManagedObject  
@@ -22,8 +25,8 @@
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * details;
 @property (nonatomic, retain) NSDate * dateModified;
-@property (nonatomic, retain) id thumbnail;
-@property (nonatomic, retain) Photo * photo;
+@property (nonatomic, retain) UIImage *thumbnail;
+@property (nonatomic, retain) NSManagedObject * photo;
 @property (nonatomic, retain) Group * group;
 
 @end

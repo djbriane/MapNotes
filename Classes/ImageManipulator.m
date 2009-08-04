@@ -99,11 +99,10 @@ static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWi
 	UIGraphicsEndImageContext();
 	// Done Resizing
 	
-	CGImageRelease(imageRef);
 	[cropped release];
 	
 	// Give the thumbnail rounded corners
-	thumbnail = [ImageManipulator makeRoundedCornerImageFromImage:thumbnail withCornerWidth:7 andCornerHeight:7];
+	//thumbnail = [ImageManipulator makeRoundedCornerImageFromImage:thumbnail withCornerWidth:7 andCornerHeight:7];
 	
 	return thumbnail;
 }
