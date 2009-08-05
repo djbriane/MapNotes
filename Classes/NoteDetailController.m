@@ -9,6 +9,7 @@
 #import "Note.h"
 
 #import "NoteDetailController.h"
+#import "NotePhotoViewController.h"
 #import "NoteAnnotation.h"
 #import "RoundedRectView.h"
 #import "ImageManipulator.h"
@@ -22,7 +23,6 @@
 @synthesize tableFooterView;
 @synthesize photoButton;
 @synthesize nameTextField;
-
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -155,39 +155,41 @@
 #pragma mark -
 #pragma mark Photo Acquisition Methods
 - (IBAction)editPhoto {
-	/*
-	 Update the photo in response to a tap on the photo button.
-	 * If the event already has a photo, delete it
-	 * If the event doesn't have a photo, show an image picker to allow the user to choose one
-	 */
+	//Update the photo in response to a tap on the photo button.
 	if (self.editing) {
-		
-		if (nil != selectedNote.photo) {			
-			/*
-			 Delete the Photo object and dispose of the thumbnail.
-			 Because the relationship was modeled in both directions, the event's relationship to the photo will automatically be set to nil.
-			 */
-			[selectedNote.managedObjectContext deleteObject:selectedNote.photo];
-			selectedNote.thumbnail = nil;
-			
-			// Commit the change.
-			NSError *error;
-			if (![selectedNote.managedObjectContext save:&error]) {
-				// Handle the error.
-				NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
-			}
-			[self updatePhotoInfo];
-			
-		} else {
-			// Let the user choose a new photo.
-			UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-			imagePicker.delegate = self;
-			[self presentModalViewController:imagePicker animated:YES];
-			[imagePicker release];
+		UIActionSheet *actionSheet = [[UIActionSheet alloc]
+									 initWithTitle:nil
+									 delegate:self
+									 cancelButtonTitle:nil
+									 destructiveButtonTitle:nil
+									 otherButtonTitles:nil];
+		// Take Photo Button
+		if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+			[actionSheet addButtonWithTitle:@"Take Photo"];
 		}
+		
+		// Choose Existing Button
+		[actionSheet addButtonWithTitle:@"Choose Existing Photo"];
+		
+		// Delete Button
+		if (nil != selectedNote.photo) {
+			[actionSheet addButtonWithTitle:@"Delete Photo"];
+		}
+		
+		// Cancel Button
+		actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:@"Cancel"];
+		
+		//actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+		[actionSheet showInView:self.view];
+		[actionSheet release];
 	}
-	else {
+	else if (nil != selectedNote.photo) {
 		// Display the photo in its own view
+		NotePhotoViewController *notePhotoViewController = [[NotePhotoViewController alloc] init];
+        notePhotoViewController.hidesBottomBarWhenPushed = YES;
+		notePhotoViewController.note = selectedNote;
+		[self.navigationController pushViewController:notePhotoViewController animated:YES];
+		[notePhotoViewController release];
 	}
 }
 
@@ -208,6 +210,52 @@
 	}
 }
 
+- (void)deleteExistingPhoto {
+	/*
+	 Delete the Photo object and dispose of the thumbnail.
+	 Because the relationship was modeled in both directions, the event's relationship to the photo will automatically be set to nil.
+	 */
+	if (nil != selectedNote.photo) {
+		[selectedNote.managedObjectContext deleteObject:selectedNote.photo];
+		selectedNote.thumbnail = nil;
+		
+		// Commit the change.
+		NSError *error;
+		if (![selectedNote.managedObjectContext save:&error]) {
+			// Handle the error.
+			NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
+		}
+		[self updatePhotoInfo];
+	}
+}
+
+#pragma mark -
+#pragma mark Action Sheet Delegate Methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+	// TODO: Move strings into constants / messages
+	if ([actionSheet buttonTitleAtIndex:buttonIndex] == @"Take Photo") {
+		// Take Photo
+		UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+		imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+		imagePicker.delegate = self;
+		[self presentModalViewController:imagePicker animated:YES];
+		[imagePicker release];
+	} 
+	else if ([actionSheet buttonTitleAtIndex:buttonIndex] == @"Choose Existing Photo") {
+		// Choose Existing
+		UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+		imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+		imagePicker.delegate = self;
+		[self presentModalViewController:imagePicker animated:YES];
+		[imagePicker release];		
+	} 
+	else if ([actionSheet buttonTitleAtIndex:buttonIndex] == @"Delete Photo") {
+		[self deleteExistingPhoto];
+	}
+}
+
 #pragma mark -
 #pragma mark Image Picker Delegate Methods
 
@@ -215,7 +263,9 @@
 		didFinishPickingImage:(UIImage *)selectedImage 
 				  editingInfo:(NSDictionary *)editingInfo {
 	
-
+	// Delete Existing Photo
+	[self deleteExistingPhoto];
+	
 	// Create a new photo object and associate it with the event.
 	NSManagedObject *photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" 
 														   inManagedObjectContext:selectedNote.managedObjectContext];

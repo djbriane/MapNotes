@@ -31,7 +31,7 @@ static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWi
     CGContextRestoreGState(context);
 }
 
-+(UIImage *)makeRoundedCornerImageFromImage:(UIImage *)img withCornerWidth:(int)cornerWidth andCornerHeight:(int)cornerHeight
++(UIImage *)roundedCornerImageFromImage:(UIImage *)img withCornerWidth:(int)cornerWidth andCornerHeight:(int)cornerHeight
 {
 	UIImage * newImage = nil;
 	
@@ -65,6 +65,42 @@ static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWi
     return newImage;
 }
 
++ (UIImage *)croppedImageFromImage:(UIImage *)imageToCrop toRect:(CGRect)rect {
+	//create a context to do our clipping in
+	UIGraphicsBeginImageContext(rect.size);
+	CGContextRef currentContext = UIGraphicsGetCurrentContext();
+	
+	//create a rect with the size we want to crop the image to
+	//the X and Y here are zero so we start at the beginning of our
+	//newly created context
+	CGRect clippedRect = CGRectMake(0, 0, rect.size.width, rect.size.height);
+	CGContextClipToRect( currentContext, clippedRect);
+	
+	//create a rect equivalent to the full size of the image
+	//offset the rect by the X and Y we want to start the crop
+	//from in order to cut off anything before them
+	CGRect drawRect = CGRectMake(rect.origin.x * -1,
+								 rect.origin.y * -1,
+								 imageToCrop.size.width,
+								 imageToCrop.size.height);
+	
+	// Flip the coordinate system
+	CGContextTranslateCTM(currentContext, 0.0, rect.size.height);
+	CGContextScaleCTM(currentContext, 1.0, -1.0);
+	
+	//draw the image to our clipped context using our offset rect
+	CGContextDrawImage(currentContext, drawRect, imageToCrop.CGImage);
+	
+	//pull the image from our cropped context
+	UIImage *cropped = UIGraphicsGetImageFromCurrentImageContext();
+	
+	//pop the context to get back to the default
+	UIGraphicsEndImageContext();
+	
+	//Note: this is autoreleased
+	return cropped;
+}
+
 + (UIImage *)generatePhotoThumbnail:(UIImage *)image {
 	// Create a thumbnail version of the image for the event object.
 	CGSize size = image.size;
@@ -75,30 +111,33 @@ static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWi
 	
 	// check the size of the image, we want to make it 
 	// a square with sides the size of the smallest dimension
+	NSLog(@"Image Dimensions: %fw x %fh", size.width, size.height); 
 	if (size.width > size.height) {
-		offsetX = (size.height - size.width) / 2;
+		offsetX = (size.width - size.height) / 2;
 		croppedSize = CGSizeMake(size.height, size.height);
 	} else {
-		offsetY = (size.width - size.height) / 2;
+		offsetY = (size.height - size.width) / 2;
 		croppedSize = CGSizeMake(size.width, size.width);
 	}
+	NSLog(@"Offsets: %fx %fy", offsetX, offsetY);
 	
 	// Crop the image before resize
-	CGRect clippedRect = CGRectMake(offsetX * -1, offsetY * -1, croppedSize.width, croppedSize.height);
-	CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], clippedRect);
+	CGRect clippedRect = CGRectMake(offsetX, offsetY, croppedSize.width, croppedSize.height);
+	NSLog(@"Clipped: %fw x %fh (%f,%f)", croppedSize.width, croppedSize.height, clippedRect.origin.x, clippedRect.origin.y); 
+	UIImage *cropped = [ImageManipulator croppedImageFromImage:image toRect:clippedRect];	
 	// Done cropping
 	
 	// Resize the image
 	CGRect rect = CGRectMake(0.0, 0.0, ratio, ratio);
 	
 	UIGraphicsBeginImageContext(rect.size);
-	[[UIImage imageWithCGImage:imageRef] drawInRect:rect];
+	[cropped drawInRect:rect];
 	UIImage *thumbnail = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 	// Done Resizing
 	
 	// Give the thumbnail rounded corners
-	thumbnail = [ImageManipulator makeRoundedCornerImageFromImage:thumbnail withCornerWidth:7 andCornerHeight:7];
+	thumbnail = [ImageManipulator roundedCornerImageFromImage:thumbnail withCornerWidth:7 andCornerHeight:7];
 	
 	return thumbnail;
 }

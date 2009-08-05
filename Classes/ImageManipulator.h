@@ -9,7 +9,8 @@
 @interface ImageManipulator : NSObject {
 }
 
-+ (UIImage *)makeRoundedCornerImageFromImage:(UIImage *)img withCornerWidth:(int)cornerWidth andCornerHeight:(int)cornerHeight;
++ (UIImage *)roundedCornerImageFromImage:(UIImage *)img withCornerWidth:(int)cornerWidth andCornerHeight:(int)cornerHeight;
++ (UIImage *)croppedImageFromImage:(UIImage *)imageToCrop toRect:(CGRect)rect;
 + (UIImage *)generatePhotoThumbnail:(UIImage *)image;
 
 @end

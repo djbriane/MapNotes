@@ -276,7 +276,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>21</integer>
+									<integer>15</integer>
 									<integer>7</integer>
 									<integer>0</integer>
 								</array>
@@ -319,7 +319,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>ImageManipulator.m</string>
+								<string>NoteDetailController.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -327,11 +327,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>ImageManipulator.m</string>
+										<string>NoteDetailController.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>D3E4DCE110293014006E4E99</string>
+										<string>D30D71CE10299A9400AF4AFF</string>
 										<key>history</key>
 										<array>
 											<string>D360D12D101D2BD70095ED7B</string>
@@ -349,11 +349,9 @@
 											<string>D3BEADCD1027F0C5001BC385</string>
 											<string>D3BEADCE1027F0C5001BC385</string>
 											<string>D3BEAE301027FE03001BC385</string>
-											<string>D3BEAE5B1027FF39001BC385</string>
 											<string>D3E4DBD610288D1D006E4E99</string>
 											<string>D3E4DBD710288D1D006E4E99</string>
 											<string>D3E4DBD810288D1D006E4E99</string>
-											<string>D3E4DBD910288D1D006E4E99</string>
 											<string>D3E4DBDC10288D1D006E4E99</string>
 											<string>D3E4DBDE10288D1D006E4E99</string>
 											<string>D3E4DBDF10288D1D006E4E99</string>
@@ -361,9 +359,15 @@
 											<string>D3E4DCB5102920CC006E4E99</string>
 											<string>D3E4DCB6102920CC006E4E99</string>
 											<string>D3E4DCB7102920CC006E4E99</string>
-											<string>D3E4DCB8102920CC006E4E99</string>
-											<string>D3E4DCCB10292BA9006E4E99</string>
-											<string>D3E4DCCC10292BA9006E4E99</string>
+											<string>D3E4DD0A1029536B006E4E99</string>
+											<string>D30D718F102991A700AF4AFF</string>
+											<string>D30D71B410299A4700AF4AFF</string>
+											<string>D30D71B510299A4700AF4AFF</string>
+											<string>D30D71B610299A4700AF4AFF</string>
+											<string>D30D71B710299A4700AF4AFF</string>
+											<string>D30D71B810299A4700AF4AFF</string>
+											<string>D30D71B910299A4700AF4AFF</string>
+											<string>D30D71BA10299A4700AF4AFF</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -401,14 +405,26 @@
 											<string>D3E4DC0310288D1D006E4E99</string>
 											<string>D3E4DC1010288D1D006E4E99</string>
 											<string>D3E4DC1110288D1D006E4E99</string>
-											<string>D3E4DCBA102920CC006E4E99</string>
-											<string>D3E4DCBB102920CC006E4E99</string>
-											<string>D3E4DCBC102920CC006E4E99</string>
-											<string>D3E4DCBD102920CC006E4E99</string>
-											<string>D3E4DCBE102920CC006E4E99</string>
-											<string>D3E4DCBF102920CC006E4E99</string>
-											<string>D3E4DCCD10292BA9006E4E99</string>
-											<string>D3E4DCCE10292BA9006E4E99</string>
+											<string>D30D717410298B5200AF4AFF</string>
+											<string>D30D717B10298E1400AF4AFF</string>
+											<string>D30D718C10298E8E00AF4AFF</string>
+											<string>D30D7191102991A700AF4AFF</string>
+											<string>D30D71A31029972A00AF4AFF</string>
+											<string>D30D71BB10299A4700AF4AFF</string>
+											<string>D30D71BC10299A4700AF4AFF</string>
+											<string>D30D71BD10299A4700AF4AFF</string>
+											<string>D30D71BE10299A4700AF4AFF</string>
+											<string>D30D71BF10299A4700AF4AFF</string>
+											<string>D30D71C010299A4700AF4AFF</string>
+											<string>D30D71C110299A4700AF4AFF</string>
+											<string>D30D71C210299A4700AF4AFF</string>
+											<string>D30D71C310299A4700AF4AFF</string>
+											<string>D30D71C410299A4700AF4AFF</string>
+											<string>D30D71C510299A4700AF4AFF</string>
+											<string>D30D71C610299A4700AF4AFF</string>
+											<string>D30D71C710299A4700AF4AFF</string>
+											<string>D30D71C810299A4700AF4AFF</string>
+											<string>D30D71C910299A4700AF4AFF</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -466,9 +482,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>D3E4DCC1102920CC006E4E99</string>
+				<string>D30D717610298B5200AF4AFF</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>D3E4DCC2102920CC006E4E99</string>
+				<string>D30D717710298B5200AF4AFF</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -602,10 +618,10 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>D3E4DCC3102920CC006E4E99</string>
-		<string>D3E4DCC4102920CC006E4E99</string>
-		<string>D3857099101A9E7200949DAD</string>
+		<string>D30D71CB10299A4700AF4AFF</string>
+		<string>D30D718610298E1400AF4AFF</string>
 		<string>1CD10A99069EF8BA00B06720</string>
+		<string>D3857099101A9E7200949DAD</string>
 		<string>/Users/brian/Projects/Development/MapNotes/MapNotes.xcodeproj</string>
 		<string>1C78EAAD065D492600B07095</string>
 	</array>
@@ -687,7 +703,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>D3857099101A9E7200949DAD</string>
-				<string>D3E4DC9710291E22006E4E99</string>
+				<string>D30D717D10298E1400AF4AFF</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -807,13 +823,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>D3E4DC9810291E22006E4E99</string>
+				<string>D30D717E10298E1400AF4AFF</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>D3E4DC9910291E22006E4E99</string>
-				<string>D3E4DC9A10291E22006E4E99</string>
-				<string>D3E4DC9B10291E22006E4E99</string>
-				<string>D3E4DC9C10291E22006E4E99</string>
-				<string>D3E4DC9D10291E22006E4E99</string>
+				<string>D30D717F10298E1400AF4AFF</string>
+				<string>D30D718010298E1400AF4AFF</string>
+				<string>D30D718110298E1400AF4AFF</string>
+				<string>D30D718210298E1400AF4AFF</string>
+				<string>D30D718310298E1400AF4AFF</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -822,7 +838,7 @@
 			<key>WindowToolGUID</key>
 			<string>1CD10A99069EF8BA00B06720</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>Identifier</key>
@@ -977,7 +993,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>D3E4DC9E10291E22006E4E99</string>
+				<string>D30D718410298E1400AF4AFF</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

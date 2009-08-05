@@ -39,6 +39,7 @@
 		D303F2A21026ACB800528192 /* img_accuracy_green.png in Resources */ = {isa = PBXBuildFile; fileRef = D303F2951026ACB800528192 /* img_accuracy_green.png */; };
 		D303F2A31026ACB800528192 /* img_accuracy_bkgnd.png in Resources */ = {isa = PBXBuildFile; fileRef = D303F2961026ACB800528192 /* img_accuracy_bkgnd.png */; };
 		D303F2A61026ACE000528192 /* UIImageToDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D303F2A41026ACE000528192 /* UIImageToDataTransformer.m */; };
+		D30D71B0102997F000AF4AFF /* NotePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D30D71AF102997F000AF4AFF /* NotePhotoViewController.m */; };
 		D345E74C10229C4B0070C491 /* NoteDetailFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = D345E74B10229C4B0070C491 /* NoteDetailFooter.xib */; };
 		D345E7541022A07C0070C491 /* RoundedRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = D345E7531022A07C0070C491 /* RoundedRectView.m */; };
 		D345E81B1022B1A30070C491 /* NoteAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D345E81A1022B1A30070C491 /* NoteAnnotation.m */; };
@@ -88,6 +89,8 @@
 		D303F2961026ACB800528192 /* img_accuracy_bkgnd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_accuracy_bkgnd.png; path = Images/img_accuracy_bkgnd.png; sourceTree = "<group>"; };
 		D303F2A41026ACE000528192 /* UIImageToDataTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIImageToDataTransformer.m; path = Classes/UIImageToDataTransformer.m; sourceTree = "<group>"; };
 		D303F2A51026ACE000528192 /* UIImageToDataTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIImageToDataTransformer.h; path = Classes/UIImageToDataTransformer.h; sourceTree = "<group>"; };
+		D30D71AE102997F000AF4AFF /* NotePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotePhotoViewController.h; sourceTree = "<group>"; };
+		D30D71AF102997F000AF4AFF /* NotePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotePhotoViewController.m; sourceTree = "<group>"; };
 		D345E74B10229C4B0070C491 /* NoteDetailFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteDetailFooter.xib; sourceTree = "<group>"; };
 		D345E7521022A07C0070C491 /* RoundedRectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedRectView.h; sourceTree = "<group>"; };
 		D345E7531022A07C0070C491 /* RoundedRectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedRectView.m; sourceTree = "<group>"; };
@@ -128,6 +131,8 @@
 				28C286E00D94DF7D0034E888 /* NotesViewController.m */,
 				D360D122101D246B0095ED7B /* NoteDetailController.h */,
 				D360D123101D246B0095ED7B /* NoteDetailController.m */,
+				D30D71AE102997F000AF4AFF /* NotePhotoViewController.h */,
+				D30D71AF102997F000AF4AFF /* NotePhotoViewController.m */,
 				D345E8191022B1A30070C491 /* NoteAnnotation.h */,
 				D345E81A1022B1A30070C491 /* NoteAnnotation.m */,
 				D345E7521022A07C0070C491 /* RoundedRectView.h */,
@@ -321,6 +326,7 @@
 				0C251C4B10236C0900C05768 /* Note.m in Sources */,
 				D303F2A61026ACE000528192 /* UIImageToDataTransformer.m in Sources */,
 				D3BEAE2E1027FDA2001BC385 /* ImageManipulator.m in Sources */,
+				D30D71B0102997F000AF4AFF /* NotePhotoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

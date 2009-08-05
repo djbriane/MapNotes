@@ -14,7 +14,7 @@
 @class NoteAnnotation;
 @class RoundedRectView;
 
-@interface NoteDetailController : UITableViewController <UINavigationControllerDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate> {
+@interface NoteDetailController : UITableViewController <UINavigationControllerDelegate, UITextFieldDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate> {
 	Note *selectedNote;
 	
 	MKMapView *_mapView;
@@ -23,6 +23,9 @@
 	UIView *tableHeaderView;
 	UIView *tableFooterView;
 	UIButton *photoButton;
+	UIButton *takePictureButton;
+	UIButton *selectFromCameraRollButton;
+	
 	UITextField *nameTextField;	
 }
 
@@ -34,6 +37,8 @@
 @property (nonatomic, retain) IBOutlet UIView *tableHeaderView;
 @property (nonatomic, retain) IBOutlet UIView *tableFooterView;
 @property (nonatomic, retain) IBOutlet UIButton *photoButton;
+
+
 @property (nonatomic, retain) IBOutlet UITextField *nameTextField;
 
 - (void)updatePhotoInfo;
