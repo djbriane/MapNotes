@@ -210,21 +210,21 @@
 
 #pragma mark -
 #pragma mark Image Picker Delegate Methods
-/*
+
 - (void)imagePickerController:(UIImagePickerController *)picker 
 		didFinishPickingImage:(UIImage *)selectedImage 
 				  editingInfo:(NSDictionary *)editingInfo {
 	
 
 	// Create a new photo object and associate it with the event.
-	Photo *photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:selectedNote.managedObjectContext];
-
-	// Set the image for the photo object.
-	photo.image = selectedImage;
+	NSManagedObject *photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" 
+														   inManagedObjectContext:selectedNote.managedObjectContext];
 	
 	selectedNote.photo = photo;
-	[photo release];
-
+	
+	// Set the image for the image managed object.
+	[photo setValue:selectedImage forKey:@"image"];
+	
 	// Generate and set a thumbnail for the note
 	UIImage *thumbnail = [ImageManipulator generatePhotoThumbnail:selectedImage];
 	selectedNote.thumbnail = thumbnail;
@@ -243,8 +243,8 @@
     [self dismissModalViewControllerAnimated:YES];
 	
 }
-*/
 
+/*
 // ORIGINAL 
 - (void)imagePickerController:(UIImagePickerController *)picker 
 		didFinishPickingImage:(UIImage *)selectedImage 
@@ -262,7 +262,7 @@
 	selectedNote.photo = photo;
 	
 	// Set the image for the image managed object.
-	[photo setValue:selectedImage forKey:@"photo"];
+	[photo setValue:selectedImage forKey:@"image"];
 
 	// Create a thumbnail version of the image for the recipe object.
 	CGSize size = selectedImage.size;
@@ -279,8 +279,12 @@
 	selectedNote.thumbnail = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 	
+	// Update the user interface appropriately.
+	[self updatePhotoInfo];
+	
     [self dismissModalViewControllerAnimated:YES];
 }
+*/
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
 	// The user canceled -- simply dismiss the image picker.

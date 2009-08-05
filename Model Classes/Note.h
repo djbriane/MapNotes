@@ -12,8 +12,7 @@
 }
 @end
 
-@interface Note :  NSManagedObject  
-{
+@interface Note :  NSManagedObject {
 }
 
 @property (nonatomic, retain) NSNumber * geoAccuracy;
@@ -24,6 +23,7 @@
 @property (nonatomic, retain) NSString * details;
 @property (nonatomic, retain) NSDate * dateModified;
 @property (nonatomic, retain) UIImage *thumbnail;
+
 @property (nonatomic, retain) NSManagedObject * photo;
 @property (nonatomic, retain) NSManagedObject * group;
 

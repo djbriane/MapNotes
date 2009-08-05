@@ -86,23 +86,19 @@ static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWi
 	// Crop the image before resize
 	CGRect clippedRect = CGRectMake(offsetX * -1, offsetY * -1, croppedSize.width, croppedSize.height);
 	CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], clippedRect);
-	
-	UIImage *cropped = [UIImage imageWithCGImage:imageRef];
 	// Done cropping
 	
 	// Resize the image
-	CGRect rect = CGRectMake(0, 0, ratio, ratio);
+	CGRect rect = CGRectMake(0.0, 0.0, ratio, ratio);
 	
 	UIGraphicsBeginImageContext(rect.size);
-	[cropped drawInRect:rect];
+	[[UIImage imageWithCGImage:imageRef] drawInRect:rect];
 	UIImage *thumbnail = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 	// Done Resizing
 	
-	[cropped release];
-	
 	// Give the thumbnail rounded corners
-	//thumbnail = [ImageManipulator makeRoundedCornerImageFromImage:thumbnail withCornerWidth:7 andCornerHeight:7];
+	thumbnail = [ImageManipulator makeRoundedCornerImageFromImage:thumbnail withCornerWidth:7 andCornerHeight:7];
 	
 	return thumbnail;
 }
