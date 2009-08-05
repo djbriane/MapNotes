@@ -257,12 +257,13 @@
 	}
 	
     // Create an image object for the new image.
-	NSManagedObject *photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:selectedNote.managedObjectContext];
+	NSManagedObject *photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" 
+														   inManagedObjectContext:selectedNote.managedObjectContext];
 	selectedNote.photo = photo;
 	
 	// Set the image for the image managed object.
 	[photo setValue:selectedImage forKey:@"photo"];
-	
+
 	// Create a thumbnail version of the image for the recipe object.
 	CGSize size = selectedImage.size;
 	CGFloat ratio = 0;

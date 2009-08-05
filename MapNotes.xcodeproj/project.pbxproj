@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0C251C4B10236C0900C05768 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C251C4710236C0900C05768 /* Note.m */; };
-		0C251C4C10236C0900C05768 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C251C4910236C0900C05768 /* Group.m */; };
 		0C3551F71020D690006C7ED7 /* NoteDetailHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C3551F61020D690006C7ED7 /* NoteDetailHeader.xib */; };
 		0CB2F13F101A3B600087C6F6 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB2F13D101A3B600087C6F6 /* RootViewController.m */; };
 		0CB2F140101A3B600087C6F6 /* RootView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CB2F13E101A3B600087C6F6 /* RootView.xib */; };
@@ -51,8 +50,6 @@
 /* Begin PBXFileReference section */
 		0C251C4610236C0900C05768 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Note.h; path = "Model Classes/Note.h"; sourceTree = "<group>"; };
 		0C251C4710236C0900C05768 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Note.m; path = "Model Classes/Note.m"; sourceTree = "<group>"; };
-		0C251C4810236C0900C05768 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Group.h; path = "Model Classes/Group.h"; sourceTree = "<group>"; };
-		0C251C4910236C0900C05768 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Group.m; path = "Model Classes/Group.m"; sourceTree = "<group>"; };
 		0C3551F61020D690006C7ED7 /* NoteDetailHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteDetailHeader.xib; sourceTree = "<group>"; };
 		0CB2F13C101A3B600087C6F6 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		0CB2F13D101A3B600087C6F6 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
@@ -171,8 +168,6 @@
 				D303F2A51026ACE000528192 /* UIImageToDataTransformer.h */,
 				0C251C4610236C0900C05768 /* Note.h */,
 				0C251C4710236C0900C05768 /* Note.m */,
-				0C251C4810236C0900C05768 /* Group.h */,
-				0C251C4910236C0900C05768 /* Group.m */,
 				28860B760F44E54D00985440 /* MapNotes.xcdatamodel */,
 			);
 			name = Model;
@@ -324,7 +319,6 @@
 				D345E7541022A07C0070C491 /* RoundedRectView.m in Sources */,
 				D345E81B1022B1A30070C491 /* NoteAnnotation.m in Sources */,
 				0C251C4B10236C0900C05768 /* Note.m in Sources */,
-				0C251C4C10236C0900C05768 /* Group.m in Sources */,
 				D303F2A61026ACE000528192 /* UIImageToDataTransformer.m in Sources */,
 				D3BEAE2E1027FDA2001BC385 /* ImageManipulator.m in Sources */,
 			);

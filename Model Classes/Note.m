@@ -7,7 +7,6 @@
 //
 
 #import "Note.h"
-#import "Group.h"
 
 @implementation Note 
 

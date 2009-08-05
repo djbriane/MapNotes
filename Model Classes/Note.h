@@ -12,8 +12,6 @@
 }
 @end
 
-@class Group;
-
 @interface Note :  NSManagedObject  
 {
 }
@@ -27,7 +25,7 @@
 @property (nonatomic, retain) NSDate * dateModified;
 @property (nonatomic, retain) UIImage *thumbnail;
 @property (nonatomic, retain) NSManagedObject * photo;
-@property (nonatomic, retain) Group * group;
+@property (nonatomic, retain) NSManagedObject * group;
 
 @end
 
