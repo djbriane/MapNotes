@@ -3,7 +3,7 @@
 //  MapNotes
 //
 //  Created by Brian Erickson on 7/31/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Copyright 2009 Local Matters, Inc. All rights reserved.
 //
 
 #import <CoreData/CoreData.h>

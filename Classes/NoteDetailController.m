@@ -3,7 +3,7 @@
 //  MapNotes
 //
 //  Created by Brian Erickson on 7/26/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Copyright 2009 Local Matters, Inc. All rights reserved.
 //
 
 #import "Note.h"
@@ -270,15 +270,19 @@
 	NSManagedObject *photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" 
 														   inManagedObjectContext:selectedNote.managedObjectContext];
 	
+	
+	// Scale the image to a manageable size and rotate it properly to account for camera
+	UIImage *image = [[ImageManipulator scaleAndRotateImage:selectedImage] retain];
 	selectedNote.photo = photo;
 	
 	// Set the image for the image managed object.
-	[photo setValue:selectedImage forKey:@"image"];
+	[photo setValue:image forKey:@"image"];
 	
 	// Generate and set a thumbnail for the note
-	UIImage *thumbnail = [ImageManipulator generatePhotoThumbnail:selectedImage];
+	UIImage *thumbnail = [[ImageManipulator generatePhotoThumbnail:image] retain];
 	selectedNote.thumbnail = thumbnail;
 	[thumbnail release];
+	[image release];
 	
 	// Commit the change.
 	NSError *error;
@@ -291,7 +295,6 @@
 	[self updatePhotoInfo];
 	
     [self dismissModalViewControllerAnimated:YES];
-	
 }
 
 /*
