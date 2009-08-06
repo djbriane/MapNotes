@@ -165,15 +165,15 @@
 									 otherButtonTitles:nil];
 		// Take Photo Button
 		if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-			[actionSheet addButtonWithTitle:@"Take Photo"];
+			[actionSheet addButtonWithTitle:kTakePhotoButtonText];
 		}
 		
 		// Choose Existing Button
-		[actionSheet addButtonWithTitle:@"Choose Existing Photo"];
+		[actionSheet addButtonWithTitle:kChoosePhotoButtonText];
 		
 		// Delete Button
 		if (nil != selectedNote.photo) {
-			[actionSheet addButtonWithTitle:@"Delete Photo"];
+			[actionSheet addButtonWithTitle:kDeletePhotoButtonText];
 		}
 		
 		// Cancel Button
@@ -235,7 +235,7 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
 	// TODO: Move strings into constants / messages
-	if ([actionSheet buttonTitleAtIndex:buttonIndex] == @"Take Photo") {
+	if ([actionSheet buttonTitleAtIndex:buttonIndex] == kTakePhotoButtonText) {
 		// Take Photo
 		UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
 		imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -243,7 +243,7 @@
 		[self presentModalViewController:imagePicker animated:YES];
 		[imagePicker release];
 	} 
-	else if ([actionSheet buttonTitleAtIndex:buttonIndex] == @"Choose Existing Photo") {
+	else if ([actionSheet buttonTitleAtIndex:buttonIndex] == kChoosePhotoButtonText) {
 		// Choose Existing
 		UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
 		imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
@@ -251,7 +251,7 @@
 		[self presentModalViewController:imagePicker animated:YES];
 		[imagePicker release];		
 	} 
-	else if ([actionSheet buttonTitleAtIndex:buttonIndex] == @"Delete Photo") {
+	else if ([actionSheet buttonTitleAtIndex:buttonIndex] == kDeletePhotoButtonText) {
 		[self deleteExistingPhoto];
 	}
 }

@@ -9,8 +9,10 @@
 /* Begin PBXBuildFile section */
 		0C251C4B10236C0900C05768 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C251C4710236C0900C05768 /* Note.m */; };
 		0C3551F71020D690006C7ED7 /* NoteDetailHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C3551F61020D690006C7ED7 /* NoteDetailHeader.xib */; };
+		0C599F78102A446800E66315 /* QuickAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */; };
+		0C599FB7102A536400E66315 /* RootView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C599FB6102A536400E66315 /* RootView.xib */; };
 		0CB2F13F101A3B600087C6F6 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB2F13D101A3B600087C6F6 /* RootViewController.m */; };
-		0CB2F140101A3B600087C6F6 /* RootView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CB2F13E101A3B600087C6F6 /* RootView.xib */; };
+		0CB2F140101A3B600087C6F6 /* QuickAddView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CB2F13E101A3B600087C6F6 /* QuickAddView.xib */; };
 		0CB2F165101A3DE10087C6F6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB2F164101A3DE10087C6F6 /* CoreLocation.framework */; };
 		0CB2F167101A3DE60087C6F6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB2F166101A3DE60087C6F6 /* MapKit.framework */; };
 		1D3623260D0F684500981E51 /* MapNotesAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* MapNotesAppDelegate.m */; };
@@ -52,9 +54,12 @@
 		0C251C4610236C0900C05768 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Note.h; path = "Model Classes/Note.h"; sourceTree = "<group>"; };
 		0C251C4710236C0900C05768 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Note.m; path = "Model Classes/Note.m"; sourceTree = "<group>"; };
 		0C3551F61020D690006C7ED7 /* NoteDetailHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteDetailHeader.xib; sourceTree = "<group>"; };
+		0C599F76102A446800E66315 /* QuickAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickAddViewController.h; sourceTree = "<group>"; };
+		0C599F77102A446800E66315 /* QuickAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickAddViewController.m; sourceTree = "<group>"; };
+		0C599FB6102A536400E66315 /* RootView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootView.xib; sourceTree = "<group>"; };
 		0CB2F13C101A3B600087C6F6 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		0CB2F13D101A3B600087C6F6 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		0CB2F13E101A3B600087C6F6 /* RootView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = RootView.xib; path = Classes/RootView.xib; sourceTree = "<group>"; };
+		0CB2F13E101A3B600087C6F6 /* QuickAddView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = QuickAddView.xib; path = Classes/QuickAddView.xib; sourceTree = "<group>"; };
 		0CB2F164101A3DE10087C6F6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0CB2F166101A3DE60087C6F6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -127,6 +132,8 @@
 				1D3623250D0F684500981E51 /* MapNotesAppDelegate.m */,
 				0CB2F13C101A3B600087C6F6 /* RootViewController.h */,
 				0CB2F13D101A3B600087C6F6 /* RootViewController.m */,
+				0C599F76102A446800E66315 /* QuickAddViewController.h */,
+				0C599F77102A446800E66315 /* QuickAddViewController.m */,
 				28C286DF0D94DF7D0034E888 /* NotesViewController.h */,
 				28C286E00D94DF7D0034E888 /* NotesViewController.m */,
 				D360D122101D246B0095ED7B /* NoteDetailController.h */,
@@ -212,12 +219,13 @@
 			isa = PBXGroup;
 			children = (
 				0C251CA81023893200C05768 /* Images */,
-				0CB2F13E101A3B600087C6F6 /* RootView.xib */,
+				0CB2F13E101A3B600087C6F6 /* QuickAddView.xib */,
 				2899E55F0DE3E45000AC0155 /* NotesView.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* MapNotes-Info.plist */,
 				0C3551F61020D690006C7ED7 /* NoteDetailHeader.xib */,
 				D345E74B10229C4B0070C491 /* NoteDetailFooter.xib */,
+				0C599FB6102A536400E66315 /* RootView.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -286,7 +294,7 @@
 			files = (
 				28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */,
 				2899E5600DE3E45000AC0155 /* NotesView.xib in Resources */,
-				0CB2F140101A3B600087C6F6 /* RootView.xib in Resources */,
+				0CB2F140101A3B600087C6F6 /* QuickAddView.xib in Resources */,
 				0C3551F71020D690006C7ED7 /* NoteDetailHeader.xib in Resources */,
 				D37E96C310215F6F00D6509A /* temp_icon.png in Resources */,
 				D345E74C10229C4B0070C491 /* NoteDetailFooter.xib in Resources */,
@@ -305,6 +313,7 @@
 				D303F2A11026ACB800528192 /* img_accuracy_red.png in Resources */,
 				D303F2A21026ACB800528192 /* img_accuracy_green.png in Resources */,
 				D303F2A31026ACB800528192 /* img_accuracy_bkgnd.png in Resources */,
+				0C599FB7102A536400E66315 /* RootView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +336,7 @@
 				D303F2A61026ACE000528192 /* UIImageToDataTransformer.m in Sources */,
 				D3BEAE2E1027FDA2001BC385 /* ImageManipulator.m in Sources */,
 				D30D71B0102997F000AF4AFF /* NotePhotoViewController.m in Sources */,
+				0C599F78102A446800E66315 /* QuickAddViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

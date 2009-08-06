@@ -6,6 +6,10 @@
 //  Copyright 2009 Local Matters, Inc.. All rights reserved.
 //
 
+#define kTakePhotoButtonText	@"Take Photo"
+#define kChoosePhotoButtonText	@"Choose Existing Photo"
+#define kDeletePhotoButtonText	@"Delete Photo"
+
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>

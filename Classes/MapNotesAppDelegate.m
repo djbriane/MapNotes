@@ -22,21 +22,21 @@
     
     // Override point for customization after app launch    
 	
-	RootViewController *launchViewController = [[RootViewController alloc] initWithNibName:@"RootView" bundle:nil];
+	RootViewController *rootViewController = [[RootViewController alloc] initWithNibName:@"RootView" bundle:nil];
 	
 	NSManagedObjectContext *context = [self managedObjectContext];
 	if (!context) {
 		// Handle the error.
 	}
-	launchViewController.managedObjectContext = context;
+	rootViewController.managedObjectContext = context;
 	
-	UINavigationController *aNavigationController = [[UINavigationController alloc] initWithRootViewController:launchViewController];
+	UINavigationController *aNavigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
 	self.navigationController = aNavigationController;	
 	
 	[window addSubview:[navigationController view]];
     [window makeKeyAndVisible];
 	
-	[launchViewController release];
+	[rootViewController release];
 	[aNavigationController release];
 }
 
