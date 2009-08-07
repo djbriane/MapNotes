@@ -9,12 +9,13 @@
 #import "QuickAddViewController.h"
 #import "RootViewController.h"
 #import "MapNotesAppDelegate.h"
+#import "Note.h"
 
 @implementation QuickAddViewController
 
 @synthesize mapView = _mapView;
 @synthesize locationManager, locationTimer, managedObjectContext;
-@synthesize addNoteButton;
+@synthesize addTextNoteButton, addPhotoNoteButton, updateLocationButton;
 @synthesize locationInfoLabel;
 
 /*
@@ -66,34 +67,6 @@
 	// e.g. self.myOutlet = nil;
 }
 
-- (void)addNote {
-	/*
-	CLLocation *location = [locationManager location];
-	if (!location) {
-		return;
-	}
-	
-	// Create and configure a new instance of the Event entity
-	Note *note = (Note *)[NSEntityDescription insertNewObjectForEntityForName:@"Note"
-													   inManagedObjectContext:managedObjectContext];
-	
-	CLLocationCoordinate2D coordinate = [location coordinate];
-	
-	[note setGeoLatitude:[NSNumber numberWithDouble:coordinate.latitude]];
-	[note setGeoLongitude:[NSNumber numberWithDouble:coordinate.longitude]];
-	[note setGeoAccuracy:[NSNumber numberWithDouble:location.horizontalAccuracy]];
-	
-	[note setDateCreated:[NSDate date]];
-	[note setTitle:@"New Note"];
-	
-	NSError *error;
-	if (![managedObjectContext save:&error]) {
-		// Handle the error.
-		NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
-	}
-	 */
-}
-
 - (void)checkAndUpdateLocation {
 	// set up NSTimer loop to check if we have a good location
 	if (nil != self.locationManager.location) {
@@ -102,40 +75,60 @@
 		region.span.longitudeDelta = 0.02f;
 		region.span.latitudeDelta = 0.02f;
 		
-		[self.mapView setRegion:region animated:YES];
+		[self.mapView setRegion:region animated:NO];
+		self.addTextNoteButton.enabled = YES;
+		self.addPhotoNoteButton.enabled = YES;
 		[self.locationTimer invalidate];
+	} else {
+		self.addTextNoteButton.enabled = NO;
+		self.addPhotoNoteButton.enabled = NO;
 	}
 }
 
-
-//- (IBAction)viewNotes:(id)sender {
-	// do something
-	// Disclosure Button
-	/*
-	NotesViewController *notesViewController = [[NotesViewController alloc] initWithStyle:UITableViewStylePlain];
-	notesViewController.managedObjectContext = managedObjectContext;
+- (IBAction)addTextNote:(id)sender {
+	if (!self.locationManager.location) {
+		return;
+	}
 	
-	[self.navigationController pushViewController:notesViewController animated:YES];
+	// Create and configure a new instance of the Event entity
+	Note *note = (Note *)[NSEntityDescription insertNewObjectForEntityForName:@"Note"
+													   inManagedObjectContext:self.managedObjectContext];
 	
-	[notesViewController release];
-	 */
-//}
-
-
-- (IBAction)textNoteButton:(id)sender {
-}
-
-- (IBAction)photoNoteButton:(id)sender {
-}
-
-- (IBAction)viewNotesButton:(id)sender {
+	CLLocationCoordinate2D coordinate = [self.locationManager.location coordinate];
+	
+	[note setGeoLatitude:[NSNumber numberWithDouble:coordinate.latitude]];
+	[note setGeoLongitude:[NSNumber numberWithDouble:coordinate.longitude]];
+	[note setGeoAccuracy:[NSNumber numberWithDouble:self.locationManager.location.horizontalAccuracy]];
+	
+	[note setDateCreated:[NSDate date]];
+	[note setTitle:@"New Note"];
+	
+	NSError *error;
+	if (![self.managedObjectContext save:&error]) {
+		// Handle the error.
+		NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
+	}
+	
 	[self.parentViewController dismissModalViewControllerAnimated:YES];
+}
+
+- (IBAction)addPhotoNote:(id)sender {
+
+}
+
+- (IBAction)viewNotes:(id)sender {
+	[self.parentViewController dismissModalViewControllerAnimated:YES];
+}
+
+- (IBAction)updateLocation:(id)sender {
 }
 
 - (void)dealloc {
 	self.mapView = nil;
 	[locationTimer release];
 	[locationInfoLabel release];
+	[locationManager release];
+	[managedObjectContext release];
     [super dealloc];
 }
 

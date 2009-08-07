@@ -16,7 +16,9 @@
 	NSTimer *locationTimer;
 	
 	IBOutlet UILabel *locationInfoLabel;
-	IBOutlet UIButton *addNoteButton;
+	IBOutlet UIButton *addTextNoteButton;
+	IBOutlet UIButton *addPhotoNoteButton;
+	IBOutlet UIButton *updateLocationButton;
 }
 
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
@@ -25,14 +27,16 @@
 @property (nonatomic, retain) NSTimer *locationTimer;
 
 @property (nonatomic, retain) IBOutlet UILabel *locationInfoLabel;
-@property (nonatomic, retain) IBOutlet UIButton *addNoteButton;
+@property (nonatomic, retain) IBOutlet UIButton *addTextNoteButton;
+@property (nonatomic, retain) IBOutlet UIButton *addPhotoNoteButton;
+@property (nonatomic, retain) IBOutlet UIButton *updateLocationButton;
 
-- (void)addNote;
 - (void)checkAndUpdateLocation;
 
-- (IBAction)photoNoteButton:(id)sender;
-- (IBAction)textNoteButton:(id)sender;
-- (IBAction)viewNotesButton:(id)sender;
+- (IBAction)addPhotoNote:(id)sender;
+- (IBAction)addTextNote:(id)sender;
+- (IBAction)viewNotes:(id)sender;
+- (IBAction)updateLocation:(id)sender;
 
 @end
 

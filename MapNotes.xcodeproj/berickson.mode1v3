@@ -279,7 +279,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>9</integer>
+									<integer>11</integer>
 									<integer>7</integer>
 									<integer>0</integer>
 								</array>
@@ -322,7 +322,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>MapNotesAppDelegate.m</string>
+								<string>QuickAddViewController.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -330,11 +330,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>MapNotesAppDelegate.m</string>
+										<string>QuickAddViewController.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>0C4D921C102CD0C500BFFBF4</string>
+										<string>0C4D9262102CD81E00BFFBF4</string>
 										<key>history</key>
 										<array>
 											<string>0CB2F142101A3B7F0087C6F6</string>
@@ -378,12 +378,12 @@
 											<string>0C599FBF102A559200E66315</string>
 											<string>0C4D918A102CC7F800BFFBF4</string>
 											<string>0C4D91DD102CCB8000BFFBF4</string>
-											<string>0C4D91DE102CCB8000BFFBF4</string>
-											<string>0C4D91F7102CCE1F00BFFBF4</string>
-											<string>0C4D91F8102CCE1F00BFFBF4</string>
-											<string>0C4D9203102CCF4B00BFFBF4</string>
-											<string>0C4D9219102CD0C500BFFBF4</string>
-											<string>0C4D921A102CD0C500BFFBF4</string>
+											<string>0C4D9233102CD68500BFFBF4</string>
+											<string>0C4D9242102CD72900BFFBF4</string>
+											<string>0C4D9244102CD72900BFFBF4</string>
+											<string>0C4D9251102CD7AF00BFFBF4</string>
+											<string>0C4D9252102CD7AF00BFFBF4</string>
+											<string>0C4D9253102CD7AF00BFFBF4</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -581,6 +581,32 @@
 											<string>0C4D920C102CCF4B00BFFBF4</string>
 											<string>0C4D920D102CCF4B00BFFBF4</string>
 											<string>0C4D921B102CD0C500BFFBF4</string>
+											<string>0C4D9223102CD32A00BFFBF4</string>
+											<string>0C4D9224102CD32A00BFFBF4</string>
+											<string>0C4D9225102CD32A00BFFBF4</string>
+											<string>0C4D9226102CD32A00BFFBF4</string>
+											<string>0C4D9227102CD32A00BFFBF4</string>
+											<string>0C4D9228102CD32A00BFFBF4</string>
+											<string>0C4D9229102CD32A00BFFBF4</string>
+											<string>0C4D922A102CD32A00BFFBF4</string>
+											<string>0C4D922B102CD32A00BFFBF4</string>
+											<string>0C4D922C102CD32A00BFFBF4</string>
+											<string>0C4D922D102CD32A00BFFBF4</string>
+											<string>0C4D922E102CD32A00BFFBF4</string>
+											<string>0C4D9236102CD68500BFFBF4</string>
+											<string>0C4D9237102CD68500BFFBF4</string>
+											<string>0C4D9238102CD68500BFFBF4</string>
+											<string>0C4D9239102CD68500BFFBF4</string>
+											<string>0C4D923A102CD68500BFFBF4</string>
+											<string>0C4D923B102CD68500BFFBF4</string>
+											<string>0C4D9246102CD72900BFFBF4</string>
+											<string>0C4D9247102CD72900BFFBF4</string>
+											<string>0C4D9248102CD72900BFFBF4</string>
+											<string>0C4D9249102CD72900BFFBF4</string>
+											<string>0C4D924A102CD72900BFFBF4</string>
+											<string>0C4D9254102CD7AF00BFFBF4</string>
+											<string>0C4D9255102CD7AF00BFFBF4</string>
+											<string>0C4D9256102CD7AF00BFFBF4</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -774,11 +800,12 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>0C4D9260102CD81900BFFBF4</string>
 		<string>0C4D913D102CA70A00BFFBF4</string>
 		<string>0C4D913E102CA70A00BFFBF4</string>
-		<string>1CD10A99069EF8BA00B06720</string>
 		<string>0CB2F15B101A3B7F0087C6F6</string>
 		<string>1C78EAAD065D492600B07095</string>
+		<string>1CD10A99069EF8BA00B06720</string>
 		<string>/localtmp/projects/iphone/MapNotes/MapNotes.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -798,6 +825,8 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -820,8 +849,6 @@
 							<string>229pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>

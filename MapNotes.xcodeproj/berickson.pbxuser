@@ -19,7 +19,7 @@
 		ignoreCount = 0;
 		lineNumber = 96;
 		location = MapNotes;
-		modificationTime = 271370945.106112;
+		modificationTime = 271374364.210521;
 		state = 1;
 	};
 	0C05E4A6101F89BC00FBF7A1 /* RootViewController.m:96 */ = {
@@ -36,7 +36,7 @@
 		ignoreCount = 0;
 		lineNumber = 96;
 		location = MapNotes;
-		modificationTime = 271370945.140353;
+		modificationTime = 271374364.243968;
 		state = 1;
 	};
 	0C05E4F2101FBF7D00FBF7A1 /* Note.m */ = {
@@ -388,7 +388,7 @@
 		ignoreCount = 0;
 		lineNumber = 86;
 		location = MapNotes;
-		modificationTime = 271370943.364476;
+		modificationTime = 271374363.19656;
 		state = 2;
 	};
 	0C39E8C6102223B5002D52DD /* NoteDetailController.m:104 */ = {
@@ -405,7 +405,7 @@
 		ignoreCount = 0;
 		lineNumber = 104;
 		location = MapNotes;
-		modificationTime = 271370943.364483;
+		modificationTime = 271374363.196568;
 		state = 2;
 	};
 	0C39E8D1102224A2002D52DD /* NoteDetailController.m:87 */ = {
@@ -422,7 +422,7 @@
 		ignoreCount = 0;
 		lineNumber = 87;
 		location = MapNotes;
-		modificationTime = 271370943.364488;
+		modificationTime = 271374363.196573;
 		state = 2;
 	};
 	0C3D63D91028AB6F00AFBF0B /* PBXTextBookmark */ = {
@@ -445,7 +445,7 @@
 		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
 		name = "QuickAddViewController.h: 17";
 		rLen = 0;
-		rLoc = 484;
+		rLoc = 570;
 		rType = 0;
 		vrLen = 1146;
 		vrLoc = 0;
@@ -455,7 +455,7 @@
 		comments = "warning: '-locationManager' not found in protocol(s)";
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		rLen = 0;
-		rLoc = 42;
+		rLoc = 43;
 		rType = 1;
 	};
 	0C4D90F6102C85A900BFFBF4 /* PBXTextBookmark */ = {
@@ -463,7 +463,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 42";
 		rLen = 0;
-		rLoc = 1270;
+		rLoc = 1333;
 		rType = 0;
 		vrLen = 426;
 		vrLoc = 913;
@@ -473,7 +473,7 @@
 		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
 		name = "QuickAddViewController.h: 17";
 		rLen = 0;
-		rLoc = 484;
+		rLoc = 570;
 		rType = 0;
 		vrLen = 1146;
 		vrLoc = 0;
@@ -493,7 +493,7 @@
 		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
 		name = "QuickAddViewController.h: 17";
 		rLen = 0;
-		rLoc = 484;
+		rLoc = 570;
 		rType = 0;
 		vrLen = 1146;
 		vrLoc = 0;
@@ -513,7 +513,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 40";
 		rLen = 0;
-		rLoc = 1097;
+		rLoc = 1160;
 		rType = 0;
 		vrLen = 1377;
 		vrLoc = 0;
@@ -523,7 +523,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 42";
 		rLen = 0;
-		rLoc = 1270;
+		rLoc = 1333;
 		rType = 0;
 		vrLen = 1315;
 		vrLoc = 0;
@@ -543,7 +543,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 42";
 		rLen = 0;
-		rLoc = 1270;
+		rLoc = 1333;
 		rType = 0;
 		vrLen = 1428;
 		vrLoc = 150;
@@ -563,7 +563,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 42";
 		rLen = 0;
-		rLoc = 1270;
+		rLoc = 1333;
 		rType = 0;
 		vrLen = 1315;
 		vrLoc = 0;
@@ -583,7 +583,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 42";
 		rLen = 0;
-		rLoc = 1270;
+		rLoc = 1333;
 		rType = 0;
 		vrLen = 1428;
 		vrLoc = 150;
@@ -623,7 +623,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 42";
 		rLen = 0;
-		rLoc = 1270;
+		rLoc = 1333;
 		rType = 0;
 		vrLen = 1334;
 		vrLoc = 150;
@@ -653,7 +653,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 43";
 		rLen = 0;
-		rLoc = 1270;
+		rLoc = 1333;
 		rType = 0;
 		vrLen = 1502;
 		vrLoc = 150;
@@ -663,7 +663,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 44";
 		rLen = 0;
-		rLoc = 1270;
+		rLoc = 1333;
 		rType = 0;
 		vrLen = 532;
 		vrLoc = 913;
@@ -681,7 +681,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 44";
 		rLen = 0;
-		rLoc = 1270;
+		rLoc = 1333;
 		rType = 0;
 		vrLen = 532;
 		vrLoc = 913;
@@ -701,7 +701,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 51";
 		rLen = 0;
-		rLoc = 1462;
+		rLoc = 1525;
 		rType = 0;
 		vrLen = 1671;
 		vrLoc = 189;
@@ -721,7 +721,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 51";
 		rLen = 0;
-		rLoc = 1462;
+		rLoc = 1525;
 		rType = 0;
 		vrLen = 1671;
 		vrLoc = 189;
@@ -801,7 +801,7 @@
 		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
 		name = "QuickAddViewController.h: 17";
 		rLen = 0;
-		rLoc = 484;
+		rLoc = 570;
 		rType = 0;
 		vrLen = 1146;
 		vrLoc = 0;
@@ -841,7 +841,7 @@
 		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
 		name = "QuickAddViewController.h: 17";
 		rLen = 0;
-		rLoc = 484;
+		rLoc = 570;
 		rType = 0;
 		vrLen = 1146;
 		vrLoc = 0;
@@ -851,7 +851,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 43";
 		rLen = 0;
-		rLoc = 1270;
+		rLoc = 1333;
 		rType = 0;
 		vrLen = 1556;
 		vrLoc = 189;
@@ -861,12 +861,12 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 42";
 		rLen = 0;
-		rLoc = 1162;
+		rLoc = 1225;
 		rType = 0;
 		vrLen = 1263;
 		vrLoc = 795;
 	};
-	0C4D9133102CA6EF00BFFBF4 /* QuickAddViewController.m:99 */ = {
+	0C4D9133102CA6EF00BFFBF4 /* QuickAddViewController.m:72 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -878,9 +878,9 @@
 		functionName = "-checkAndUpdateLocation";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 99;
+		lineNumber = 72;
 		location = MapNotes;
-		modificationTime = 271370945.181933;
+		modificationTime = 271374364.289836;
 		state = 1;
 	};
 	0C4D9135102CA70A00BFFBF4 /* PBXTextBookmark */ = {
@@ -888,7 +888,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 95";
 		rLen = 33;
-		rLoc = 2925;
+		rLoc = 2125;
 		rType = 0;
 		vrLen = 1455;
 		vrLoc = 2207;
@@ -908,7 +908,7 @@
 		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
 		name = "QuickAddViewController.h: 22";
 		rLen = 0;
-		rLoc = 612;
+		rLoc = 698;
 		rType = 0;
 		vrLen = 1243;
 		vrLoc = 0;
@@ -918,7 +918,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 42";
 		rLen = 15;
-		rLoc = 1167;
+		rLoc = 1230;
 		rType = 0;
 		vrLen = 1116;
 		vrLoc = 772;
@@ -928,7 +928,7 @@
 		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
 		name = "QuickAddViewController.h: 22";
 		rLen = 0;
-		rLoc = 612;
+		rLoc = 698;
 		rType = 0;
 		vrLen = 1243;
 		vrLoc = 0;
@@ -938,7 +938,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 95";
 		rLen = 33;
-		rLoc = 2925;
+		rLoc = 2125;
 		rType = 0;
 		vrLen = 1455;
 		vrLoc = 2207;
@@ -958,7 +958,7 @@
 		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
 		name = "QuickAddViewController.h: 30";
 		rLen = 0;
-		rLoc = 925;
+		rLoc = 1138;
 		rType = 0;
 		vrLen = 1276;
 		vrLoc = 0;
@@ -968,7 +968,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 96";
 		rLen = 7;
-		rLoc = 2969;
+		rLoc = 2169;
 		rType = 0;
 		vrLen = 1455;
 		vrLoc = 2207;
@@ -978,7 +978,7 @@
 		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
 		name = "QuickAddViewController.h: 30";
 		rLen = 0;
-		rLoc = 925;
+		rLoc = 1138;
 		rType = 0;
 		vrLen = 1191;
 		vrLoc = 0;
@@ -988,7 +988,7 @@
 		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
 		name = "QuickAddViewController.h: 30";
 		rLen = 0;
-		rLoc = 925;
+		rLoc = 1138;
 		rType = 0;
 		vrLen = 1191;
 		vrLoc = 0;
@@ -998,7 +998,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 96";
 		rLen = 7;
-		rLoc = 2969;
+		rLoc = 2169;
 		rType = 0;
 		vrLen = 1455;
 		vrLoc = 2207;
@@ -1008,7 +1008,7 @@
 		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
 		name = "QuickAddViewController.h: 25";
 		rLen = 0;
-		rLoc = 742;
+		rLoc = 828;
 		rType = 0;
 		vrLen = 1354;
 		vrLoc = 0;
@@ -1018,7 +1018,7 @@
 		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
 		name = "QuickAddViewController.h: 25";
 		rLen = 0;
-		rLoc = 742;
+		rLoc = 828;
 		rType = 0;
 		vrLen = 1354;
 		vrLoc = 0;
@@ -1028,7 +1028,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 96";
 		rLen = 7;
-		rLoc = 2969;
+		rLoc = 2169;
 		rType = 0;
 		vrLen = 1455;
 		vrLoc = 2207;
@@ -1038,7 +1038,7 @@
 		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
 		name = "QuickAddViewController.h: 25";
 		rLen = 0;
-		rLoc = 742;
+		rLoc = 828;
 		rType = 0;
 		vrLen = 1354;
 		vrLoc = 0;
@@ -1048,7 +1048,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 18";
 		rLen = 0;
-		rLoc = 447;
+		rLoc = 510;
 		rType = 0;
 		vrLen = 1303;
 		vrLoc = 0;
@@ -1058,7 +1058,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 18";
 		rLen = 17;
-		rLoc = 430;
+		rLoc = 493;
 		rType = 0;
 		vrLen = 1308;
 		vrLoc = 0;
@@ -1068,7 +1068,7 @@
 		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
 		name = "QuickAddViewController.h: 25";
 		rLen = 0;
-		rLoc = 742;
+		rLoc = 828;
 		rType = 0;
 		vrLen = 1270;
 		vrLoc = 0;
@@ -1078,7 +1078,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 18";
 		rLen = 17;
-		rLoc = 430;
+		rLoc = 493;
 		rType = 0;
 		vrLen = 1308;
 		vrLoc = 0;
@@ -1108,7 +1108,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 18";
 		rLen = 17;
-		rLoc = 430;
+		rLoc = 493;
 		rType = 0;
 		vrLen = 1308;
 		vrLoc = 0;
@@ -1128,7 +1128,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 145";
 		rLen = 0;
-		rLoc = 3996;
+		rLoc = 3935;
 		rType = 0;
 		vrLen = 1308;
 		vrLoc = 0;
@@ -1138,7 +1138,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 95";
 		rLen = 0;
-		rLoc = 2982;
+		rLoc = 2182;
 		rType = 0;
 		vrLen = 1441;
 		vrLoc = 1901;
@@ -1158,7 +1158,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 103";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 2710;
 		rType = 0;
 		vrLen = 1524;
 		vrLoc = 2764;
@@ -1168,7 +1168,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 103";
 		rLen = 0;
-		rLoc = 3341;
+		rLoc = 2710;
 		rType = 0;
 		vrLen = 1524;
 		vrLoc = 2764;
@@ -1188,7 +1188,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 103";
 		rLen = 0;
-		rLoc = 3338;
+		rLoc = 2618;
 		rType = 0;
 		vrLen = 1403;
 		vrLoc = 2659;
@@ -1198,7 +1198,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 106";
 		rLen = 0;
-		rLoc = 3338;
+		rLoc = 2618;
 		rType = 0;
 		vrLen = 1576;
 		vrLoc = 453;
@@ -1218,7 +1218,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 42";
 		rLen = 107;
-		rLoc = 1162;
+		rLoc = 1225;
 		rType = 0;
 		vrLen = 1606;
 		vrLoc = 453;
@@ -1258,7 +1258,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 38";
 		rLen = 0;
-		rLoc = 1070;
+		rLoc = 1133;
 		rType = 0;
 		vrLen = 1606;
 		vrLoc = 453;
@@ -1328,7 +1328,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 42";
 		rLen = 107;
-		rLoc = 1162;
+		rLoc = 1225;
 		rType = 0;
 		vrLen = 1606;
 		vrLoc = 453;
@@ -1472,7 +1472,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 40";
 		rLen = 0;
-		rLoc = 1097;
+		rLoc = 1160;
 		rType = 0;
 		vrLen = 1380;
 		vrLoc = 2917;
@@ -1592,7 +1592,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 40";
 		rLen = 0;
-		rLoc = 1097;
+		rLoc = 1160;
 		rType = 0;
 		vrLen = 1297;
 		vrLoc = 3346;
@@ -1702,7 +1702,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 40";
 		rLen = 0;
-		rLoc = 1097;
+		rLoc = 1160;
 		rType = 0;
 		vrLen = 1380;
 		vrLoc = 2917;
@@ -1822,7 +1822,7 @@
 		comments = "error: expected ':' before ']' token";
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		rLen = 1;
-		rLoc = 132;
+		rLoc = 120;
 		rType = 1;
 	};
 	0C4D91AE102CC94500BFFBF4 /* PBXTextBookmark */ = {
@@ -1840,7 +1840,7 @@
 		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
 		name = "QuickAddViewController.h: 31";
 		rLen = 0;
-		rLoc = 893;
+		rLoc = 1106;
 		rType = 0;
 		vrLen = 1319;
 		vrLoc = 45;
@@ -1850,7 +1850,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 131";
 		rLen = 0;
-		rLoc = 3840;
+		rLoc = 3742;
 		rType = 0;
 		vrLen = 1107;
 		vrLoc = 2925;
@@ -1880,7 +1880,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 40";
 		rLen = 0;
-		rLoc = 1097;
+		rLoc = 1160;
 		rType = 0;
 		vrLen = 1357;
 		vrLoc = 2374;
@@ -1890,7 +1890,7 @@
 		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
 		name = "QuickAddViewController.h: 31";
 		rLen = 0;
-		rLoc = 893;
+		rLoc = 1106;
 		rType = 0;
 		vrLen = 1319;
 		vrLoc = 45;
@@ -1900,7 +1900,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 131";
 		rLen = 0;
-		rLoc = 3840;
+		rLoc = 3742;
 		rType = 0;
 		vrLen = 1107;
 		vrLoc = 2925;
@@ -1930,7 +1930,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 128";
 		rLen = 0;
-		rLoc = 3815;
+		rLoc = 3717;
 		rType = 0;
 		vrLen = 1112;
 		vrLoc = 2922;
@@ -1950,7 +1950,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 131";
 		rLen = 0;
-		rLoc = 3840;
+		rLoc = 3742;
 		rType = 0;
 		vrLen = 1105;
 		vrLoc = 2925;
@@ -1970,7 +1970,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 132";
 		rLen = 0;
-		rLoc = 3929;
+		rLoc = 3825;
 		rType = 0;
 		vrLen = 1057;
 		vrLoc = 2925;
@@ -1980,7 +1980,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 122";
 		rLen = 0;
-		rLoc = 3729;
+		rLoc = 2713;
 		rType = 0;
 		vrLen = 1534;
 		vrLoc = 418;
@@ -2020,7 +2020,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 122";
 		rLen = 0;
-		rLoc = 3729;
+		rLoc = 2713;
 		rType = 0;
 		vrLen = 1534;
 		vrLoc = 418;
@@ -2380,7 +2380,7 @@
 		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
 		name = "QuickAddViewController.h: 31";
 		rLen = 0;
-		rLoc = 893;
+		rLoc = 1106;
 		rType = 0;
 		vrLen = 1319;
 		vrLoc = 45;
@@ -2390,7 +2390,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 122";
 		rLen = 0;
-		rLoc = 3729;
+		rLoc = 2713;
 		rType = 0;
 		vrLen = 1389;
 		vrLoc = 1049;
@@ -2410,7 +2410,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 122";
 		rLen = 0;
-		rLoc = 3729;
+		rLoc = 2713;
 		rType = 0;
 		vrLen = 1389;
 		vrLoc = 1049;
@@ -2420,7 +2420,7 @@
 		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
 		name = "QuickAddViewController.h: 31";
 		rLen = 0;
-		rLoc = 893;
+		rLoc = 1106;
 		rType = 0;
 		vrLen = 1319;
 		vrLoc = 45;
@@ -2430,7 +2430,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 132";
 		rLen = 0;
-		rLoc = 3928;
+		rLoc = 3824;
 		rType = 0;
 		vrLen = 1125;
 		vrLoc = 2925;
@@ -2440,7 +2440,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 132";
 		rLen = 0;
-		rLoc = 3928;
+		rLoc = 3824;
 		rType = 0;
 		vrLen = 1271;
 		vrLoc = 809;
@@ -2450,7 +2450,7 @@
 		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
 		name = "QuickAddViewController.h: 31";
 		rLen = 0;
-		rLoc = 893;
+		rLoc = 1106;
 		rType = 0;
 		vrLen = 1319;
 		vrLoc = 45;
@@ -2460,7 +2460,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 132";
 		rLen = 0;
-		rLoc = 3928;
+		rLoc = 3824;
 		rType = 0;
 		vrLen = 1271;
 		vrLoc = 809;
@@ -2470,7 +2470,7 @@
 		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
 		name = "QuickAddViewController.h: 31";
 		rLen = 0;
-		rLoc = 893;
+		rLoc = 1106;
 		rType = 0;
 		vrLen = 1319;
 		vrLoc = 45;
@@ -2725,6 +2725,513 @@
 		vrLen = 1540;
 		vrLoc = 368;
 	};
+	0C4D921E102CD32A00BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* MapNotesAppDelegate.m */;
+		name = "MapNotesAppDelegate.m: 47";
+		rLen = 0;
+		rLoc = 1549;
+		rType = 0;
+		vrLen = 1648;
+		vrLoc = 368;
+	};
+	0C4D921F102CD32A00BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0CB2F13D101A3B600087C6F6 /* RootViewController.m */;
+		name = "RootViewController.m: 11";
+		rLen = 0;
+		rLoc = 246;
+		rType = 0;
+		vrLen = 1384;
+		vrLoc = 0;
+	};
+	0C4D9220102CD32A00BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28C286DF0D94DF7D0034E888 /* NotesViewController.h */;
+		name = "NotesViewController.h: 20";
+		rLen = 0;
+		rLoc = 632;
+		rType = 0;
+		vrLen = 781;
+		vrLoc = 0;
+	};
+	0C4D9221102CD32A00BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
+		name = "QuickAddViewController.m: 78";
+		rLen = 81;
+		rLoc = 2503;
+		rType = 0;
+		vrLen = 1446;
+		vrLoc = 2061;
+	};
+	0C4D9222102CD32A00BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
+		name = "QuickAddViewController.h: 33";
+		rLen = 0;
+		rLoc = 1105;
+		rType = 0;
+		vrLen = 1349;
+		vrLoc = 0;
+	};
+	0C4D9223102CD32A00BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* MapNotesAppDelegate.m */;
+		name = "MapNotesAppDelegate.m: 47";
+		rLen = 0;
+		rLoc = 1549;
+		rType = 0;
+		vrLen = 1648;
+		vrLoc = 368;
+	};
+	0C4D9224102CD32A00BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0CB2F13D101A3B600087C6F6 /* RootViewController.m */;
+		name = "RootViewController.m: 11";
+		rLen = 0;
+		rLoc = 246;
+		rType = 0;
+		vrLen = 1384;
+		vrLoc = 0;
+	};
+	0C4D9225102CD32A00BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28C286DF0D94DF7D0034E888 /* NotesViewController.h */;
+		name = "NotesViewController.h: 20";
+		rLen = 0;
+		rLoc = 632;
+		rType = 0;
+		vrLen = 781;
+		vrLoc = 0;
+	};
+	0C4D9226102CD32A00BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
+		name = "QuickAddViewController.m: 103";
+		rLen = 0;
+		rLoc = 2583;
+		rType = 0;
+		vrLen = 1392;
+		vrLoc = 1950;
+	};
+	0C4D9227102CD32A00BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
+		name = "QuickAddViewController.h: 40";
+		rLen = 0;
+		rLoc = 1284;
+		rType = 0;
+		vrLen = 1363;
+		vrLoc = 3;
+	};
+	0C4D9228102CD32A00BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
+		name = "QuickAddViewController.m: 129";
+		rLen = 0;
+		rLoc = 3742;
+		rType = 0;
+		vrLen = 1024;
+		vrLoc = 3023;
+	};
+	0C4D9229102CD32A00BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
+		name = "QuickAddViewController.h: 40";
+		rLen = 0;
+		rLoc = 1284;
+		rType = 0;
+		vrLen = 1365;
+		vrLoc = 0;
+	};
+	0C4D922A102CD32A00BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
+		name = "QuickAddViewController.m: 67";
+		rLen = 0;
+		rLoc = 2123;
+		rType = 0;
+		vrLen = 1502;
+		vrLoc = 1071;
+	};
+	0C4D922B102CD32A00BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
+		name = "QuickAddViewController.h: 33";
+		rLen = 0;
+		rLoc = 1105;
+		rType = 0;
+		vrLen = 1349;
+		vrLoc = 0;
+	};
+	0C4D922C102CD32A00BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
+		name = "QuickAddViewController.m: 105";
+		rLen = 0;
+		rLoc = 3675;
+		rType = 0;
+		vrLen = 1122;
+		vrLoc = 2512;
+	};
+	0C4D922D102CD32A00BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
+		name = "QuickAddViewController.h: 33";
+		rLen = 0;
+		rLoc = 1105;
+		rType = 0;
+		vrLen = 1349;
+		vrLoc = 0;
+	};
+	0C4D922E102CD32A00BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
+		name = "QuickAddViewController.m: 78";
+		rLen = 81;
+		rLoc = 2503;
+		rType = 0;
+		vrLen = 1446;
+		vrLoc = 2061;
+	};
+	0C4D922F102CD32A00BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
+		name = "QuickAddViewController.h: 30";
+		rLen = 8;
+		rLoc = 936;
+		rType = 0;
+		vrLen = 1349;
+		vrLoc = 0;
+	};
+	0C4D9233102CD68500BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* MapNotesAppDelegate.m */;
+		name = "MapNotesAppDelegate.m: 47";
+		rLen = 0;
+		rLoc = 1549;
+		rType = 0;
+		vrLen = 1508;
+		vrLoc = 0;
+	};
+	0C4D9234102CD68500BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
+		name = "QuickAddViewController.h: 32";
+		rLen = 0;
+		rLoc = 1077;
+		rType = 0;
+		vrLen = 1349;
+		vrLoc = 0;
+	};
+	0C4D9235102CD68500BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
+		name = "QuickAddViewController.m: 17";
+		rLen = 0;
+		rLoc = 489;
+		rType = 0;
+		vrLen = 1462;
+		vrLoc = 0;
+	};
+	0C4D9236102CD68500BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
+		name = "QuickAddViewController.h: 32";
+		rLen = 0;
+		rLoc = 1077;
+		rType = 0;
+		vrLen = 1349;
+		vrLoc = 0;
+	};
+	0C4D9237102CD68500BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
+		name = "QuickAddViewController.m: 86";
+		rLen = 0;
+		rLoc = 2802;
+		rType = 0;
+		vrLen = 1412;
+		vrLoc = 1465;
+	};
+	0C4D9238102CD68500BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* MapNotesAppDelegate.m */;
+		name = "MapNotesAppDelegate.m: 47";
+		rLen = 0;
+		rLoc = 1549;
+		rType = 0;
+		vrLen = 1508;
+		vrLoc = 0;
+	};
+	0C4D9239102CD68500BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
+		name = "QuickAddViewController.h: 32";
+		rLen = 0;
+		rLoc = 1077;
+		rType = 0;
+		vrLen = 1349;
+		vrLoc = 0;
+	};
+	0C4D923A102CD68500BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
+		name = "QuickAddViewController.m: 17";
+		rLen = 0;
+		rLoc = 489;
+		rType = 0;
+		vrLen = 1462;
+		vrLoc = 0;
+	};
+	0C4D923B102CD68500BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
+		name = "QuickAddViewController.h: 32";
+		rLen = 0;
+		rLoc = 1077;
+		rType = 0;
+		vrLen = 1349;
+		vrLoc = 0;
+	};
+	0C4D923C102CD68500BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
+		name = "QuickAddViewController.m: 78";
+		rLen = 0;
+		rLoc = 2583;
+		rType = 0;
+		vrLen = 1257;
+		vrLoc = 1896;
+	};
+	0C4D9242102CD72900BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0CB2F13D101A3B600087C6F6 /* RootViewController.m */;
+		name = "RootViewController.m: 11";
+		rLen = 0;
+		rLoc = 246;
+		rType = 0;
+		vrLen = 1384;
+		vrLoc = 0;
+	};
+	0C4D9243102CD72900BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28C286DF0D94DF7D0034E888 /* NotesViewController.h */;
+		name = "NotesViewController.h: 20";
+		rLen = 0;
+		rLoc = 632;
+		rType = 0;
+		vrLen = 781;
+		vrLoc = 0;
+	};
+	0C4D9244102CD72900BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
+		name = "QuickAddViewController.h: 32";
+		rLen = 0;
+		rLoc = 1077;
+		rType = 0;
+		vrLen = 1349;
+		vrLoc = 0;
+	};
+	0C4D9245102CD72900BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
+		name = "QuickAddViewController.m: 12";
+		rLen = 0;
+		rLoc = 268;
+		rType = 0;
+		vrLen = 1497;
+		vrLoc = 0;
+	};
+	0C4D9246102CD72900BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
+		name = "QuickAddViewController.m: 12";
+		rLen = 0;
+		rLoc = 268;
+		rType = 0;
+		vrLen = 1497;
+		vrLoc = 0;
+	};
+	0C4D9247102CD72900BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28C286DF0D94DF7D0034E888 /* NotesViewController.h */;
+		name = "NotesViewController.h: 20";
+		rLen = 0;
+		rLoc = 632;
+		rType = 0;
+		vrLen = 781;
+		vrLoc = 0;
+	};
+	0C4D9248102CD72900BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0CB2F13D101A3B600087C6F6 /* RootViewController.m */;
+		name = "RootViewController.m: 11";
+		rLen = 0;
+		rLoc = 246;
+		rType = 0;
+		vrLen = 1384;
+		vrLoc = 0;
+	};
+	0C4D9249102CD72900BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28C286DF0D94DF7D0034E888 /* NotesViewController.h */;
+		name = "NotesViewController.h: 20";
+		rLen = 0;
+		rLoc = 632;
+		rType = 0;
+		vrLen = 781;
+		vrLoc = 0;
+	};
+	0C4D924A102CD72900BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
+		name = "QuickAddViewController.h: 32";
+		rLen = 0;
+		rLoc = 1077;
+		rType = 0;
+		vrLen = 1349;
+		vrLoc = 0;
+	};
+	0C4D924B102CD72900BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
+		name = "QuickAddViewController.m: 121";
+		rLen = 0;
+		rLoc = 3855;
+		rType = 0;
+		vrLen = 1245;
+		vrLoc = 2668;
+	};
+	0C4D924E102CD76300BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
+		name = "QuickAddViewController.m: 112";
+		rLen = 0;
+		rLoc = 3675;
+		rType = 0;
+		vrLen = 1368;
+		vrLoc = 2378;
+	};
+	0C4D9251102CD7AF00BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28C286DF0D94DF7D0034E888 /* NotesViewController.h */;
+		name = "NotesViewController.h: 20";
+		rLen = 0;
+		rLoc = 632;
+		rType = 0;
+		vrLen = 781;
+		vrLoc = 0;
+	};
+	0C4D9252102CD7AF00BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28C286E00D94DF7D0034E888 /* NotesViewController.m */;
+		name = "NotesViewController.m: 26";
+		rLen = 0;
+		rLoc = 746;
+		rType = 0;
+		vrLen = 1696;
+		vrLoc = 1008;
+	};
+	0C4D9253102CD7AF00BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
+		name = "QuickAddViewController.m: 112";
+		rLen = 0;
+		rLoc = 3675;
+		rType = 0;
+		vrLen = 1214;
+		vrLoc = 2800;
+	};
+	0C4D9254102CD7AF00BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
+		name = "QuickAddViewController.m: 112";
+		rLen = 0;
+		rLoc = 3675;
+		rType = 0;
+		vrLen = 1214;
+		vrLoc = 2800;
+	};
+	0C4D9255102CD7AF00BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28C286DF0D94DF7D0034E888 /* NotesViewController.h */;
+		name = "NotesViewController.h: 20";
+		rLen = 0;
+		rLoc = 632;
+		rType = 0;
+		vrLen = 781;
+		vrLoc = 0;
+	};
+	0C4D9256102CD7AF00BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28C286E00D94DF7D0034E888 /* NotesViewController.m */;
+		name = "NotesViewController.m: 26";
+		rLen = 0;
+		rLoc = 746;
+		rType = 0;
+		vrLen = 1696;
+		vrLoc = 1008;
+	};
+	0C4D9257102CD7AF00BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
+		name = "QuickAddViewController.m: 131";
+		rLen = 0;
+		rLoc = 4026;
+		rType = 0;
+		vrLen = 1252;
+		vrLoc = 2800;
+	};
+	0C4D9259102CD7DE00BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
+		name = "QuickAddViewController.m: 131";
+		rLen = 0;
+		rLoc = 4026;
+		rType = 0;
+		vrLen = 1552;
+		vrLoc = 1161;
+	};
+	0C4D925D102CD81500BFFBF4 /* QuickAddViewController.m:43 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
+		functionName = "-viewDidLoad";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 43;
+		location = MapNotes;
+		modificationTime = 271374364.345242;
+		state = 1;
+	};
+	0C4D925F102CD81900BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
+		name = "QuickAddViewController.m: 62";
+		rLen = 0;
+		rLoc = 1980;
+		rType = 0;
+		vrLen = 1492;
+		vrLoc = 1011;
+	};
+	0C4D9262102CD81E00BFFBF4 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
+		name = "QuickAddViewController.m: 62";
+		rLen = 0;
+		rLoc = 1980;
+		rType = 0;
+		vrLen = 1492;
+		vrLoc = 1011;
+	};
 	0C599ED51029E66D00E66315 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = D3BEAE2D1027FDA2001BC385 /* ImageManipulator.m */;
@@ -2799,7 +3306,7 @@
 		ignoreCount = 0;
 		lineNumber = 282;
 		location = MapNotes;
-		modificationTime = 271370943.364492;
+		modificationTime = 271374363.196578;
 		state = 2;
 	};
 	0C599EE61029F5AE00E66315 /* ImageManipulator.m:216 */ = {
@@ -2816,7 +3323,7 @@
 		ignoreCount = 0;
 		lineNumber = 216;
 		location = MapNotes;
-		modificationTime = 271370943.364496;
+		modificationTime = 271374363.196583;
 		state = 2;
 	};
 	0C599EEA102A012A00E66315 /* PBXTextBookmark */ = {
@@ -3491,16 +3998,16 @@
 	};
 	0C599F76102A446800E66315 /* QuickAddViewController.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {895, 705}}";
-			sepNavSelRange = "{893, 0}";
-			sepNavVisRange = "{45, 1319}";
+			sepNavIntBoundsRect = "{{0, 0}, {895, 765}}";
+			sepNavSelRange = "{1077, 0}";
+			sepNavVisRange = "{0, 1349}";
 		};
 	};
 	0C599F77102A446800E66315 /* QuickAddViewController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {803, 2310}}";
-			sepNavSelRange = "{3929, 0}";
-			sepNavVisRange = "{3687, 173}";
+			sepNavIntBoundsRect = "{{0, 0}, {1146, 2055}}";
+			sepNavSelRange = "{1980, 0}";
+			sepNavVisRange = "{1011, 1492}";
 			sepNavWindowFrame = "{{38, 135}, {1010, 867}}";
 		};
 	};
@@ -3639,7 +4146,7 @@
 		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
 		name = "QuickAddViewController.h: 19";
 		rLen = 0;
-		rLoc = 499;
+		rLoc = 585;
 		rType = 0;
 		vrLen = 440;
 		vrLoc = 0;
@@ -3659,7 +4166,7 @@
 		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
 		name = "QuickAddViewController.h: 19";
 		rLen = 0;
-		rLoc = 499;
+		rLoc = 585;
 		rType = 0;
 		vrLen = 440;
 		vrLoc = 0;
@@ -3679,7 +4186,7 @@
 		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
 		name = "QuickAddViewController.h: 23";
 		rLen = 0;
-		rLoc = 838;
+		rLoc = 924;
 		rType = 0;
 		vrLen = 568;
 		vrLoc = 0;
@@ -3699,7 +4206,7 @@
 		fRef = 0C599F76102A446800E66315 /* QuickAddViewController.h */;
 		name = "QuickAddViewController.h: 25";
 		rLen = 0;
-		rLoc = 838;
+		rLoc = 924;
 		rType = 0;
 		vrLen = 654;
 		vrLoc = 0;
@@ -3749,7 +4256,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 14";
 		rLen = 0;
-		rLoc = 292;
+		rLoc = 309;
 		rType = 0;
 		vrLen = 1214;
 		vrLoc = 0;
@@ -3769,7 +4276,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 17";
 		rLen = 0;
-		rLoc = 391;
+		rLoc = 408;
 		rType = 0;
 		vrLen = 1263;
 		vrLoc = 0;
@@ -3809,7 +4316,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 102";
 		rLen = 0;
-		rLoc = 3375;
+		rLoc = 2713;
 		rType = 0;
 		vrLen = 1251;
 		vrLoc = 1665;
@@ -3829,7 +4336,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 105";
 		rLen = 0;
-		rLoc = 3440;
+		rLoc = 2713;
 		rType = 0;
 		vrLen = 1277;
 		vrLoc = 1655;
@@ -3849,7 +4356,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 106";
 		rLen = 0;
-		rLoc = 3440;
+		rLoc = 2713;
 		rType = 0;
 		vrLen = 1318;
 		vrLoc = 1637;
@@ -3869,7 +4376,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 106";
 		rLen = 0;
-		rLoc = 3440;
+		rLoc = 2713;
 		rType = 0;
 		vrLen = 1365;
 		vrLoc = 1567;
@@ -3939,7 +4446,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 62";
 		rLen = 0;
-		rLoc = 1659;
+		rLoc = 1722;
 		rType = 0;
 		vrLen = 1439;
 		vrLoc = 1083;
@@ -3958,8 +4465,8 @@
 		isa = PBXTextBookmark;
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 97";
-		rLen = 66;
-		rLoc = 2765;
+		rLen = 0;
+		rLoc = 2123;
 		rType = 0;
 		vrLen = 1292;
 		vrLoc = 1700;
@@ -4079,7 +4586,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 105";
 		rLen = 0;
-		rLoc = 3373;
+		rLoc = 2713;
 		rType = 0;
 		vrLen = 1293;
 		vrLoc = 0;
@@ -4239,7 +4746,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 91";
 		rLen = 0;
-		rLoc = 2556;
+		rLoc = 2123;
 		rType = 0;
 		vrLen = 1239;
 		vrLoc = 1764;
@@ -4259,7 +4766,7 @@
 		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
 		name = "QuickAddViewController.m: 105";
 		rLen = 0;
-		rLoc = 3373;
+		rLoc = 2713;
 		rType = 0;
 		vrLen = 1293;
 		vrLoc = 0;
@@ -4281,7 +4788,7 @@
 		argumentStrings = (
 		);
 		autoAttachOnCrash = 1;
-		breakpointsEnabled = 0;
+		breakpointsEnabled = 1;
 		configStateDict = {
 		};
 		customDataFormattersEnabled = 1;
@@ -4323,7 +4830,7 @@
 	};
 	0CB2F13D101A3B600087C6F6 /* RootViewController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1146, 3450}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1146, 3375}}";
 			sepNavSelRange = "{246, 0}";
 			sepNavVisRange = "{0, 1384}";
 			sepNavWindowFrame = "{{61, 114}, {1010, 867}}";
@@ -4561,9 +5068,9 @@
 	};
 	1D3623250D0F684500981E51 /* MapNotesAppDelegate.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {929, 3225}}";
+			sepNavIntBoundsRect = "{{0, 0}, {999, 3210}}";
 			sepNavSelRange = "{1549, 0}";
-			sepNavVisRange = "{368, 1540}";
+			sepNavVisRange = "{0, 1508}";
 		};
 	};
 	1D6058900D05DD3D006BFB54 /* MapNotes */ = {
@@ -4734,16 +5241,16 @@
 	28C286DF0D94DF7D0034E888 /* NotesViewController.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {895, 683}}";
-			sepNavSelRange = "{773, 0}";
+			sepNavSelRange = "{632, 0}";
 			sepNavVisRange = "{0, 781}";
 			sepNavWindowFrame = "{{38, 135}, {1010, 867}}";
 		};
 	};
 	28C286E00D94DF7D0034E888 /* NotesViewController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {985, 3885}}";
-			sepNavSelRange = "{746, 0}";
-			sepNavVisRange = "{252, 1729}";
+			sepNavIntBoundsRect = "{{0, 0}, {985, 4020}}";
+			sepNavSelRange = "{2502, 0}";
+			sepNavVisRange = "{2161, 540}";
 		};
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
@@ -4762,7 +5269,8 @@
 			0C39E8D1102224A2002D52DD /* NoteDetailController.m:87 */,
 			0C599EE11029F49F00E66315 /* NoteDetailController.m:282 */,
 			0C599EE61029F5AE00E66315 /* ImageManipulator.m:216 */,
-			0C4D9133102CA6EF00BFFBF4 /* QuickAddViewController.m:99 */,
+			0C4D9133102CA6EF00BFFBF4 /* QuickAddViewController.m:72 */,
+			0C4D925D102CD81500BFFBF4 /* QuickAddViewController.m:43 */,
 		);
 		codeSenseManager = 0CB2F112101A1EC70087C6F6 /* Code sense */;
 		executables = (
@@ -5142,6 +5650,55 @@
 			0C4D921A102CD0C500BFFBF4 /* PBXTextBookmark */ = 0C4D921A102CD0C500BFFBF4 /* PBXTextBookmark */;
 			0C4D921B102CD0C500BFFBF4 /* PBXTextBookmark */ = 0C4D921B102CD0C500BFFBF4 /* PBXTextBookmark */;
 			0C4D921C102CD0C500BFFBF4 /* PBXTextBookmark */ = 0C4D921C102CD0C500BFFBF4 /* PBXTextBookmark */;
+			0C4D921E102CD32A00BFFBF4 /* PBXTextBookmark */ = 0C4D921E102CD32A00BFFBF4 /* PBXTextBookmark */;
+			0C4D921F102CD32A00BFFBF4 /* PBXTextBookmark */ = 0C4D921F102CD32A00BFFBF4 /* PBXTextBookmark */;
+			0C4D9220102CD32A00BFFBF4 /* PBXTextBookmark */ = 0C4D9220102CD32A00BFFBF4 /* PBXTextBookmark */;
+			0C4D9221102CD32A00BFFBF4 /* PBXTextBookmark */ = 0C4D9221102CD32A00BFFBF4 /* PBXTextBookmark */;
+			0C4D9222102CD32A00BFFBF4 /* PBXTextBookmark */ = 0C4D9222102CD32A00BFFBF4 /* PBXTextBookmark */;
+			0C4D9223102CD32A00BFFBF4 /* PBXTextBookmark */ = 0C4D9223102CD32A00BFFBF4 /* PBXTextBookmark */;
+			0C4D9224102CD32A00BFFBF4 /* PBXTextBookmark */ = 0C4D9224102CD32A00BFFBF4 /* PBXTextBookmark */;
+			0C4D9225102CD32A00BFFBF4 /* PBXTextBookmark */ = 0C4D9225102CD32A00BFFBF4 /* PBXTextBookmark */;
+			0C4D9226102CD32A00BFFBF4 /* PBXTextBookmark */ = 0C4D9226102CD32A00BFFBF4 /* PBXTextBookmark */;
+			0C4D9227102CD32A00BFFBF4 /* PBXTextBookmark */ = 0C4D9227102CD32A00BFFBF4 /* PBXTextBookmark */;
+			0C4D9228102CD32A00BFFBF4 /* PBXTextBookmark */ = 0C4D9228102CD32A00BFFBF4 /* PBXTextBookmark */;
+			0C4D9229102CD32A00BFFBF4 /* PBXTextBookmark */ = 0C4D9229102CD32A00BFFBF4 /* PBXTextBookmark */;
+			0C4D922A102CD32A00BFFBF4 /* PBXTextBookmark */ = 0C4D922A102CD32A00BFFBF4 /* PBXTextBookmark */;
+			0C4D922B102CD32A00BFFBF4 /* PBXTextBookmark */ = 0C4D922B102CD32A00BFFBF4 /* PBXTextBookmark */;
+			0C4D922C102CD32A00BFFBF4 /* PBXTextBookmark */ = 0C4D922C102CD32A00BFFBF4 /* PBXTextBookmark */;
+			0C4D922D102CD32A00BFFBF4 /* PBXTextBookmark */ = 0C4D922D102CD32A00BFFBF4 /* PBXTextBookmark */;
+			0C4D922E102CD32A00BFFBF4 /* PBXTextBookmark */ = 0C4D922E102CD32A00BFFBF4 /* PBXTextBookmark */;
+			0C4D922F102CD32A00BFFBF4 /* PBXTextBookmark */ = 0C4D922F102CD32A00BFFBF4 /* PBXTextBookmark */;
+			0C4D9233102CD68500BFFBF4 /* PBXTextBookmark */ = 0C4D9233102CD68500BFFBF4 /* PBXTextBookmark */;
+			0C4D9234102CD68500BFFBF4 /* PBXTextBookmark */ = 0C4D9234102CD68500BFFBF4 /* PBXTextBookmark */;
+			0C4D9235102CD68500BFFBF4 /* PBXTextBookmark */ = 0C4D9235102CD68500BFFBF4 /* PBXTextBookmark */;
+			0C4D9236102CD68500BFFBF4 /* PBXTextBookmark */ = 0C4D9236102CD68500BFFBF4 /* PBXTextBookmark */;
+			0C4D9237102CD68500BFFBF4 /* PBXTextBookmark */ = 0C4D9237102CD68500BFFBF4 /* PBXTextBookmark */;
+			0C4D9238102CD68500BFFBF4 /* PBXTextBookmark */ = 0C4D9238102CD68500BFFBF4 /* PBXTextBookmark */;
+			0C4D9239102CD68500BFFBF4 /* PBXTextBookmark */ = 0C4D9239102CD68500BFFBF4 /* PBXTextBookmark */;
+			0C4D923A102CD68500BFFBF4 /* PBXTextBookmark */ = 0C4D923A102CD68500BFFBF4 /* PBXTextBookmark */;
+			0C4D923B102CD68500BFFBF4 /* PBXTextBookmark */ = 0C4D923B102CD68500BFFBF4 /* PBXTextBookmark */;
+			0C4D923C102CD68500BFFBF4 /* PBXTextBookmark */ = 0C4D923C102CD68500BFFBF4 /* PBXTextBookmark */;
+			0C4D9242102CD72900BFFBF4 /* PBXTextBookmark */ = 0C4D9242102CD72900BFFBF4 /* PBXTextBookmark */;
+			0C4D9243102CD72900BFFBF4 /* PBXTextBookmark */ = 0C4D9243102CD72900BFFBF4 /* PBXTextBookmark */;
+			0C4D9244102CD72900BFFBF4 /* PBXTextBookmark */ = 0C4D9244102CD72900BFFBF4 /* PBXTextBookmark */;
+			0C4D9245102CD72900BFFBF4 /* PBXTextBookmark */ = 0C4D9245102CD72900BFFBF4 /* PBXTextBookmark */;
+			0C4D9246102CD72900BFFBF4 /* PBXTextBookmark */ = 0C4D9246102CD72900BFFBF4 /* PBXTextBookmark */;
+			0C4D9247102CD72900BFFBF4 /* PBXTextBookmark */ = 0C4D9247102CD72900BFFBF4 /* PBXTextBookmark */;
+			0C4D9248102CD72900BFFBF4 /* PBXTextBookmark */ = 0C4D9248102CD72900BFFBF4 /* PBXTextBookmark */;
+			0C4D9249102CD72900BFFBF4 /* PBXTextBookmark */ = 0C4D9249102CD72900BFFBF4 /* PBXTextBookmark */;
+			0C4D924A102CD72900BFFBF4 /* PBXTextBookmark */ = 0C4D924A102CD72900BFFBF4 /* PBXTextBookmark */;
+			0C4D924B102CD72900BFFBF4 /* PBXTextBookmark */ = 0C4D924B102CD72900BFFBF4 /* PBXTextBookmark */;
+			0C4D924E102CD76300BFFBF4 /* PBXTextBookmark */ = 0C4D924E102CD76300BFFBF4 /* PBXTextBookmark */;
+			0C4D9251102CD7AF00BFFBF4 /* PBXTextBookmark */ = 0C4D9251102CD7AF00BFFBF4 /* PBXTextBookmark */;
+			0C4D9252102CD7AF00BFFBF4 /* PBXTextBookmark */ = 0C4D9252102CD7AF00BFFBF4 /* PBXTextBookmark */;
+			0C4D9253102CD7AF00BFFBF4 /* PBXTextBookmark */ = 0C4D9253102CD7AF00BFFBF4 /* PBXTextBookmark */;
+			0C4D9254102CD7AF00BFFBF4 /* PBXTextBookmark */ = 0C4D9254102CD7AF00BFFBF4 /* PBXTextBookmark */;
+			0C4D9255102CD7AF00BFFBF4 /* PBXTextBookmark */ = 0C4D9255102CD7AF00BFFBF4 /* PBXTextBookmark */;
+			0C4D9256102CD7AF00BFFBF4 /* PBXTextBookmark */ = 0C4D9256102CD7AF00BFFBF4 /* PBXTextBookmark */;
+			0C4D9257102CD7AF00BFFBF4 /* PBXTextBookmark */ = 0C4D9257102CD7AF00BFFBF4 /* PBXTextBookmark */;
+			0C4D9259102CD7DE00BFFBF4 /* PBXTextBookmark */ = 0C4D9259102CD7DE00BFFBF4 /* PBXTextBookmark */;
+			0C4D925F102CD81900BFFBF4 /* PBXTextBookmark */ = 0C4D925F102CD81900BFFBF4 /* PBXTextBookmark */;
+			0C4D9262102CD81E00BFFBF4 /* PBXTextBookmark */ = 0C4D9262102CD81E00BFFBF4 /* PBXTextBookmark */;
 			0C599ED51029E66D00E66315 = 0C599ED51029E66D00E66315 /* PBXTextBookmark */;
 			0C599ED61029E66D00E66315 = 0C599ED61029E66D00E66315 /* PBXTextBookmark */;
 			0C599ED71029E66D00E66315 = 0C599ED71029E66D00E66315 /* PBXTextBookmark */;
