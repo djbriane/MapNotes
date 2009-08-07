@@ -6,6 +6,9 @@
 //  Copyright Local Matters, Inc. 2009. All rights reserved.
 //
 
+#define UIAppDelegate \
+((MapNotesAppDelegate *)[UIApplication sharedApplication].delegate)
+
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
@@ -22,12 +25,11 @@
 
     UIWindow *window;
     UINavigationController *navigationController;
-	QuickAddViewController *quickAddViewController;
-
 }
 
 - (IBAction)saveAction:sender;
 - (void)updateCurrentLocation;
+- (void)initLocationManager;
 
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
@@ -38,8 +40,6 @@
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
-@property (nonatomic, retain) QuickAddViewController *quickAddViewController;
-
 
 @end
 

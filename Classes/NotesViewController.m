@@ -8,6 +8,7 @@
 
 #import "NotesViewController.h"
 #import "NoteDetailController.h"
+#import "QuickAddViewController.h"
 #import "Note.h"
 
 @implementation NotesViewController
@@ -20,7 +21,9 @@
 	// Set up the edit and add buttons.
     //self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject)];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
+																			   target:self 
+																			   action:@selector(showQuickAddView:)];
     self.navigationItem.rightBarButtonItem = addButton;
     [addButton release];
 	
@@ -60,8 +63,13 @@
     [self.tableView reloadData];
 }
 
-
-
+- (void)showQuickAddView:(BOOL)animated {
+	// Set up QuickAdd VC for future use
+	QuickAddViewController *aQuickAddViewController = [[QuickAddViewController alloc] initWithNibName:@"QuickAddView" bundle:nil];
+	aQuickAddViewController.managedObjectContext = [fetchedResultsController managedObjectContext];
+	[self presentModalViewController:aQuickAddViewController animated:animated];
+	[aQuickAddViewController release];
+}
 
 /*
 - (void)viewWillAppear:(BOOL)animated {

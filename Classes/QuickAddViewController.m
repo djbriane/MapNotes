@@ -13,9 +13,9 @@
 @implementation QuickAddViewController
 
 @synthesize mapView = _mapView;
-@synthesize managedObjectContext;
+@synthesize locationManager, locationTimer, managedObjectContext;
 @synthesize addNoteButton;
-@synthesize locationInfo;
+@synthesize locationInfoLabel;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -38,15 +38,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	// Might need this later
-	CLLocationManager *locationManager = [[UIApplication sharedApplication].delegate locationManager];
-	
-	MKCoordinateRegion region = {{0.0f, 0.0f}, {0.0f, 0.0f}};
-	region.center = locationManager.location.coordinate;
-	region.span.longitudeDelta = 0.02f;
-	region.span.latitudeDelta = 0.02f;
-	
-	[self.mapView setRegion:region animated:YES];
+	// Get a handle on the location manager from the app delegate
+	self.locationManager = ((MapNotesAppDelegate *)[UIApplication sharedApplication].delegate).locationManager;
+	self.locationTimer = [NSTimer scheduledTimerWithTimeInterval:.1 target:self 
+														selector:@selector(checkAndUpdateLocation) 
+														userInfo:nil 
+														 repeats:YES];
 }
 
 /*
@@ -97,6 +94,19 @@
 	 */
 }
 
+- (void)checkAndUpdateLocation {
+	// set up NSTimer loop to check if we have a good location
+	if (nil != self.locationManager.location) {
+		MKCoordinateRegion region = {{0.0f, 0.0f}, {0.0f, 0.0f}};
+		region.center = locationManager.location.coordinate;
+		region.span.longitudeDelta = 0.02f;
+		region.span.latitudeDelta = 0.02f;
+		
+		[self.mapView setRegion:region animated:YES];
+		[self.locationTimer invalidate];
+	}
+}
+
 
 //- (IBAction)viewNotes:(id)sender {
 	// do something
@@ -111,32 +121,21 @@
 	 */
 //}
 
-/*
+
 - (IBAction)textNoteButton:(id)sender {
-	if ([self.delegate respondsToSelector:@selector (quickAddViewController:newTextNote:)]) {
-		// Need to change this to actually pass the results of the play
-		[self.delegate quickAddViewController:self viewNotes];
-	}
 }
 
 - (IBAction)photoNoteButton:(id)sender {
-	if ([self.delegate respondsToSelector:@selector (quickAddViewController:newPhotoNote:)]) {
-		// Need to change this to actually pass the results of the play
-		[self.delegate quickAddViewController:self viewNotes];
-	}
 }
 
 - (IBAction)viewNotesButton:(id)sender {
-	if ([self.delegate respondsToSelector:@selector (quickAddViewController:viewNotes:)]) {
-		// Need to change this to actually pass the results of the play
-		[self.delegate quickAddViewController:self viewNotes];
-	}
+	[self.parentViewController dismissModalViewControllerAnimated:YES];
 }
-*/
 
 - (void)dealloc {
 	self.mapView = nil;
-	[locationInfo release];
+	[locationTimer release];
+	[locationInfoLabel release];
     [super dealloc];
 }
 

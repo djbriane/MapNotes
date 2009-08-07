@@ -21,4 +21,6 @@
 
 //@property (nonatomic, retain) NoteDetailController *noteDetailController;
 
+- (void)showQuickAddView:(BOOL)animated;
+
 @end

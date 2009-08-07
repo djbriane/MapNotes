@@ -8,13 +8,12 @@
 
 #import "MapNotesAppDelegate.h"
 #import "RootViewController.h"
-#import	"QuickAddViewController.h"
+#import "NotesViewController.h"
 
 @implementation MapNotesAppDelegate
 
 @synthesize window;
 @synthesize navigationController;
-@synthesize quickAddViewController;
 @synthesize locationManager;
 
 #pragma mark -
@@ -23,7 +22,8 @@
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
     
     // Override point for customization after app launch    
-	
+	[self initLocationManager];
+
 	RootViewController *rootViewController = [[RootViewController alloc] initWithStyle:UITableViewStyleGrouped];
 	
 	NSManagedObjectContext *context = [self managedObjectContext];
@@ -34,19 +34,20 @@
 	
 	UINavigationController *aNavigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
 	self.navigationController = aNavigationController;	
+
+	// Push notes view controller since we always start at the Notes list level
+	NotesViewController *notesViewController = [[NotesViewController alloc] initWithStyle:UITableViewStylePlain];
+	notesViewController.managedObjectContext = context;
+	[self.navigationController pushViewController:notesViewController animated:NO];
+	[notesViewController release];
 	
 	[window addSubview:[navigationController view]];
 	
-	QuickAddViewController *aQuickAddViewController = [[QuickAddViewController alloc] initWithNibName:@"QuickAddView" bundle:nil];
-	self.quickAddViewController = aQuickAddViewController;
+	// Show the Quick Add view when the application loads
+	[notesViewController showQuickAddView:NO];
 	
-	quickAddViewController.managedObjectContext = context;
-	[window addSubview:[quickAddViewController view]];
-	//[self presentModalViewController:quickAddViewController animated:YES];
-
     [window makeKeyAndVisible];
-	
-	[aQuickAddViewController release];
+
 	[rootViewController release];
 	[aNavigationController release];
 }
@@ -71,7 +72,7 @@
 #pragma mark Core Location
 
 - (void)initLocationManager {
-	self.locationManager = [[[CLLocationManager alloc] init] autorelease];
+	self.locationManager = [[CLLocationManager alloc] init];
 	self.locationManager.distanceFilter = 10.0f;
 	self.locationManager.delegate = self;
 	self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
@@ -202,7 +203,6 @@
     [persistentStoreCoordinator release];
     
 	[navigationController release];
-	[quickAddViewController release];
 
 	[window release];
 	[super dealloc];
