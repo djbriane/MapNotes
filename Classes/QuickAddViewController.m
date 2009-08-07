@@ -15,7 +15,7 @@
 
 @synthesize mapView = _mapView;
 @synthesize locationManager, locationTimer, managedObjectContext;
-@synthesize addTextNoteButton, addPhotoNoteButton, updateLocationButton;
+@synthesize addTextNoteButton, addPhotoNoteButton, updateLocationButton, updateLocationActivity;
 @synthesize locationInfoLabel;
 
 /*
@@ -67,8 +67,8 @@
 	// e.g. self.myOutlet = nil;
 }
 
-- (void)checkAndUpdateLocation {
-	// set up NSTimer loop to check if we have a good location
+- (void)checkAndUpdateLocation {	
+	// check if we have a good location
 	if (nil != self.locationManager.location) {
 		MKCoordinateRegion region = {{0.0f, 0.0f}, {0.0f, 0.0f}};
 		region.center = locationManager.location.coordinate;
@@ -76,10 +76,17 @@
 		region.span.latitudeDelta = 0.02f;
 		
 		[self.mapView setRegion:region animated:NO];
+		self.mapView.hidden = NO;
+		
+		// Update UI to reflect we have a good location
+		[self.updateLocationActivity stopAnimating];
+		self.updateLocationButton.enabled = YES;
 		self.addTextNoteButton.enabled = YES;
 		self.addPhotoNoteButton.enabled = YES;
 		[self.locationTimer invalidate];
 	} else {
+		[self.updateLocationActivity startAnimating];
+		self.updateLocationButton.enabled = NO;
 		self.addTextNoteButton.enabled = NO;
 		self.addPhotoNoteButton.enabled = NO;
 	}
@@ -121,6 +128,7 @@
 }
 
 - (IBAction)updateLocation:(id)sender {
+	[self.locationManager startUpdatingLocation];
 }
 
 - (void)dealloc {

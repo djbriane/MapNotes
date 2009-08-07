@@ -19,6 +19,7 @@
 	IBOutlet UIButton *addTextNoteButton;
 	IBOutlet UIButton *addPhotoNoteButton;
 	IBOutlet UIButton *updateLocationButton;
+	IBOutlet UIActivityIndicatorView *updateLocationActivity;
 }
 
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
@@ -30,6 +31,7 @@
 @property (nonatomic, retain) IBOutlet UIButton *addTextNoteButton;
 @property (nonatomic, retain) IBOutlet UIButton *addPhotoNoteButton;
 @property (nonatomic, retain) IBOutlet UIButton *updateLocationButton;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *updateLocationActivity;
 
 - (void)checkAndUpdateLocation;
 

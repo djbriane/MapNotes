@@ -276,7 +276,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>11</integer>
+									<integer>9</integer>
 									<integer>7</integer>
 									<integer>0</integer>
 								</array>
@@ -319,7 +319,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>QuickAddViewController.m</string>
+								<string>MapNotesAppDelegate.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -327,11 +327,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>QuickAddViewController.m</string>
+										<string>MapNotesAppDelegate.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>D3CF15E4102B9C2200A15376</string>
+										<string>D36710A8102CE88F000A046B</string>
 										<key>history</key>
 										<array>
 											<string>D360D12D101D2BD70095ED7B</string>
@@ -347,29 +347,32 @@
 											<string>D37E96CB1021627900D6509A</string>
 											<string>D37E96CC1021627900D6509A</string>
 											<string>D3BEAE301027FE03001BC385</string>
-											<string>D3E4DBDC10288D1D006E4E99</string>
 											<string>D3E4DBDE10288D1D006E4E99</string>
 											<string>D3E4DBDF10288D1D006E4E99</string>
 											<string>D3E4DCB5102920CC006E4E99</string>
 											<string>D3E4DCB6102920CC006E4E99</string>
 											<string>D3E4DCB7102920CC006E4E99</string>
 											<string>D3E4DD0A1029536B006E4E99</string>
-											<string>D30D718F102991A700AF4AFF</string>
 											<string>D30D71B610299A4700AF4AFF</string>
-											<string>D30D71B710299A4700AF4AFF</string>
 											<string>D30D71B810299A4700AF4AFF</string>
-											<string>D30D71B910299A4700AF4AFF</string>
 											<string>D3CF14F1102B817000A15376</string>
 											<string>D3CF1571102B8CE100A15376</string>
-											<string>D3CF1596102B911000A15376</string>
-											<string>D3CF15B8102B915500A15376</string>
-											<string>D3CF15C9102B9AB200A15376</string>
-											<string>D3CF15CA102B9AB200A15376</string>
 											<string>D3CF15CB102B9AB200A15376</string>
-											<string>D3CF15CD102B9AB200A15376</string>
-											<string>D3CF15CE102B9AB200A15376</string>
-											<string>D3CF15DE102B9B0300A15376</string>
-											<string>D3CF15DF102B9B0300A15376</string>
+											<string>D3CF15F0102C838F00A15376</string>
+											<string>D3CF15F2102C838F00A15376</string>
+											<string>D3CF15F3102C838F00A15376</string>
+											<string>D3671073102CE88F000A046B</string>
+											<string>D3671074102CE88F000A046B</string>
+											<string>D3671075102CE88F000A046B</string>
+											<string>D3671076102CE88F000A046B</string>
+											<string>D3671077102CE88F000A046B</string>
+											<string>D3671078102CE88F000A046B</string>
+											<string>D3671079102CE88F000A046B</string>
+											<string>D367107A102CE88F000A046B</string>
+											<string>D367107B102CE88F000A046B</string>
+											<string>D367107C102CE88F000A046B</string>
+											<string>D367107D102CE88F000A046B</string>
+											<string>D367107E102CE88F000A046B</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -411,146 +414,58 @@
 											<string>D30D71C410299A4700AF4AFF</string>
 											<string>D3753B52102B2A1B0065CD11</string>
 											<string>D3753B57102B2A1B0065CD11</string>
-											<string>D3CF14F8102B817000A15376</string>
-											<string>D3CF14F9102B817000A15376</string>
-											<string>D3CF14FA102B817000A15376</string>
-											<string>D3CF14FB102B817000A15376</string>
-											<string>D3CF14FC102B817000A15376</string>
-											<string>D3CF14FD102B817000A15376</string>
-											<string>D3CF14FE102B817000A15376</string>
-											<string>D3CF14FF102B817000A15376</string>
-											<string>D3CF1500102B817000A15376</string>
-											<string>D3CF1501102B817000A15376</string>
-											<string>D3CF1502102B817000A15376</string>
-											<string>D3CF1503102B817000A15376</string>
-											<string>D3CF1504102B817000A15376</string>
-											<string>D3CF1505102B817000A15376</string>
-											<string>D3CF1506102B817000A15376</string>
-											<string>D3CF1507102B817000A15376</string>
-											<string>D3CF1508102B817000A15376</string>
-											<string>D3CF1509102B817000A15376</string>
-											<string>D3CF150A102B817000A15376</string>
-											<string>D3CF150B102B817000A15376</string>
-											<string>D3CF150C102B817000A15376</string>
-											<string>D3CF150D102B817000A15376</string>
-											<string>D3CF150E102B817000A15376</string>
-											<string>D3CF150F102B817000A15376</string>
-											<string>D3CF1510102B817000A15376</string>
-											<string>D3CF1511102B817000A15376</string>
-											<string>D3CF1512102B817000A15376</string>
-											<string>D3CF1513102B817000A15376</string>
-											<string>D3CF1514102B817000A15376</string>
-											<string>D3CF1515102B817000A15376</string>
-											<string>D3CF1516102B817000A15376</string>
-											<string>D3CF1517102B817000A15376</string>
-											<string>D3CF1518102B817000A15376</string>
-											<string>D3CF1519102B817000A15376</string>
-											<string>D3CF151A102B817000A15376</string>
-											<string>D3CF151B102B817000A15376</string>
-											<string>D3CF151C102B817000A15376</string>
-											<string>D3CF151D102B817000A15376</string>
-											<string>D3CF151E102B817000A15376</string>
-											<string>D3CF151F102B817000A15376</string>
-											<string>D3CF1520102B817000A15376</string>
-											<string>D3CF1521102B817000A15376</string>
-											<string>D3CF1522102B817000A15376</string>
-											<string>D3CF1523102B817000A15376</string>
-											<string>D3CF1524102B817000A15376</string>
-											<string>D3CF1525102B817000A15376</string>
-											<string>D3CF1526102B817000A15376</string>
-											<string>D3CF1527102B817000A15376</string>
-											<string>D3CF1528102B817000A15376</string>
-											<string>D3CF1529102B817000A15376</string>
-											<string>D3CF152A102B817000A15376</string>
-											<string>D3CF152B102B817000A15376</string>
-											<string>D3CF152C102B817000A15376</string>
-											<string>D3CF152D102B817000A15376</string>
-											<string>D3CF152E102B817000A15376</string>
-											<string>D3CF152F102B817000A15376</string>
-											<string>D3CF1530102B817000A15376</string>
-											<string>D3CF1531102B817000A15376</string>
-											<string>D3CF1532102B817000A15376</string>
-											<string>D3CF1533102B817000A15376</string>
-											<string>D3CF1534102B817000A15376</string>
-											<string>D3CF1535102B817000A15376</string>
-											<string>D3CF1536102B817000A15376</string>
-											<string>D3CF1537102B817000A15376</string>
-											<string>D3CF1538102B817000A15376</string>
-											<string>D3CF1539102B817000A15376</string>
-											<string>D3CF153A102B817000A15376</string>
-											<string>D3CF153B102B817000A15376</string>
-											<string>D3CF153C102B817000A15376</string>
-											<string>D3CF153D102B817000A15376</string>
-											<string>D3CF153E102B817000A15376</string>
-											<string>D3CF153F102B817000A15376</string>
-											<string>D3CF154C102B83FB00A15376</string>
-											<string>D3CF154D102B83FB00A15376</string>
-											<string>D3CF154E102B83FB00A15376</string>
-											<string>D3CF154F102B83FB00A15376</string>
-											<string>D3CF1550102B83FB00A15376</string>
-											<string>D3CF1551102B83FB00A15376</string>
-											<string>D3CF1552102B83FB00A15376</string>
-											<string>D3CF1553102B83FB00A15376</string>
-											<string>D3CF1559102B856200A15376</string>
-											<string>D3CF155A102B856200A15376</string>
-											<string>D3CF155B102B856200A15376</string>
-											<string>D3CF155C102B856200A15376</string>
-											<string>D3CF155D102B856200A15376</string>
-											<string>D3CF1568102B8A5B00A15376</string>
-											<string>D3CF1569102B8A5B00A15376</string>
-											<string>D3CF156A102B8A5B00A15376</string>
-											<string>D3CF156B102B8A5B00A15376</string>
-											<string>D3CF156C102B8A5B00A15376</string>
-											<string>D3CF156D102B8A5B00A15376</string>
-											<string>D3CF1578102B8CE100A15376</string>
-											<string>D3CF1579102B8CE100A15376</string>
-											<string>D3CF157A102B8CE100A15376</string>
-											<string>D3CF157B102B8CE100A15376</string>
-											<string>D3CF157C102B8CE100A15376</string>
-											<string>D3CF157D102B8CE100A15376</string>
-											<string>D3CF157E102B8CE100A15376</string>
-											<string>D3CF157F102B8CE100A15376</string>
-											<string>D3CF1580102B8CE100A15376</string>
-											<string>D3CF1581102B8CE100A15376</string>
-											<string>D3CF1587102B8D2D00A15376</string>
-											<string>D3CF1588102B8D2D00A15376</string>
-											<string>D3CF159A102B911000A15376</string>
-											<string>D3CF159B102B911000A15376</string>
-											<string>D3CF159C102B911000A15376</string>
-											<string>D3CF159D102B911000A15376</string>
-											<string>D3CF159E102B911000A15376</string>
-											<string>D3CF159F102B911000A15376</string>
-											<string>D3CF15A0102B911000A15376</string>
-											<string>D3CF15A1102B911000A15376</string>
-											<string>D3CF15A2102B911000A15376</string>
-											<string>D3CF15A3102B911000A15376</string>
-											<string>D3CF15A4102B911000A15376</string>
-											<string>D3CF15A5102B911000A15376</string>
-											<string>D3CF15A6102B911000A15376</string>
-											<string>D3CF15A7102B911000A15376</string>
-											<string>D3CF15A8102B911000A15376</string>
-											<string>D3CF15A9102B911000A15376</string>
-											<string>D3CF15AA102B911000A15376</string>
-											<string>D3CF15AB102B911000A15376</string>
-											<string>D3CF15AC102B911000A15376</string>
-											<string>D3CF15BB102B915500A15376</string>
-											<string>D3CF15BC102B915500A15376</string>
-											<string>D3CF15BD102B915500A15376</string>
-											<string>D3CF15BE102B915500A15376</string>
-											<string>D3CF15D0102B9AB200A15376</string>
-											<string>D3CF15D1102B9AB200A15376</string>
-											<string>D3CF15D2102B9AB200A15376</string>
-											<string>D3CF15D3102B9AB200A15376</string>
-											<string>D3CF15D4102B9AB200A15376</string>
-											<string>D3CF15D5102B9AB200A15376</string>
-											<string>D3CF15D6102B9AB200A15376</string>
-											<string>D3CF15D7102B9AB200A15376</string>
-											<string>D3CF15D8102B9AB200A15376</string>
-											<string>D3CF15D9102B9AB200A15376</string>
-											<string>D3CF15DA102B9AB200A15376</string>
-											<string>D3CF15DB102B9AB200A15376</string>
-											<string>D3CF15DC102B9AB200A15376</string>
-											<string>D3CF15E0102B9B0300A15376</string>
+											<string>D3CF15F5102C838F00A15376</string>
+											<string>D3CF15F7102C838F00A15376</string>
+											<string>D3CF15F8102C838F00A15376</string>
+											<string>D3CF15F9102C838F00A15376</string>
+											<string>D3CF15FA102C838F00A15376</string>
+											<string>D3CF15FB102C838F00A15376</string>
+											<string>D3CF15FC102C838F00A15376</string>
+											<string>D3CF15FD102C838F00A15376</string>
+											<string>D3CF15FE102C838F00A15376</string>
+											<string>D3CF15FF102C838F00A15376</string>
+											<string>D3CF1600102C838F00A15376</string>
+											<string>D367107F102CE88F000A046B</string>
+											<string>D3671080102CE88F000A046B</string>
+											<string>D3671081102CE88F000A046B</string>
+											<string>D3671082102CE88F000A046B</string>
+											<string>D3671083102CE88F000A046B</string>
+											<string>D3671084102CE88F000A046B</string>
+											<string>D3671085102CE88F000A046B</string>
+											<string>D3671086102CE88F000A046B</string>
+											<string>D3671087102CE88F000A046B</string>
+											<string>D3671088102CE88F000A046B</string>
+											<string>D3671089102CE88F000A046B</string>
+											<string>D367108A102CE88F000A046B</string>
+											<string>D367108B102CE88F000A046B</string>
+											<string>D367108C102CE88F000A046B</string>
+											<string>D367108D102CE88F000A046B</string>
+											<string>D367108E102CE88F000A046B</string>
+											<string>D367108F102CE88F000A046B</string>
+											<string>D3671090102CE88F000A046B</string>
+											<string>D3671091102CE88F000A046B</string>
+											<string>D3671092102CE88F000A046B</string>
+											<string>D3671093102CE88F000A046B</string>
+											<string>D3671094102CE88F000A046B</string>
+											<string>D3671095102CE88F000A046B</string>
+											<string>D3671096102CE88F000A046B</string>
+											<string>D3671097102CE88F000A046B</string>
+											<string>D3671098102CE88F000A046B</string>
+											<string>D3671099102CE88F000A046B</string>
+											<string>D367109A102CE88F000A046B</string>
+											<string>D367109B102CE88F000A046B</string>
+											<string>D367109C102CE88F000A046B</string>
+											<string>D367109D102CE88F000A046B</string>
+											<string>D367109E102CE88F000A046B</string>
+											<string>D367109F102CE88F000A046B</string>
+											<string>D36710A0102CE88F000A046B</string>
+											<string>D36710A1102CE88F000A046B</string>
+											<string>D36710A2102CE88F000A046B</string>
+											<string>D36710A3102CE88F000A046B</string>
+											<string>D36710A4102CE88F000A046B</string>
+											<string>D36710A5102CE88F000A046B</string>
+											<string>D36710A6102CE88F000A046B</string>
+											<string>D36710A7102CE88F000A046B</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -608,9 +523,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>D3CF1541102B817000A15376</string>
+				<string>D36710A9102CE88F000A046B</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>D3CF1542102B817000A15376</string>
+				<string>D36710AA102CE88F000A046B</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -744,12 +659,12 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>D3CF15B5102B911000A15376</string>
-		<string>D3CF15B6102B911000A15376</string>
-		<string>1CD10A99069EF8BA00B06720</string>
+		<string>D36710B3102CE88F000A046B</string>
+		<string>D36710B4102CE88F000A046B</string>
 		<string>D3857099101A9E7200949DAD</string>
-		<string>1C78EAAD065D492600B07095</string>
+		<string>1CD10A99069EF8BA00B06720</string>
 		<string>/Users/brian/Projects/Development/MapNotes/MapNotes.xcodeproj</string>
+		<string>1C78EAAD065D492600B07095</string>
 	</array>
 	<key>WindowString</key>
 	<string>105 106 1076 672 0 0 1280 778 </string>
@@ -768,14 +683,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>MapNotesAppDelegate.m</string>
+								<string></string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -831,7 +744,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>D3857099101A9E7200949DAD</string>
-				<string>D3CF156F102B8A5B00A15376</string>
+				<string>D36710AB102CE88F000A046B</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -951,13 +864,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>D3CF15AE102B911000A15376</string>
+				<string>D36710AC102CE88F000A046B</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>D3CF15AF102B911000A15376</string>
-				<string>D3CF15B0102B911000A15376</string>
-				<string>D3CF15B1102B911000A15376</string>
-				<string>D3CF15B2102B911000A15376</string>
-				<string>D3CF15B3102B911000A15376</string>
+				<string>D36710AD102CE88F000A046B</string>
+				<string>D36710AE102CE88F000A046B</string>
+				<string>D36710AF102CE88F000A046B</string>
+				<string>D36710B0102CE88F000A046B</string>
+				<string>D36710B1102CE88F000A046B</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -966,7 +879,7 @@
 			<key>WindowToolGUID</key>
 			<string>1CD10A99069EF8BA00B06720</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>Identifier</key>
@@ -1121,7 +1034,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>D3CF15B4102B911000A15376</string>
+				<string>D36710B2102CE88F000A046B</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

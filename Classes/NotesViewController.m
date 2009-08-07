@@ -18,9 +18,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	// Set up the edit and add buttons.
-    //self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
+	// Remove the back button for now, till we get Groups implemented
+	[self.navigationItem setHidesBackButton:YES animated:YES];
+
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
 																			   target:self 
 																			   action:@selector(showQuickAddView:)];
