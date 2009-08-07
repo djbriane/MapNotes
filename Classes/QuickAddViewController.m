@@ -8,12 +8,14 @@
 
 #import "QuickAddViewController.h"
 #import "RootViewController.h"
+#import "MapNotesAppDelegate.h"
 
 @implementation QuickAddViewController
 
 @synthesize mapView = _mapView;
-@synthesize locationInfo;
+@synthesize managedObjectContext;
 @synthesize addNoteButton;
+@synthesize locationInfo;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -31,12 +33,21 @@
 }
 */
 
-/*
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	// Might need this later
+	CLLocationManager *locationManager = [[UIApplication sharedApplication].delegate locationManager];
+	
+	MKCoordinateRegion region = {{0.0f, 0.0f}, {0.0f, 0.0f}};
+	region.center = locationManager.location.coordinate;
+	region.span.longitudeDelta = 0.02f;
+	region.span.latitudeDelta = 0.02f;
+	
+	[self.mapView setRegion:region animated:YES];
 }
-*/
 
 /*
 // Override to allow orientations other than the default portrait orientation.
@@ -86,13 +97,8 @@
 	 */
 }
 
-- (IBAction)newTextNote:(id)sender {
-	// do something
-	//[self addNote];
-}
 
-
-- (IBAction)viewNotes:(id)sender {
+//- (IBAction)viewNotes:(id)sender {
 	// do something
 	// Disclosure Button
 	/*
@@ -103,7 +109,30 @@
 	
 	[notesViewController release];
 	 */
+//}
+
+/*
+- (IBAction)textNoteButton:(id)sender {
+	if ([self.delegate respondsToSelector:@selector (quickAddViewController:newTextNote:)]) {
+		// Need to change this to actually pass the results of the play
+		[self.delegate quickAddViewController:self viewNotes];
+	}
 }
+
+- (IBAction)photoNoteButton:(id)sender {
+	if ([self.delegate respondsToSelector:@selector (quickAddViewController:newPhotoNote:)]) {
+		// Need to change this to actually pass the results of the play
+		[self.delegate quickAddViewController:self viewNotes];
+	}
+}
+
+- (IBAction)viewNotesButton:(id)sender {
+	if ([self.delegate respondsToSelector:@selector (quickAddViewController:viewNotes:)]) {
+		// Need to change this to actually pass the results of the play
+		[self.delegate quickAddViewController:self viewNotes];
+	}
+}
+*/
 
 - (void)dealloc {
 	self.mapView = nil;

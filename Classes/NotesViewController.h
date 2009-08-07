@@ -12,10 +12,13 @@
 	NSManagedObjectContext *managedObjectContext;
 	
 	//NoteDetailController *noteDetailController;
+	NSManagedObject *selectedGroup;
 }
 
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain) NSManagedObject *selectedGroup;
+
 //@property (nonatomic, retain) NoteDetailController *noteDetailController;
 
 @end

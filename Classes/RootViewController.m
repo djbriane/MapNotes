@@ -8,14 +8,11 @@
 
 #import "RootViewController.h"
 #import "MapNotesAppDelegate.h"
-#import "QuickAddViewController.h"
 #import "NotesViewController.h"
-#import "Note.h"
 
 @implementation RootViewController
 
-@synthesize managedObjectContext;
-@synthesize locationManager;
+@synthesize fetchedResultsController, managedObjectContext;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -31,18 +28,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-	QuickAddViewController *quickAddViewController = [[QuickAddViewController alloc] initWithNibName:@"QuickAddView" bundle:nil];
-	//quickAddViewController.managedObjectContext = managedObjectContext;
-	
-	[self presentModalViewController:quickAddViewController animated:YES];
+	NSError *error;
+	if (![[self fetchedResultsController] performFetch:&error]) {
+		// Handle the error...
+		NSLog(@"%@:%s Error fetching context: %@", [self class], _cmd, [error localizedDescription]);
+	}
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	self.navigationController.navigationBarHidden = YES;
-	[self updateCurrentLocation];
+	[self.tableView reloadData];
 }
 
+- (void)insertNewObject {
+	// Create a new instance of the entity managed by the fetched results controller.
+	NSManagedObjectContext *context = [fetchedResultsController managedObjectContext];
+	NSEntityDescription *entity = [[fetchedResultsController fetchRequest] entity];
+	NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
+	
+	// If appropriate, configure the new managed object.
+	[newManagedObject setValue:@"New Group" forKey:@"name"];
+	
+	// Save the context.
+    NSError *error;
+    if (![context save:&error]) {
+		// Handle the error...
+		NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
+    }
+	
+    [self.tableView reloadData];
+}
 
 
 /*
@@ -65,67 +80,142 @@
 	// e.g. self.myOutlet = nil;
 }
 
-# pragma mark -
-# pragma mark Custom Methods
+#pragma mark Table view methods
 
-- (void)updateCurrentLocation {
-	self.locationManager = [[[CLLocationManager alloc] init] autorelease];
-	self.locationManager.distanceFilter = 10.0f;
-	self.locationManager.delegate = self;
-	self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
-	[self.locationManager startUpdatingLocation];		
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return [[fetchedResultsController sections] count];
 }
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	id <NSFetchedResultsSectionInfo> sectionInfo = [[fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
+	return 0;
+}
+
+
+// Customize the appearance of table view cells.
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    }
+    
+	// Configure the cell.
 	
-
-- (void)setCurrentLocation:(CLLocation *)location {
-	/*
-	MKCoordinateRegion region = {{0.0f, 0.0f}, {0.0f, 0.0f}};
-	region.center = location.coordinate;
-	region.span.longitudeDelta = 0.02f;
-	region.span.latitudeDelta = 0.02f;
+	NSManagedObject *managedObject = [fetchedResultsController objectAtIndexPath:indexPath];
 	
-	[self.mapView setRegion:region animated:YES];
-	 */
-}
-
-- (IBAction)updateLocation:(id)sender {
-	[self updateCurrentLocation];
-}
-
-
-# pragma mark -
-#pragma mark CoreLocation Delegate Methods
-
-- (void)locationManager:(CLLocationManager *)manager
-	didUpdateToLocation:(CLLocation *)newLocation
-		   fromLocation:(CLLocation *)oldLocation {
-
-	//locationInfo.text = [NSString stringWithFormat:@"Accuracy: %4.2fm", newLocation.horizontalAccuracy];
-
-	//addNoteButton.enabled = YES;
+	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	cell.textLabel.text = [[managedObject valueForKey:@"title"] description];
 	
-	[self setCurrentLocation:newLocation];
-	[self.locationManager stopUpdatingLocation];
+    return cell;
 }
 
-/**
- Conditionally enable the Add button:
- If the location manager is generating updates, then enable the button;
- If the location manager is failing, then disable the button.
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Navigation logic may go here -- for example, create and push another view controller.
+	// AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
+    // NSManagedObject *selectedObject = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+    // Pass the selected object to the new view controller.
+    /// ...
+	
+	NotesViewController *notesViewController = [[NotesViewController alloc] initWithStyle:UITableViewStyleGrouped];
+	
+	NSManagedObject *group = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+	notesViewController.selectedGroup = group;
+    [self.navigationController pushViewController:notesViewController animated:YES];
+	[notesViewController release];
+	
+}
+
+
+/*
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
  */
 
-- (void)locationManager:(CLLocationManager *)manager
-       didFailWithError:(NSError *)error {
-    //addNoteButton.enabled = NO;
-	[self.locationManager stopUpdatingLocation];
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle 
+forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the managed object for the given index path
+		NSManagedObjectContext *context = [fetchedResultsController managedObjectContext];
+		[context deleteObject:[fetchedResultsController objectAtIndexPath:indexPath]];
+		
+		// Save the context.
+		NSError *error;
+		if (![context save:&error]) {
+			// Handle the error...
+			NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
+		}
+		
+		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }   
 }
+
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    // The table view should not be re-orderable.
+    return NO;
+}
+
+
+/*
+ // NSFetchedResultsControllerDelegate method to notify the delegate that all section and object changes have been processed. 
+ - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+ [self.tableView reloadData];
+ }
+ */
+
+
+- (NSFetchedResultsController *)fetchedResultsController {
+    
+    if (fetchedResultsController != nil) {
+        return fetchedResultsController;
+    }
+    
+    /*
+	 Set up the fetched results controller.
+	 */
+	// Create the fetch request for the entity.
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	// Edit the entity name as appropriate.
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Group" inManagedObjectContext:managedObjectContext];
+	[fetchRequest setEntity:entity];
+	
+	// Edit the sort key as appropriate.
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+	
+	[fetchRequest setSortDescriptors:sortDescriptors];
+	
+	// Edit the section name key path and cache name if appropriate.
+    // nil for section name key path means "no sections".
+	NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:@"Root"];
+    aFetchedResultsController.delegate = self;
+	self.fetchedResultsController = aFetchedResultsController;
+	
+	[aFetchedResultsController release];
+	[fetchRequest release];
+	[sortDescriptor release];
+	[sortDescriptors release];
+	
+	return fetchedResultsController;
+}    
 
 
 - (void)dealloc {
+	[fetchedResultsController release];
 	[managedObjectContext release];
-	[locationManager release];
     [super dealloc];
 }
-
 
 @end

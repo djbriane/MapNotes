@@ -7,26 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreLocation/CoreLocation.h>
 
-
-@interface RootViewController : UIViewController <CLLocationManagerDelegate> {
+@interface RootViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
+	NSFetchedResultsController *fetchedResultsController;
 	NSManagedObjectContext *managedObjectContext;
-
-	CLLocationManager *locationManager;
 
 }
 
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-
-@property (nonatomic, retain) CLLocationManager *locationManager;
-
-
-
-- (void)updateCurrentLocation;
-- (void)setCurrentLocation:(CLLocation *)location;
-- (IBAction)updateLocation:(id)sender;
-
-
 
 @end

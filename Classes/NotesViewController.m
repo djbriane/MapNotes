@@ -12,7 +12,7 @@
 
 @implementation NotesViewController
 
-@synthesize fetchedResultsController, managedObjectContext;
+@synthesize fetchedResultsController, managedObjectContext, selectedGroup;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,6 +24,7 @@
     self.navigationItem.rightBarButtonItem = addButton;
     [addButton release];
 	
+	// If group is set, then fetch notes from that group, otherwise use fetched results controller
 	NSError *error;
 	if (![[self fetchedResultsController] performFetch:&error]) {
 		// Handle the error...

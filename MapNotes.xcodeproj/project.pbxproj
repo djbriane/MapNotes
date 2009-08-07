@@ -48,6 +48,7 @@
 		D360D124101D246B0095ED7B /* NoteDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = D360D123101D246B0095ED7B /* NoteDetailController.m */; };
 		D37E96C310215F6F00D6509A /* temp_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D37E96C210215F6F00D6509A /* temp_icon.png */; };
 		D3BEAE2E1027FDA2001BC385 /* ImageManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BEAE2D1027FDA2001BC385 /* ImageManipulator.m */; };
+		D3CF15EB102BAE9900A15376 /* sharedLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D3CF15EA102BAE9900A15376 /* sharedLocationManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +107,9 @@
 		D37E96C210215F6F00D6509A /* temp_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = temp_icon.png; sourceTree = "<group>"; };
 		D3BEAE2C1027FDA2001BC385 /* ImageManipulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageManipulator.h; sourceTree = "<group>"; };
 		D3BEAE2D1027FDA2001BC385 /* ImageManipulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageManipulator.m; sourceTree = "<group>"; };
+		D3CF15E9102BAE9900A15376 /* sharedLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sharedLocationManager.h; sourceTree = "<group>"; };
+		D3CF15EA102BAE9900A15376 /* sharedLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sharedLocationManager.m; sourceTree = "<group>"; };
+		D3CF15EC102BB05D00A15376 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,12 +132,13 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D3CF15EC102BB05D00A15376 /* SynthesizeSingleton.h */,
 				1D3623240D0F684500981E51 /* MapNotesAppDelegate.h */,
 				1D3623250D0F684500981E51 /* MapNotesAppDelegate.m */,
-				0CB2F13C101A3B600087C6F6 /* RootViewController.h */,
-				0CB2F13D101A3B600087C6F6 /* RootViewController.m */,
 				0C599F76102A446800E66315 /* QuickAddViewController.h */,
 				0C599F77102A446800E66315 /* QuickAddViewController.m */,
+				0CB2F13C101A3B600087C6F6 /* RootViewController.h */,
+				0CB2F13D101A3B600087C6F6 /* RootViewController.m */,
 				28C286DF0D94DF7D0034E888 /* NotesViewController.h */,
 				28C286E00D94DF7D0034E888 /* NotesViewController.m */,
 				D360D122101D246B0095ED7B /* NoteDetailController.h */,
@@ -146,6 +151,8 @@
 				D345E7531022A07C0070C491 /* RoundedRectView.m */,
 				D3BEAE2C1027FDA2001BC385 /* ImageManipulator.h */,
 				D3BEAE2D1027FDA2001BC385 /* ImageManipulator.m */,
+				D3CF15E9102BAE9900A15376 /* sharedLocationManager.h */,
+				D3CF15EA102BAE9900A15376 /* sharedLocationManager.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -337,6 +344,7 @@
 				D3BEAE2E1027FDA2001BC385 /* ImageManipulator.m in Sources */,
 				D30D71B0102997F000AF4AFF /* NotePhotoViewController.m in Sources */,
 				0C599F78102A446800E66315 /* QuickAddViewController.m in Sources */,
+				D3CF15EB102BAE9900A15376 /* sharedLocationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

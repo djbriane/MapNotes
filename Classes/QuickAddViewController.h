@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 
 @interface QuickAddViewController : UIViewController <MKMapViewDelegate> {
+	NSManagedObjectContext *managedObjectContext;
 	MKMapView *_mapView;
 	
 	IBOutlet UILabel *locationInfo;
@@ -17,11 +18,26 @@
 }
 
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+
 @property (nonatomic, retain) IBOutlet UILabel *locationInfo;
 @property (nonatomic, retain) IBOutlet UIButton *addNoteButton;
 
 - (void)addNote;
-- (IBAction)newTextNote:(id)sender;
-- (IBAction)viewNotes:(id)sender;
+/*
+- (IBAction)photoNoteButton:(id)sender;
+- (IBAction)textNoteButton:(id)sender;
+- (IBAction)viewNotesButton:(id)sender;
+*/ 
 
 @end
+
+//@protocol MapNotesAppDelegate <NSObject>
+
+//@optional
+
+//- (void)quickAddViewController:(QuickAddViewController *)controller viewNotes;
+//- (void)quickAddViewController:(QuickAddViewController *)controller newTextNote;
+//- (void)quickAddViewController:(QuickAddViewController *)controller newPhotoNote;
+
+//@end
