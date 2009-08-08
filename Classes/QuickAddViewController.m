@@ -74,12 +74,13 @@
 		region.center = locationManager.location.coordinate;
 		region.span.longitudeDelta = 0.02f;
 		region.span.latitudeDelta = 0.02f;
-		
+
 		[self.mapView setRegion:region animated:NO];
 		self.mapView.hidden = NO;
-		
+
 		// Update UI to reflect we have a good location
 		[self.updateLocationActivity stopAnimating];
+		self.locationInfoLabel.text = [NSString stringWithFormat:@"Accuracy: %4.0fm", locationManager.location.horizontalAccuracy];
 		self.updateLocationButton.enabled = YES;
 		self.addTextNoteButton.enabled = YES;
 		self.addPhotoNoteButton.enabled = YES;

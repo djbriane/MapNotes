@@ -66,7 +66,7 @@
 - (void)showQuickAddView:(BOOL)animated {
 	// Set up QuickAdd VC for future use
 	QuickAddViewController *aQuickAddViewController = [[QuickAddViewController alloc] initWithNibName:@"QuickAddView" bundle:nil];
-	aQuickAddViewController.managedObjectContext = [fetchedResultsController managedObjectContext];
+	aQuickAddViewController.managedObjectContext = self.managedObjectContext;
 	[self presentModalViewController:aQuickAddViewController animated:animated];
 	[aQuickAddViewController release];
 }

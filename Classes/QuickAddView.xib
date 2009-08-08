@@ -191,7 +191,7 @@
 					<object class="IBUIButton" id="175234671">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{15, 175}, {37, 37}}</string>
+						<string key="NSFrame">{{268, 176}, {37, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -220,10 +220,10 @@
 							<string key="NSResourceName">img_map-crosshairs.png</string>
 						</object>
 					</object>
-					<object class="IBUIActivityIndicatorView" id="727798315">
+					<object class="IBUIActivityIndicatorView" id="538898688">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{23, 183}, {20, 20}}</string>
+						<string key="NSFrame">{{276, 184}, {20, 20}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -330,7 +330,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">updateLocationActivity</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="727798315"/>
+						<reference key="destination" ref="538898688"/>
 					</object>
 					<int key="connectionID">45</int>
 				</object>
@@ -357,9 +357,9 @@
 							<reference ref="594973260"/>
 							<reference ref="110904240"/>
 							<reference ref="94192153"/>
-							<reference ref="175234671"/>
 							<reference ref="334123767"/>
-							<reference ref="727798315"/>
+							<reference ref="175234671"/>
+							<reference ref="538898688"/>
 						</object>
 						<reference key="parent" ref="317526666"/>
 					</object>
@@ -423,7 +423,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">44</int>
-						<reference key="object" ref="727798315"/>
+						<reference key="object" ref="538898688"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</object>
