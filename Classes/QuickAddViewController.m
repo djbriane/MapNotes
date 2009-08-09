@@ -13,6 +13,7 @@
 
 @implementation QuickAddViewController
 
+@synthesize delegate;
 @synthesize mapView = _mapView;
 @synthesize locationManager, locationTimer, managedObjectContext;
 @synthesize addTextNoteButton, addPhotoNoteButton, updateLocationButton, updateLocationActivity;
@@ -65,6 +66,16 @@
 - (void)viewDidUnload {
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
+	self.mapView = nil;
+	self.locationManager = nil;
+	self.locationTimer = nil;
+	
+	self.locationInfoLabel = nil;
+	self.addTextNoteButton = nil;
+	self.addPhotoNoteButton = nil;
+	self.updateLocationButton = nil;
+	self.updateLocationActivity = nil;
+	
 }
 
 - (void)checkAndUpdateLocation {	
@@ -109,15 +120,19 @@
 	[note setGeoAccuracy:[NSNumber numberWithDouble:self.locationManager.location.horizontalAccuracy]];
 	
 	[note setDateCreated:[NSDate date]];
-	[note setTitle:@"New Note"];
+	//[note setTitle:@"New Note"];
 	
+	/*
 	NSError *error;
 	if (![self.managedObjectContext save:&error]) {
 		// Handle the error.
 		NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
 	}
+	*/
 	
-	[self.parentViewController dismissModalViewControllerAnimated:YES];
+	if ([self.delegate respondsToSelector:@selector (quickAddViewController:showNewNote:)]) {
+		[self.delegate quickAddViewController:self showNewNote:note];
+	}
 }
 
 - (IBAction)addPhotoNote:(id)sender {
@@ -134,10 +149,14 @@
 
 - (void)dealloc {
 	self.mapView = nil;
-	[locationTimer release];
-	[locationInfoLabel release];
-	[locationManager release];
 	[managedObjectContext release];
+	[locationManager release];
+	[locationTimer release];
+
+	[locationInfoLabel release];
+	[addTextNoteButton release];
+	[addPhotoNoteButton release];
+	[updateLocationButton release];
     [super dealloc];
 }
 

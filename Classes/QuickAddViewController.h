@@ -9,7 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
+@class Note;
+
+@protocol QuickAddViewControllerDelegate;
+
 @interface QuickAddViewController : UIViewController <MKMapViewDelegate> {
+	id<QuickAddViewControllerDelegate> delegate;
+	
 	NSManagedObjectContext *managedObjectContext;
 	MKMapView *_mapView;
 	CLLocationManager *locationManager;
@@ -21,6 +27,8 @@
 	IBOutlet UIButton *updateLocationButton;
 	IBOutlet UIActivityIndicatorView *updateLocationActivity;
 }
+
+@property (nonatomic, assign) id<QuickAddViewControllerDelegate> delegate;
 
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
 @property (nonatomic, retain) CLLocationManager *locationManager;
@@ -42,12 +50,11 @@
 
 @end
 
-//@protocol MapNotesAppDelegate <NSObject>
+@protocol QuickAddViewControllerDelegate <NSObject>
 
-//@optional
+@optional
 
-//- (void)quickAddViewController:(QuickAddViewController *)controller viewNotes;
-//- (void)quickAddViewController:(QuickAddViewController *)controller newTextNote;
-//- (void)quickAddViewController:(QuickAddViewController *)controller newPhotoNote;
+- (void)quickAddViewController:(QuickAddViewController *)controller showNewNote:(Note *)note;
+//- (void)scorePlayViewController:(ScorePlayViewController *)controller didScorePlay:(NSString *)text;
 
-//@end
+@end

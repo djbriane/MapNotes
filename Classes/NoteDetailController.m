@@ -38,12 +38,9 @@
  // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
  - (void)viewDidLoad {
 	 [super viewDidLoad];
-	 
-	 self.navigationItem.rightBarButtonItem = [self editButtonItem];
-	 self.navigationItem.title = selectedNote.title;
-	 
-	 self.editing = NO; // Initially displays an Edit button and noneditable view
-	 
+
+	 //self.editing = NO; // Initially displays an Edit button and noneditable view
+
 	 // Create and set the table header / footer view.
 	 if (tableHeaderView == nil) {
 		 [[NSBundle mainBundle] loadNibNamed:@"NoteDetailHeader" owner:self options:nil];
@@ -56,27 +53,32 @@
 		 self.tableView.allowsSelectionDuringEditing = NO;
 	 }
 	 
-	 [self updatePhotoInfo];
-	 
-	 // Add Note to Map (Move this to seperate function)
-	 CLLocationCoordinate2D location;
-	 location.latitude = [selectedNote.geoLatitude doubleValue];
-	 location.longitude = [selectedNote.geoLongitude doubleValue];
-
-	 self.noteAnnotation = [NoteAnnotation annotationWithCoordinate:location];
-	 
-	 MKCoordinateRegion region = {{0.0f, 0.0f}, {0.0f, 0.0f}};
-	 region.center = location;
-	 region.span.longitudeDelta = 0.005f;
-	 region.span.latitudeDelta = 0.005f;
-	 
-	 [self.mapView setRegion:region animated:NO];
-	 [self.mapView addAnnotation:self.noteAnnotation];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+	
+	self.navigationItem.rightBarButtonItem = [self editButtonItem];
+	self.navigationItem.title = selectedNote.title;
 	nameTextField.text = [selectedNote title];
+	
+	[self updatePhotoInfo];
+	
+	// Add Note to Map (Move this to own method)
+	CLLocationCoordinate2D location;
+	location.latitude = [selectedNote.geoLatitude doubleValue];
+	location.longitude = [selectedNote.geoLongitude doubleValue];
+	
+	self.noteAnnotation = [NoteAnnotation annotationWithCoordinate:location];
+	
+	MKCoordinateRegion region = {{0.0f, 0.0f}, {0.0f, 0.0f}};
+	region.center = location;
+	region.span.longitudeDelta = 0.005f;
+	region.span.latitudeDelta = 0.005f;
+	
+	[self.mapView setRegion:region animated:NO];
+	[self.mapView addAnnotation:self.noteAnnotation];
+	// Done adding Note
 }
 
 /*
@@ -138,18 +140,6 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	[textField resignFirstResponder];
 	return YES;
-}
-
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
 }
 
 #pragma mark -
@@ -483,11 +473,26 @@
 	return NO;
 }
 
+- (void)didReceiveMemoryWarning {
+	// Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+	
+	// Release any cached data, images, etc that aren't in use.
+}
+
+- (void)viewDidUnload {
+	// Release any retained subviews of the main view.
+	// e.g. self.myOutlet = nil;
+	self.mapView = nil;
+	self.tableHeaderView = nil;
+	self.tableFooterView = nil;
+}
+
 - (void)dealloc {
+	self.mapView = nil;
 	self.selectedNote = nil;
     [super dealloc];
 }
-
 
 @end
 

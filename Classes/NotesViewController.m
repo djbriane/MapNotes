@@ -8,7 +8,6 @@
 
 #import "NotesViewController.h"
 #import "NoteDetailController.h"
-#import "QuickAddViewController.h"
 #import "Note.h"
 
 @implementation NotesViewController
@@ -67,8 +66,17 @@
 	// Set up QuickAdd VC for future use
 	QuickAddViewController *aQuickAddViewController = [[QuickAddViewController alloc] initWithNibName:@"QuickAddView" bundle:nil];
 	aQuickAddViewController.managedObjectContext = self.managedObjectContext;
+	aQuickAddViewController.delegate = self;
 	[self presentModalViewController:aQuickAddViewController animated:animated];
 	[aQuickAddViewController release];
+}
+
+- (void)pushNoteDetailViewController:(Note *)note editing:(BOOL)editing animated:(BOOL)animated {
+	NoteDetailController *noteDetailController = [[NoteDetailController alloc] initWithStyle:UITableViewStyleGrouped];
+	noteDetailController.selectedNote = note;
+    [self.navigationController pushViewController:noteDetailController animated:animated];
+	[noteDetailController setEditing:editing animated:NO];
+	[noteDetailController release];
 }
 
 /*
@@ -112,7 +120,16 @@
 	// e.g. self.myOutlet = nil;
 }
 
+#pragma mark -
+#pragma mark Qukck Add View Controller Methods
 
+- (void)quickAddViewController:(QuickAddViewController *)controller 
+				   showNewNote:(Note *)note {
+	[self pushNoteDetailViewController:note	editing:YES animated:NO];
+	[self dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark -
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -154,14 +171,9 @@
     // NSManagedObject *selectedObject = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     // Pass the selected object to the new view controller.
     /// ...
-
-	NoteDetailController *noteDetailController = [[NoteDetailController alloc] initWithStyle:UITableViewStyleGrouped];
-
+	
 	Note *note = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-	noteDetailController.selectedNote = note;
-    [self.navigationController pushViewController:noteDetailController animated:YES];
-	[noteDetailController release];
-
+	[self pushNoteDetailViewController:note editing:NO animated:YES];
 }
 
 
@@ -225,7 +237,7 @@
 	[fetchRequest setEntity:entity];
 	
 	// Edit the sort key as appropriate.
-	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:YES];
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:NO];
 	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
 	
 	[fetchRequest setSortDescriptors:sortDescriptors];

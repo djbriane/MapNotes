@@ -26,18 +26,14 @@
 
 	RootViewController *rootViewController = [[RootViewController alloc] initWithStyle:UITableViewStyleGrouped];
 	
-	NSManagedObjectContext *context = [self managedObjectContext];
-	if (!context) {
-		// Handle the error.
-	}
-	rootViewController.managedObjectContext = context;
+	rootViewController.managedObjectContext = self.managedObjectContext;
 	
 	UINavigationController *aNavigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
 	self.navigationController = aNavigationController;	
 
 	// Push notes view controller since we always start at the Notes list level
 	NotesViewController *notesViewController = [[NotesViewController alloc] initWithStyle:UITableViewStylePlain];
-	notesViewController.managedObjectContext = context;
+	notesViewController.managedObjectContext = self.managedObjectContext;
 	[self.navigationController pushViewController:notesViewController animated:NO];
 	[notesViewController release];
 	

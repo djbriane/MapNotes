@@ -6,8 +6,12 @@
 //  Copyright Local Matters, Inc. 2009. All rights reserved.
 //
 
+#import "QuickAddViewController.h"
 
-@interface NotesViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
+@class QuickAddViewController;
+@class Note;
+
+@interface NotesViewController : UITableViewController <QuickAddViewControllerDelegate, NSFetchedResultsControllerDelegate> {
 	NSFetchedResultsController *fetchedResultsController;
 	NSManagedObjectContext *managedObjectContext;
 	
@@ -22,5 +26,7 @@
 //@property (nonatomic, retain) NoteDetailController *noteDetailController;
 
 - (void)showQuickAddView:(BOOL)animated;
+- (void)pushNoteDetailViewController:(Note *)note editing:(BOOL)editing animated:(BOOL)animated;
+
 
 @end
