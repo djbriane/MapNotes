@@ -130,9 +130,17 @@
 	}
 	*/
 	
-	if ([self.delegate respondsToSelector:@selector (quickAddViewController:showNewNote:)]) {
-		[self.delegate quickAddViewController:self showNewNote:note];
-	}
+	
+	NoteTitleViewController *titleController = [[NoteTitleViewController alloc] initWithNibName:@"NoteTitle" bundle:nil];
+    titleController.delegate = self;
+	
+	titleController.note = note;
+	
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:titleController];
+    [self presentModalViewController:navigationController animated:YES];
+    
+    [navigationController release];
+    [titleController release];
 }
 
 - (IBAction)addPhotoNote:(id)sender {
@@ -145,6 +153,23 @@
 
 - (IBAction)updateLocation:(id)sender {
 	[self.locationManager startUpdatingLocation];
+}
+
+#pragma mark -
+#pragma mark Note Title View Controller Methods
+
+- (void)noteTitleViewController:(NoteTitleViewController *)controller 
+				   didSetTitle:(Note *)note {
+	//[self pushNoteDetailViewController:note	editing:YES animated:NO];
+	//[self dismissModalViewControllerAnimated:YES];
+	//[self.parentViewController dismissModalViewControllerAnimated:YES];
+	if (note != nil) {
+		if ([self.delegate respondsToSelector:@selector (quickAddViewController:showNewNote:)]) {
+			[self.delegate quickAddViewController:self showNewNote:note];
+		}
+	} else {
+		[self dismissModalViewControllerAnimated:YES];
+	}
 }
 
 - (void)dealloc {

@@ -46,8 +46,8 @@
 		D345E7541022A07C0070C491 /* RoundedRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = D345E7531022A07C0070C491 /* RoundedRectView.m */; };
 		D345E81B1022B1A30070C491 /* NoteAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D345E81A1022B1A30070C491 /* NoteAnnotation.m */; };
 		D360D124101D246B0095ED7B /* NoteDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = D360D123101D246B0095ED7B /* NoteDetailController.m */; };
-		D36712F3102F62D6000A046B /* TextNoteAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D36712F1102F62D6000A046B /* TextNoteAddViewController.m */; };
-		D36712F4102F62D6000A046B /* TextNoteAddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D36712F2102F62D6000A046B /* TextNoteAddViewController.xib */; };
+		D36712F3102F62D6000A046B /* NoteTitleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D36712F1102F62D6000A046B /* NoteTitleViewController.m */; };
+		D36712F4102F62D6000A046B /* NoteTitle.xib in Resources */ = {isa = PBXBuildFile; fileRef = D36712F2102F62D6000A046B /* NoteTitle.xib */; };
 		D37E96C310215F6F00D6509A /* temp_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D37E96C210215F6F00D6509A /* temp_icon.png */; };
 		D3BEAE2E1027FDA2001BC385 /* ImageManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BEAE2D1027FDA2001BC385 /* ImageManipulator.m */; };
 /* End PBXBuildFile section */
@@ -105,9 +105,9 @@
 		D345E81A1022B1A30070C491 /* NoteAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteAnnotation.m; sourceTree = "<group>"; };
 		D360D122101D246B0095ED7B /* NoteDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteDetailController.h; sourceTree = "<group>"; };
 		D360D123101D246B0095ED7B /* NoteDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteDetailController.m; sourceTree = "<group>"; };
-		D36712F0102F62D6000A046B /* TextNoteAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextNoteAddViewController.h; sourceTree = "<group>"; };
-		D36712F1102F62D6000A046B /* TextNoteAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextNoteAddViewController.m; sourceTree = "<group>"; };
-		D36712F2102F62D6000A046B /* TextNoteAddViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TextNoteAddViewController.xib; path = Classes/TextNoteAddViewController.xib; sourceTree = "<group>"; };
+		D36712F0102F62D6000A046B /* NoteTitleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteTitleViewController.h; sourceTree = "<group>"; };
+		D36712F1102F62D6000A046B /* NoteTitleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteTitleViewController.m; sourceTree = "<group>"; };
+		D36712F2102F62D6000A046B /* NoteTitle.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = NoteTitle.xib; path = Classes/NoteTitle.xib; sourceTree = "<group>"; };
 		D37E96C210215F6F00D6509A /* temp_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = temp_icon.png; sourceTree = "<group>"; };
 		D3BEAE2C1027FDA2001BC385 /* ImageManipulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageManipulator.h; sourceTree = "<group>"; };
 		D3BEAE2D1027FDA2001BC385 /* ImageManipulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageManipulator.m; sourceTree = "<group>"; };
@@ -139,6 +139,8 @@
 				0CB2F13D101A3B600087C6F6 /* RootViewController.m */,
 				0C599F76102A446800E66315 /* QuickAddViewController.h */,
 				0C599F77102A446800E66315 /* QuickAddViewController.m */,
+				D36712F0102F62D6000A046B /* NoteTitleViewController.h */,
+				D36712F1102F62D6000A046B /* NoteTitleViewController.m */,
 				28C286DF0D94DF7D0034E888 /* NotesViewController.h */,
 				28C286E00D94DF7D0034E888 /* NotesViewController.m */,
 				D360D122101D246B0095ED7B /* NoteDetailController.h */,
@@ -151,8 +153,6 @@
 				D345E7531022A07C0070C491 /* RoundedRectView.m */,
 				D3BEAE2C1027FDA2001BC385 /* ImageManipulator.h */,
 				D3BEAE2D1027FDA2001BC385 /* ImageManipulator.m */,
-				D36712F0102F62D6000A046B /* TextNoteAddViewController.h */,
-				D36712F1102F62D6000A046B /* TextNoteAddViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -228,7 +228,7 @@
 				0C251CA81023893200C05768 /* Images */,
 				0CB2F13E101A3B600087C6F6 /* QuickAddView.xib */,
 				2899E55F0DE3E45000AC0155 /* NotesView.xib */,
-				D36712F2102F62D6000A046B /* TextNoteAddViewController.xib */,
+				D36712F2102F62D6000A046B /* NoteTitle.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* MapNotes-Info.plist */,
 				0C3551F61020D690006C7ED7 /* NoteDetailHeader.xib */,
@@ -322,7 +322,7 @@
 				D303F2A21026ACB800528192 /* img_accuracy_green.png in Resources */,
 				D303F2A31026ACB800528192 /* img_accuracy_bkgnd.png in Resources */,
 				0C599FB7102A536400E66315 /* RootView.xib in Resources */,
-				D36712F4102F62D6000A046B /* TextNoteAddViewController.xib in Resources */,
+				D36712F4102F62D6000A046B /* NoteTitle.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,7 +346,7 @@
 				D3BEAE2E1027FDA2001BC385 /* ImageManipulator.m in Sources */,
 				D30D71B0102997F000AF4AFF /* NotePhotoViewController.m in Sources */,
 				0C599F78102A446800E66315 /* QuickAddViewController.m in Sources */,
-				D36712F3102F62D6000A046B /* TextNoteAddViewController.m in Sources */,
+				D36712F3102F62D6000A046B /* NoteTitleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

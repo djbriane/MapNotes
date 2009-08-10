@@ -224,7 +224,6 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-	// TODO: Move strings into constants / messages
 	if ([actionSheet buttonTitleAtIndex:buttonIndex] == kTakePhotoButtonText) {
 		// Take Photo
 		UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
@@ -286,48 +285,6 @@
 	
     [self dismissModalViewControllerAnimated:YES];
 }
-
-/*
-// ORIGINAL 
-- (void)imagePickerController:(UIImagePickerController *)picker 
-		didFinishPickingImage:(UIImage *)selectedImage 
-				  editingInfo:(NSDictionary *)editingInfo {
-	
-	// Delete any existing image.
-	NSManagedObject *oldPhoto = selectedNote.photo;
-	if (oldPhoto != nil) {
-		[selectedNote.managedObjectContext deleteObject:oldPhoto];
-	}
-	
-    // Create an image object for the new image.
-	NSManagedObject *photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" 
-														   inManagedObjectContext:selectedNote.managedObjectContext];
-	selectedNote.photo = photo;
-	
-	// Set the image for the image managed object.
-	[photo setValue:selectedImage forKey:@"image"];
-
-	// Create a thumbnail version of the image for the recipe object.
-	CGSize size = selectedImage.size;
-	CGFloat ratio = 0;
-	if (size.width > size.height) {
-		ratio = 44.0 / size.width;
-	} else {
-		ratio = 44.0 / size.height;
-	}
-	CGRect rect = CGRectMake(0.0, 0.0, ratio * size.width, ratio * size.height);
-	
-	UIGraphicsBeginImageContext(rect.size);
-	[selectedImage drawInRect:rect];
-	selectedNote.thumbnail = UIGraphicsGetImageFromCurrentImageContext();
-	UIGraphicsEndImageContext();
-	
-	// Update the user interface appropriately.
-	[self updatePhotoInfo];
-	
-    [self dismissModalViewControllerAnimated:YES];
-}
-*/
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
 	// The user canceled -- simply dismiss the image picker.

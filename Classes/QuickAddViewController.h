@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "NoteTitleViewController.h"
+
+@class NoteTitleViewController;
 
 @class Note;
 
 @protocol QuickAddViewControllerDelegate;
 
-@interface QuickAddViewController : UIViewController <MKMapViewDelegate> {
+@interface QuickAddViewController : UIViewController <MKMapViewDelegate, NoteTitleDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate> {
 	id<QuickAddViewControllerDelegate> delegate;
 	
 	NSManagedObjectContext *managedObjectContext;
