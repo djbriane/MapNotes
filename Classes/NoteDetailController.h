@@ -13,12 +13,14 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "NoteTitleViewController.h"
 
+@class NoteTitleViewController;
 @class Note;
 @class NoteAnnotation;
 @class RoundedRectView;
 
-@interface NoteDetailController : UITableViewController <UINavigationControllerDelegate, UITextFieldDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate> {
+@interface NoteDetailController : UITableViewController <UINavigationControllerDelegate, NoteTitleDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate> {
 	Note *selectedNote;
 	
 	MKMapView *_mapView;
@@ -30,7 +32,7 @@
 	UIButton *takePictureButton;
 	UIButton *selectFromCameraRollButton;
 	
-	UITextField *nameTextField;	
+	UIButton *nameTextField;	
 }
 
 @property (nonatomic, retain) Note *selectedNote;
@@ -43,9 +45,10 @@
 @property (nonatomic, retain) IBOutlet UIButton *photoButton;
 
 
-@property (nonatomic, retain) IBOutlet UITextField *nameTextField;
+@property (nonatomic, retain) IBOutlet UIButton *nameTextField;
 
 - (void)updatePhotoInfo;
 - (IBAction)editPhoto;
+- (IBAction)editTitle;
 
 @end

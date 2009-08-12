@@ -60,7 +60,9 @@
 	
 	self.navigationItem.rightBarButtonItem = [self editButtonItem];
 	self.navigationItem.title = selectedNote.title;
-	nameTextField.text = [selectedNote title];
+	if (selectedNote.title != nil) {
+		[nameTextField setTitle:[selectedNote title] forState:UIControlStateNormal];
+	}
 	
 	[self updatePhotoInfo];
 	
@@ -99,11 +101,11 @@
 	
     if (editing == YES){
         // change view to an editable view
-		nameTextField.borderStyle = UITextBorderStyleRoundedRect;
+		nameTextField.enabled = YES;
     }
     else {
         // save the changes if needed and change view to noneditable
-		nameTextField.borderStyle = UITextBorderStyleNone;
+		nameTextField.enabled = NO;
     }
 	
 	// Update photo display accordingly
@@ -128,19 +130,29 @@
 	
 }
 
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-	
-	if (textField == nameTextField) {
-		selectedNote.title = nameTextField.text;
-		self.navigationItem.title = selectedNote.title;
-	}
-	return YES;
-}	
+- (IBAction)editTitle {
+	NoteTitleViewController *titleController = [[NoteTitleViewController alloc] initWithNibName:@"NoteTitle" bundle:nil];
+    titleController.delegate = self;
+	titleController.note = self.selectedNote;
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-	[textField resignFirstResponder];
-	return YES;
+    [self.navigationController pushViewController:titleController animated:YES];
+	
+    [titleController release];
 }
+
+#pragma mark -
+#pragma mark Note Title View Controller Methods
+
+- (void)noteTitleViewController:(NoteTitleViewController *)controller 
+					didSetTitle:(Note *)note
+						didSave:(BOOL)didSave {
+	if (didSave) {
+		self.selectedNote = note;
+	}
+	[self.navigationController popViewControllerAnimated:YES];
+	
+}
+
 
 #pragma mark -
 #pragma mark Photo Acquisition Methods

@@ -9,6 +9,7 @@
 #import "QuickAddViewController.h"
 #import "RootViewController.h"
 #import "MapNotesAppDelegate.h"
+#import "ImageManipulator.h"
 #import "Note.h"
 
 @implementation QuickAddViewController
@@ -104,9 +105,9 @@
 	}
 }
 
-- (IBAction)addTextNote:(id)sender {
+- (Note *)createNewNote {
 	if (!self.locationManager.location) {
-		return;
+		return nil;
 	}
 	
 	// Create and configure a new instance of the Event entity
@@ -120,6 +121,12 @@
 	[note setGeoAccuracy:[NSNumber numberWithDouble:self.locationManager.location.horizontalAccuracy]];
 	
 	[note setDateCreated:[NSDate date]];
+	
+	return note;
+}
+
+- (IBAction)addTextNote:(id)sender {
+	Note *note = [self createNewNote];
 	//[note setTitle:@"New Note"];
 	
 	/*
@@ -144,7 +151,26 @@
 }
 
 - (IBAction)addPhotoNote:(id)sender {
-
+	UIActionSheet *actionSheet = [[UIActionSheet alloc]
+								  initWithTitle:nil
+								  delegate:self
+								  cancelButtonTitle:nil
+								  destructiveButtonTitle:nil
+								  otherButtonTitles:nil];
+	// Take Photo Button
+	if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+		[actionSheet addButtonWithTitle:kTakePhotoButtonText];
+	}
+	
+	// Choose Existing Button
+	[actionSheet addButtonWithTitle:kChoosePhotoButtonText];
+	
+	// Cancel Button
+	actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:@"Cancel"];
+	
+	//actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+	[actionSheet showInView:self.view];
+	[actionSheet release];
 }
 
 - (IBAction)viewNotes:(id)sender {
@@ -156,14 +182,97 @@
 }
 
 #pragma mark -
+#pragma mark Action Sheet Delegate Methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+	if ([actionSheet buttonTitleAtIndex:buttonIndex] == kTakePhotoButtonText) {
+		// Take Photo
+		UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+		imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+		imagePicker.delegate = self;
+		[self presentModalViewController:imagePicker animated:YES];
+		[imagePicker release];
+	} 
+	else if ([actionSheet buttonTitleAtIndex:buttonIndex] == kChoosePhotoButtonText) {
+		// Choose Existing
+		UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+		imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+		imagePicker.delegate = self;
+		[self presentModalViewController:imagePicker animated:YES];
+		[imagePicker release];		
+	} 
+}
+
+#pragma mark -
+#pragma mark Image Picker Delegate Methods
+
+- (void)imagePickerController:(UIImagePickerController *)picker 
+		didFinishPickingImage:(UIImage *)selectedImage 
+				  editingInfo:(NSDictionary *)editingInfo {
+	
+	// Create a new note
+	Note *note = [self createNewNote];
+	
+	// Create a new photo object and associate it with the event.
+	NSManagedObject *photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" 
+														   inManagedObjectContext:note.managedObjectContext];
+	
+	
+	// Scale the image to a manageable size and rotate it properly to account for camera
+	UIImage *image = [[ImageManipulator scaleAndRotateImage:selectedImage] retain];
+	note.photo = photo;
+	
+	// Set the image for the image managed object.
+	[photo setValue:image forKey:@"image"];
+	
+	// Generate and set a thumbnail for the note
+	UIImage *thumbnail = [[ImageManipulator generatePhotoThumbnail:image] retain];
+	note.thumbnail = thumbnail;
+	[thumbnail release];
+	[image release];
+	
+	// Commit the change.
+	NSError *error;
+	if (![note.managedObjectContext save:&error]) {
+		// Handle the error.
+		NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
+	}
+	
+    if ([self.delegate respondsToSelector:@selector (quickAddViewController:showNewNote:)]) {
+		[self.delegate quickAddViewController:self showNewNote:note];
+	}
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+	// The user canceled -- simply dismiss the image picker.
+	[self dismissModalViewControllerAnimated:YES];
+}
+
+
+#pragma mark -
 #pragma mark Note Title View Controller Methods
 
 - (void)noteTitleViewController:(NoteTitleViewController *)controller 
-				   didSetTitle:(Note *)note {
-	//[self pushNoteDetailViewController:note	editing:YES animated:NO];
-	//[self dismissModalViewControllerAnimated:YES];
-	//[self.parentViewController dismissModalViewControllerAnimated:YES];
-	if (note != nil) {
+					didSetTitle:(Note *)note
+						didSave:(BOOL)didSave {
+
+	if (didSave == NO) {
+		[note.managedObjectContext deleteObject:note];
+	}
+
+	NSError *error = nil;
+	if (![note.managedObjectContext save:&error]) {
+		/*
+		 Replace this implementation with code to handle the error appropriately.
+		 
+		 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+		 */
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		abort();
+	}
+	
+	if (didSave) {
 		if ([self.delegate respondsToSelector:@selector (quickAddViewController:showNewNote:)]) {
 			[self.delegate quickAddViewController:self showNewNote:note];
 		}

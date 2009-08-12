@@ -30,7 +30,7 @@
 
 @protocol NoteTitleDelegate <NSObject>
 // recipe == nil on cancel
-- (void)noteTitleViewController:(NoteTitleViewController *)noteTitleViewController didSetTitle:(Note *)note;
+- (void)noteTitleViewController:(NoteTitleViewController *)noteTitleViewController didSetTitle:(Note *)note didSave:(BOOL)didSave;
 
 @end
 
