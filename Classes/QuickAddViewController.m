@@ -49,6 +49,20 @@
 														 repeats:YES];
 }
 
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	//[UIApplication sharedApplication].statusBarHidden = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+	if (self.locationTimer != nil) {
+		[self.locationTimer invalidate];
+	}
+	//[UIApplication sharedApplication].statusBarHidden = NO;
+}
+
 /*
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -249,6 +263,11 @@
 	[self dismissModalViewControllerAnimated:YES];
 }
 
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+	// Customize the title of the nav bar for camera capture
+	//navigationController.navigationBar.topItem.title = @"Custom Picker Title";
+    //navigationController.navigationBar.topItem.prompt = @"Custom Picker Prompt";
+}
 
 #pragma mark -
 #pragma mark Note Title View Controller Methods

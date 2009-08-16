@@ -20,7 +20,7 @@
 
 @protocol QuickAddViewControllerDelegate;
 
-@interface QuickAddViewController : UIViewController <MKMapViewDelegate, NoteTitleDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate> {
+@interface QuickAddViewController : UIViewController <MKMapViewDelegate, NoteTitleDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
 	id<QuickAddViewControllerDelegate> delegate;
 	
 	NSManagedObjectContext *managedObjectContext;

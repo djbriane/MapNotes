@@ -21,6 +21,15 @@
 @dynamic photo;
 @dynamic group;
 
+- (CLLocationDistance)getDistanceFrom:(const CLLocation *)location {
+	CLLocationDegrees noteLatitude = (CLLocationDegrees) [self.geoLatitude doubleValue];
+	CLLocationDegrees noteLongitude = (CLLocationDegrees) [self.geoLongitude doubleValue];
+
+	CLLocation *noteLocation = [[CLLocation alloc] initWithLatitude:noteLatitude longitude:noteLongitude];
+	
+	return [location getDistanceFrom:noteLocation];
+}
+
 @end 
 
 @implementation ImageToDataTransformer

@@ -48,6 +48,7 @@
 @property (nonatomic, retain) IBOutlet UIButton *nameTextField;
 
 - (void)updatePhotoInfo;
+- (void)initializeMap;
 - (IBAction)editPhoto;
 - (IBAction)editTitle;
 

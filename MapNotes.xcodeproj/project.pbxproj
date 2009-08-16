@@ -42,6 +42,7 @@
 		D303F2A31026ACB800528192 /* img_accuracy_bkgnd.png in Resources */ = {isa = PBXBuildFile; fileRef = D303F2961026ACB800528192 /* img_accuracy_bkgnd.png */; };
 		D303F2A61026ACE000528192 /* UIImageToDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D303F2A41026ACE000528192 /* UIImageToDataTransformer.m */; };
 		D30D71B0102997F000AF4AFF /* NotePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D30D71AF102997F000AF4AFF /* NotePhotoViewController.m */; };
+		D342E594103872CF002382B7 /* BigRedButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D342E593103872CF002382B7 /* BigRedButton.png */; };
 		D345E74C10229C4B0070C491 /* NoteDetailFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = D345E74B10229C4B0070C491 /* NoteDetailFooter.xib */; };
 		D345E7541022A07C0070C491 /* RoundedRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = D345E7531022A07C0070C491 /* RoundedRectView.m */; };
 		D345E81B1022B1A30070C491 /* NoteAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D345E81A1022B1A30070C491 /* NoteAnnotation.m */; };
@@ -50,6 +51,7 @@
 		D36712F4102F62D6000A046B /* NoteTitle.xib in Resources */ = {isa = PBXBuildFile; fileRef = D36712F2102F62D6000A046B /* NoteTitle.xib */; };
 		D37E96C310215F6F00D6509A /* temp_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D37E96C210215F6F00D6509A /* temp_icon.png */; };
 		D3BEAE2E1027FDA2001BC385 /* ImageManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BEAE2D1027FDA2001BC385 /* ImageManipulator.m */; };
+		D3D952971034536400C39C92 /* MapTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3D952961034536400C39C92 /* MapTableCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +100,7 @@
 		D303F2A51026ACE000528192 /* UIImageToDataTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIImageToDataTransformer.h; path = Classes/UIImageToDataTransformer.h; sourceTree = "<group>"; };
 		D30D71AE102997F000AF4AFF /* NotePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotePhotoViewController.h; sourceTree = "<group>"; };
 		D30D71AF102997F000AF4AFF /* NotePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotePhotoViewController.m; sourceTree = "<group>"; };
+		D342E593103872CF002382B7 /* BigRedButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BigRedButton.png; path = Images/BigRedButton.png; sourceTree = "<group>"; };
 		D345E74B10229C4B0070C491 /* NoteDetailFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteDetailFooter.xib; sourceTree = "<group>"; };
 		D345E7521022A07C0070C491 /* RoundedRectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedRectView.h; sourceTree = "<group>"; };
 		D345E7531022A07C0070C491 /* RoundedRectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedRectView.m; sourceTree = "<group>"; };
@@ -111,6 +114,7 @@
 		D37E96C210215F6F00D6509A /* temp_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = temp_icon.png; sourceTree = "<group>"; };
 		D3BEAE2C1027FDA2001BC385 /* ImageManipulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageManipulator.h; sourceTree = "<group>"; };
 		D3BEAE2D1027FDA2001BC385 /* ImageManipulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageManipulator.m; sourceTree = "<group>"; };
+		D3D952961034536400C39C92 /* MapTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapTableCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +164,7 @@
 		0C251CA81023893200C05768 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D342E593103872CF002382B7 /* BigRedButton.png */,
 				D303F28A1026ACB800528192 /* img_photo-blank.png */,
 				D303F28B1026ACB800528192 /* img_photo-add.png */,
 				D303F28C1026ACB800528192 /* img_map-refresh.png */,
@@ -234,6 +239,7 @@
 				0C3551F61020D690006C7ED7 /* NoteDetailHeader.xib */,
 				D345E74B10229C4B0070C491 /* NoteDetailFooter.xib */,
 				0C599FB6102A536400E66315 /* RootView.xib */,
+				D3D952961034536400C39C92 /* MapTableCell.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -323,6 +329,8 @@
 				D303F2A31026ACB800528192 /* img_accuracy_bkgnd.png in Resources */,
 				0C599FB7102A536400E66315 /* RootView.xib in Resources */,
 				D36712F4102F62D6000A046B /* NoteTitle.xib in Resources */,
+				D3D952971034536400C39C92 /* MapTableCell.xib in Resources */,
+				D342E594103872CF002382B7 /* BigRedButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

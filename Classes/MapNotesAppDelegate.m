@@ -22,6 +22,8 @@
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
     
     // Override point for customization after app launch    
+	application.statusBarStyle = UIStatusBarStyleBlackOpaque;
+	
 	[self initLocationManager];
 
 	RootViewController *rootViewController = [[RootViewController alloc] initWithStyle:UITableViewStyleGrouped];
@@ -29,11 +31,13 @@
 	rootViewController.managedObjectContext = self.managedObjectContext;
 	
 	UINavigationController *aNavigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
+	aNavigationController.navigationBar.barStyle = UIBarStyleBlack;
 	self.navigationController = aNavigationController;	
 
 	// Push notes view controller since we always start at the Notes list level
-	NotesViewController *notesViewController = [[NotesViewController alloc] initWithStyle:UITableViewStylePlain];
+	NotesViewController *notesViewController = [[NotesViewController alloc] initWithNibName:@"NotesView" bundle:nil];
 	notesViewController.managedObjectContext = self.managedObjectContext;
+	notesViewController.locationManager = self.locationManager;
 	[self.navigationController pushViewController:notesViewController animated:NO];
 	[notesViewController release];
 	

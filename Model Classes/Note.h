@@ -7,6 +7,7 @@
 //
 
 #import <CoreData/CoreData.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface ImageToDataTransformer : NSValueTransformer {
 }
@@ -26,6 +27,8 @@
 
 @property (nonatomic, retain) NSManagedObject * photo;
 @property (nonatomic, retain) NSManagedObject * group;
+
+- (CLLocationDistance)getDistanceFrom:(const CLLocation *)location;
 
 @end
 

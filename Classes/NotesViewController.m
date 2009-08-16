@@ -12,10 +12,14 @@
 
 @implementation NotesViewController
 
-@synthesize fetchedResultsController, managedObjectContext, selectedGroup;
+@synthesize fetchedResultsController, managedObjectContext, selectedGroup, myTableView, toolbar, sortOrder, sortAscending, locationManager;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	// Default sorting to date created descending (most recent at top)
+	sortOrder = @"dateCreated";
+	sortAscending = NO;
 	
 	// Remove the back button for now, till we get Groups implemented
 	[self.navigationItem setHidesBackButton:YES animated:YES];
@@ -26,6 +30,28 @@
     self.navigationItem.rightBarButtonItem = addButton;
     [addButton release];
 	
+	if (selectedGroup == nil) {
+		self.navigationItem.title = @"All Notes";
+	}
+	
+	// Create the sort control as a UISegmentedControl
+	UISegmentedControl *sortControl = [[UISegmentedControl alloc] initWithItems: [NSArray arrayWithObjects: @"Date", @"A - Z", @"Distance", nil]];
+	sortControl.segmentedControlStyle = UISegmentedControlStyleBar;
+	sortControl.backgroundColor = [UIColor clearColor];
+	sortControl.tintColor = [UIColor darkGrayColor];
+	// default to date sort, should change this to remember sort preference
+	sortControl.selectedSegmentIndex = 0;
+	
+	[sortControl addTarget:self action:@selector(changeSortOrder:) forControlEvents:UIControlEventValueChanged];
+	
+	sortControl.frame = CGRectMake(10, 6, 300,30);
+	[toolbar addSubview:sortControl];
+	[sortControl release];
+	
+	//Add the toolbar as a subview to the navigation controller.
+	//[self.navigationController.view addSubview:toolbar];
+	//[self.view addSubview:toolbar];
+	
 	// If group is set, then fetch notes from that group, otherwise use fetched results controller
 	NSError *error;
 	if (![[self fetchedResultsController] performFetch:&error]) {
@@ -34,11 +60,7 @@
 	}
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
-	self.navigationController.navigationBarHidden = NO;
-    [self.tableView reloadData];
-}
+
 
 - (void)insertNewObject {
 	
@@ -59,7 +81,7 @@
 		NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
     }
 
-    [self.tableView reloadData];
+    [self.myTableView reloadData];
 }
 
 - (void)showQuickAddView:(BOOL)animated {
@@ -67,6 +89,8 @@
 	QuickAddViewController *aQuickAddViewController = [[QuickAddViewController alloc] initWithNibName:@"QuickAddView" bundle:nil];
 	aQuickAddViewController.managedObjectContext = self.managedObjectContext;
 	aQuickAddViewController.delegate = self;
+	
+	//[UIApplication sharedApplication].statusBarHidden = YES;
 	[self presentModalViewController:aQuickAddViewController animated:animated];
 	[aQuickAddViewController release];
 }
@@ -79,11 +103,45 @@
 	[noteDetailController release];
 }
 
-/*
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)changeSortOrder:(id)sender {
+	UISegmentedControl* segCtl = sender;
+	NSInteger selectedIndex = [segCtl selectedSegmentIndex];
+	
+	switch (selectedIndex) {
+		case 0:
+			// sort by date
+			NSLog(@"Sort date selected");
+			self.sortOrder = @"dateCreated";
+			self.sortAscending = NO;
+			break;
+		case 1:
+			// sort by alpha
+			NSLog(@"Sort A-Z selected");
+			self.sortOrder = @"title";
+			self.sortAscending = YES;
+			break;
+		default:
+			// sort by distance
+			NSLog(@"Sort distance selected");
+			// TODO: geoAccuracy is a placeholder, need to figure out how to sort by distance
+			self.sortOrder = @"geoAccuracy";
+			self.sortAscending = YES;
+			break;
+	}
+	
+	// invalidate and re-run the fetch with the new sort descriptor
+	self.fetchedResultsController = nil;
+	self.fetchedResultsController = [self fetchedResultsController];
+
+	[self.myTableView reloadData];
 }
-*/
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	self.navigationController.navigationBarHidden = NO;
+	//[UIApplication sharedApplication].statusBarHidden = NO;
+    [self.myTableView reloadData];
+}
 /*
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -147,23 +205,32 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"NoteCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
     
 	// Configure the cell.
-
-	NSManagedObject *managedObject = [fetchedResultsController objectAtIndexPath:indexPath];
-
+	Note *note = (Note *)[fetchedResultsController objectAtIndexPath:indexPath];
+	
+	cell.textLabel.text = note.title;
+	cell.imageView.image = note.thumbnail;
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-	cell.textLabel.text = [[managedObject valueForKey:@"title"] description];
+
+	// show distance if sorted by distance
+	if (self.locationManager.location) {
+		cell.detailTextLabel.text = [NSString stringWithFormat:@"%4.2fm", [note getDistanceFrom:self.locationManager.location]];
+	}
 	
     return cell;
 }
 
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return 70;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here -- for example, create and push another view controller.
@@ -203,7 +270,7 @@
 		}
 		
 		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
+    }
 }
 
 
@@ -218,26 +285,30 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
 	[self.tableView reloadData];
 }
-*/
-
+*/		
 
 - (NSFetchedResultsController *)fetchedResultsController {
     
     if (fetchedResultsController != nil) {
         return fetchedResultsController;
     }
-    
+
     /*
 	 Set up the fetched results controller.
 	*/
 	// Create the fetch request for the entity.
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-	// Edit the entity name as appropriate.
+
 	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:managedObjectContext];
 	[fetchRequest setEntity:entity];
 	
-	// Edit the sort key as appropriate.
-	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:NO];
+	// TODO: Add a NSPedicate for group support
+	// NSPredicate *pred = [NSPredicate predicateWithFormat:@"group = %@", self.selectedGroup];
+	// [fetchRequest setPredicate:pred];
+	// [pred release];
+		
+	// Change the sort key according to the current sort order
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:self.sortOrder ascending:self.sortAscending];
 	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
 	
 	[fetchRequest setSortDescriptors:sortDescriptors];
@@ -247,6 +318,12 @@
 	NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:@"Root"];
     aFetchedResultsController.delegate = self;
 	self.fetchedResultsController = aFetchedResultsController;
+
+	NSError *error;
+	if (![[self fetchedResultsController] performFetch:&error]) {
+		// Handle the error...
+		NSLog(@"%@:%s Error fetching context: %@", [self class], _cmd, [error localizedDescription]);
+	}
 	
 	[aFetchedResultsController release];
 	[fetchRequest release];
@@ -258,6 +335,9 @@
 
 
 - (void)dealloc {
+	[sortOrder release];
+	[toolbar release];
+	[locationManager release];
 	[fetchedResultsController release];
 	[managedObjectContext release];
     [super dealloc];

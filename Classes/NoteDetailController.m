@@ -47,11 +47,11 @@
 		 self.tableView.tableHeaderView = tableHeaderView;
 		 self.tableView.allowsSelectionDuringEditing = YES;
 	 }
-	 if (tableFooterView == nil) {
-		 [[NSBundle mainBundle] loadNibNamed:@"NoteDetailFooter" owner:self options:nil];
-		 self.tableView.tableFooterView = tableFooterView;
-		 self.tableView.allowsSelectionDuringEditing = NO;
-	 }
+	 //if (tableFooterView == nil) {
+		// [[NSBundle mainBundle] loadNibNamed:@"NoteDetailFooter" owner:self options:nil];
+		// self.tableView.tableFooterView = tableFooterView;
+		// self.tableView.allowsSelectionDuringEditing = NO;
+	 //}
 	 
 }
 
@@ -65,22 +65,6 @@
 	}
 	
 	[self updatePhotoInfo];
-	
-	// Add Note to Map (Move this to own method)
-	CLLocationCoordinate2D location;
-	location.latitude = [selectedNote.geoLatitude doubleValue];
-	location.longitude = [selectedNote.geoLongitude doubleValue];
-	
-	self.noteAnnotation = [NoteAnnotation annotationWithCoordinate:location];
-	
-	MKCoordinateRegion region = {{0.0f, 0.0f}, {0.0f, 0.0f}};
-	region.center = location;
-	region.span.longitudeDelta = 0.005f;
-	region.span.latitudeDelta = 0.005f;
-	
-	[self.mapView setRegion:region animated:NO];
-	[self.mapView addAnnotation:self.noteAnnotation];
-	// Done adding Note
 }
 
 /*
@@ -231,6 +215,25 @@
 	}
 }
 
+- (void)initializeMap {
+	// Add Note to Map
+	CLLocationCoordinate2D location;
+	location.latitude = [selectedNote.geoLatitude doubleValue];
+	location.longitude = [selectedNote.geoLongitude doubleValue];
+	
+	self.noteAnnotation = [NoteAnnotation annotationWithCoordinate:location];
+	
+	MKCoordinateRegion region = {{0.0f, 0.0f}, {0.0f, 0.0f}};
+	region.center = location;
+	region.span.longitudeDelta = 0.005f;
+	region.span.latitudeDelta = 0.005f;
+	
+	[self.mapView setRegion:region animated:NO];
+	[self.mapView addAnnotation:self.noteAnnotation];
+	// Done adding Note to map
+	
+}
+
 #pragma mark -
 #pragma mark Action Sheet Delegate Methods
 
@@ -320,12 +323,16 @@
     NSInteger rows = 0;
     switch (section) {
         case 0:
-			rows = 2;
+			// Details (and Tags later)
+			rows = 1;
 			break;
         case 1:
+			// Map View Cell
+			rows = 1;
+			break;
 		case 2:
-            // For the action 'buttons' there is just one row
-            rows = 0;
+            // Change group button
+            rows = 1;
             break;
         default:
             break;
@@ -337,21 +344,33 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
 	static NSString *CellIdentifier = @"CellIdentifier";
+	static NSString *MapCellIdentifier = @"MapCellIdentifier";
+	UITableViewCell *cell;
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
-	
-	// A date formatter for the creation/modified dates.
-    static NSDateFormatter *dateFormatter = nil;
-	if (dateFormatter == nil) {
-		dateFormatter = [[NSDateFormatter alloc] init];
-		[dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
-		[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+	if (indexPath.section == 1) {
+		// Map View Cell Setup
+		cell = [tableView dequeueReusableCellWithIdentifier:MapCellIdentifier];
+		if (cell == nil) {
+			// load map view cell			
+			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+										   reuseIdentifier:CellIdentifier] autorelease];
+			CGRect mapViewRect = CGRectMake(4, 4, 292, 124);
+			MKMapView *mapViewCell = [[MKMapView alloc] initWithFrame:mapViewRect];
+			[cell.contentView addSubview: mapViewCell];
+			cell.selectionStyle = UITableViewCellSelectionStyleNone;
+			self.mapView = mapViewCell;
+			[mapViewCell release];
+		}
+	} else {
+		// All Other Cell Setup
+		cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+		if (cell == nil) {
+			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+			cell.selectionStyle = UITableViewCellSelectionStyleNone;
+		}
 	}
-	
+
+	/*
 	static NSNumberFormatter *numberFormatter = nil;
 	if (numberFormatter == nil) {
 		numberFormatter = [[NSNumberFormatter alloc] init];
@@ -363,6 +382,7 @@
 						[numberFormatter stringFromNumber:[selectedNote geoLatitude]],
 						[numberFormatter stringFromNumber:[selectedNote geoLongitude]],
 						[numberFormatter stringFromNumber:[selectedNote geoAccuracy]]];
+	 */
 	
     // Set the text in the cell for the section/row.
     
@@ -377,24 +397,24 @@
 			
 			switch (indexPath.row) {
 				case 0:
-					// Location
-					cellText = geoString;
+					// Details
+					cellText = @"Note Details";
 					break;
 				case 1:
-					// Created Date
-					cellText = [dateFormatter stringFromDate:[selectedNote dateCreated]];
+					// TODO: Add tag support here
 					break;
 				default:
 					break;
 			}
             break;
         case 1:
-			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cellText = NSLocalizedString(@"Move Folder", @"Move to new folder");
+			// Set up the Map and add the note to it
+			[self initializeMap];
             break;
         case 2:
+			// Change Group Cell
 			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cellText = NSLocalizedString(@"Share", @"Share note with friends");
+            cellText = NSLocalizedString(@"Change Group", @"Move to new group");
             break;
         default:
             break;
@@ -404,11 +424,39 @@
     return cell;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+	if (section != 0) {
+		return nil;
+	}
+	
+	// A date formatter for the creation/modified dates.
+	static NSDateFormatter *dateFormatter = nil;
+	if (dateFormatter == nil) {
+		dateFormatter = [[NSDateFormatter alloc] init];
+		[dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+		[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+	}
+	
+	// return the created date if its the first section
+	return [NSString stringWithFormat:@"Created: %@", [dateFormatter stringFromDate:[selectedNote dateCreated]]];
+
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 	if (section == 0) {
 		return 0.0;
 	} 
 	return self.tableView.sectionHeaderHeight;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (indexPath.section == 1) {
+		// if its the map make it big
+		return 132;
+	} else {
+		// return default
+		return 44;
+	}
 }
 
 
