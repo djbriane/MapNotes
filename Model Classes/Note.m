@@ -7,28 +7,18 @@
 //
 
 #import "Note.h"
+#import "CLLocation+DistanceComparison.h"
 
 @implementation Note 
 
-@dynamic geoAccuracy;
 @dynamic dateCreated;
-@dynamic geoLongitude;
-@dynamic geoLatitude;
 @dynamic title;
 @dynamic details;
 @dynamic dateModified;
 @dynamic thumbnail;
 @dynamic photo;
 @dynamic group;
-
-- (CLLocationDistance)getDistanceFrom:(const CLLocation *)location {
-	CLLocationDegrees noteLatitude = (CLLocationDegrees) [self.geoLatitude doubleValue];
-	CLLocationDegrees noteLongitude = (CLLocationDegrees) [self.geoLongitude doubleValue];
-
-	CLLocation *noteLocation = [[CLLocation alloc] initWithLatitude:noteLatitude longitude:noteLongitude];
-	
-	return [location getDistanceFrom:noteLocation];
-}
+@dynamic location;
 
 @end 
 

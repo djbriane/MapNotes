@@ -128,14 +128,13 @@
 	Note *note = (Note *)[NSEntityDescription insertNewObjectForEntityForName:@"Note"
 													   inManagedObjectContext:self.managedObjectContext];
 	
-	CLLocationCoordinate2D coordinate = [self.locationManager.location coordinate];
-	
-	[note setGeoLatitude:[NSNumber numberWithDouble:coordinate.latitude]];
-	[note setGeoLongitude:[NSNumber numberWithDouble:coordinate.longitude]];
-	[note setGeoAccuracy:[NSNumber numberWithDouble:self.locationManager.location.horizontalAccuracy]];
+	[note setLocation:self.locationManager.location];
+	//[note setGeoLatitude:[NSNumber numberWithDouble:self.locationManager.location.coordinate.latitude]];
+	//[note setGeoLongitude:[NSNumber numberWithDouble:self.locationManager.location.coordinate.longitude]];
+	//[note setGeoAccuracy:[NSNumber numberWithDouble:self.locationManager.location.horizontalAccuracy]];
 	
 	[note setDateCreated:[NSDate date]];
-	
+
 	return note;
 }
 

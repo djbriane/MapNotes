@@ -38,9 +38,10 @@
  // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
  - (void)viewDidLoad {
 	 [super viewDidLoad];
+	 self.tableView.backgroundColor = [UIColor clearColor];
 
 	 //self.editing = NO; // Initially displays an Edit button and noneditable view
-
+	 
 	 // Create and set the table header / footer view.
 	 if (tableHeaderView == nil) {
 		 [[NSBundle mainBundle] loadNibNamed:@"NoteDetailHeader" owner:self options:nil];
@@ -217,14 +218,10 @@
 
 - (void)initializeMap {
 	// Add Note to Map
-	CLLocationCoordinate2D location;
-	location.latitude = [selectedNote.geoLatitude doubleValue];
-	location.longitude = [selectedNote.geoLongitude doubleValue];
-	
-	self.noteAnnotation = [NoteAnnotation annotationWithCoordinate:location];
+	self.noteAnnotation = [NoteAnnotation annotationWithCoordinate:selectedNote.location.coordinate];
 	
 	MKCoordinateRegion region = {{0.0f, 0.0f}, {0.0f, 0.0f}};
-	region.center = location;
+	region.center = selectedNote.location.coordinate;
 	region.span.longitudeDelta = 0.005f;
 	region.span.latitudeDelta = 0.005f;
 	

@@ -43,6 +43,8 @@
 		D303F2A61026ACE000528192 /* UIImageToDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D303F2A41026ACE000528192 /* UIImageToDataTransformer.m */; };
 		D30D71B0102997F000AF4AFF /* NotePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D30D71AF102997F000AF4AFF /* NotePhotoViewController.m */; };
 		D342E594103872CF002382B7 /* BigRedButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D342E593103872CF002382B7 /* BigRedButton.png */; };
+		D342E5EB1038B66A002382B7 /* StripedBG.png in Resources */ = {isa = PBXBuildFile; fileRef = D342E5EA1038B66A002382B7 /* StripedBG.png */; };
+		D342E6D4103A5BCA002382B7 /* CLLocation+DistanceComparison.m in Sources */ = {isa = PBXBuildFile; fileRef = D342E6D3103A5BCA002382B7 /* CLLocation+DistanceComparison.m */; };
 		D345E74C10229C4B0070C491 /* NoteDetailFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = D345E74B10229C4B0070C491 /* NoteDetailFooter.xib */; };
 		D345E7541022A07C0070C491 /* RoundedRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = D345E7531022A07C0070C491 /* RoundedRectView.m */; };
 		D345E81B1022B1A30070C491 /* NoteAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D345E81A1022B1A30070C491 /* NoteAnnotation.m */; };
@@ -101,6 +103,9 @@
 		D30D71AE102997F000AF4AFF /* NotePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotePhotoViewController.h; sourceTree = "<group>"; };
 		D30D71AF102997F000AF4AFF /* NotePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotePhotoViewController.m; sourceTree = "<group>"; };
 		D342E593103872CF002382B7 /* BigRedButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BigRedButton.png; path = Images/BigRedButton.png; sourceTree = "<group>"; };
+		D342E5EA1038B66A002382B7 /* StripedBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = StripedBG.png; path = Images/StripedBG.png; sourceTree = "<group>"; };
+		D342E6D2103A5BCA002382B7 /* CLLocation+DistanceComparison.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CLLocation+DistanceComparison.h"; path = "Classes/CLLocation+DistanceComparison.h"; sourceTree = "<group>"; };
+		D342E6D3103A5BCA002382B7 /* CLLocation+DistanceComparison.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CLLocation+DistanceComparison.m"; path = "Classes/CLLocation+DistanceComparison.m"; sourceTree = "<group>"; };
 		D345E74B10229C4B0070C491 /* NoteDetailFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteDetailFooter.xib; sourceTree = "<group>"; };
 		D345E7521022A07C0070C491 /* RoundedRectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedRectView.h; sourceTree = "<group>"; };
 		D345E7531022A07C0070C491 /* RoundedRectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedRectView.m; sourceTree = "<group>"; };
@@ -164,6 +169,7 @@
 		0C251CA81023893200C05768 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D342E5EA1038B66A002382B7 /* StripedBG.png */,
 				D342E593103872CF002382B7 /* BigRedButton.png */,
 				D303F28A1026ACB800528192 /* img_photo-blank.png */,
 				D303F28B1026ACB800528192 /* img_photo-add.png */,
@@ -188,11 +194,13 @@
 		0CB2F123101A37420087C6F6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D303F2A41026ACE000528192 /* UIImageToDataTransformer.m */,
 				D303F2A51026ACE000528192 /* UIImageToDataTransformer.h */,
+				D303F2A41026ACE000528192 /* UIImageToDataTransformer.m */,
 				0C251C4610236C0900C05768 /* Note.h */,
 				0C251C4710236C0900C05768 /* Note.m */,
 				28860B760F44E54D00985440 /* MapNotes.xcdatamodel */,
+				D342E6D2103A5BCA002382B7 /* CLLocation+DistanceComparison.h */,
+				D342E6D3103A5BCA002382B7 /* CLLocation+DistanceComparison.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -331,6 +339,7 @@
 				D36712F4102F62D6000A046B /* NoteTitle.xib in Resources */,
 				D3D952971034536400C39C92 /* MapTableCell.xib in Resources */,
 				D342E594103872CF002382B7 /* BigRedButton.png in Resources */,
+				D342E5EB1038B66A002382B7 /* StripedBG.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +364,7 @@
 				D30D71B0102997F000AF4AFF /* NotePhotoViewController.m in Sources */,
 				0C599F78102A446800E66315 /* QuickAddViewController.m in Sources */,
 				D36712F3102F62D6000A046B /* NoteTitleViewController.m in Sources */,
+				D342E6D4103A5BCA002382B7 /* CLLocation+DistanceComparison.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

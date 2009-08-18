@@ -8,6 +8,7 @@
 
 #import "NotesViewController.h"
 #import "NoteDetailController.h"
+#import "CLLocation+DistanceComparison.h"
 #import "Note.h"
 
 @implementation NotesViewController
@@ -97,6 +98,7 @@
 
 - (void)pushNoteDetailViewController:(Note *)note editing:(BOOL)editing animated:(BOOL)animated {
 	NoteDetailController *noteDetailController = [[NoteDetailController alloc] initWithStyle:UITableViewStyleGrouped];
+	noteDetailController.view.backgroundColor = [UIColor clearColor];
 	noteDetailController.selectedNote = note;
     [self.navigationController pushViewController:noteDetailController animated:animated];
 	[noteDetailController setEditing:editing animated:NO];
@@ -108,24 +110,22 @@
 	NSInteger selectedIndex = [segCtl selectedSegmentIndex];
 	
 	switch (selectedIndex) {
-		case 0:
-			// sort by date
-			NSLog(@"Sort date selected");
-			self.sortOrder = @"dateCreated";
-			self.sortAscending = NO;
-			break;
 		case 1:
 			// sort by alpha
-			NSLog(@"Sort A-Z selected");
 			self.sortOrder = @"title";
 			self.sortAscending = YES;
 			break;
+		case 2:
+			if (self.locationManager.location) {
+				// sort by distance
+				self.sortOrder = @"geoDistance";
+				self.sortAscending = YES;
+				break;			
+			}
 		default:
-			// sort by distance
-			NSLog(@"Sort distance selected");
-			// TODO: geoAccuracy is a placeholder, need to figure out how to sort by distance
-			self.sortOrder = @"geoAccuracy";
-			self.sortAscending = YES;
+			// default to sort by date
+			self.sortOrder = @"dateCreated";
+			self.sortAscending = NO;
 			break;
 	}
 	
@@ -220,8 +220,8 @@
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
 	// show distance if sorted by distance
-	if (self.locationManager.location) {
-		cell.detailTextLabel.text = [NSString stringWithFormat:@"%4.2fm", [note getDistanceFrom:self.locationManager.location]];
+	if (note.location != nil && self.locationManager.location != nil) {
+		cell.detailTextLabel.text = [NSString stringWithFormat:@"%4.1f mi", ([note.location getDistanceFrom:self.locationManager.location] * 0.000621371192)];
 	}
 	
     return cell;
@@ -308,7 +308,15 @@
 	// [pred release];
 		
 	// Change the sort key according to the current sort order
-	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:self.sortOrder ascending:self.sortAscending];
+	NSSortDescriptor *sortDescriptor;
+	if (self.sortOrder == @"geoDistance") {
+		referenceLocation = self.locationManager.location;
+		sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"location" ascending:self.sortAscending selector:@selector(compareToLocation:)];
+		referenceLocation = nil;
+	} else {
+		sortDescriptor = [[NSSortDescriptor alloc] initWithKey:self.sortOrder ascending:self.sortAscending];
+	}	
+	
 	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
 	
 	[fetchRequest setSortDescriptors:sortDescriptors];

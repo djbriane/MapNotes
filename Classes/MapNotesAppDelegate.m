@@ -24,10 +24,15 @@
     // Override point for customization after app launch    
 	application.statusBarStyle = UIStatusBarStyleBlackOpaque;
 	
+	// Set the background of the app
+	UIView *backgroundView = [[UIView alloc] initWithFrame:window.frame];
+	backgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"StripedBG.png"]];
+	[window addSubview:backgroundView];
+	[backgroundView release];
+	
 	[self initLocationManager];
 
 	RootViewController *rootViewController = [[RootViewController alloc] initWithStyle:UITableViewStyleGrouped];
-	
 	rootViewController.managedObjectContext = self.managedObjectContext;
 	
 	UINavigationController *aNavigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
