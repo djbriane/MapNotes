@@ -9,11 +9,13 @@
 #import "NotesViewController.h"
 #import "NoteDetailController.h"
 #import "CLLocation+DistanceComparison.h"
+#import "LocationController.h"
 #import "Note.h"
 
 @implementation NotesViewController
 
-@synthesize fetchedResultsController, managedObjectContext, selectedGroup, myTableView, toolbar, sortOrder, sortAscending, locationManager;
+@synthesize managedObjectContext, selectedGroup, notesArray;
+@synthesize myTableView, toolbar, sortOrder, sortAscending;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,6 +39,7 @@
 	
 	// Create the sort control as a UISegmentedControl
 	UISegmentedControl *sortControl = [[UISegmentedControl alloc] initWithItems: [NSArray arrayWithObjects: @"Date", @"A - Z", @"Distance", nil]];
+
 	sortControl.segmentedControlStyle = UISegmentedControlStyleBar;
 	sortControl.backgroundColor = [UIColor clearColor];
 	sortControl.tintColor = [UIColor darkGrayColor];
@@ -48,98 +51,14 @@
 	sortControl.frame = CGRectMake(10, 6, 300,30);
 	[toolbar addSubview:sortControl];
 	[sortControl release];
-	
-	//Add the toolbar as a subview to the navigation controller.
-	//[self.navigationController.view addSubview:toolbar];
-	//[self.view addSubview:toolbar];
-	
-	// If group is set, then fetch notes from that group, otherwise use fetched results controller
-	NSError *error;
-	if (![[self fetchedResultsController] performFetch:&error]) {
-		// Handle the error...
-		NSLog(@"%@:%s Error fetching context: %@", [self class], _cmd, [error localizedDescription]);
-	}
-}
 
-
-
-- (void)insertNewObject {
-	
-	// Create a new instance of the entity managed by the fetched results controller.
-	NSManagedObjectContext *context = [fetchedResultsController managedObjectContext];
-	NSEntityDescription *entity = [[fetchedResultsController fetchRequest] entity];
-	NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
-	
-	// If appropriate, configure the new managed object.
-	[newManagedObject setValue:@"New Note" forKey:@"title"];
-	[newManagedObject setValue:[NSDate date] forKey:@"dateCreated"];
-	[newManagedObject setValue:[NSDate date] forKey:@"dateModified"];
-
-	// Save the context.
-    NSError *error;
-    if (![context save:&error]) {
-		// Handle the error...
-		NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
-    }
-
-    [self.myTableView reloadData];
-}
-
-- (void)showQuickAddView:(BOOL)animated {
-	// Set up QuickAdd VC for future use
-	QuickAddViewController *aQuickAddViewController = [[QuickAddViewController alloc] initWithNibName:@"QuickAddView" bundle:nil];
-	aQuickAddViewController.managedObjectContext = self.managedObjectContext;
-	aQuickAddViewController.delegate = self;
-	
-	//[UIApplication sharedApplication].statusBarHidden = YES;
-	[self presentModalViewController:aQuickAddViewController animated:animated];
-	[aQuickAddViewController release];
-}
-
-- (void)pushNoteDetailViewController:(Note *)note editing:(BOOL)editing animated:(BOOL)animated {
-	NoteDetailController *noteDetailController = [[NoteDetailController alloc] initWithStyle:UITableViewStyleGrouped];
-	noteDetailController.view.backgroundColor = [UIColor clearColor];
-	noteDetailController.selectedNote = note;
-    [self.navigationController pushViewController:noteDetailController animated:animated];
-	[noteDetailController setEditing:editing animated:NO];
-	[noteDetailController release];
-}
-
-- (void)changeSortOrder:(id)sender {
-	UISegmentedControl* segCtl = sender;
-	NSInteger selectedIndex = [segCtl selectedSegmentIndex];
-	
-	switch (selectedIndex) {
-		case 1:
-			// sort by alpha
-			self.sortOrder = @"title";
-			self.sortAscending = YES;
-			break;
-		case 2:
-			if (self.locationManager.location) {
-				// sort by distance
-				self.sortOrder = @"geoDistance";
-				self.sortAscending = YES;
-				break;			
-			}
-		default:
-			// default to sort by date
-			self.sortOrder = @"dateCreated";
-			self.sortAscending = NO;
-			break;
-	}
-	
-	// invalidate and re-run the fetch with the new sort descriptor
-	self.fetchedResultsController = nil;
-	self.fetchedResultsController = [self fetchedResultsController];
-
-	[self.myTableView reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	self.navigationController.navigationBarHidden = NO;
 	//[UIApplication sharedApplication].statusBarHidden = NO;
+	[self fetchExistingNotes];
     [self.myTableView reloadData];
 }
 /*
@@ -178,6 +97,113 @@
 	// e.g. self.myOutlet = nil;
 }
 
+- (void)fetchExistingNotes {
+	/*
+	 Fetch existing events.
+	 Create a fetch request; find the Event entity and assign it to the request; add a sort descriptor; then execute the fetch.
+	 */
+	NSFetchRequest *request = [[NSFetchRequest alloc] init];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:managedObjectContext];
+	[request setEntity:entity];
+	
+	// Order the notes by creation date, most recent first.
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:NO];
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+	[request setSortDescriptors:sortDescriptors];
+	[sortDescriptor release];
+	[sortDescriptors release];
+	
+	// Execute the fetch -- create a mutable copy of the result.
+	NSError *error = nil;
+	NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+	if (mutableFetchResults == nil) {
+		// Handle the error.
+		NSLog(@"%@:%s Error fetching context: %@", [self class], _cmd, [error localizedDescription]);
+	}
+	
+	// Set self's events array to the mutable array, then clean up.
+	[self setNotesArray:mutableFetchResults];	
+	
+	[mutableFetchResults release];
+	[request release];
+}
+
+- (void)sortExistingNotes {
+	// If it's not possible to get a location, then return.
+	//CLLocation *location = [locationManager location];
+	CLLocation *location = [[LocationController sharedInstance] currentLocation];
+	
+	if (!location) {
+		return;
+	}
+	
+	// Set self's events array to the mutable array, then clean up.
+	NSSortDescriptor *sortDescriptor;
+	if (self.sortOrder == @"geoDistance") {
+		sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"location" ascending:YES selector:@selector(compareToLocation:)];
+	} else {
+		sortDescriptor = [[NSSortDescriptor alloc] initWithKey:self.sortOrder ascending:self.sortAscending];
+	}	
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+	NSMutableArray *sortedNotesArray = [[self.notesArray sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
+	[self setNotesArray:sortedNotesArray];
+	
+	[sortDescriptor release];
+	[sortDescriptors release];
+	[sortedNotesArray release];
+	
+	[self.myTableView reloadData];
+}
+
+- (void)showQuickAddView:(BOOL)animated {
+	// Set up QuickAdd VC for future use
+	QuickAddViewController *aQuickAddViewController = [[QuickAddViewController alloc] initWithNibName:@"QuickAddView" bundle:nil];
+	aQuickAddViewController.managedObjectContext = self.managedObjectContext;
+	aQuickAddViewController.delegate = self;
+	
+	[UIApplication sharedApplication].statusBarHidden = YES;
+	[self presentModalViewController:aQuickAddViewController animated:animated];
+	[aQuickAddViewController release];
+}
+
+- (void)pushNoteDetailViewController:(Note *)note editing:(BOOL)editing animated:(BOOL)animated {
+	NoteDetailController *noteDetailController = [[NoteDetailController alloc] initWithStyle:UITableViewStyleGrouped];
+	noteDetailController.view.backgroundColor = [UIColor clearColor];
+	noteDetailController.selectedNote = note;
+    [self.navigationController pushViewController:noteDetailController animated:animated];
+	[noteDetailController setEditing:editing animated:NO];
+	[noteDetailController release];
+}
+
+- (void)changeSortOrder:(id)sender {
+	UISegmentedControl* segCtl = sender;
+	NSInteger selectedIndex = [segCtl selectedSegmentIndex];
+	
+	switch (selectedIndex) {
+		case 1:
+			// sort by alpha
+			self.sortOrder = @"title";
+			self.sortAscending = YES;
+			break;
+		case 2:
+			if ([[LocationController sharedInstance] currentLocation]) {
+				// sort by distance
+				self.sortOrder = @"geoDistance";
+				self.sortAscending = YES;
+				break;			
+			}
+		default:
+			// default to sort by date
+			self.sortOrder = @"dateCreated";
+			self.sortAscending = NO;
+			break;
+	}
+	
+	// invalidate and re-run the fetch with the new sort descriptor
+	[self sortExistingNotes];
+}
+
+
 #pragma mark -
 #pragma mark Qukck Add View Controller Methods
 
@@ -191,14 +217,12 @@
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[fetchedResultsController sections] count];
+    return 1;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	id <NSFetchedResultsSectionInfo> sectionInfo = [[fetchedResultsController sections] objectAtIndex:section];
-    return [sectionInfo numberOfObjects];
-	return 0;
+	return [notesArray count];
 }
 
 
@@ -213,17 +237,19 @@
     }
     
 	// Configure the cell.
-	Note *note = (Note *)[fetchedResultsController objectAtIndexPath:indexPath];
+	Note *note = (Note *)[notesArray objectAtIndex:indexPath.row];
 	
 	cell.textLabel.text = note.title;
 	cell.imageView.image = note.thumbnail;
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
 	// show distance if sorted by distance
-	if (note.location != nil && self.locationManager.location != nil) {
-		cell.detailTextLabel.text = [NSString stringWithFormat:@"%4.1f mi", ([note.location getDistanceFrom:self.locationManager.location] * 0.000621371192)];
+	CLLocation *location = [[LocationController sharedInstance] currentLocation];
+	if (!location || !note.location) {
+		return cell;
 	}
-	
+	cell.detailTextLabel.text = [NSString stringWithFormat:@"%4.1f mi", ([note.location getDistanceFrom:location] * 0.000621371192)];
+
     return cell;
 }
 
@@ -239,7 +265,7 @@
     // Pass the selected object to the new view controller.
     /// ...
 	
-	Note *note = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+	Note *note = (Note *)[notesArray objectAtIndex:indexPath.row];
 	[self pushNoteDetailViewController:note editing:NO animated:YES];
 }
 
@@ -259,12 +285,14 @@
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the managed object for the given index path
-		NSManagedObjectContext *context = [fetchedResultsController managedObjectContext];
-		[context deleteObject:[fetchedResultsController objectAtIndexPath:indexPath]];
-		
+		NSManagedObject *noteToDelete = [notesArray objectAtIndex:indexPath.row];
+
+		[managedObjectContext deleteObject:noteToDelete];		
+		[notesArray removeObjectAtIndex:indexPath.row];
+
 		// Save the context.
 		NSError *error;
-		if (![context save:&error]) {
+		if (![managedObjectContext save:&error]) {
 			// Handle the error...
 			NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
 		}
@@ -286,16 +314,13 @@
 	[self.tableView reloadData];
 }
 */		
-
+/*
 - (NSFetchedResultsController *)fetchedResultsController {
     
     if (fetchedResultsController != nil) {
         return fetchedResultsController;
     }
 
-    /*
-	 Set up the fetched results controller.
-	*/
 	// Create the fetch request for the entity.
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 
@@ -310,9 +335,7 @@
 	// Change the sort key according to the current sort order
 	NSSortDescriptor *sortDescriptor;
 	if (self.sortOrder == @"geoDistance") {
-		referenceLocation = self.locationManager.location;
 		sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"location" ascending:self.sortAscending selector:@selector(compareToLocation:)];
-		referenceLocation = nil;
 	} else {
 		sortDescriptor = [[NSSortDescriptor alloc] initWithKey:self.sortOrder ascending:self.sortAscending];
 	}	
@@ -340,13 +363,11 @@
 	
 	return fetchedResultsController;
 }    
-
+*/
 
 - (void)dealloc {
 	[sortOrder release];
 	[toolbar release];
-	[locationManager release];
-	[fetchedResultsController release];
 	[managedObjectContext release];
     [super dealloc];
 }

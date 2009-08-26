@@ -25,7 +25,6 @@
 	
 	NSManagedObjectContext *managedObjectContext;
 	MKMapView *_mapView;
-	CLLocationManager *locationManager;
 	NSTimer *locationTimer;
 	
 	IBOutlet UILabel *locationInfoLabel;
@@ -38,11 +37,9 @@
 @property (nonatomic, assign) id<QuickAddViewControllerDelegate> delegate;
 
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
-@property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) NSTimer *locationTimer;
 
-@property (nonatomic, retain) IBOutlet UILabel *locationInfoLabel;
 @property (nonatomic, retain) IBOutlet UIButton *addTextNoteButton;
 @property (nonatomic, retain) IBOutlet UIButton *addPhotoNoteButton;
 @property (nonatomic, retain) IBOutlet UIButton *updateLocationButton;

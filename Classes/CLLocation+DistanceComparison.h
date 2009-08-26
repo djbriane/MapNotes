@@ -8,8 +8,6 @@
 
 #import <CoreLocation/CoreLocation.h>
 
-static CLLocation * referenceLocation;
-
 @interface CLLocation (DistanceComparison)
 
 - (NSComparisonResult) compareToLocation:(CLLocation *)other;

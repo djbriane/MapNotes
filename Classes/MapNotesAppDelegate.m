@@ -9,12 +9,13 @@
 #import "MapNotesAppDelegate.h"
 #import "RootViewController.h"
 #import "NotesViewController.h"
+#import "LocationController.h"
 
 @implementation MapNotesAppDelegate
 
 @synthesize window;
 @synthesize navigationController;
-@synthesize locationManager;
+//@synthesize locationManager;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -30,8 +31,13 @@
 	[window addSubview:backgroundView];
 	[backgroundView release];
 	
-	[self initLocationManager];
-
+	//[self initLocationManager];
+	//[[LocationController sharedInstance] init];
+	NSManagedObjectContext *context = [self managedObjectContext];
+	if (!context) {
+		// Handle the error.
+	}
+	
 	RootViewController *rootViewController = [[RootViewController alloc] initWithStyle:UITableViewStyleGrouped];
 	rootViewController.managedObjectContext = self.managedObjectContext;
 	
@@ -42,7 +48,7 @@
 	// Push notes view controller since we always start at the Notes list level
 	NotesViewController *notesViewController = [[NotesViewController alloc] initWithNibName:@"NotesView" bundle:nil];
 	notesViewController.managedObjectContext = self.managedObjectContext;
-	notesViewController.locationManager = self.locationManager;
+	//notesViewController.locationManager = self.locationManager;
 	[self.navigationController pushViewController:notesViewController animated:NO];
 	[notesViewController release];
 	
@@ -70,43 +76,6 @@
 			exit(-1);  // Fail
         } 
     }
-}
-
-
-# pragma mark -
-#pragma mark Core Location
-
-- (void)initLocationManager {
-	self.locationManager = [[CLLocationManager alloc] init];
-	self.locationManager.distanceFilter = 10.0f;
-	self.locationManager.delegate = self;
-	self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
-	[self.locationManager startUpdatingLocation];		
-}
-
-- (void)updateCurrentLocation {
-	[self.locationManager startUpdatingLocation];
-}
-
-- (void)locationManager:(CLLocationManager *)manager
-	didUpdateToLocation:(CLLocation *)newLocation
-		   fromLocation:(CLLocation *)oldLocation {
-	
-	// Since this gets called even if we don't have an accurate enough location, need
-	// to check the horizontalAccuracy before we stop updating the location
-	//[self.locationManager stopUpdatingLocation];
-}
-
-/**
- Conditionally enable the Add button:
- If the location manager is generating updates, then enable the button;
- If the location manager is failing, then disable the button.
- */
-
-- (void)locationManager:(CLLocationManager *)manager
-       didFailWithError:(NSError *)error {
-    //addNoteButton.enabled = NO;
-	//[self.locationManager stopUpdatingLocation];
 }
 
 #pragma mark -

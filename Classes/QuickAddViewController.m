@@ -10,15 +10,15 @@
 #import "RootViewController.h"
 #import "MapNotesAppDelegate.h"
 #import "ImageManipulator.h"
+#import "LocationController.h"
 #import "Note.h"
 
 @implementation QuickAddViewController
 
 @synthesize delegate;
 @synthesize mapView = _mapView;
-@synthesize locationManager, locationTimer, managedObjectContext;
+@synthesize locationTimer, managedObjectContext;
 @synthesize addTextNoteButton, addPhotoNoteButton, updateLocationButton, updateLocationActivity;
-@synthesize locationInfoLabel;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -41,8 +41,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	// Get a handle on the location manager from the app delegate
-	self.locationManager = ((MapNotesAppDelegate *)[UIApplication sharedApplication].delegate).locationManager;
+	// Start checking for a valid location
 	self.locationTimer = [NSTimer scheduledTimerWithTimeInterval:.1 target:self 
 														selector:@selector(checkAndUpdateLocation) 
 														userInfo:nil 
@@ -60,7 +59,7 @@
 	if (self.locationTimer != nil) {
 		[self.locationTimer invalidate];
 	}
-	//[UIApplication sharedApplication].statusBarHidden = NO;
+	[UIApplication sharedApplication].statusBarHidden = NO;
 }
 
 /*
@@ -82,10 +81,8 @@
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
 	self.mapView = nil;
-	self.locationManager = nil;
 	self.locationTimer = nil;
 	
-	self.locationInfoLabel = nil;
 	self.addTextNoteButton = nil;
 	self.addPhotoNoteButton = nil;
 	self.updateLocationButton = nil;
@@ -95,9 +92,17 @@
 
 - (void)checkAndUpdateLocation {	
 	// check if we have a good location
-	if (nil != self.locationManager.location) {
+	if (![[LocationController sharedInstance] locationKnown]) {
+		[self.updateLocationActivity startAnimating];
+		self.updateLocationButton.enabled = NO;
+		self.addTextNoteButton.enabled = NO;
+		self.addPhotoNoteButton.enabled = NO;
+		return;
+	} else {
 		MKCoordinateRegion region = {{0.0f, 0.0f}, {0.0f, 0.0f}};
-		region.center = locationManager.location.coordinate;
+		CLLocation *location = [[LocationController sharedInstance] currentLocation];
+		NSLog([location description]);
+		region.center = location.coordinate;
 		region.span.longitudeDelta = 0.02f;
 		region.span.latitudeDelta = 0.02f;
 
@@ -106,21 +111,16 @@
 
 		// Update UI to reflect we have a good location
 		[self.updateLocationActivity stopAnimating];
-		self.locationInfoLabel.text = [NSString stringWithFormat:@"Accuracy: %4.0fm", locationManager.location.horizontalAccuracy];
 		self.updateLocationButton.enabled = YES;
 		self.addTextNoteButton.enabled = YES;
 		self.addPhotoNoteButton.enabled = YES;
 		[self.locationTimer invalidate];
-	} else {
-		[self.updateLocationActivity startAnimating];
-		self.updateLocationButton.enabled = NO;
-		self.addTextNoteButton.enabled = NO;
-		self.addPhotoNoteButton.enabled = NO;
-	}
+	} 
 }
 
 - (Note *)createNewNote {
-	if (!self.locationManager.location) {
+	CLLocation *myLocation = [[LocationController sharedInstance] currentLocation];
+	if (!myLocation) {
 		return nil;
 	}
 	
@@ -128,7 +128,7 @@
 	Note *note = (Note *)[NSEntityDescription insertNewObjectForEntityForName:@"Note"
 													   inManagedObjectContext:self.managedObjectContext];
 	
-	[note setLocation:self.locationManager.location];
+	[note setLocation:myLocation];
 	//[note setGeoLatitude:[NSNumber numberWithDouble:self.locationManager.location.coordinate.latitude]];
 	//[note setGeoLongitude:[NSNumber numberWithDouble:self.locationManager.location.coordinate.longitude]];
 	//[note setGeoAccuracy:[NSNumber numberWithDouble:self.locationManager.location.horizontalAccuracy]];
@@ -140,6 +140,10 @@
 
 - (IBAction)addTextNote:(id)sender {
 	Note *note = [self createNewNote];
+	if (!note) {
+		// TODO: Should throw an error here.
+		return;
+	}
 	//[note setTitle:@"New Note"];
 	
 	/*
@@ -150,7 +154,7 @@
 	}
 	*/
 	
-	
+
 	NoteTitleViewController *titleController = [[NoteTitleViewController alloc] initWithNibName:@"NoteTitle" bundle:nil];
     titleController.delegate = self;
 	
@@ -191,7 +195,12 @@
 }
 
 - (IBAction)updateLocation:(id)sender {
-	[self.locationManager startUpdatingLocation];
+	[self.locationTimer invalidate];
+	[[LocationController sharedInstance] start];
+	self.locationTimer = [NSTimer scheduledTimerWithTimeInterval:.1 target:self 
+														selector:@selector(checkAndUpdateLocation) 
+														userInfo:nil 
+														 repeats:YES];
 }
 
 #pragma mark -
@@ -226,6 +235,10 @@
 	
 	// Create a new note
 	Note *note = [self createNewNote];
+	if (!note) {
+		// TODO: Throw an error here
+		return;
+	}
 	
 	// Create a new photo object and associate it with the event.
 	NSManagedObject *photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" 
@@ -302,10 +315,8 @@
 - (void)dealloc {
 	self.mapView = nil;
 	[managedObjectContext release];
-	[locationManager release];
 	[locationTimer release];
 
-	[locationInfoLabel release];
 	[addTextNoteButton release];
 	[addPhotoNoteButton release];
 	[updateLocationButton release];

@@ -7,12 +7,15 @@
 //
 
 #import "CLLocation+DistanceComparison.h"
+#import "LocationController.h"
 
 @implementation CLLocation (DistanceComparison)
 
 - (NSComparisonResult) compareToLocation:(CLLocation *)other {
-	CLLocationDistance thisDistance = [self getDistanceFrom:referenceLocation];
-	CLLocationDistance thatDistance = [other getDistanceFrom:referenceLocation];
+	CLLocation *myLocation = [[LocationController sharedInstance] currentLocation]; 
+	CLLocationDistance thisDistance = [self getDistanceFrom:myLocation];
+	CLLocationDistance thatDistance = [other getDistanceFrom:myLocation];
+	
 	if (thisDistance < thatDistance) { return NSOrderedAscending; }
 	if (thisDistance > thatDistance) { return NSOrderedDescending; }
 	return NSOrderedSame;

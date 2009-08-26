@@ -10,26 +10,23 @@
 ((MapNotesAppDelegate *)[UIApplication sharedApplication].delegate)
 
 #import <UIKit/UIKit.h>
-#import <CoreLocation/CoreLocation.h>
 
 @class RootViewController;
 @class QuickAddViewController;
 
-@interface MapNotesAppDelegate : NSObject <UIApplicationDelegate, CLLocationManagerDelegate> {
+@interface MapNotesAppDelegate : NSObject <UIApplicationDelegate> {
     
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;	    
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
 	
-	CLLocationManager *locationManager;
+	//CLLocationManager *locationManager;
 
     UIWindow *window;
     UINavigationController *navigationController;
 }
 
 - (IBAction)saveAction:sender;
-- (void)updateCurrentLocation;
-- (void)initLocationManager;
 
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
@@ -37,7 +34,7 @@
 
 @property (nonatomic, readonly) NSString *applicationDocumentsDirectory;
 
-@property (nonatomic, retain) CLLocationManager *locationManager;
+//@property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 
