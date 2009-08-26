@@ -22,6 +22,7 @@
 @synthesize tableHeaderView;
 @synthesize tableFooterView;
 @synthesize photoButton;
+@synthesize deleteButton;
 @synthesize nameTextField;
 
 /*
@@ -48,11 +49,11 @@
 		 self.tableView.tableHeaderView = tableHeaderView;
 		 self.tableView.allowsSelectionDuringEditing = YES;
 	 }
-	 //if (tableFooterView == nil) {
-		// [[NSBundle mainBundle] loadNibNamed:@"NoteDetailFooter" owner:self options:nil];
-		// self.tableView.tableFooterView = tableFooterView;
-		// self.tableView.allowsSelectionDuringEditing = NO;
-	 //}
+	 if (tableFooterView == nil) {
+		[[NSBundle mainBundle] loadNibNamed:@"NoteDetailFooter" owner:self options:nil];
+		self.tableView.tableFooterView = tableFooterView;
+		self.tableView.allowsSelectionDuringEditing = YES;
+	 }
 	 
 }
 
@@ -64,7 +65,7 @@
 	if (selectedNote.title != nil) {
 		[nameTextField setTitle:[selectedNote title] forState:UIControlStateNormal];
 	}
-	
+	[self initializeMap];
 	[self updatePhotoInfo];
 }
 
@@ -87,10 +88,12 @@
     if (editing == YES){
         // change view to an editable view
 		nameTextField.enabled = YES;
+		deleteButton.hidden = NO;
     }
     else {
         // save the changes if needed and change view to noneditable
 		nameTextField.enabled = NO;
+		deleteButton.hidden = YES;
     }
 	
 	// Update photo display accordingly
@@ -308,7 +311,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // There are three sections, for note details, move folders and share
-    return 3;
+    return 1;
 }
 
 
@@ -320,17 +323,9 @@
     NSInteger rows = 0;
     switch (section) {
         case 0:
-			// Details (and Tags later)
-			rows = 1;
+			// Details and Group
+			rows = 2;
 			break;
-        case 1:
-			// Map View Cell
-			rows = 1;
-			break;
-		case 2:
-            // Change group button
-            rows = 1;
-            break;
         default:
             break;
     }
@@ -341,48 +336,17 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
 	static NSString *CellIdentifier = @"CellIdentifier";
-	static NSString *MapCellIdentifier = @"MapCellIdentifier";
 	UITableViewCell *cell;
-    
-	if (indexPath.section == 1) {
-		// Map View Cell Setup
-		cell = [tableView dequeueReusableCellWithIdentifier:MapCellIdentifier];
-		if (cell == nil) {
-			// load map view cell			
-			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-										   reuseIdentifier:CellIdentifier] autorelease];
-			CGRect mapViewRect = CGRectMake(4, 4, 292, 124);
-			MKMapView *mapViewCell = [[MKMapView alloc] initWithFrame:mapViewRect];
-			[cell.contentView addSubview: mapViewCell];
-			cell.selectionStyle = UITableViewCellSelectionStyleNone;
-			self.mapView = mapViewCell;
-			[mapViewCell release];
-		}
-	} else {
-		// All Other Cell Setup
-		cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-		if (cell == nil) {
-			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-			cell.selectionStyle = UITableViewCellSelectionStyleNone;
-		}
+
+	// All Other Cell Setup
+	cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	if (cell == nil) {
+		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	}
 
-	/*
-	static NSNumberFormatter *numberFormatter = nil;
-	if (numberFormatter == nil) {
-		numberFormatter = [[NSNumberFormatter alloc] init];
-		[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-		[numberFormatter setMaximumFractionDigits:3];
-	}
-
-	NSString *geoString = [NSString stringWithFormat:@"%@, %@ : %@",
-						[numberFormatter stringFromNumber:[selectedNote geoLatitude]],
-						[numberFormatter stringFromNumber:[selectedNote geoLongitude]],
-						[numberFormatter stringFromNumber:[selectedNote geoAccuracy]]];
-	 */
 	
-    // Set the text in the cell for the section/row.
-    
+    // Set the text in the cell for the section/row.    
     NSString *cellText = nil;
    
     switch (indexPath.section) {
@@ -395,23 +359,17 @@
 			switch (indexPath.row) {
 				case 0:
 					// Details
-					cellText = @"Note Details";
+					cellText = @"Description";
+					cell.imageView.image = [UIImage imageNamed:@"icon_desc.png"];
 					break;
 				case 1:
 					// TODO: Add tag support here
+					cellText = @"Group";
+					cell.imageView.image = [UIImage imageNamed:@"icon_group.png"];
 					break;
 				default:
 					break;
 			}
-            break;
-        case 1:
-			// Set up the Map and add the note to it
-			[self initializeMap];
-            break;
-        case 2:
-			// Change Group Cell
-			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cellText = NSLocalizedString(@"Change Group", @"Move to new group");
             break;
         default:
             break;
@@ -447,13 +405,8 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == 1) {
-		// if its the map make it big
-		return 132;
-	} else {
-		// return default
-		return 44;
-	}
+	// return default
+	return 44;
 }
 
 

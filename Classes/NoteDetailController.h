@@ -29,6 +29,7 @@
 	UIView *tableHeaderView;
 	UIView *tableFooterView;
 	UIButton *photoButton;
+	UIButton *deleteButton;
 	UIButton *takePictureButton;
 	UIButton *selectFromCameraRollButton;
 	
@@ -43,6 +44,7 @@
 @property (nonatomic, retain) IBOutlet UIView *tableHeaderView;
 @property (nonatomic, retain) IBOutlet UIView *tableFooterView;
 @property (nonatomic, retain) IBOutlet UIButton *photoButton;
+@property (nonatomic, retain) IBOutlet UIButton *deleteButton;
 
 
 @property (nonatomic, retain) IBOutlet UIButton *nameTextField;
