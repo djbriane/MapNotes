@@ -152,7 +152,10 @@
 	[sortDescriptors release];
 	[sortedNotesArray release];
 	
-	[self.myTableView reloadData];
+	//[self.myTableView reloadData];
+	NSIndexPath *indPath = [NSIndexPath indexPathForRow:0 inSection:0];
+	[self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationTop];
+	[self.myTableView scrollToRowAtIndexPath:indPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 
 - (void)showQuickAddView:(BOOL)animated {
@@ -205,7 +208,7 @@
 
 
 #pragma mark -
-#pragma mark Qukck Add View Controller Methods
+#pragma mark Quick Add View Controller Methods
 
 - (void)quickAddViewController:(QuickAddViewController *)controller 
 				   showNewNote:(Note *)note {
@@ -248,7 +251,23 @@
 	if (!location || !note.location) {
 		return cell;
 	}
-	cell.detailTextLabel.text = [NSString stringWithFormat:@"%4.1f mi", ([note.location getDistanceFrom:location] * 0.000621371192)];
+	if (self.sortOrder == @"geoDistance") {
+		cell.detailTextLabel.text = [NSString stringWithFormat:@"%4.1f mi", ([note.location getDistanceFrom:location] * 0.000621371192)];
+	} else if (self.sortOrder == @"dateCreated") {
+		// A date formatter for the creation/modified dates.
+		static NSDateFormatter *dateFormatter = nil;
+		if (dateFormatter == nil) {
+			dateFormatter = [[NSDateFormatter alloc] init];
+			[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+			[dateFormatter setDateStyle:NSDateFormatterShortStyle];
+		}
+		
+		// return the created date if its the first section
+		cell.detailTextLabel.text = [dateFormatter stringFromDate:[note dateCreated]];
+		
+	} else {
+		cell.detailTextLabel.text = nil;
+	}
 
     return cell;
 }

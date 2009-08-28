@@ -22,6 +22,7 @@
 @property(nonatomic, retain) IBOutlet UITextField *titleTextField;
 @property(nonatomic, assign) id <NoteTitleDelegate> delegate;
 
+- (IBAction)doneButtonOnKeyboardPressed:(id)sender;
 - (void)save;
 - (void)cancel;
 

@@ -58,6 +58,9 @@
 	return YES;
 }
 
+-(IBAction)doneButtonOnKeyboardPressed:(id)sender {
+	[self save];
+}
 
 - (void)save {
 	note.title = titleTextField.text;

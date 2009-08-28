@@ -13,6 +13,15 @@
 #import "NoteAnnotation.h"
 #import "RoundedRectView.h"
 #import "ImageManipulator.h"
+#import "StringHelper.h"
+
+//Note Description View contstants
+#define kTextViewFontSize        14.0
+#define kTextViewFontSizeDefault 17.0
+#define kDefaultNoteLabel        @"Description"
+#define kDefaultGroupLabel		 @"Group"
+#define kMainLabelTag 1
+#define kIconImageTag 2
 
 @implementation NoteDetailController
 
@@ -89,12 +98,18 @@
         // change view to an editable view
 		nameTextField.enabled = YES;
 		deleteButton.hidden = NO;
-    }
+		//[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+	}
     else {
         // save the changes if needed and change view to noneditable
 		nameTextField.enabled = NO;
 		deleteButton.hidden = YES;
     }
+	
+	// recalculate height / width of the description text field 
+	//[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+	//[self.tableView insertSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+
 	
 	// Update photo display accordingly
 	[self updatePhotoInfo];
@@ -114,6 +129,7 @@
 			NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 			abort();
 		}
+
 	}
 	
 }
@@ -128,9 +144,18 @@
     [titleController release];
 }
 
+- (void)editDesc {
+	NoteDescViewController *descController = [[NoteDescViewController alloc] initWithNibName:@"NoteDesc" bundle:nil];
+    descController.delegate = self;
+	descController.note = self.selectedNote;
+	
+    [self.navigationController pushViewController:descController animated:YES];
+	
+    [descController release];
+}
+
 #pragma mark -
 #pragma mark Note Title View Controller Methods
-
 - (void)noteTitleViewController:(NoteTitleViewController *)controller 
 					didSetTitle:(Note *)note
 						didSave:(BOOL)didSave {
@@ -141,6 +166,19 @@
 	
 }
 
+#pragma mark -
+#pragma mark Note Description View Controller Methods
+- (void)noteDescViewController:(NoteDescViewController *)controller 
+					didSetDesc:(Note *)note
+						didSave:(BOOL)didSave {
+	if (didSave) {
+		self.selectedNote = note;
+	}
+	[self.navigationController popViewControllerAnimated:YES];
+	//[self.tableView reloadData];
+	[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+
+}
 
 #pragma mark -
 #pragma mark Photo Acquisition Methods
@@ -336,18 +374,39 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
 	static NSString *CellIdentifier = @"CellIdentifier";
+	static NSString *NoteCellIdentifier = @"NoteCellIdentifier";
 	UITableViewCell *cell;
-
-	// All Other Cell Setup
-	cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-	if (cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-		cell.selectionStyle = UITableViewCellSelectionStyleNone;
+	UILabel *mainLabel;
+    UIImageView *photo;
+	
+	if (indexPath.section == 0 && indexPath.row == 0) {
+		// set up note description cell
+		cell = [tableView dequeueReusableCellWithIdentifier:NoteCellIdentifier];
+		if (cell == nil) {
+			//cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:NoteCellIdentifier] autorelease];
+			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NoteCellIdentifier] autorelease];
+			
+			photo = [[[UIImageView alloc] initWithFrame:CGRectMake(10.0, 10.0, 21.0, 22.0)] autorelease];
+			photo.tag = kIconImageTag;
+			//photo.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
+			[cell.contentView addSubview:photo];
+		} else {
+			photo = (UIImageView *)[cell.contentView viewWithTag:kIconImageTag];
+		}
+		
+	} else {
+		// All Other Cell Setup
+		cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+		if (cell == nil) {
+			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+		}
 	}
 
 	
     // Set the text in the cell for the section/row.    
     NSString *cellText = nil;
+	CGFloat fontSize;
+	BOOL isBold = NO;
    
     switch (indexPath.section) {
         case 0:
@@ -355,17 +414,34 @@
 			// a tableView:accessoryButtonTappedForRowWithIndexPath: message.
 			cell.accessoryType = UITableViewCellAccessoryNone;
 			cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
-			
+			cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
 			switch (indexPath.row) {
 				case 0:
 					// Details
-					cellText = @"Description";
-					cell.imageView.image = [UIImage imageNamed:@"icon_desc.png"];
+					if ([selectedNote.details length] == 0) {
+						cellText = kDefaultNoteLabel;
+						fontSize = kTextViewFontSizeDefault;
+						isBold = YES;
+					} else {
+						cellText = selectedNote.details;
+						fontSize = kTextViewFontSize;
+					}
+					// check if there is already a mainLabel in the view before we add a new one
+					mainLabel = (UILabel *)[cell.contentView viewWithTag:kMainLabelTag];
+					if (mainLabel != nil) {
+						[mainLabel removeFromSuperview];
+					}
+					mainLabel = [cellText RAD_newSizedCellLabelWithSystemFontOfSize:fontSize withBold:isBold];
+					mainLabel.tag = kMainLabelTag;
+					[cell.contentView addSubview:mainLabel];
+					photo.image = [UIImage imageNamed:@"icon_desc.png"];
 					break;
 				case 1:
-					// TODO: Add tag support here
-					cellText = @"Group";
+					// TODO: Add group support here
+					cellText = kDefaultGroupLabel;
 					cell.imageView.image = [UIImage imageNamed:@"icon_group.png"];
+					cell.textLabel.text = cellText;
 					break;
 				default:
 					break;
@@ -374,9 +450,17 @@
         default:
             break;
     }
-    
-    cell.textLabel.text = cellText;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (indexPath.section == 0) {
+		if (indexPath.row == 0 && self.editing) {
+			[self editDesc];
+		} else {
+			// change group
+		}
+	}
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
@@ -388,7 +472,7 @@
 	static NSDateFormatter *dateFormatter = nil;
 	if (dateFormatter == nil) {
 		dateFormatter = [[NSDateFormatter alloc] init];
-		[dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+		[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
 		[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
 	}
 	
@@ -405,6 +489,14 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	// return dynamic size for note description
+	if (indexPath.section == 0 && indexPath.row == 0) {
+		NSString *label = [selectedNote.details length] == 0 ? kDefaultNoteLabel : selectedNote.details;
+		CGFloat fontSize = [selectedNote.details length] == 0 ? kTextViewFontSizeDefault : kTextViewFontSize;
+
+		CGFloat height = [label RAD_textHeightForSystemFontOfSize:fontSize] + 20.0;
+		return height;
+	}
 	// return default
 	return 44;
 }
@@ -415,7 +507,7 @@
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
 	UITableViewCellEditingStyle style = UITableViewCellEditingStyleNone;
-    
+    /*
 	static NSString *CellIdentifier = @"CellIdentifier";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -423,15 +515,28 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-	
-    switch (indexPath.section) {
-		case 1:
-		case 2:
-			cell.hidden = YES;
-			break;
-		default:
-			break;
-	}
+	 */
+	/* Disable for now, don't like how this works
+	if (indexPath.section == 0) {
+		switch (indexPath.row) {
+			case 0:
+				if ([selectedNote.details length] == 0) {
+					style = UITableViewCellEditingStyleInsert;
+				} else {
+					style = UITableViewCellEditingStyleDelete;
+				}
+				break;
+			case 1:
+				if (selectedNote.group == nil) {
+					style = UITableViewCellEditingStyleInsert;
+				} else {
+					style = UITableViewCellEditingStyleDelete;
+				}
+				break;
+			default:
+				break;
+		}
+	}*/
     return style;
 }
 

@@ -14,13 +14,14 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "NoteTitleViewController.h"
+#import "NoteDescViewController.h"
 
 @class NoteTitleViewController;
 @class Note;
 @class NoteAnnotation;
 @class RoundedRectView;
 
-@interface NoteDetailController : UITableViewController <UINavigationControllerDelegate, NoteTitleDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate> {
+@interface NoteDetailController : UITableViewController <UINavigationControllerDelegate, NoteTitleDelegate, NoteDescDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate> {
 	Note *selectedNote;
 	
 	MKMapView *_mapView;

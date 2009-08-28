@@ -101,7 +101,6 @@
 	} else {
 		MKCoordinateRegion region = {{0.0f, 0.0f}, {0.0f, 0.0f}};
 		CLLocation *location = [[LocationController sharedInstance] currentLocation];
-		NSLog([location description]);
 		region.center = location.coordinate;
 		region.span.longitudeDelta = 0.02f;
 		region.span.latitudeDelta = 0.02f;
