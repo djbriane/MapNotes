@@ -30,6 +30,7 @@
 	IBOutlet UILabel *locationInfoLabel;
 	IBOutlet UIButton *addTextNoteButton;
 	IBOutlet UIButton *addPhotoNoteButton;
+	IBOutlet UIButton *viewNotesButton;
 	IBOutlet UIButton *updateLocationButton;
 	IBOutlet UIActivityIndicatorView *updateLocationActivity;
 }
@@ -42,10 +43,12 @@
 
 @property (nonatomic, retain) IBOutlet UIButton *addTextNoteButton;
 @property (nonatomic, retain) IBOutlet UIButton *addPhotoNoteButton;
+@property (nonatomic, retain) IBOutlet UIButton *viewNotesButton;
 @property (nonatomic, retain) IBOutlet UIButton *updateLocationButton;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *updateLocationActivity;
 
 - (void)checkAndUpdateLocation;
+- (void)startUpdatingLocation;
 - (Note *)createNewNote;
 
 - (IBAction)addPhotoNote:(id)sender;

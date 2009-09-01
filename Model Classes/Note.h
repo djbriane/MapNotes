@@ -9,6 +9,8 @@
 #import <CoreData/CoreData.h>
 #import <CoreLocation/CoreLocation.h>
 
+@class Group;
+
 @interface ImageToDataTransformer : NSValueTransformer {
 }
 @end
@@ -24,7 +26,7 @@
 @property (nonatomic, retain) CLLocation * location;
 
 @property (nonatomic, retain) NSManagedObject * photo;
-@property (nonatomic, retain) NSManagedObject * group;
+@property (nonatomic, retain) Group * group;
 
 @end
 

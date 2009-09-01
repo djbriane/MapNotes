@@ -160,12 +160,18 @@
 
 - (void)showQuickAddView:(BOOL)animated {
 	// Set up QuickAdd VC for future use
+	//QuickAddViewController *aQuickAddViewController = [[QuickAddViewController alloc] initWithNibName:nil bundle:nil];
 	QuickAddViewController *aQuickAddViewController = [[QuickAddViewController alloc] initWithNibName:@"QuickAddView" bundle:nil];
 	aQuickAddViewController.managedObjectContext = self.managedObjectContext;
 	aQuickAddViewController.delegate = self;
-	
-	[UIApplication sharedApplication].statusBarHidden = YES;
+	//[aQuickAddViewController.view setFrame: [[UIScreen mainScreen] bounds]];
+	//[aQuickAddViewController.view setFrame:[[UIScreen mainScreen] applicationFrame]];
+	//[aQuickAddViewController.view setFrame: [[UIScreen mainScreen] bounds]];
+
+	//[UIApplication sharedApplication].statusBarHidden = YES;
+	[[UIApplication sharedApplication] setStatusBarHidden:YES animated:YES];
 	[self presentModalViewController:aQuickAddViewController animated:animated];
+
 	[aQuickAddViewController release];
 }
 
@@ -213,6 +219,8 @@
 - (void)quickAddViewController:(QuickAddViewController *)controller 
 				   showNewNote:(Note *)note {
 	[self pushNoteDetailViewController:note	editing:YES animated:NO];
+	
+	[[UIApplication sharedApplication] setStatusBarHidden:NO animated:YES];
 	[self dismissModalViewControllerAnimated:YES];
 }
 

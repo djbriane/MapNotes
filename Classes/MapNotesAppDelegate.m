@@ -24,10 +24,11 @@
     
     // Override point for customization after app launch    
 	application.statusBarStyle = UIStatusBarStyleBlackOpaque;
+	[application setStatusBarHidden:YES animated:NO];
 	
 	// Set the background of the app
 	UIView *backgroundView = [[UIView alloc] initWithFrame:window.frame];
-	backgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"StripedBG.png"]];
+	backgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"img_app_bkgnd.png"]];
 	[window addSubview:backgroundView];
 	[backgroundView release];
 	
@@ -39,7 +40,7 @@
 	}
 	
 	RootViewController *rootViewController = [[RootViewController alloc] initWithStyle:UITableViewStyleGrouped];
-	rootViewController.managedObjectContext = self.managedObjectContext;
+	rootViewController.managedObjectContext = context;
 	
 	UINavigationController *aNavigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
 	aNavigationController.navigationBar.barStyle = UIBarStyleBlack;
@@ -47,7 +48,7 @@
 
 	// Push notes view controller since we always start at the Notes list level
 	NotesViewController *notesViewController = [[NotesViewController alloc] initWithNibName:@"NotesView" bundle:nil];
-	notesViewController.managedObjectContext = self.managedObjectContext;
+	notesViewController.managedObjectContext = context;
 	//notesViewController.locationManager = self.locationManager;
 	[self.navigationController pushViewController:notesViewController animated:NO];
 	[notesViewController release];

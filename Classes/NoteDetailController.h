@@ -23,7 +23,7 @@
 
 @interface NoteDetailController : UITableViewController <UINavigationControllerDelegate, NoteTitleDelegate, NoteDescDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate> {
 	Note *selectedNote;
-	
+
 	MKMapView *_mapView;
 	NoteAnnotation *noteAnnotation;
 	
@@ -46,7 +46,6 @@
 @property (nonatomic, retain) IBOutlet UIView *tableFooterView;
 @property (nonatomic, retain) IBOutlet UIButton *photoButton;
 @property (nonatomic, retain) IBOutlet UIButton *deleteButton;
-
 
 @property (nonatomic, retain) IBOutlet UIButton *nameTextField;
 

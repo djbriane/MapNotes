@@ -7,12 +7,14 @@
 //
 
 #import "Note.h"
+#import "Group.h"
 
 #import "NoteDetailController.h"
 #import "NotePhotoViewController.h"
 #import "NoteAnnotation.h"
 #import "RoundedRectView.h"
 #import "ImageManipulator.h"
+#import "GroupsViewController.h"
 #import "StringHelper.h"
 
 //Note Description View contstants
@@ -26,13 +28,11 @@
 @implementation NoteDetailController
 
 @synthesize selectedNote;
+
 @synthesize mapView = _mapView;
 @synthesize noteAnnotation;
-@synthesize tableHeaderView;
-@synthesize tableFooterView;
-@synthesize photoButton;
-@synthesize deleteButton;
-@synthesize nameTextField;
+@synthesize tableHeaderView, tableFooterView;
+@synthesize photoButton, deleteButton, nameTextField;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -51,17 +51,16 @@
 	 self.tableView.backgroundColor = [UIColor clearColor];
 
 	 //self.editing = NO; // Initially displays an Edit button and noneditable view
-	 
+	 self.tableView.allowsSelectionDuringEditing = YES;
+
 	 // Create and set the table header / footer view.
 	 if (tableHeaderView == nil) {
 		 [[NSBundle mainBundle] loadNibNamed:@"NoteDetailHeader" owner:self options:nil];
 		 self.tableView.tableHeaderView = tableHeaderView;
-		 self.tableView.allowsSelectionDuringEditing = YES;
 	 }
 	 if (tableFooterView == nil) {
 		[[NSBundle mainBundle] loadNibNamed:@"NoteDetailFooter" owner:self options:nil];
 		self.tableView.tableFooterView = tableFooterView;
-		self.tableView.allowsSelectionDuringEditing = YES;
 	 }
 	 
 }
@@ -70,12 +69,14 @@
 	[super viewWillAppear:animated];
 	
 	self.navigationItem.rightBarButtonItem = [self editButtonItem];
-	self.navigationItem.title = selectedNote.title;
+
 	if (selectedNote.title != nil) {
+		self.navigationItem.title = selectedNote.title;
 		[nameTextField setTitle:[selectedNote title] forState:UIControlStateNormal];
 	}
 	[self initializeMap];
 	[self updatePhotoInfo];
+	[self.tableView reloadData];
 }
 
 /*
@@ -135,7 +136,7 @@
 }
 
 - (IBAction)editTitle {
-	NoteTitleViewController *titleController = [[NoteTitleViewController alloc] initWithNibName:@"NoteTitle" bundle:nil];
+	NoteTitleViewController *titleController = [[NoteTitleViewController alloc] initWithNibName:@"EditTitle" bundle:nil];
     titleController.delegate = self;
 	titleController.note = self.selectedNote;
 
@@ -145,7 +146,7 @@
 }
 
 - (void)editDesc {
-	NoteDescViewController *descController = [[NoteDescViewController alloc] initWithNibName:@"NoteDesc" bundle:nil];
+	NoteDescViewController *descController = [[NoteDescViewController alloc] initWithNibName:@"EditDesc" bundle:nil];
     descController.delegate = self;
 	descController.note = self.selectedNote;
 	
@@ -372,7 +373,6 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
 	static NSString *CellIdentifier = @"CellIdentifier";
 	static NSString *NoteCellIdentifier = @"NoteCellIdentifier";
 	UITableViewCell *cell;
@@ -438,8 +438,11 @@
 					photo.image = [UIImage imageNamed:@"icon_desc.png"];
 					break;
 				case 1:
-					// TODO: Add group support here
-					cellText = kDefaultGroupLabel;
+					if (selectedNote.group != nil) {
+						cellText = selectedNote.group.name;
+					} else {
+						cellText = kDefaultGroupLabel;
+					}
 					cell.imageView.image = [UIImage imageNamed:@"icon_group.png"];
 					cell.textLabel.text = cellText;
 					break;
@@ -454,11 +457,21 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == 0) {
-		if (indexPath.row == 0 && self.editing) {
+	if (indexPath.section == 0 && self.editing) {
+		if (indexPath.row == 0) {
+			// note description
 			[self editDesc];
-		} else {
+		} else if (indexPath.row == 1) {
 			// change group
+			GroupsViewController *groupsViewController = [[GroupsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+			groupsViewController.view.backgroundColor = [UIColor clearColor];
+			
+			groupsViewController.selectedNote = selectedNote;
+
+			//[groupsViewController setEditing:YES animated:NO];
+			[self.navigationController pushViewController:groupsViewController animated:YES];
+
+			[groupsViewController release];
 		}
 	}
 }
@@ -516,7 +529,8 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
 	 */
-	/* Disable for now, don't like how this works
+	/* Disable for now, don't like how this works */
+	/*
 	if (indexPath.section == 0) {
 		switch (indexPath.row) {
 			case 0:
@@ -536,7 +550,8 @@
 			default:
 				break;
 		}
-	}*/
+	}
+	 */
     return style;
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import "Note.h"
+#import "Group.h"
 #import "CLLocation+DistanceComparison.h"
 
 @implementation Note 

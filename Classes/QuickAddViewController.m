@@ -11,6 +11,7 @@
 #import "MapNotesAppDelegate.h"
 #import "ImageManipulator.h"
 #import "LocationController.h"
+#import "NoClipModalView.h"
 #import "Note.h"
 
 @implementation QuickAddViewController
@@ -18,40 +19,19 @@
 @synthesize delegate;
 @synthesize mapView = _mapView;
 @synthesize locationTimer, managedObjectContext;
-@synthesize addTextNoteButton, addPhotoNoteButton, updateLocationButton, updateLocationActivity;
-
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
-
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-}
-*/
-
+@synthesize addTextNoteButton, addPhotoNoteButton, viewNotesButton, updateLocationButton, updateLocationActivity;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
-	// Start checking for a valid location
-	self.locationTimer = [NSTimer scheduledTimerWithTimeInterval:.1 target:self 
-														selector:@selector(checkAndUpdateLocation) 
-														userInfo:nil 
-														 repeats:YES];
 }
-
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	//[UIApplication sharedApplication].statusBarHidden = YES;
+	[UIApplication sharedApplication].statusBarHidden = YES;
+
+	// update location
+	[self startUpdatingLocation];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -59,7 +39,9 @@
 	if (self.locationTimer != nil) {
 		[self.locationTimer invalidate];
 	}
-	[UIApplication sharedApplication].statusBarHidden = NO;
+	[[LocationController sharedInstance] stop];
+	//[[UIApplication sharedApplication] setStatusBarHidden:NO animated:YES];
+	//[UIApplication sharedApplication].statusBarHidden = NO;
 }
 
 /*
@@ -80,17 +62,19 @@
 - (void)viewDidUnload {
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
-	self.mapView = nil;
+	// Setting mapView to nil causes crashes when the uses dismisses the view 
+	//self.mapView = nil;
 	self.locationTimer = nil;
 	
 	self.addTextNoteButton = nil;
 	self.addPhotoNoteButton = nil;
+	self.viewNotesButton = nil;
 	self.updateLocationButton = nil;
 	self.updateLocationActivity = nil;
 	
 }
 
-- (void)checkAndUpdateLocation {	
+- (void)checkAndUpdateLocation {
 	// check if we have a good location
 	if (![[LocationController sharedInstance] locationKnown]) {
 		[self.updateLocationActivity startAnimating];
@@ -107,14 +91,33 @@
 
 		[self.mapView setRegion:region animated:NO];
 		self.mapView.hidden = NO;
-
+		
 		// Update UI to reflect we have a good location
 		[self.updateLocationActivity stopAnimating];
 		self.updateLocationButton.enabled = YES;
 		self.addTextNoteButton.enabled = YES;
 		self.addPhotoNoteButton.enabled = YES;
+		
+		[[LocationController sharedInstance] stop];
 		[self.locationTimer invalidate];
 	} 
+}
+
+
+- (void)startUpdatingLocation {
+	// invalidate any existing timer
+	[self.locationTimer invalidate];
+	
+	// disable the location button and start animating
+	self.updateLocationButton.enabled = NO;
+	[self.updateLocationActivity startAnimating];
+	
+	// tell the location controller to start updating and set up a timer 
+	[[LocationController sharedInstance] start];
+	self.locationTimer = [NSTimer scheduledTimerWithTimeInterval:.1 target:self 
+														selector:@selector(checkAndUpdateLocation) 
+														userInfo:nil 
+														 repeats:YES];
 }
 
 - (Note *)createNewNote {
@@ -128,10 +131,6 @@
 													   inManagedObjectContext:self.managedObjectContext];
 	
 	[note setLocation:myLocation];
-	//[note setGeoLatitude:[NSNumber numberWithDouble:self.locationManager.location.coordinate.latitude]];
-	//[note setGeoLongitude:[NSNumber numberWithDouble:self.locationManager.location.coordinate.longitude]];
-	//[note setGeoAccuracy:[NSNumber numberWithDouble:self.locationManager.location.horizontalAccuracy]];
-	
 	[note setDateCreated:[NSDate date]];
 
 	return note;
@@ -143,16 +142,6 @@
 		// TODO: Should throw an error here.
 		return;
 	}
-	//[note setTitle:@"New Note"];
-	
-	/*
-	NSError *error;
-	if (![self.managedObjectContext save:&error]) {
-		// Handle the error.
-		NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
-	}
-	*/
-	
 
 	NoteTitleViewController *titleController = [[NoteTitleViewController alloc] initWithNibName:@"NoteTitle" bundle:nil];
     titleController.delegate = self;
@@ -190,16 +179,12 @@
 }
 
 - (IBAction)viewNotes:(id)sender {
+	[[UIApplication sharedApplication] setStatusBarHidden:NO animated:YES];
 	[self.parentViewController dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)updateLocation:(id)sender {
-	[self.locationTimer invalidate];
-	[[LocationController sharedInstance] start];
-	self.locationTimer = [NSTimer scheduledTimerWithTimeInterval:.1 target:self 
-														selector:@selector(checkAndUpdateLocation) 
-														userInfo:nil 
-														 repeats:YES];
+	[self startUpdatingLocation];
 }
 
 #pragma mark -
@@ -311,13 +296,33 @@
 	}
 }
 
+#pragma mark -
+#pragma mark Map View Delegate Methods
+/*
+- (void)mapViewWillStartLoadingMap:(MKMapView *)mapView {
+	NSLog(@"Start Loading Map");
+	//self.viewNotesButton.enabled = NO;
+}
+
+- (void)mapViewDidFinishLoadingMap:(MKMapView *)mapView {
+	NSLog(@"Finish Loading Map");
+	//self.viewNotesButton.enabled = YES;
+}
+*/
+- (void)mapViewDidFailLoadingMap:(MKMapView *)mapView withError:(NSError *)error {
+	NSLog(@"Map View Fail with error %@, %@", error, [error userInfo]);
+}
+
+
 - (void)dealloc {
+	// Setting mapView to nil causes crashes when the uses dismisses the view 
 	self.mapView = nil;
 	[managedObjectContext release];
 	[locationTimer release];
 
 	[addTextNoteButton release];
 	[addPhotoNoteButton release];
+	[viewNotesButton release];
 	[updateLocationButton release];
     [super dealloc];
 }

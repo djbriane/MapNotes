@@ -33,7 +33,7 @@
 		D345E81B1022B1A30070C491 /* NoteAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D345E81A1022B1A30070C491 /* NoteAnnotation.m */; };
 		D360D124101D246B0095ED7B /* NoteDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = D360D123101D246B0095ED7B /* NoteDetailController.m */; };
 		D36712F3102F62D6000A046B /* NoteDescViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D36712F1102F62D6000A046B /* NoteDescViewController.m */; };
-		D36712F4102F62D6000A046B /* NoteTitle.xib in Resources */ = {isa = PBXBuildFile; fileRef = D36712F2102F62D6000A046B /* NoteTitle.xib */; };
+		D36712F4102F62D6000A046B /* EditTitle.xib in Resources */ = {isa = PBXBuildFile; fileRef = D36712F2102F62D6000A046B /* EditTitle.xib */; };
 		D36C287210437CAA00AFB7A8 /* LocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D36C287110437CAA00AFB7A8 /* LocationController.m */; };
 		D3BEAE2E1027FDA2001BC385 /* ImageManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BEAE2D1027FDA2001BC385 /* ImageManipulator.m */; };
 		D3D952971034536400C39C92 /* MapTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3D952961034536400C39C92 /* MapTableCell.xib */; };
@@ -57,10 +57,15 @@
 		D3F991B51044D9A200066E1D /* img_map-node.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F991A31044D9A200066E1D /* img_map-node.png */; };
 		D3F991C41044DFBF00066E1D /* img_blank.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F991C31044DFBF00066E1D /* img_blank.png */; };
 		D3F991F7104611D900066E1D /* NoteTitleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F991F6104611D900066E1D /* NoteTitleViewController.m */; };
-		D3F9924710461D4B00066E1D /* NoteDesc.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3F9924610461D4B00066E1D /* NoteDesc.xib */; };
+		D3F9924710461D4B00066E1D /* EditDesc.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3F9924610461D4B00066E1D /* EditDesc.xib */; };
 		D3F992BA104645FB00066E1D /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F992B9104645FB00066E1D /* TextFieldCell.m */; };
 		D3F992BC1046465A00066E1D /* TextViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3F992BB1046465A00066E1D /* TextViewCell.xib */; };
 		D3F992E110464D1900066E1D /* StringHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F992E010464D1900066E1D /* StringHelper.m */; };
+		D3F99543104848AC00066E1D /* img_app_bkgnd.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F99542104848AC00066E1D /* img_app_bkgnd.png */; };
+		D3F995641048F55500066E1D /* GroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F995631048F55500066E1D /* GroupsViewController.m */; };
+		D3F995971049CD3800066E1D /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F995961049CD3800066E1D /* Group.m */; };
+		D3F996121049E43D00066E1D /* GroupNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F996111049E43D00066E1D /* GroupNameViewController.m */; };
+		D3F996261049E8B900066E1D /* EditName.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3F996251049E8B900066E1D /* EditName.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,7 +110,7 @@
 		D360D123101D246B0095ED7B /* NoteDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteDetailController.m; sourceTree = "<group>"; };
 		D36712F0102F62D6000A046B /* NoteDescViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteDescViewController.h; sourceTree = "<group>"; };
 		D36712F1102F62D6000A046B /* NoteDescViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteDescViewController.m; sourceTree = "<group>"; };
-		D36712F2102F62D6000A046B /* NoteTitle.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = NoteTitle.xib; path = Classes/NoteTitle.xib; sourceTree = "<group>"; };
+		D36712F2102F62D6000A046B /* EditTitle.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = EditTitle.xib; path = Classes/EditTitle.xib; sourceTree = "<group>"; };
 		D36C287010437CAA00AFB7A8 /* LocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationController.h; sourceTree = "<group>"; };
 		D36C287110437CAA00AFB7A8 /* LocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationController.m; sourceTree = "<group>"; };
 		D3BEAE2C1027FDA2001BC385 /* ImageManipulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageManipulator.h; sourceTree = "<group>"; };
@@ -132,12 +137,20 @@
 		D3F991C31044DFBF00066E1D /* img_blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_blank.png; path = Images/img_blank.png; sourceTree = "<group>"; };
 		D3F991F11046119D00066E1D /* NoteTitleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteTitleViewController.h; sourceTree = "<group>"; };
 		D3F991F6104611D900066E1D /* NoteTitleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteTitleViewController.m; sourceTree = "<group>"; };
-		D3F9924610461D4B00066E1D /* NoteDesc.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteDesc.xib; sourceTree = "<group>"; };
+		D3F9924610461D4B00066E1D /* EditDesc.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditDesc.xib; sourceTree = "<group>"; };
 		D3F992B8104645FB00066E1D /* TextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldCell.h; sourceTree = "<group>"; };
 		D3F992B9104645FB00066E1D /* TextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCell.m; sourceTree = "<group>"; };
 		D3F992BB1046465A00066E1D /* TextViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextViewCell.xib; sourceTree = "<group>"; };
 		D3F992DF10464D1900066E1D /* StringHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringHelper.h; sourceTree = "<group>"; };
 		D3F992E010464D1900066E1D /* StringHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringHelper.m; sourceTree = "<group>"; };
+		D3F99542104848AC00066E1D /* img_app_bkgnd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_app_bkgnd.png; path = Images/img_app_bkgnd.png; sourceTree = "<group>"; };
+		D3F995621048F55500066E1D /* GroupsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupsViewController.h; sourceTree = "<group>"; };
+		D3F995631048F55500066E1D /* GroupsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupsViewController.m; sourceTree = "<group>"; };
+		D3F995951049CD3800066E1D /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Group.h; path = "Model Classes/Group.h"; sourceTree = "<group>"; };
+		D3F995961049CD3800066E1D /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Group.m; path = "Model Classes/Group.m"; sourceTree = "<group>"; };
+		D3F996101049E43D00066E1D /* GroupNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupNameViewController.h; sourceTree = "<group>"; };
+		D3F996111049E43D00066E1D /* GroupNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupNameViewController.m; sourceTree = "<group>"; };
+		D3F996251049E8B900066E1D /* EditName.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditName.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +188,10 @@
 				28C286E00D94DF7D0034E888 /* NotesViewController.m */,
 				D360D122101D246B0095ED7B /* NoteDetailController.h */,
 				D360D123101D246B0095ED7B /* NoteDetailController.m */,
+				D3F995621048F55500066E1D /* GroupsViewController.h */,
+				D3F995631048F55500066E1D /* GroupsViewController.m */,
+				D3F996101049E43D00066E1D /* GroupNameViewController.h */,
+				D3F996111049E43D00066E1D /* GroupNameViewController.m */,
 				D30D71AE102997F000AF4AFF /* NotePhotoViewController.h */,
 				D30D71AF102997F000AF4AFF /* NotePhotoViewController.m */,
 				D345E8191022B1A30070C491 /* NoteAnnotation.h */,
@@ -188,6 +205,7 @@
 		0C251CA81023893200C05768 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D3F99542104848AC00066E1D /* img_app_bkgnd.png */,
 				D3F991C31044DFBF00066E1D /* img_blank.png */,
 				D3F991921044D9A200066E1D /* img_note_footer_bkgnd.png */,
 				D3F991931044D9A200066E1D /* img_main_bkgnd.png */,
@@ -214,6 +232,8 @@
 		0CB2F123101A37420087C6F6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D3F995951049CD3800066E1D /* Group.h */,
+				D3F995961049CD3800066E1D /* Group.m */,
 				D303F2A51026ACE000528192 /* UIImageToDataTransformer.h */,
 				D303F2A41026ACE000528192 /* UIImageToDataTransformer.m */,
 				0C251C4610236C0900C05768 /* Note.h */,
@@ -261,8 +281,9 @@
 				0C251CA81023893200C05768 /* Images */,
 				0CB2F13E101A3B600087C6F6 /* QuickAddView.xib */,
 				2899E55F0DE3E45000AC0155 /* NotesView.xib */,
-				D36712F2102F62D6000A046B /* NoteTitle.xib */,
-				D3F9924610461D4B00066E1D /* NoteDesc.xib */,
+				D36712F2102F62D6000A046B /* EditTitle.xib */,
+				D3F9924610461D4B00066E1D /* EditDesc.xib */,
+				D3F996251049E8B900066E1D /* EditName.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* MapNotes-Info.plist */,
 				0C3551F61020D690006C7ED7 /* NoteDetailHeader.xib */,
@@ -357,7 +378,7 @@
 				0C3551F71020D690006C7ED7 /* NoteDetailHeader.xib in Resources */,
 				D345E74C10229C4B0070C491 /* NoteDetailFooter.xib in Resources */,
 				0C599FB7102A536400E66315 /* RootView.xib in Resources */,
-				D36712F4102F62D6000A046B /* NoteTitle.xib in Resources */,
+				D36712F4102F62D6000A046B /* EditTitle.xib in Resources */,
 				D3D952971034536400C39C92 /* MapTableCell.xib in Resources */,
 				D3F991A41044D9A200066E1D /* img_note_footer_bkgnd.png in Resources */,
 				D3F991A51044D9A200066E1D /* img_main_bkgnd.png in Resources */,
@@ -378,8 +399,10 @@
 				D3F991B41044D9A200066E1D /* img_photo-add.png in Resources */,
 				D3F991B51044D9A200066E1D /* img_map-node.png in Resources */,
 				D3F991C41044DFBF00066E1D /* img_blank.png in Resources */,
-				D3F9924710461D4B00066E1D /* NoteDesc.xib in Resources */,
+				D3F9924710461D4B00066E1D /* EditDesc.xib in Resources */,
 				D3F992BC1046465A00066E1D /* TextViewCell.xib in Resources */,
+				D3F99543104848AC00066E1D /* img_app_bkgnd.png in Resources */,
+				D3F996261049E8B900066E1D /* EditName.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +432,9 @@
 				D3F991F7104611D900066E1D /* NoteTitleViewController.m in Sources */,
 				D3F992BA104645FB00066E1D /* TextFieldCell.m in Sources */,
 				D3F992E110464D1900066E1D /* StringHelper.m in Sources */,
+				D3F995641048F55500066E1D /* GroupsViewController.m in Sources */,
+				D3F995971049CD3800066E1D /* Group.m in Sources */,
+				D3F996121049E43D00066E1D /* GroupNameViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,6 +475,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				NSZombieEnabled = YES;
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9753E399-E34B-42CB-B876-B317EF4FFB74";
 				SDKROOT = iphoneos3.0;
