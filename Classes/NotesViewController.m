@@ -11,6 +11,7 @@
 #import "CLLocation+DistanceComparison.h"
 #import "LocationController.h"
 #import "Note.h"
+#import "Group.h"
 
 @implementation NotesViewController
 
@@ -25,7 +26,7 @@
 	sortAscending = NO;
 	
 	// Remove the back button for now, till we get Groups implemented
-	[self.navigationItem setHidesBackButton:YES animated:YES];
+	//[self.navigationItem setHidesBackButton:YES animated:YES];
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
 																			   target:self 
@@ -35,6 +36,8 @@
 	
 	if (selectedGroup == nil) {
 		self.navigationItem.title = @"All Notes";
+	} else {
+		self.navigationItem.title = selectedGroup.name;
 	}
 	
 	// Create the sort control as a UISegmentedControl
@@ -113,6 +116,12 @@
 	[sortDescriptor release];
 	[sortDescriptors release];
 	
+	// set up a Predicate if a group has been selected
+	if (self.selectedGroup != nil) {
+		NSPredicate *pred = [NSPredicate predicateWithFormat:@"(group = %@)", self.selectedGroup];
+		[request setPredicate: pred];
+	}
+	
 	// Execute the fetch -- create a mutable copy of the result.
 	NSError *error = nil;
 	NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
@@ -150,7 +159,7 @@
 	
 	[sortDescriptor release];
 	[sortDescriptors release];
-	[sortedNotesArray release];
+	//[sortedNotesArray release];
 	
 	//[self.myTableView reloadData];
 	NSIndexPath *indPath = [NSIndexPath indexPathForRow:0 inSection:0];
@@ -396,6 +405,7 @@
 	[sortOrder release];
 	[toolbar release];
 	[managedObjectContext release];
+	[notesArray release];
     [super dealloc];
 }
 

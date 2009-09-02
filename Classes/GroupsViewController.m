@@ -8,6 +8,7 @@
 
 #import "MapNotesAppDelegate.h"
 #import "GroupsViewController.h"
+#import "NotesViewController.h"
 #import "Group.h"
 #import "Note.h"
 
@@ -28,16 +29,17 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	managedObjectContext = [((MapNotesAppDelegate *)[UIApplication sharedApplication].delegate).managedObjectContext retain];
+	if (managedObjectContext == nil) {
+		managedObjectContext = [((MapNotesAppDelegate *)[UIApplication sharedApplication].delegate).managedObjectContext retain];
+	}
 
+	
 	//self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	self.tableView.backgroundColor = [UIColor clearColor];
 	self.tableView.allowsSelectionDuringEditing = YES;
 	
-	if (selectedNote.group == nil) {
-		self.navigationItem.title = @"Groups";
-	}
-	
+	self.navigationItem.title = @"Groups";
+
 	NSError *error;
 	if (![[self fetchedResultsController] performFetch:&error]) {
 		// Handle the error...
@@ -155,7 +157,7 @@
 	if (didSave == NO) {
 		// delete the group before saving
 		[managedObjectContext deleteObject:group];
-	} else {
+	} else if (selectedNote != nil) {
 		// add the note to the group
 		[self addToGroup:group withNote:selectedNote];
 	}
@@ -168,14 +170,24 @@
 	}
 	
 	// return to appropriate view
-	if (didSave == YES) {
-		// return to detail view
-		[self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
+	if (didSave == YES && selectedNote != nil) {
+		// return to note detail view 
+		if ([self.navigationController.viewControllers objectAtIndex:2] != nil) {
+			[self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
+		}
 	} else {
 		// return to list of groups
 		[self.navigationController popViewControllerAnimated:YES];
 	}
+}
+
+- (void)showAllNotesWithGroup:(Group *)group {
+	NotesViewController *notesViewController = [[NotesViewController alloc] initWithNibName:@"NotesView" bundle:nil];
+	notesViewController.managedObjectContext = managedObjectContext;
+	notesViewController.selectedGroup = group;
 	
+	[self.navigationController pushViewController:notesViewController animated:YES];
+	[notesViewController release];
 }
 
 #pragma mark -
@@ -231,7 +243,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
     // Navigation logic may go here -- for example, create and push another view controller.
 	// AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
     // NSManagedObject *selectedObject = [[self fetchedResultsController] objectAtIndexPath:indexPath];
@@ -246,18 +257,21 @@
     [self.navigationController pushViewController:notesViewController animated:YES];
 	[notesViewController release];
 	*/
-	
+	Group *group = [[self fetchedResultsController] objectAtIndexPath:indexPath];
 	if (indexPath.section == 1) {
 		[self editTitle:nil];
-	} else {
+	} else if (selectedNote != nil) {
 		// selected an existing group
-		Group *group = [[self fetchedResultsController] objectAtIndexPath:indexPath];
 		[self addToGroup:group withNote:selectedNote];
 		[self.navigationController popViewControllerAnimated:YES];
+	} else {
+		// TODO: show list of notes
+		[self showAllNotesWithGroup:group];
 	}
 	
 }
 
+/*
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSLog(@"Will Select");
 	return indexPath;
@@ -267,14 +281,16 @@
 		NSLog(@"Tapped");
 	}
 }
+*/
 
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
+// Override to support conditional editing of the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+	// Return NO if you do not want the specified item to be editable.
+	if (indexPath.section == 1) {
+		return YES;
+	}
+ 	return NO;
+}
 
 - (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
 	// For this view we don't want to indent the cells so return NO

@@ -6,15 +6,12 @@
 //  Copyright 2009 Local Matters, Inc. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "GroupsViewController.h"
 
-@interface RootViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
-	NSFetchedResultsController *fetchedResultsController;
-	NSManagedObjectContext *managedObjectContext;
-
+@interface RootViewController : GroupsViewController {
 }
 
-@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+- (void)showAllNotes;
+- (void)showAllNotesWithQuickAdd;
 
 @end

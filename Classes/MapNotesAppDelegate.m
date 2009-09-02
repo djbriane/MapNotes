@@ -47,19 +47,19 @@
 	self.navigationController = aNavigationController;	
 
 	// Push notes view controller since we always start at the Notes list level
-	NotesViewController *notesViewController = [[NotesViewController alloc] initWithNibName:@"NotesView" bundle:nil];
-	notesViewController.managedObjectContext = context;
-	//notesViewController.locationManager = self.locationManager;
-	[self.navigationController pushViewController:notesViewController animated:NO];
-	[notesViewController release];
+	//NotesViewController *notesViewController = [[NotesViewController alloc] initWithNibName:@"NotesView" bundle:nil];
+	//notesViewController.managedObjectContext = managedObjectContext;
+	//[self.navigationController pushViewController:notesViewController animated:NO];
 	
 	[window addSubview:[navigationController view]];
-	
-	// Show the Quick Add view when the application loads
-	[notesViewController showQuickAddView:NO];
-	
-    [window makeKeyAndVisible];
+    
+	// Show the Quick Add view if loading the notes controller with app start
+	//[notesViewController showQuickAddView:NO];
+	[rootViewController showAllNotesWithQuickAdd];
 
+	[window makeKeyAndVisible];
+	
+	//[notesViewController release];
 	[rootViewController release];
 	[aNavigationController release];
 }

@@ -11,7 +11,6 @@
 #import "MapNotesAppDelegate.h"
 #import "ImageManipulator.h"
 #import "LocationController.h"
-#import "NoClipModalView.h"
 #import "Note.h"
 
 @implementation QuickAddViewController
@@ -143,9 +142,8 @@
 		return;
 	}
 
-	NoteTitleViewController *titleController = [[NoteTitleViewController alloc] initWithNibName:@"NoteTitle" bundle:nil];
+	NoteTitleViewController *titleController = [[NoteTitleViewController alloc] initWithNibName:@"EditTitle" bundle:nil];
     titleController.delegate = self;
-	
 	titleController.note = note;
 	
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:titleController];

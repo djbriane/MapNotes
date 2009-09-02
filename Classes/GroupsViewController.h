@@ -16,7 +16,7 @@
 	NSFetchedResultsController *fetchedResultsController;
 	NSManagedObjectContext *managedObjectContext;
 	
-	Note *selectedNote;	
+	Note *selectedNote;
 }
 
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
@@ -25,5 +25,6 @@
 
 - (void)editTitle:(Group *)group;
 - (void)addToGroup:(Group *)group withNote:(Note *)note;
+- (void)showAllNotesWithGroup:(Group *)group;
 
 @end

@@ -10,10 +10,11 @@
 
 @class QuickAddViewController;
 @class Note;
+@class Group;
 
 @interface NotesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, QuickAddViewControllerDelegate> {
 	NSManagedObjectContext *managedObjectContext;
-	NSManagedObject *selectedGroup;
+	Group *selectedGroup;
 	NSMutableArray *notesArray;
 	
 	IBOutlet UIToolbar *toolbar;
@@ -24,7 +25,7 @@
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, retain) NSManagedObject *selectedGroup;
+@property (nonatomic, retain) Group *selectedGroup;
 @property (nonatomic, retain) NSMutableArray *notesArray;
 
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
