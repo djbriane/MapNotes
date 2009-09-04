@@ -12,6 +12,8 @@
 #import "Group.h"
 #import "Note.h"
 
+#define kIconImageTag 1
+
 @implementation GroupsViewController
 
 @synthesize fetchedResultsController, managedObjectContext, selectedNote;
@@ -36,7 +38,7 @@
 	
 	//self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	self.tableView.backgroundColor = [UIColor clearColor];
-	self.tableView.allowsSelectionDuringEditing = YES;
+	//self.tableView.allowsSelectionDuringEditing = YES;
 	
 	self.navigationItem.title = @"Groups";
 
@@ -49,7 +51,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	[self setEditing:YES animated:NO];
+	//[self setEditing:YES animated:NO];
 
 	[self.tableView reloadData];
 }
@@ -212,13 +214,33 @@
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
+	static NSString *CellIdentifier = @"CellIdentifier";
+	static NSString *AddCellIdentifier = @"AddCellIdentifier";
+	UITableViewCell *cell;
+    UIImageView *icon;
+	
+	if (indexPath.section == 1) {
+		// set up add group cell
+		cell = [tableView dequeueReusableCellWithIdentifier:AddCellIdentifier];
+		if (cell == nil) {
+			//cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:NoteCellIdentifier] autorelease];
+			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:AddCellIdentifier] autorelease];
+			
+			icon = [[[UIImageView alloc] initWithFrame:CGRectMake(10.0, 10.0, 27.0, 27.0)] autorelease];
+			icon.tag = kIconImageTag;
+			//photo.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
+			[cell.contentView addSubview:icon];
+		} else {
+			icon = (UIImageView *)[cell.contentView viewWithTag:kIconImageTag];
+		}
+		
+	} else {
+		// All Other Cell Setup
+		cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+		if (cell == nil) {
+			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+		}
+	}
     
 	// Configure the cell.
 	cell.selectionStyle = UITableViewCellSelectionStyleBlue;
@@ -234,9 +256,11 @@
 			//cell.highlighted = YES;
 		} */
 		cell.textLabel.text = group.name;
+		// TODO: If this is the root view, set the accessoryType to disclosure
 	} else {
-		cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		//cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		cell.textLabel.text = @"New Group";
+		cell.imageView.image = [UIImage imageNamed:@"icon_group.png"];
 	}
 	
     return cell;
@@ -257,18 +281,20 @@
     [self.navigationController pushViewController:notesViewController animated:YES];
 	[notesViewController release];
 	*/
-	Group *group = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-	if (indexPath.section == 1) {
-		[self editTitle:nil];
-	} else if (selectedNote != nil) {
-		// selected an existing group
-		[self addToGroup:group withNote:selectedNote];
-		[self.navigationController popViewControllerAnimated:YES];
+	if (indexPath.section == 0) {
+		Group *group = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+		if (selectedNote != nil) {
+			// selected an existing group
+			[self addToGroup:group withNote:selectedNote];
+			[self.navigationController popViewControllerAnimated:YES];
+		} else {
+			// show list of notes
+			[self showAllNotesWithGroup:group];
+		}
 	} else {
-		// TODO: show list of notes
-		[self showAllNotesWithGroup:group];
+		[self editTitle:nil];
 	}
-	
+
 }
 
 /*
@@ -286,7 +312,7 @@
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
 	// Return NO if you do not want the specified item to be editable.
-	if (indexPath.section == 1) {
+	if (indexPath.section == 0) {
 		return YES;
 	}
  	return NO;
@@ -294,7 +320,7 @@
 
 - (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
 	// For this view we don't want to indent the cells so return NO
-	if (indexPath.section == 1) {
+	if (indexPath.section == 0) {
 		return YES;
 	}
 	return NO;
@@ -303,8 +329,8 @@
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
 	UITableViewCellEditingStyle style = UITableViewCellEditingStyleNone;
 	/* Set up the editing style */
-	if (indexPath.section == 1) {
-		style = UITableViewCellEditingStyleInsert;
+	if (indexPath.section == 0) {
+		style = UITableViewCellEditingStyleDelete;
 	} 
     return style;
 }
@@ -336,6 +362,13 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
     return NO;
 }
 
+- (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (indexPath.section == 1) {
+		return 0;
+	} else {
+		return 0;
+	}
+}
 
 /*
  // NSFetchedResultsControllerDelegate method to notify the delegate that all section and object changes have been processed. 

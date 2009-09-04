@@ -7,21 +7,24 @@
 //
 
 #import "NoteAnnotation.h"
+#import "Note.h"
 
 @implementation NoteAnnotation
 
+@synthesize note = _note;
 @synthesize coordinate = _coordinate;
 @synthesize title;
 @synthesize subtitle;
 
-+ (id)annotationWithCoordinate:(CLLocationCoordinate2D)coordinate {
-	return [[[[self class] alloc] initWithCoordinate:coordinate] autorelease];
++ (id)annotationWithNote:(Note *)note {
+	return [[[[self class] alloc] initWithNote:note] autorelease];
 }
 
-- (id)initWithCoordinate:(CLLocationCoordinate2D)coordinate {
+- (id)initWithNote:(Note *)note {
 	self = [super init];
 	if(nil != self) {
-		self.coordinate = coordinate;
+		self.note = note;
+		self.coordinate = note.location.coordinate;
 	}
 	return self;
 }

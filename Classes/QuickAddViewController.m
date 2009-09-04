@@ -51,28 +51,6 @@
 }
 */
 
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
-	// Setting mapView to nil causes crashes when the uses dismisses the view 
-	//self.mapView = nil;
-	self.locationTimer = nil;
-	
-	self.addTextNoteButton = nil;
-	self.addPhotoNoteButton = nil;
-	self.viewNotesButton = nil;
-	self.updateLocationButton = nil;
-	self.updateLocationActivity = nil;
-	
-}
-
 - (void)checkAndUpdateLocation {
 	// check if we have a good location
 	if (![[LocationController sharedInstance] locationKnown]) {
@@ -147,6 +125,7 @@
 	titleController.note = note;
 	
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:titleController];
+	navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.4902 green:0.5098 blue:.5294 alpha:1.0];
     [self presentModalViewController:navigationController animated:YES];
     
     [navigationController release];
@@ -311,10 +290,43 @@
 	NSLog(@"Map View Fail with error %@, %@", error, [error userInfo]);
 }
 
+- (void)mapView:(MKMapView *)mapView // there is a bug in the map view in beta 5
+// that makes this method required, the map view is nto checking if we 
+// respond before invoking so it blows up if we don't
+didSelectSearchResult:(id)result
+  userInitiated:(BOOL)userInitiated {
+}
+
+#pragma mark -
+#pragma mark Memory / Dealloc Methods
+- (void)didReceiveMemoryWarning {
+	// Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+	
+	// Release any cached data, images, etc that aren't in use.
+}
+
+- (void)viewDidUnload {
+	// Release any retained subviews of the main view.
+	// e.g. self.myOutlet = nil;
+	// Setting mapView to nil causes crashes when the uses dismisses the view 
+	//self.mapView.delegate = nil;
+	//self.mapView = nil;
+	
+	self.locationTimer = nil;
+	
+	self.addTextNoteButton = nil;
+	self.addPhotoNoteButton = nil;
+	self.viewNotesButton = nil;
+	self.updateLocationButton = nil;
+	self.updateLocationActivity = nil;
+	
+}
 
 - (void)dealloc {
 	// Setting mapView to nil causes crashes when the uses dismisses the view 
-	self.mapView = nil;
+	self.mapView.delegate = nil;
+	//self.mapView = nil;
 	[managedObjectContext release];
 	[locationTimer release];
 

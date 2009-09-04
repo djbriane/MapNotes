@@ -8,6 +8,7 @@
 
 #import "NotesViewController.h"
 #import "NoteDetailController.h"
+#import "NotesMapViewController.h"
 #import "CLLocation+DistanceComparison.h"
 #import "LocationController.h"
 #import "Note.h"
@@ -17,6 +18,7 @@
 
 @synthesize managedObjectContext, selectedGroup, notesArray;
 @synthesize myTableView, toolbar, sortOrder, sortAscending;
+@synthesize sortControl, mapViewButton;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,7 +29,6 @@
 	
 	// Remove the back button for now, till we get Groups implemented
 	//[self.navigationItem setHidesBackButton:YES animated:YES];
-
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
 																			   target:self 
 																			   action:@selector(showQuickAddView:)];
@@ -41,6 +42,8 @@
 	}
 	
 	// Create the sort control as a UISegmentedControl
+	/*
+	NSArray *itemsArray;
 	UISegmentedControl *sortControl = [[UISegmentedControl alloc] initWithItems: [NSArray arrayWithObjects: @"Date", @"A - Z", @"Distance", nil]];
 
 	sortControl.segmentedControlStyle = UISegmentedControlStyleBar;
@@ -51,16 +54,29 @@
 	
 	[sortControl addTarget:self action:@selector(changeSortOrder:) forControlEvents:UIControlEventValueChanged];
 	
-	sortControl.frame = CGRectMake(10, 6, 300,30);
-	[toolbar addSubview:sortControl];
+	sortControl.frame = CGRectMake(10, 6, 250,30);
+	
+	UIBarButtonItem *mapViewButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_map.png"] 
+																	  style:UIBarButtonItemStylePlain 
+																	 target:self 
+																	 action:nil];
+	
+	itemsArray = [NSArray arrayWithObjects:sortControl, mapViewButton, nil];
+	
+	//[toolbar setItems:itemsArray animated:NO];
+	toolbar.items = itemsArray;
 	[sortControl release];
-
+	[mapViewButton release];
+	 */
+	[sortControl addTarget:self action:@selector(changeSortOrder:) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	self.navigationController.navigationBarHidden = NO;
 	//[UIApplication sharedApplication].statusBarHidden = NO;
+	[sortControl setSelectedSegmentIndex:0];
+
 	[self fetchExistingNotes];
     [self.myTableView reloadData];
 }
@@ -221,6 +237,15 @@
 	[self sortExistingNotes];
 }
 
+- (IBAction)showMapView:(id)sender {
+	// TODO: Push map view controller with visible notes
+	NotesMapViewController *aNotesMapViewController = [[NotesMapViewController alloc] initWithNibName:@"NotesMapView" bundle:nil];
+	//aNotesMapViewController.view.backgroundColor = [UIColor clearColor];
+	//aNotesMapViewController.notesArray = [[NSMutableArray alloc] initWithArray:notesArray copyItems:YES];
+	aNotesMapViewController.notesArray = [NSMutableArray arrayWithArray:notesArray];
+    [self.navigationController pushViewController:aNotesMapViewController animated:YES];
+	[aNotesMapViewController release];
+}
 
 #pragma mark -
 #pragma mark Quick Add View Controller Methods

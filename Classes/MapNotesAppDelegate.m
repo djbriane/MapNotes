@@ -41,9 +41,12 @@
 	
 	RootViewController *rootViewController = [[RootViewController alloc] initWithStyle:UITableViewStyleGrouped];
 	rootViewController.managedObjectContext = context;
-	
+
 	UINavigationController *aNavigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
-	aNavigationController.navigationBar.barStyle = UIBarStyleBlack;
+
+	//aNavigationController.navigationBar.barStyle = UIBarStyleBlack;
+	aNavigationController.navigationBar.tintColor = [UIColor colorWithRed:(129.0/255.0) green:(137.0/255.0) blue:(149.0/255.0) alpha:1.0];
+	//aNavigationController.navigationBar.tintColor = [UIColor redColor];
 	self.navigationController = aNavigationController;	
 
 	// Push notes view controller since we always start at the Notes list level

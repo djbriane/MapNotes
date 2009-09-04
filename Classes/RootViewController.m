@@ -9,13 +9,15 @@
 #import "RootViewController.h"
 #import "MapNotesAppDelegate.h"
 #import "NotesViewController.h"
+#import "StringHelper.h"
 
 @implementation RootViewController
+
+@synthesize groupsTitleView;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
 	
 	// add 'Edit' button to Nav Bar (left)
 	self.navigationItem.leftBarButtonItem = [self editButtonItem];
@@ -25,22 +27,14 @@
 	UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
 	[button setBackgroundImage:[UIImage imageNamed:@"btn_all-notes-blank.png"] forState:UIControlStateNormal];
 	button.titleLabel.font = [UIFont boldSystemFontOfSize: 13];
+	[button setTitleEdgeInsets:UIEdgeInsetsMake(-2.0, -3.0, 0, 0)];
+	
 	//[button setImage:[UIImage imageNamed:@"btn_all-notes.png"] forState:UIControlStateNormal];
 	[button setTitle:@"All Notes" forState:UIControlStateNormal];
-	button.bounds = CGRectMake(0,0,78, 32);
+	button.bounds = CGRectMake(0,0,80, 30);
 	[button addTarget:self action:@selector(showAllNotes) forControlEvents:UIControlEventTouchUpInside];
 	UIBarButtonItem *allNotesItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 	
-	
-	//UIImage *allNotesImage = [UIImage imageNamed:@"btn_all-notes.png"];
-	//UIButton *allNotesView = [[UIButton alloc] initWithFrame:CGRectMake (0, 0, 78, 32)];
-	//[allNotesView setBackgroundImage:allNotesImage forState:UIControlStateNormal];
-	
-	// Obtain a UIBarButtonItem object and initialize it with the UIButton object
-	//UIBarButtonItem *allNotesItem = [[UIBarButtonItem alloc] initWithCustomView:allNotesView];
-	//[allNotesItem addTarget:self action:@selector(showAllNotes) forControlEvents:UIControlEventTouchUpInside];
-	
-	//newAllNotesItem.title = @"All Notes";
 	self.navigationItem.rightBarButtonItem = allNotesItem;
 
 	[allNotesItem release];
@@ -55,6 +49,7 @@
 }
 
 - (void)showAllNotesWithQuickAdd {
+	self.navigationItem.title = @"Groups";
 	NotesViewController *notesViewController = [[NotesViewController alloc] initWithNibName:@"NotesView" bundle:nil];
 	notesViewController.managedObjectContext = managedObjectContext;
 
@@ -68,7 +63,27 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	//[[self.navigationController navigationBar] performSelectorInBackground:@selector(setBackgroundImage:) withObject:image];
-	self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_group-header.png"]];;
+	/*
+	UIView *titleWithIcon = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 100.0, 22.0)];
+	UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 0.0, 23.0, 18.0)];
+	icon.image = [UIImage imageNamed:@"btn_all-notes-blank.png"];
+	[titleWithIcon addSubview:icon];
+	[icon release];
+	
+	NSString *titleText = @"Groups";
+	UILabel *mainLabel = [titleText RAD_newSizedCellLabelWithSystemFontOfSize:18.0 withBold:YES];
+	[titleWithIcon addSubview:mainLabel];
+	self.navigationItem.title = nil;
+	[self.navigationItem.titleView addSubview:titleWithIcon];
+	[titleWithIcon release];
+	 */
+	/*
+	if (groupsTitleView == nil) {
+		[[NSBundle mainBundle] loadNibNamed:@"GroupsTitle" owner:self options:nil];
+	}
+	self.navigationItem.titleView = groupsTitleView;
+	*/
+	//self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_group-header.png"]];;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

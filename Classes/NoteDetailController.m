@@ -260,7 +260,7 @@
 
 - (void)initializeMap {
 	// Add Note to Map
-	self.noteAnnotation = [NoteAnnotation annotationWithCoordinate:selectedNote.location.coordinate];
+	self.noteAnnotation = [NoteAnnotation annotationWithNote:selectedNote];
 	
 	MKCoordinateRegion region = {{0.0f, 0.0f}, {0.0f, 0.0f}};
 	region.center = selectedNote.location.coordinate;

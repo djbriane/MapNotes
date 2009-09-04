@@ -9,7 +9,10 @@
 #import "GroupsViewController.h"
 
 @interface RootViewController : GroupsViewController {
+	UIView *groupsTitleView;
 }
+
+@property (nonatomic, retain) IBOutlet UIView *groupsTitleView;
 
 - (void)showAllNotes;
 - (void)showAllNotesWithQuickAdd;
