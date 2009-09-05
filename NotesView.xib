@@ -87,7 +87,7 @@
 								</object>
 								<object class="NSColor" key="IBTintColor">
 									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC43MDk4MDM5MjE2IDAuNzM3MjU0OTAyIDAuNzc2NDcwNTg4MgA</bytes>
+									<bytes key="NSRGB">MC41MDU4ODIzNTI5IDAuNTM3MjU0OTAyIDAuNTg0MzEzNzI1NQA</bytes>
 								</object>
 							</object>
 						</object>
@@ -151,7 +151,7 @@
 				</object>
 				<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
-					<int key="IBUIStatusBarStyle">2</int>
+					<int key="IBUIStatusBarStyle">1</int>
 				</object>
 				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
 					<int key="IBUIBarStyle">1</int>

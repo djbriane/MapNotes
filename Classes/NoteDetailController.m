@@ -73,6 +73,14 @@
 	if (selectedNote.title != nil) {
 		self.navigationItem.title = selectedNote.title;
 		[nameTextField setTitle:[selectedNote title] forState:UIControlStateNormal];
+		[nameTextField setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+		[nameTextField setTitleColor:[UIColor blackColor] forState:UIControlStateDisabled];
+	} else {
+		[nameTextField setTitle:@"Note Title" forState:UIControlStateNormal];
+		//nameTextField.titleLabel.font = [UIFont boldSystemFontOfSize:18];
+		[nameTextField setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+		[nameTextField setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+
 	}
 	[self initializeMap];
 	[self updatePhotoInfo];

@@ -5,8 +5,8 @@
 
 #import <UIKit/UIKit.h>
 
-#define kDefaultStrokeColor         [UIColor whiteColor]
-#define kDefaultRectColor           [UIColor whiteColor]
+#define kDefaultStrokeColor         [UIColor grayColor]
+#define kDefaultRectColor           [UIColor clearColor]
 #define kDefaultStrokeWidth         1.0
 #define kDefaultCornerRadius        10.0
 

@@ -11,8 +11,13 @@
 #import "NotesMapViewController.h"
 #import "CLLocation+DistanceComparison.h"
 #import "LocationController.h"
+#import "RoundedRectView.h"
 #import "Note.h"
 #import "Group.h"
+
+#define kPhotoViewTag		11
+#define kTitleViewTag		12
+#define kDetailsViewTag		13
 
 @implementation NotesViewController
 
@@ -26,6 +31,9 @@
 	// Default sorting to date created descending (most recent at top)
 	sortOrder = @"dateCreated";
 	sortAscending = NO;
+	
+	self.myTableView.rowHeight = 44;
+	self.myTableView.backgroundColor = [UIColor clearColor];
 	
 	// Remove the back button for now, till we get Groups implemented
 	//[self.navigationItem setHidesBackButton:YES animated:YES];
@@ -273,50 +281,78 @@
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+	UILabel *titleLabel;
+	UILabel *detailsLabel;
+	UIImageView *photoView;
     static NSString *CellIdentifier = @"NoteCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
-    }
+        //cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		
+		// set up custom cell
+		photoView = [[[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 34, 34)] autorelease];
+		[cell.contentView addSubview:photoView];
+		photoView.tag = kPhotoViewTag;
+		//photo.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
+		
+		titleLabel = [[[UILabel alloc] initWithFrame:CGRectMake(45, 2, 187, 40)] autorelease];
+		[cell.contentView addSubview:titleLabel];
+		titleLabel.textAlignment = UITextAlignmentLeft;
+		titleLabel.font = [UIFont boldSystemFontOfSize:18];
+		titleLabel.tag = kTitleViewTag;
+		
+		detailsLabel = [[[UILabel alloc] initWithFrame:CGRectMake(237, 2, 55, 40)] autorelease];
+		[cell.contentView addSubview:detailsLabel];
+		detailsLabel.textAlignment = UITextAlignmentRight;
+		detailsLabel.font = [UIFont systemFontOfSize:14];
+		detailsLabel.textColor = [UIColor darkGrayColor];
+		detailsLabel.tag = kDetailsViewTag;
+		
+	}
     
 	// Configure the cell.
 	Note *note = (Note *)[notesArray objectAtIndex:indexPath.row];
 	
-	cell.textLabel.text = note.title;
-	cell.imageView.image = note.thumbnail;
-	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-
-	// show distance if sorted by distance
-	CLLocation *location = [[LocationController sharedInstance] currentLocation];
-	if (!location || !note.location) {
-		return cell;
+	titleLabel = (UILabel *)[cell viewWithTag:kTitleViewTag];
+	if (note.title != nil) {
+		titleLabel.text = note.title;
+		titleLabel.textColor = [UIColor blackColor];
+	} else {
+		//titleLabel.font = [UIFont italicSystemFontOfSize:18];
+		titleLabel.textColor = [UIColor grayColor];
+		titleLabel.text = @"No Title";
 	}
+
+	photoView = (UIImageView *)[cell viewWithTag:kPhotoViewTag];
+	photoView.image = note.thumbnail;
+	
+	detailsLabel = (UILabel *)[cell viewWithTag:kDetailsViewTag];
 	if (self.sortOrder == @"geoDistance") {
-		cell.detailTextLabel.text = [NSString stringWithFormat:@"%4.1f mi", ([note.location getDistanceFrom:location] * 0.000621371192)];
+		// show distance if sorted by distance
+		CLLocation *location = [[LocationController sharedInstance] currentLocation];
+		if (!location || !note.location) {
+			return cell;
+		}
+		detailsLabel.text = [NSString stringWithFormat:@"%4.1f mi", ([note.location getDistanceFrom:location] * 0.000621371192)];
 	} else if (self.sortOrder == @"dateCreated") {
 		// A date formatter for the creation/modified dates.
 		static NSDateFormatter *dateFormatter = nil;
 		if (dateFormatter == nil) {
 			dateFormatter = [[NSDateFormatter alloc] init];
-			[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+			[dateFormatter setTimeStyle:NSDateFormatterNoStyle];
 			[dateFormatter setDateStyle:NSDateFormatterShortStyle];
 		}
 		
 		// return the created date if its the first section
-		cell.detailTextLabel.text = [dateFormatter stringFromDate:[note dateCreated]];
-		
+		detailsLabel.text = [dateFormatter stringFromDate:[note dateCreated]];
 	} else {
-		cell.detailTextLabel.text = nil;
+		detailsLabel.text = nil;
 	}
 
     return cell;
-}
-
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-	return 70;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

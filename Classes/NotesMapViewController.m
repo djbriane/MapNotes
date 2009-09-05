@@ -7,6 +7,7 @@
 //
 
 #import "NotesMapViewController.h"
+#import "NoteDetailController.h"
 #import "NoteAnnotation.h"
 #import "Note.h"
 
@@ -37,7 +38,7 @@
     [super viewDidAppear:(BOOL)animated];
 	
 	// initialize the map
-	if(nil != self.notesArray) {
+	if(nil != self.notesArray && self.mapView.annotations.count == 0) {
 		for (Note *aNote in self.notesArray) {
 			// create an annotation
 			NoteAnnotation *aNoteAnnotation;
@@ -160,6 +161,12 @@
 	personVC.personViewDelegate = self;
 	[self presentModalViewController:nav animated:YES];
 	 */
+	NoteAnnotation *ann = (NoteAnnotation *)view.annotation;
+	NoteDetailController *noteDetailController = [[NoteDetailController alloc] initWithStyle:UITableViewStyleGrouped];
+	noteDetailController.view.backgroundColor = [UIColor clearColor];
+	noteDetailController.selectedNote = ann.note;
+    [self.navigationController pushViewController:noteDetailController animated:YES];
+	[noteDetailController release];
 }
 
 - (void)dealloc {

@@ -24,6 +24,7 @@
     
     // Override point for customization after app launch    
 	application.statusBarStyle = UIStatusBarStyleBlackOpaque;
+	//application.statusBarStyle = UIStatusBarStyleBlackTranslucent;
 	[application setStatusBarHidden:YES animated:NO];
 	
 	// Set the background of the app

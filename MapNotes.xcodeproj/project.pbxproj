@@ -29,11 +29,11 @@
 		D3028937104E530600E5A99D /* btn_all-notes.png in Resources */ = {isa = PBXBuildFile; fileRef = D3028934104E530600E5A99D /* btn_all-notes.png */; };
 		D3028938104E530600E5A99D /* temp_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D3028935104E530600E5A99D /* temp_icon.png */; };
 		D3028967104F17B100E5A99D /* GroupsTitle.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3028966104F17B100E5A99D /* GroupsTitle.xib */; };
-		D30289BE104F9B3200E5A99D /* TestSortBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = D30289BD104F9B3200E5A99D /* TestSortBar.xib */; };
 		D3028ABC1050A3E000E5A99D /* NotesMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3028ABB1050A3E000E5A99D /* NotesMapViewController.m */; };
 		D3028AC61050AC6500E5A99D /* NotesMapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3028AC51050AC6500E5A99D /* NotesMapView.xib */; };
 		D3028C0C1050E69F00E5A99D /* btn_all-notes-blank.png in Resources */ = {isa = PBXBuildFile; fileRef = D3028C0A1050E69F00E5A99D /* btn_all-notes-blank.png */; };
 		D3028C0D1050E69F00E5A99D /* btn_add.png in Resources */ = {isa = PBXBuildFile; fileRef = D3028C0B1050E69F00E5A99D /* btn_add.png */; };
+		D3028C251051803600E5A99D /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3028C241051803600E5A99D /* Entitlements.plist */; };
 		D303F2A61026ACE000528192 /* UIImageToDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D303F2A41026ACE000528192 /* UIImageToDataTransformer.m */; };
 		D30D71B0102997F000AF4AFF /* NotePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D30D71AF102997F000AF4AFF /* NotePhotoViewController.m */; };
 		D342E6D4103A5BCA002382B7 /* CLLocation+DistanceComparison.m in Sources */ = {isa = PBXBuildFile; fileRef = D342E6D3103A5BCA002382B7 /* CLLocation+DistanceComparison.m */; };
@@ -43,6 +43,10 @@
 		D360D124101D246B0095ED7B /* NoteDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = D360D123101D246B0095ED7B /* NoteDetailController.m */; };
 		D36712F3102F62D6000A046B /* NoteDescViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D36712F1102F62D6000A046B /* NoteDescViewController.m */; };
 		D36C287210437CAA00AFB7A8 /* LocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D36C287110437CAA00AFB7A8 /* LocationController.m */; };
+		D36EA0091051A58D00776556 /* NoteableDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D36EA0071051A58D00776556 /* NoteableDev-Info.plist */; };
+		D36EA00A1051A58D00776556 /* NoteableBeta-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D36EA0081051A58D00776556 /* NoteableBeta-Info.plist */; };
+		D36EA0221051B1D000776556 /* temp_icon-dev.png in Resources */ = {isa = PBXBuildFile; fileRef = D36EA0211051B1D000776556 /* temp_icon-dev.png */; };
+		D36EA0261051B9EC00776556 /* NotesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D36EA0251051B9EC00776556 /* NotesCell.xib */; };
 		D3BEAE2E1027FDA2001BC385 /* ImageManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BEAE2D1027FDA2001BC385 /* ImageManipulator.m */; };
 		D3D952971034536400C39C92 /* MapTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3D952961034536400C39C92 /* MapTableCell.xib */; };
 		D3F991A41044D9A200066E1D /* img_note_footer_bkgnd.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F991921044D9A200066E1D /* img_note_footer_bkgnd.png */; };
@@ -90,7 +94,7 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* MapNotesAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapNotesAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* MapNotesAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapNotesAppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* MapNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* NoteableDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoteableDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		28860B760F44E54D00985440 /* MapNotes.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = MapNotes.xcdatamodel; sourceTree = "<group>"; };
 		28860BE40F44EE6400985440 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -101,18 +105,17 @@
 		28C286DF0D94DF7D0034E888 /* NotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesViewController.h; sourceTree = "<group>"; };
 		28C286E00D94DF7D0034E888 /* NotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		8D1107310486CEB800E47090 /* MapNotes-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MapNotes-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		D302892F104E52C800E5A99D /* QuickAddView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuickAddView.xib; sourceTree = "<group>"; };
 		D3028931104E52E100E5A99D /* EditTitle.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditTitle.xib; sourceTree = "<group>"; };
 		D3028934104E530600E5A99D /* btn_all-notes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_all-notes.png"; path = "Images/btn_all-notes.png"; sourceTree = "<group>"; };
 		D3028935104E530600E5A99D /* temp_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = temp_icon.png; path = Images/temp_icon.png; sourceTree = "<group>"; };
 		D3028966104F17B100E5A99D /* GroupsTitle.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupsTitle.xib; sourceTree = "<group>"; };
-		D30289BD104F9B3200E5A99D /* TestSortBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestSortBar.xib; sourceTree = "<group>"; };
 		D3028ABA1050A3E000E5A99D /* NotesMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesMapViewController.h; sourceTree = "<group>"; };
 		D3028ABB1050A3E000E5A99D /* NotesMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesMapViewController.m; sourceTree = "<group>"; };
 		D3028AC51050AC6500E5A99D /* NotesMapView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotesMapView.xib; sourceTree = "<group>"; };
 		D3028C0A1050E69F00E5A99D /* btn_all-notes-blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_all-notes-blank.png"; path = "Images/btn_all-notes-blank.png"; sourceTree = "<group>"; };
 		D3028C0B1050E69F00E5A99D /* btn_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btn_add.png; path = Images/btn_add.png; sourceTree = "<group>"; };
+		D3028C241051803600E5A99D /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		D303F2A41026ACE000528192 /* UIImageToDataTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIImageToDataTransformer.m; path = Classes/UIImageToDataTransformer.m; sourceTree = "<group>"; };
 		D303F2A51026ACE000528192 /* UIImageToDataTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIImageToDataTransformer.h; path = Classes/UIImageToDataTransformer.h; sourceTree = "<group>"; };
 		D30D71AE102997F000AF4AFF /* NotePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotePhotoViewController.h; sourceTree = "<group>"; };
@@ -130,6 +133,10 @@
 		D36712F1102F62D6000A046B /* NoteDescViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteDescViewController.m; sourceTree = "<group>"; };
 		D36C287010437CAA00AFB7A8 /* LocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationController.h; sourceTree = "<group>"; };
 		D36C287110437CAA00AFB7A8 /* LocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationController.m; sourceTree = "<group>"; };
+		D36EA0071051A58D00776556 /* NoteableDev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "NoteableDev-Info.plist"; sourceTree = "<group>"; };
+		D36EA0081051A58D00776556 /* NoteableBeta-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "NoteableBeta-Info.plist"; sourceTree = "<group>"; };
+		D36EA0211051B1D000776556 /* temp_icon-dev.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "temp_icon-dev.png"; path = "Images/temp_icon-dev.png"; sourceTree = "<group>"; };
+		D36EA0251051B9EC00776556 /* NotesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotesCell.xib; sourceTree = "<group>"; };
 		D3BEAE2C1027FDA2001BC385 /* ImageManipulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageManipulator.h; sourceTree = "<group>"; };
 		D3BEAE2D1027FDA2001BC385 /* ImageManipulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageManipulator.m; sourceTree = "<group>"; };
 		D3D952961034536400C39C92 /* MapTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapTableCell.xib; sourceTree = "<group>"; };
@@ -207,6 +214,8 @@
 				D36712F1102F62D6000A046B /* NoteDescViewController.m */,
 				28C286DF0D94DF7D0034E888 /* NotesViewController.h */,
 				28C286E00D94DF7D0034E888 /* NotesViewController.m */,
+				D3028ABA1050A3E000E5A99D /* NotesMapViewController.h */,
+				D3028ABB1050A3E000E5A99D /* NotesMapViewController.m */,
 				D360D122101D246B0095ED7B /* NoteDetailController.h */,
 				D360D123101D246B0095ED7B /* NoteDetailController.m */,
 				D30D71AE102997F000AF4AFF /* NotePhotoViewController.h */,
@@ -215,8 +224,6 @@
 				D345E81A1022B1A30070C491 /* NoteAnnotation.m */,
 				D3F992B8104645FB00066E1D /* TextFieldCell.h */,
 				D3F992B9104645FB00066E1D /* TextFieldCell.m */,
-				D3028ABA1050A3E000E5A99D /* NotesMapViewController.h */,
-				D3028ABB1050A3E000E5A99D /* NotesMapViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -228,6 +235,7 @@
 				D3028C0B1050E69F00E5A99D /* btn_add.png */,
 				D3028934104E530600E5A99D /* btn_all-notes.png */,
 				D3028935104E530600E5A99D /* temp_icon.png */,
+				D36EA0211051B1D000776556 /* temp_icon-dev.png */,
 				D3F99542104848AC00066E1D /* img_app_bkgnd.png */,
 				D3F991C31044DFBF00066E1D /* img_blank.png */,
 				D3F991921044D9A200066E1D /* img_note_footer_bkgnd.png */,
@@ -271,7 +279,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* MapNotes.app */,
+				1D6058910D05DD3D006BFB54 /* NoteableDev.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -285,8 +293,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				D3028966104F17B100E5A99D /* GroupsTitle.xib */,
-				D30289BD104F9B3200E5A99D /* TestSortBar.xib */,
+				D36EA0251051B9EC00776556 /* NotesCell.xib */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -310,13 +317,16 @@
 				D3F9924610461D4B00066E1D /* EditDesc.xib */,
 				D3F996251049E8B900066E1D /* EditName.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
-				8D1107310486CEB800E47090 /* MapNotes-Info.plist */,
 				0C3551F61020D690006C7ED7 /* NoteDetailHeader.xib */,
 				D345E74B10229C4B0070C491 /* NoteDetailFooter.xib */,
 				0C599FB6102A536400E66315 /* RootView.xib */,
 				D3D952961034536400C39C92 /* MapTableCell.xib */,
 				D3F992BB1046465A00066E1D /* TextViewCell.xib */,
 				D3028AC51050AC6500E5A99D /* NotesMapView.xib */,
+				D3028966104F17B100E5A99D /* GroupsTitle.xib */,
+				D36EA0071051A58D00776556 /* NoteableDev-Info.plist */,
+				D36EA0081051A58D00776556 /* NoteableBeta-Info.plist */,
+				D3028C241051803600E5A99D /* Entitlements.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -366,7 +376,7 @@
 			);
 			name = MapNotes;
 			productName = MapNotes;
-			productReference = 1D6058910D05DD3D006BFB54 /* MapNotes.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* NoteableDev.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -432,10 +442,14 @@
 				D3028937104E530600E5A99D /* btn_all-notes.png in Resources */,
 				D3028938104E530600E5A99D /* temp_icon.png in Resources */,
 				D3028967104F17B100E5A99D /* GroupsTitle.xib in Resources */,
-				D30289BE104F9B3200E5A99D /* TestSortBar.xib in Resources */,
 				D3028AC61050AC6500E5A99D /* NotesMapView.xib in Resources */,
 				D3028C0C1050E69F00E5A99D /* btn_all-notes-blank.png in Resources */,
 				D3028C0D1050E69F00E5A99D /* btn_add.png in Resources */,
+				D3028C251051803600E5A99D /* Entitlements.plist in Resources */,
+				D36EA0091051A58D00776556 /* NoteableDev-Info.plist in Resources */,
+				D36EA00A1051A58D00776556 /* NoteableBeta-Info.plist in Resources */,
+				D36EA0221051B1D000776556 /* temp_icon-dev.png in Resources */,
+				D36EA0261051B9EC00776556 /* NotesCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,8 +498,9 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MapNotes_Prefix.pch;
-				INFOPLIST_FILE = "MapNotes-Info.plist";
-				PRODUCT_NAME = MapNotes;
+				INFOPLIST_FILE = "NoteableDev-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				PRODUCT_NAME = NoteableDev;
 			};
 			name = Debug;
 		};
@@ -529,6 +544,33 @@
 			};
 			name = Release;
 		};
+		D3028C2010517ED300E5A99D /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: WRKSHP, LLC";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "85388F83-4239-47D3-8E9D-E2F5D9DAF519";
+				SDKROOT = iphoneos3.0;
+			};
+			name = Distribution;
+		};
+		D3028C2110517ED300E5A99D /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = MapNotes_Prefix.pch;
+				INFOPLIST_FILE = "NoteableBeta-Info.plist";
+				PRODUCT_NAME = Noteable;
+			};
+			name = Distribution;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -537,6 +579,7 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+				D3028C2110517ED300E5A99D /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -546,6 +589,7 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
+				D3028C2010517ED300E5A99D /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
