@@ -35,8 +35,6 @@
 	self.myTableView.rowHeight = 44;
 	self.myTableView.backgroundColor = [UIColor clearColor];
 	
-	// Remove the back button for now, till we get Groups implemented
-	//[self.navigationItem setHidesBackButton:YES animated:YES];
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
 																			   target:self 
 																			   action:@selector(showQuickAddView:)];
@@ -82,9 +80,19 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	self.navigationController.navigationBarHidden = NO;
-	//[UIApplication sharedApplication].statusBarHidden = NO;
+	self.navigationItem.backBarButtonItem = nil;
+	// set the sort to date created
+	// TODO: Change this to remember the preferred sort (with fallback to date if no location)
 	[sortControl setSelectedSegmentIndex:0];
-
+	
+	// disable distance sort if no location
+	CLLocation *location = [[LocationController sharedInstance] currentLocation];
+	if (!location) {
+		[sortControl setEnabled:NO forSegmentAtIndex:2];
+	} else {
+		[sortControl setEnabled:YES forSegmentAtIndex:2];
+	}
+	
 	[self fetchExistingNotes];
     [self.myTableView reloadData];
 }
@@ -166,8 +174,9 @@
 	//CLLocation *location = [locationManager location];
 	CLLocation *location = [[LocationController sharedInstance] currentLocation];
 	
-	if (!location) {
-		return;
+	if (!location && self.sortOrder == @"geoDistance") {
+		// set the sort order to date created since we don't have a location
+		self.sortOrder == @"dateCreated";
 	}
 	
 	// Set self's events array to the mutable array, then clean up.
@@ -196,6 +205,9 @@
 	//QuickAddViewController *aQuickAddViewController = [[QuickAddViewController alloc] initWithNibName:nil bundle:nil];
 	QuickAddViewController *aQuickAddViewController = [[QuickAddViewController alloc] initWithNibName:@"QuickAddView" bundle:nil];
 	aQuickAddViewController.managedObjectContext = self.managedObjectContext;
+	if (selectedGroup != nil) {
+		aQuickAddViewController.selectedGroup = selectedGroup;
+	}
 	aQuickAddViewController.delegate = self;
 	//[aQuickAddViewController.view setFrame: [[UIScreen mainScreen] bounds]];
 	//[aQuickAddViewController.view setFrame:[[UIScreen mainScreen] applicationFrame]];
@@ -246,11 +258,17 @@
 }
 
 - (IBAction)showMapView:(id)sender {
-	// TODO: Push map view controller with visible notes
 	NotesMapViewController *aNotesMapViewController = [[NotesMapViewController alloc] initWithNibName:@"NotesMapView" bundle:nil];
 	//aNotesMapViewController.view.backgroundColor = [UIColor clearColor];
 	//aNotesMapViewController.notesArray = [[NSMutableArray alloc] initWithArray:notesArray copyItems:YES];
 	aNotesMapViewController.notesArray = [NSMutableArray arrayWithArray:notesArray];
+	aNotesMapViewController.selectedGroup = selectedGroup;
+	
+	// change the title of the back button 
+	UIBarButtonItem *backBar = [[UIBarButtonItem alloc] initWithTitle:@"List View" style:UIBarButtonItemStyleDone target:nil action:nil];
+	self.navigationItem.backBarButtonItem = backBar;
+	[backBar release];
+	
     [self.navigationController pushViewController:aNotesMapViewController animated:YES];
 	[aNotesMapViewController release];
 }
@@ -301,12 +319,14 @@
 		titleLabel = [[[UILabel alloc] initWithFrame:CGRectMake(45, 2, 187, 40)] autorelease];
 		[cell.contentView addSubview:titleLabel];
 		titleLabel.textAlignment = UITextAlignmentLeft;
+		titleLabel.highlightedTextColor = [UIColor whiteColor];
 		titleLabel.font = [UIFont boldSystemFontOfSize:18];
 		titleLabel.tag = kTitleViewTag;
 		
 		detailsLabel = [[[UILabel alloc] initWithFrame:CGRectMake(237, 2, 55, 40)] autorelease];
 		[cell.contentView addSubview:detailsLabel];
 		detailsLabel.textAlignment = UITextAlignmentRight;
+		titleLabel.highlightedTextColor = [UIColor whiteColor];
 		detailsLabel.font = [UIFont systemFontOfSize:14];
 		detailsLabel.textColor = [UIColor darkGrayColor];
 		detailsLabel.tag = kDetailsViewTag;
@@ -424,7 +444,7 @@
 	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:managedObjectContext];
 	[fetchRequest setEntity:entity];
 	
-	// TODO: Add a NSPedicate for group support
+	// Add a NSPedicate for group support
 	// NSPredicate *pred = [NSPredicate predicateWithFormat:@"group = %@", self.selectedGroup];
 	// [fetchRequest setPredicate:pred];
 	// [pred release];

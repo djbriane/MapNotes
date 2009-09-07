@@ -17,6 +17,7 @@
 @class NoteTitleViewController;
 
 @class Note;
+@class Group;
 
 @protocol QuickAddViewControllerDelegate;
 
@@ -26,6 +27,7 @@
 	NSManagedObjectContext *managedObjectContext;
 	MKMapView *_mapView;
 	NSTimer *locationTimer;
+	Group *selectedGroup;
 	
 	IBOutlet UILabel *locationInfoLabel;
 	IBOutlet UIButton *addTextNoteButton;
@@ -40,6 +42,7 @@
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) NSTimer *locationTimer;
+@property (nonatomic, retain) Group *selectedGroup;
 
 @property (nonatomic, retain) IBOutlet UIButton *addTextNoteButton;
 @property (nonatomic, retain) IBOutlet UIButton *addPhotoNoteButton;

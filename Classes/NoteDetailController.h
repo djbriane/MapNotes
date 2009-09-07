@@ -29,6 +29,8 @@
 	
 	UIView *tableHeaderView;
 	UIView *tableFooterView;
+	
+	UIButton *photoEditButton;
 	UIButton *photoButton;
 	UIButton *deleteButton;
 	UIButton *takePictureButton;
@@ -44,6 +46,8 @@
 
 @property (nonatomic, retain) IBOutlet UIView *tableHeaderView;
 @property (nonatomic, retain) IBOutlet UIView *tableFooterView;
+
+@property (nonatomic, retain) IBOutlet UIButton *photoEditButton;
 @property (nonatomic, retain) IBOutlet UIButton *photoButton;
 @property (nonatomic, retain) IBOutlet UIButton *deleteButton;
 
@@ -51,7 +55,8 @@
 
 - (void)updatePhotoInfo;
 - (void)initializeMap;
-- (IBAction)editPhoto;
-- (IBAction)editTitle;
+- (IBAction)editPhoto:(id)sender;
+- (IBAction)editTitle:(id)sender;
+- (IBAction)deleteNote:(id)sender;
 
 @end

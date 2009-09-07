@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface NSString (StringHelper)
-	- (CGFloat)RAD_textHeightForSystemFontOfSize:(CGFloat)size;
-	- (UILabel *)RAD_newSizedCellLabelWithSystemFontOfSize:(CGFloat)size withBold:(BOOL)isBold;	
-	- (CGRect)RAD_frameForCellLabelWithSystemFontOfSize:(CGFloat)size;
-	- (void)RAD_resizeLabel:(UILabel *)aLabel WithSystemFontOfSize:(CGFloat)size;
+
+- (CGFloat)RAD_textHeightForSystemFontOfSize:(CGFloat)size;
+- (UILabel *)RAD_newSizedCellLabelWithSystemFontOfSize:(CGFloat)size;	
+- (CGRect)RAD_frameForCellLabelWithSystemFontOfSize:(CGFloat)size;
+- (void)RAD_resizeLabel:(UILabel *)aLabel withSystemFontOfSize:(CGFloat)size;
 
 @end

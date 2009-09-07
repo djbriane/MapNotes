@@ -24,6 +24,7 @@
 #define kDefaultGroupLabel		 @"Group"
 #define kMainLabelTag 1
 #define kIconImageTag 2
+#define kDetailsDescLabel 15
 
 @implementation NoteDetailController
 
@@ -32,7 +33,7 @@
 @synthesize mapView = _mapView;
 @synthesize noteAnnotation;
 @synthesize tableHeaderView, tableFooterView;
-@synthesize photoButton, deleteButton, nameTextField;
+@synthesize photoEditButton, photoButton, deleteButton, nameTextField;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -98,6 +99,11 @@
 // If the setEditing: parameter is YES, the view should display editable controls; 
 // otherwise, it should display noneditable controls.
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+	NSString *noteDesc;
+	NSArray *visibleCells;
+	UITableViewCell *currentCell;
+	//UIImageView *detailsDescIcon;
+	//UILabel *detailsDescLabel;
     [super setEditing:editing animated:animated];
 	[self.navigationItem setHidesBackButton:editing animated:YES];
 
@@ -106,20 +112,42 @@
     if (editing == YES){
         // change view to an editable view
 		nameTextField.enabled = YES;
-		deleteButton.hidden = NO;
 		//[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+		deleteButton.hidden = NO;
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+
+		[UIView setAnimationDuration:0.4];
+		[UIView setAnimationDelegate:self];
+		//[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:deleteButton cache:YES];
+		[deleteButton setAlpha:1.0];
+		[UIView commitAnimations];
+		
 	}
     else {
         // save the changes if needed and change view to noneditable
 		nameTextField.enabled = NO;
-		deleteButton.hidden = YES;
+		
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+		[UIView setAnimationDuration:0.4];
+		[UIView setAnimationDelegate:self];
+		//[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:deleteButton cache:YES];
+		[deleteButton setAlpha:0.0];
+		//deleteButton.hidden = YES;
+		[UIView commitAnimations];
+		//
     }
 	
-	// recalculate height / width of the description text field 
-	//[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
-	//[self.tableView insertSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
-
-	
+	// Adjust note desc label width
+	if ([selectedNote.details length] != 0) {
+		noteDesc = selectedNote.details;
+		visibleCells = [self.tableView visibleCells];
+		currentCell = [visibleCells objectAtIndex:0];
+		NSArray *rowToReload = [NSArray arrayWithObject:[self.tableView indexPathForCell:currentCell]];
+		[self.tableView reloadRowsAtIndexPaths:rowToReload withRowAnimation:UITableViewRowAnimationFade];  
+	}
+		
 	// Update photo display accordingly
 	[self updatePhotoInfo];
 	
@@ -143,7 +171,9 @@
 	
 }
 
-- (IBAction)editTitle {
+#pragma mark -
+#pragma mark Interface Methods
+- (IBAction)editTitle:(id)sender {
 	NoteTitleViewController *titleController = [[NoteTitleViewController alloc] initWithNibName:@"EditTitle" bundle:nil];
     titleController.delegate = self;
 	titleController.note = self.selectedNote;
@@ -161,6 +191,23 @@
     [self.navigationController pushViewController:descController animated:YES];
 	
     [descController release];
+}
+
+- (IBAction)deleteNote:(id)sender {
+	NSManagedObjectContext *context = selectedNote.managedObjectContext;
+	
+	// TODO: Should present a confirmation alert before deleting
+	[context deleteObject:selectedNote];		
+	
+	// Save the context.
+	NSError *error;
+	if (![context save:&error]) {
+		// Handle the error...
+		NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
+	}
+	
+	// return to notes view
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark -
@@ -191,7 +238,7 @@
 
 #pragma mark -
 #pragma mark Photo Acquisition Methods
-- (IBAction)editPhoto {
+- (IBAction)editPhoto:(id)sender {
 	//Update the photo in response to a tap on the photo button.
 	if (self.editing) {
 		UIActionSheet *actionSheet = [[UIActionSheet alloc]
@@ -234,11 +281,15 @@
 	
 	// Synchronize the photo image view and the text on the photo button with the event's photo.
 	UIImage *image = selectedNote.thumbnail;
+	if (image && self.editing) {
+		[photoEditButton setHidden:NO];
+	} else {
+		[photoEditButton setHidden:YES];
+	}
 	
 	if (image) {
 		[photoButton setImage:image forState:UIControlStateNormal];
-	}
-	else if (self.editing) {
+	} else if (self.editing) {
 		image = [UIImage imageNamed:@"img_photo-add.png"];
 		[photoButton setImage:image forState:UIControlStateNormal];
 	} else {
@@ -387,7 +438,7 @@
 	UILabel *mainLabel;
     UIImageView *photo;
 	
-	if (indexPath.section == 0 && indexPath.row == 0) {
+	if (indexPath.row == 0 && !tableView.editing && [selectedNote.details length] != 0 ) {
 		// set up note description cell
 		cell = [tableView dequeueReusableCellWithIdentifier:NoteCellIdentifier];
 		if (cell == nil) {
@@ -396,7 +447,6 @@
 			
 			photo = [[[UIImageView alloc] initWithFrame:CGRectMake(10.0, 10.0, 21.0, 22.0)] autorelease];
 			photo.tag = kIconImageTag;
-			//photo.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
 			[cell.contentView addSubview:photo];
 		} else {
 			photo = (UIImageView *)[cell.contentView viewWithTag:kIconImageTag];
@@ -414,7 +464,6 @@
     // Set the text in the cell for the section/row.    
     NSString *cellText = nil;
 	CGFloat fontSize;
-	BOOL isBold = NO;
    
     switch (indexPath.section) {
         case 0:
@@ -422,28 +471,31 @@
 			// a tableView:accessoryButtonTappedForRowWithIndexPath: message.
 			cell.accessoryType = UITableViewCellAccessoryNone;
 			cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
-			cell.selectionStyle = UITableViewCellSelectionStyleNone;
+			cell.selectionStyle = UITableViewCellSelectionStyleBlue;
 
 			switch (indexPath.row) {
 				case 0:
 					// Details
-					if ([selectedNote.details length] == 0) {
-						cellText = kDefaultNoteLabel;
-						fontSize = kTextViewFontSizeDefault;
-						isBold = YES;
-					} else {
+					if (!tableView.editing && [selectedNote.details length] != 0) {
 						cellText = selectedNote.details;
 						fontSize = kTextViewFontSize;
+						// check if there is already a mainLabel in the view before we add a new one
+						mainLabel = (UILabel *)[cell.contentView viewWithTag:kMainLabelTag];
+						if (mainLabel != nil) {
+							[mainLabel removeFromSuperview];
+						}
+						mainLabel = [cellText RAD_newSizedCellLabelWithSystemFontOfSize:fontSize];
+						mainLabel.tag = kMainLabelTag;
+						[cell.contentView addSubview:mainLabel];
+						photo.image = [UIImage imageNamed:@"icon_desc.png"];
+						break;
+					} else if ([selectedNote.details length] != 0) {
+						cellText = selectedNote.details;
+					} else {
+						cellText = kDefaultNoteLabel;
 					}
-					// check if there is already a mainLabel in the view before we add a new one
-					mainLabel = (UILabel *)[cell.contentView viewWithTag:kMainLabelTag];
-					if (mainLabel != nil) {
-						[mainLabel removeFromSuperview];
-					}
-					mainLabel = [cellText RAD_newSizedCellLabelWithSystemFontOfSize:fontSize withBold:isBold];
-					mainLabel.tag = kMainLabelTag;
-					[cell.contentView addSubview:mainLabel];
-					photo.image = [UIImage imageNamed:@"icon_desc.png"];
+					cell.imageView.image = [UIImage imageNamed:@"icon_desc.png"];
+					cell.textLabel.text = cellText;	
 					break;
 				case 1:
 					if (selectedNote.group != nil) {
@@ -465,7 +517,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == 0 && self.editing) {
+	if (indexPath.section == 0 && tableView.editing) {
 		if (indexPath.row == 0) {
 			// note description
 			[self editDesc];
@@ -481,7 +533,11 @@
 
 			[groupsViewController release];
 		}
+	} else {
+		[[self.tableView cellForRowAtIndexPath:indexPath] setSelected:NO animated:YES];
 	}
+		
+
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
@@ -511,9 +567,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	// return dynamic size for note description
-	if (indexPath.section == 0 && indexPath.row == 0) {
-		NSString *label = [selectedNote.details length] == 0 ? kDefaultNoteLabel : selectedNote.details;
-		CGFloat fontSize = [selectedNote.details length] == 0 ? kTextViewFontSizeDefault : kTextViewFontSize;
+	if (indexPath.row == 0 && !tableView.editing && [selectedNote.details length] != 0) {
+		NSString *label = selectedNote.details;
+		CGFloat fontSize = kTextViewFontSize;
 
 		CGFloat height = [label RAD_textHeightForSystemFontOfSize:fontSize] + 20.0;
 		return height;
@@ -538,7 +594,7 @@
     }
 	 */
 	/* Disable for now, don't like how this works */
-	/*
+	
 	if (indexPath.section == 0) {
 		switch (indexPath.row) {
 			case 0:
@@ -559,13 +615,12 @@
 				break;
 		}
 	}
-	 */
     return style;
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
 	// For this view we don't want to indent the cells so return NO
-	return NO;
+	return YES;
 }
 
 - (void)didReceiveMemoryWarning {

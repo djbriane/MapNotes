@@ -10,11 +10,13 @@
 #import "NoteDetailController.h"
 #import "NoteAnnotation.h"
 #import "Note.h"
+#import "Group.h"
 
 @implementation NotesMapViewController
 
 @synthesize mapView = _mapView;
 @synthesize notesArray;
+@synthesize selectedGroup;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -31,12 +33,75 @@
 - (void)loadView {
 }
 */
-
-
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+	if (selectedGroup != nil) {
+		self.navigationItem.title = selectedGroup.name;
+	} else {
+		self.navigationItem.title = @"All Notes";
+	}
+	
+	// add zoom controls
+	// Create the sort control as a UISegmentedControl
+	UIImage *zoomInIcon = [UIImage imageNamed:@"icon_map-zoom-in.png"];
+	UIImage *zoomOutIcon = [UIImage imageNamed:@"icon_map-zoom-out.png"];
+
+	UISegmentedControl *sortControl = [[UISegmentedControl alloc] initWithItems: 
+									   [NSArray arrayWithObjects: zoomInIcon, zoomOutIcon, nil]];
+	 
+	sortControl.segmentedControlStyle = UISegmentedControlStyleBar;
+	sortControl.tintColor = [UIColor colorWithRed:(129.0/255.0) green:(137.0/255.0) blue:(149.0/255.0) alpha:1.0];
+	sortControl.momentary = YES;
+	// default to date sort, should change this to remember sort preference
+	//sortControl.selectedSegmentIndex = nil;
+	 
+	[sortControl addTarget:self action:@selector(zoomMap:) forControlEvents:UIControlEventValueChanged];
+	 
+	//sortControl.frame = CGRectMake(10, 6, 250,30);
+	UIBarButtonItem *zoomButton = [[UIBarButtonItem alloc] initWithCustomView:sortControl];
+
+	self.navigationItem.rightBarButtonItem = zoomButton;
+	[sortControl release];
+	[zoomButton release];
+
+}
+
+- (void)zoomMap:(id)sender {
+	MKCoordinateRegion region;
+	MKCoordinateSpan span;  
+
+	UISegmentedControl *segCtl = sender;
+	NSInteger selectedIndex = [segCtl selectedSegmentIndex];
+	
+	switch (selectedIndex) {
+		// Zoom In
+		case 0: 
+			//Set Zoom level using Span
+			region.center = self.mapView.region.center;
+			
+			span.latitudeDelta = self.mapView.region.span.latitudeDelta /2.0002;
+			span.longitudeDelta = self.mapView.region.span.longitudeDelta /2.0002;
+			region.span = span;
+			[self.mapView setRegion:region animated:TRUE];
+			break;
+			
+		// Zoom Out     
+        case 1: {
+			//Set Zoom level using Span 
+			region.center = self.mapView.region.center;
+			span.latitudeDelta = self.mapView.region.span.latitudeDelta * 2;
+			span.longitudeDelta = self.mapView.region.span.longitudeDelta * 2;
+			region.span = span;
+			[self.mapView setRegion:region animated:TRUE];
+        }
+	}	
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:(BOOL)animated];
-	
+
 	// initialize the map
 	if(nil != self.notesArray && self.mapView.annotations.count == 0) {
 		for (Note *aNote in self.notesArray) {
@@ -106,8 +171,9 @@
 	MKCoordinateRegion region = {{0.0f, 0.0f}, {0.0f, 0.0f}};
 	region.center.longitude = (minCoord.longitude + maxCoord.longitude) / 2.0;
 	region.center.latitude = (minCoord.latitude + maxCoord.latitude) / 2.0;
-	CGFloat longDelta = maxCoord.longitude - minCoord.longitude;
-	CGFloat latDelta = maxCoord.latitude - minCoord.latitude;
+	// TODO: Added 0.05f to give it some padding, probably need to tune this a bit
+	CGFloat longDelta = maxCoord.longitude - minCoord.longitude + 0.05f;
+	CGFloat latDelta = maxCoord.latitude - minCoord.latitude + 0.05f;
 	
 	// needed this logic in case only one point or all points in the same location
 	if (longDelta != 0.0) {
@@ -172,6 +238,7 @@
 - (void)dealloc {
 	self.mapView = nil;
 	self.notesArray = nil;
+	[selectedGroup release];
     [super dealloc];
 }
 

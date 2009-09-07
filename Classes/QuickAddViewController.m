@@ -12,12 +12,13 @@
 #import "ImageManipulator.h"
 #import "LocationController.h"
 #import "Note.h"
+#import "Group.h"
 
 @implementation QuickAddViewController
 
 @synthesize delegate;
 @synthesize mapView = _mapView;
-@synthesize locationTimer, managedObjectContext;
+@synthesize locationTimer, managedObjectContext, selectedGroup;
 @synthesize addTextNoteButton, addPhotoNoteButton, viewNotesButton, updateLocationButton, updateLocationActivity;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -109,6 +110,9 @@
 	
 	[note setLocation:myLocation];
 	[note setDateCreated:[NSDate date]];
+	if (selectedGroup != nil) {
+		[note setGroup:selectedGroup];
+	}
 
 	return note;
 }
@@ -329,6 +333,7 @@ didSelectSearchResult:(id)result
 	//self.mapView = nil;
 	[managedObjectContext release];
 	[locationTimer release];
+	[selectedGroup release];
 
 	[addTextNoteButton release];
 	[addPhotoNoteButton release];
