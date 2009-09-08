@@ -170,34 +170,40 @@
 }
 
 - (void)sortExistingNotes {
-	// If it's not possible to get a location, then return.
-	//CLLocation *location = [locationManager location];
 	CLLocation *location = [[LocationController sharedInstance] currentLocation];
-	
-	if (!location && self.sortOrder == @"geoDistance") {
-		// set the sort order to date created since we don't have a location
-		self.sortOrder == @"dateCreated";
+	if ([notesArray count] != 0) {
+		if (!location && self.sortOrder == @"geoDistance") {
+			// set the sort order to date created since we don't have a location
+			self.sortOrder == @"dateCreated";
+		}
+		
+		// Set self's events array to the mutable array, then clean up.
+		NSSortDescriptor *sortDescriptor;
+		if (self.sortOrder == @"geoDistance") {
+			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"location" ascending:YES selector:@selector(compareToLocation:)];
+		} else {
+			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:self.sortOrder ascending:self.sortAscending];
+		}	
+		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+		NSMutableArray *sortedNotesArray = [[self.notesArray sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
+		[self setNotesArray:sortedNotesArray];
+		
+		[sortDescriptor release];
+		[sortDescriptors release];
+		//[sortedNotesArray release];
+		
+		//[self.myTableView reloadData];
+		NSIndexPath *indPath = [NSIndexPath indexPathForRow:0 inSection:0];
+		[self.myTableView scrollToRowAtIndexPath:indPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+		[NSTimer scheduledTimerWithTimeInterval:.02 target:self 
+									   selector:@selector(reloadSections) 
+									   userInfo:nil 
+										repeats:NO];
 	}
-	
-	// Set self's events array to the mutable array, then clean up.
-	NSSortDescriptor *sortDescriptor;
-	if (self.sortOrder == @"geoDistance") {
-		sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"location" ascending:YES selector:@selector(compareToLocation:)];
-	} else {
-		sortDescriptor = [[NSSortDescriptor alloc] initWithKey:self.sortOrder ascending:self.sortAscending];
-	}	
-	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-	NSMutableArray *sortedNotesArray = [[self.notesArray sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
-	[self setNotesArray:sortedNotesArray];
-	
-	[sortDescriptor release];
-	[sortDescriptors release];
-	//[sortedNotesArray release];
-	
-	//[self.myTableView reloadData];
-	NSIndexPath *indPath = [NSIndexPath indexPathForRow:0 inSection:0];
+}
+
+- (void)reloadSections {
 	[self.myTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationTop];
-	[self.myTableView scrollToRowAtIndexPath:indPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 
 - (void)showQuickAddView:(BOOL)animated {

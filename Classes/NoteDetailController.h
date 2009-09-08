@@ -55,6 +55,7 @@
 
 - (void)updatePhotoInfo;
 - (void)initializeMap;
+- (void)didSelectInsertRowAtIndexPath:(NSIndexPath *)indexPath;
 - (IBAction)editPhoto:(id)sender;
 - (IBAction)editTitle:(id)sender;
 - (IBAction)deleteNote:(id)sender;

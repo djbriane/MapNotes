@@ -172,8 +172,8 @@
 	region.center.longitude = (minCoord.longitude + maxCoord.longitude) / 2.0;
 	region.center.latitude = (minCoord.latitude + maxCoord.latitude) / 2.0;
 	// TODO: Added 0.05f to give it some padding, probably need to tune this a bit
-	CGFloat longDelta = maxCoord.longitude - minCoord.longitude + 0.05f;
-	CGFloat latDelta = maxCoord.latitude - minCoord.latitude + 0.05f;
+	CGFloat longDelta = maxCoord.longitude - minCoord.longitude + 0.005f;
+	CGFloat latDelta = maxCoord.latitude - minCoord.latitude + 0.005f;
 	
 	// needed this logic in case only one point or all points in the same location
 	if (longDelta != 0.0) {

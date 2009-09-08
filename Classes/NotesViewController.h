@@ -44,6 +44,7 @@
 - (void)sortExistingNotes;
 - (void)showQuickAddView:(BOOL)animated;
 - (void)changeSortOrder:(id)sender;
+- (void)reloadSections;
 - (void)pushNoteDetailViewController:(Note *)note editing:(BOOL)editing animated:(BOOL)animated;
 - (IBAction)showMapView:(id)sender;
 

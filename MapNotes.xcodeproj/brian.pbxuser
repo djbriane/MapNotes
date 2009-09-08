@@ -24,9 +24,9 @@
 	};
 	0C599F77102A446800E66315 /* QuickAddViewController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {2343, 5355}}";
-			sepNavSelRange = "{10967, 0}";
-			sepNavVisRange = "{10237, 884}";
+			sepNavIntBoundsRect = "{{0, 0}, {2343, 5205}}";
+			sepNavSelRange = "{2931, 170}";
+			sepNavVisRange = "{2415, 1183}";
 			sepNavWindowFrame = "{{15, 166}, {946, 607}}";
 		};
 	};
@@ -235,22 +235,22 @@
 	28C286DF0D94DF7D0034E888 /* NotesViewController.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {908, 780}}";
-			sepNavSelRange = "{553, 18}";
-			sepNavVisRange = "{0, 1130}";
+			sepNavSelRange = "{1464, 0}";
+			sepNavVisRange = "{232, 1372}";
 		};
 	};
 	28C286E00D94DF7D0034E888 /* NotesViewController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1034, 7260}}";
-			sepNavSelRange = "{8586, 524}";
-			sepNavVisRange = "{8322, 1309}";
+			sepNavIntBoundsRect = "{{0, 0}, {943, 7260}}";
+			sepNavSelRange = "{7004, 0}";
+			sepNavVisRange = "{5906, 1322}";
 			sepNavWindowFrame = "{{15, 166}, {946, 607}}";
 		};
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeBuildConfigurationName = Debug;
 		activeExecutable = D3857085101A9E4000949DAD /* MapNotes */;
-		activeSDKPreference = iphonesimulator3.1;
+		activeSDKPreference = iphoneos3.1;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* MapNotes */;
 		addToTargets = (
 			1D6058900D05DD3D006BFB54 /* MapNotes */,
@@ -526,6 +526,41 @@
 			D35CAABC1055A9A5000682BD /* PBXTextBookmark */ = D35CAABC1055A9A5000682BD /* PBXTextBookmark */;
 			D35CAAC11055AA3D000682BD /* PBXTextBookmark */ = D35CAAC11055AA3D000682BD /* PBXTextBookmark */;
 			D35CAAC21055AA3D000682BD /* PBXTextBookmark */ = D35CAAC21055AA3D000682BD /* PBXTextBookmark */;
+			D35CAACA1055B5CA000682BD /* XCBuildMessageTextBookmark */ = D35CAACA1055B5CA000682BD /* XCBuildMessageTextBookmark */;
+			D35CAACB1055B5CA000682BD /* PBXTextBookmark */ = D35CAACB1055B5CA000682BD /* PBXTextBookmark */;
+			D35CAADB1055BF38000682BD /* PBXTextBookmark */ = D35CAADB1055BF38000682BD /* PBXTextBookmark */;
+			D35CAADC1055BF38000682BD /* PBXTextBookmark */ = D35CAADC1055BF38000682BD /* PBXTextBookmark */;
+			D35CAADD1055BF38000682BD /* PBXTextBookmark */ = D35CAADD1055BF38000682BD /* PBXTextBookmark */;
+			D35CAADE1055BF38000682BD /* PBXTextBookmark */ = D35CAADE1055BF38000682BD /* PBXTextBookmark */;
+			D35CAAE61055C798000682BD /* PBXTextBookmark */ = D35CAAE61055C798000682BD /* PBXTextBookmark */;
+			D35CAAE71055C798000682BD /* PBXTextBookmark */ = D35CAAE71055C798000682BD /* PBXTextBookmark */;
+			D35CAAE81055C798000682BD /* PBXTextBookmark */ = D35CAAE81055C798000682BD /* PBXTextBookmark */;
+			D35CAAE91055C798000682BD /* PBXTextBookmark */ = D35CAAE91055C798000682BD /* PBXTextBookmark */;
+			D35CAAEA1055C798000682BD /* PBXTextBookmark */ = D35CAAEA1055C798000682BD /* PBXTextBookmark */;
+			D35CAAF31055C88A000682BD /* PBXTextBookmark */ = D35CAAF31055C88A000682BD /* PBXTextBookmark */;
+			D35CAAF41055C88A000682BD /* PBXTextBookmark */ = D35CAAF41055C88A000682BD /* PBXTextBookmark */;
+			D35CAAF91055C936000682BD /* PBXTextBookmark */ = D35CAAF91055C936000682BD /* PBXTextBookmark */;
+			D35CAB071055CAF2000682BD /* PBXTextBookmark */ = D35CAB071055CAF2000682BD /* PBXTextBookmark */;
+			D35CAB081055CAF2000682BD /* PBXTextBookmark */ = D35CAB081055CAF2000682BD /* PBXTextBookmark */;
+			D35CAB091055CAF2000682BD /* PBXTextBookmark */ = D35CAB091055CAF2000682BD /* PBXTextBookmark */;
+			D35CAB0C1055CAF2000682BD /* PBXTextBookmark */ = D35CAB0C1055CAF2000682BD /* PBXTextBookmark */;
+			D35CAB0D1055CAF2000682BD /* PBXTextBookmark */ = D35CAB0D1055CAF2000682BD /* PBXTextBookmark */;
+			D35CAB1B1055CC74000682BD /* PBXTextBookmark */ = D35CAB1B1055CC74000682BD /* PBXTextBookmark */;
+			D35CAB1C1055CC74000682BD /* PBXTextBookmark */ = D35CAB1C1055CC74000682BD /* PBXTextBookmark */;
+			D35CAB1D1055CC74000682BD /* PBXTextBookmark */ = D35CAB1D1055CC74000682BD /* PBXTextBookmark */;
+			D35CAB1E1055CC74000682BD /* PBXTextBookmark */ = D35CAB1E1055CC74000682BD /* PBXTextBookmark */;
+			D35CAB1F1055CC74000682BD /* PBXTextBookmark */ = D35CAB1F1055CC74000682BD /* PBXTextBookmark */;
+			D35CAB2A1055CDB9000682BD /* PBXTextBookmark */ = D35CAB2A1055CDB9000682BD /* PBXTextBookmark */;
+			D35CAB2B1055CDB9000682BD /* PBXTextBookmark */ = D35CAB2B1055CDB9000682BD /* PBXTextBookmark */;
+			D35CAB2C1055CDB9000682BD /* PBXTextBookmark */ = D35CAB2C1055CDB9000682BD /* PBXTextBookmark */;
+			D35CAB2D1055CDB9000682BD /* PBXTextBookmark */ = D35CAB2D1055CDB9000682BD /* PBXTextBookmark */;
+			D35CAB2E1055CDB9000682BD /* PBXTextBookmark */ = D35CAB2E1055CDB9000682BD /* PBXTextBookmark */;
+			D35CAB2F1055CDB9000682BD /* PBXTextBookmark */ = D35CAB2F1055CDB9000682BD /* PBXTextBookmark */;
+			D35CAB301055CDB9000682BD /* PBXTextBookmark */ = D35CAB301055CDB9000682BD /* PBXTextBookmark */;
+			D35CAB311055CDB9000682BD /* PBXTextBookmark */ = D35CAB311055CDB9000682BD /* PBXTextBookmark */;
+			D35CAB431055D0F6000682BD /* PBXTextBookmark */ = D35CAB431055D0F6000682BD /* PBXTextBookmark */;
+			D35CAB441055D0F6000682BD /* PBXTextBookmark */ = D35CAB441055D0F6000682BD /* PBXTextBookmark */;
+			D35CAB451055D0F6000682BD /* PBXTextBookmark */ = D35CAB451055D0F6000682BD /* PBXTextBookmark */;
 			D360D12D101D2BD70095ED7B = D360D12D101D2BD70095ED7B /* PBXTextBookmark */;
 			D360D147101D3D9F0095ED7B = D360D147101D3D9F0095ED7B /* PBXTextBookmark */;
 			D360D16D101D4CDB0095ED7B = D360D16D101D4CDB0095ED7B /* PBXTextBookmark */;
@@ -713,9 +748,9 @@
 	};
 	D3028ABB1050A3E000E5A99D /* NotesMapViewController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1146, 3810}}";
+			sepNavIntBoundsRect = "{{0, 0}, {830, 3720}}";
 			sepNavSelRange = "{2460, 0}";
-			sepNavVisRange = "{1729, 1115}";
+			sepNavVisRange = "{2224, 225}";
 			sepNavWindowFrame = "{{15, 166}, {946, 607}}";
 		};
 	};
@@ -1048,7 +1083,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 551";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 974;
 		vrLoc = 16522;
@@ -1068,7 +1103,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 551";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 880;
 		vrLoc = 16522;
@@ -1088,7 +1123,7 @@
 		fRef = 28C286E00D94DF7D0034E888 /* NotesViewController.m */;
 		name = "NotesViewController.m: 311";
 		rLen = 0;
-		rLoc = 12257;
+		rLoc = 12386;
 		rType = 0;
 		vrLen = 1713;
 		vrLoc = 10248;
@@ -1166,7 +1201,7 @@
 		fRef = D360D122101D246B0095ED7B /* NoteDetailController.h */;
 		name = "NoteDetailController.h: 54";
 		rLen = 0;
-		rLoc = 1677;
+		rLoc = 1741;
 		rType = 0;
 		vrLen = 1175;
 		vrLoc = 492;
@@ -1196,7 +1231,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 556";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 885;
 		vrLoc = 16580;
@@ -1216,7 +1251,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 556";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 885;
 		vrLoc = 16613;
@@ -1226,7 +1261,7 @@
 		fRef = 28C286E00D94DF7D0034E888 /* NotesViewController.m */;
 		name = "NotesViewController.m: 389";
 		rLen = 316;
-		rLoc = 15154;
+		rLoc = 15283;
 		rType = 0;
 		vrLen = 1271;
 		vrLoc = 14020;
@@ -1276,7 +1311,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 568";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 965;
 		vrLoc = 16761;
@@ -1296,7 +1331,7 @@
 		fRef = D360D122101D246B0095ED7B /* NoteDetailController.h */;
 		name = "NoteDetailController.h: 54";
 		rLen = 0;
-		rLoc = 1677;
+		rLoc = 1741;
 		rType = 0;
 		vrLen = 1175;
 		vrLoc = 492;
@@ -1326,7 +1361,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 568";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 932;
 		vrLoc = 16856;
@@ -1346,7 +1381,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 969;
 		vrLoc = 16893;
@@ -1376,7 +1411,7 @@
 		fRef = 28C286E00D94DF7D0034E888 /* NotesViewController.m */;
 		name = "NotesViewController.m: 249";
 		rLen = 0;
-		rLoc = 9244;
+		rLoc = 9373;
 		rType = 0;
 		vrLen = 1247;
 		vrLoc = 8050;
@@ -1386,7 +1421,7 @@
 		fRef = 28C286E00D94DF7D0034E888 /* NotesViewController.m */;
 		name = "NotesViewController.m: 169";
 		rLen = 0;
-		rLoc = 5866;
+		rLoc = 5736;
 		rType = 0;
 		vrLen = 1581;
 		vrLoc = 5299;
@@ -1396,7 +1431,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 965;
 		vrLoc = 16893;
@@ -1416,7 +1451,7 @@
 		fRef = 28C286E00D94DF7D0034E888 /* NotesViewController.m */;
 		name = "NotesViewController.m: 172";
 		rLen = 0;
-		rLoc = 5977;
+		rLoc = 5736;
 		rType = 0;
 		vrLen = 1175;
 		vrLoc = 7673;
@@ -1436,7 +1471,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 965;
 		vrLoc = 16893;
@@ -1456,7 +1491,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 965;
 		vrLoc = 16893;
@@ -1476,7 +1511,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 965;
 		vrLoc = 16893;
@@ -1496,7 +1531,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 969;
 		vrLoc = 16893;
@@ -1546,7 +1581,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 969;
 		vrLoc = 16893;
@@ -1596,7 +1631,7 @@
 		fRef = 28C286E00D94DF7D0034E888 /* NotesViewController.m */;
 		name = "NotesViewController.m: 264";
 		rLen = 0;
-		rLoc = 9936;
+		rLoc = 10065;
 		rType = 0;
 		vrLen = 1207;
 		vrLoc = 8577;
@@ -1616,7 +1651,7 @@
 		fRef = D3028ABB1050A3E000E5A99D /* NotesMapViewController.m */;
 		name = "NotesMapViewController.m: 180";
 		rLen = 0;
-		rLoc = 8198;
+		rLoc = 8200;
 		rType = 0;
 		vrLen = 1400;
 		vrLoc = 4685;
@@ -1636,7 +1671,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 969;
 		vrLoc = 16893;
@@ -1676,7 +1711,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 969;
 		vrLoc = 16893;
@@ -1716,7 +1751,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 965;
 		vrLoc = 16893;
@@ -1746,7 +1781,7 @@
 		fRef = 28C286E00D94DF7D0034E888 /* NotesViewController.m */;
 		name = "NotesViewController.m: 265";
 		rLen = 0;
-		rLoc = 9687;
+		rLoc = 9816;
 		rType = 0;
 		vrLen = 1417;
 		vrLoc = 8539;
@@ -1756,7 +1791,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 965;
 		vrLoc = 16893;
@@ -1766,7 +1801,7 @@
 		fRef = 28C286E00D94DF7D0034E888 /* NotesViewController.m */;
 		name = "NotesViewController.m: 265";
 		rLen = 0;
-		rLoc = 9936;
+		rLoc = 10065;
 		rType = 0;
 		vrLen = 1244;
 		vrLoc = 8693;
@@ -1776,7 +1811,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 965;
 		vrLoc = 16893;
@@ -1786,7 +1821,7 @@
 		fRef = 28C286E00D94DF7D0034E888 /* NotesViewController.m */;
 		name = "NotesViewController.m: 269";
 		rLen = 0;
-		rLoc = 9934;
+		rLoc = 10063;
 		rType = 0;
 		vrLen = 1335;
 		vrLoc = 8673;
@@ -1796,7 +1831,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 965;
 		vrLoc = 16893;
@@ -1806,7 +1841,7 @@
 		fRef = 28C286E00D94DF7D0034E888 /* NotesViewController.m */;
 		name = "NotesViewController.m: 267";
 		rLen = 0;
-		rLoc = 9742;
+		rLoc = 9871;
 		rType = 0;
 		vrLen = 1306;
 		vrLoc = 8723;
@@ -1816,7 +1851,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 965;
 		vrLoc = 16893;
@@ -1836,7 +1871,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 965;
 		vrLoc = 16893;
@@ -1856,7 +1891,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 969;
 		vrLoc = 16893;
@@ -1866,7 +1901,7 @@
 		fRef = 28C286E00D94DF7D0034E888 /* NotesViewController.m */;
 		name = "NotesViewController.m: 268";
 		rLen = 0;
-		rLoc = 9808;
+		rLoc = 9937;
 		rType = 0;
 		vrLen = 1399;
 		vrLoc = 8798;
@@ -1886,7 +1921,7 @@
 		fRef = D3028ABB1050A3E000E5A99D /* NotesMapViewController.m */;
 		name = "NotesMapViewController.m: 124";
 		rLen = 0;
-		rLoc = 5636;
+		rLoc = 5638;
 		rType = 0;
 		vrLen = 1334;
 		vrLoc = 2594;
@@ -1896,7 +1931,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 965;
 		vrLoc = 16893;
@@ -1916,7 +1951,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 969;
 		vrLoc = 16893;
@@ -1966,7 +2001,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 969;
 		vrLoc = 16893;
@@ -1986,7 +2021,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 969;
 		vrLoc = 16893;
@@ -2006,7 +2041,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 965;
 		vrLoc = 16893;
@@ -2046,7 +2081,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 969;
 		vrLoc = 16893;
@@ -2056,7 +2091,7 @@
 		fRef = 28C286E00D94DF7D0034E888 /* NotesViewController.m */;
 		name = "NotesViewController.m: 232";
 		rLen = 36;
-		rLoc = 8548;
+		rLoc = 8677;
 		rType = 0;
 		vrLen = 1305;
 		vrLoc = 8139;
@@ -2066,7 +2101,7 @@
 		fRef = D360D122101D246B0095ED7B /* NoteDetailController.h */;
 		name = "NoteDetailController.h: 54";
 		rLen = 0;
-		rLoc = 1677;
+		rLoc = 1741;
 		rType = 0;
 		vrLen = 1175;
 		vrLoc = 492;
@@ -2096,7 +2131,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 965;
 		vrLoc = 16893;
@@ -2116,7 +2151,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 965;
 		vrLoc = 16893;
@@ -2126,7 +2161,7 @@
 		fRef = 28C286E00D94DF7D0034E888 /* NotesViewController.m */;
 		name = "NotesViewController.m: 232";
 		rLen = 36;
-		rLoc = 8548;
+		rLoc = 8677;
 		rType = 0;
 		vrLen = 1233;
 		vrLoc = 415;
@@ -2166,7 +2201,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 965;
 		vrLoc = 16893;
@@ -2192,7 +2227,7 @@
 		fRef = D3028ABB1050A3E000E5A99D /* NotesMapViewController.m */;
 		name = "NotesMapViewController.m: 167";
 		rLen = 9;
-		rLoc = 6029;
+		rLoc = 6031;
 		rType = 0;
 		vrLen = 1446;
 		vrLoc = 4368;
@@ -2202,7 +2237,7 @@
 		fRef = D3028ABB1050A3E000E5A99D /* NotesMapViewController.m */;
 		name = "NotesMapViewController.m: 167";
 		rLen = 0;
-		rLoc = 6038;
+		rLoc = 6040;
 		rType = 0;
 		vrLen = 1442;
 		vrLoc = 4372;
@@ -2212,7 +2247,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 965;
 		vrLoc = 16893;
@@ -2222,7 +2257,7 @@
 		fRef = D360D122101D246B0095ED7B /* NoteDetailController.h */;
 		name = "NoteDetailController.h: 54";
 		rLen = 0;
-		rLoc = 1677;
+		rLoc = 1741;
 		rType = 0;
 		vrLen = 1175;
 		vrLoc = 492;
@@ -2232,7 +2267,7 @@
 		fRef = 28C286E00D94DF7D0034E888 /* NotesViewController.m */;
 		name = "NotesViewController.m: 233";
 		rLen = 524;
-		rLoc = 8586;
+		rLoc = 8715;
 		rType = 0;
 		vrLen = 1309;
 		vrLoc = 8322;
@@ -2242,7 +2277,7 @@
 		fRef = D3028ABB1050A3E000E5A99D /* NotesMapViewController.m */;
 		name = "NotesMapViewController.m: 167";
 		rLen = 0;
-		rLoc = 6038;
+		rLoc = 6040;
 		rType = 0;
 		vrLen = 1547;
 		vrLoc = 5844;
@@ -2262,7 +2297,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 965;
 		vrLoc = 16893;
@@ -2282,7 +2317,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 965;
 		vrLoc = 16893;
@@ -2302,7 +2337,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 965;
 		vrLoc = 16893;
@@ -2322,7 +2357,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 969;
 		vrLoc = 16893;
@@ -2342,7 +2377,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 570";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 969;
 		vrLoc = 16893;
@@ -2391,7 +2426,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 574";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 905;
 		vrLoc = 16888;
@@ -2441,7 +2476,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 574";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 905;
 		vrLoc = 16894;
@@ -2461,24 +2496,370 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 574";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 906;
 		vrLoc = 16903;
 	};
+	D35CAACA1055B5CA000682BD /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "Expected expression before 'MKCoordinateRegion'";
+		fRef = D3028ABB1050A3E000E5A99D /* NotesMapViewController.m */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 80;
+		rType = 1;
+	};
+	D35CAACB1055B5CA000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D3028ABB1050A3E000E5A99D /* NotesMapViewController.m */;
+		name = "NotesMapViewController.m: 81";
+		rLen = 0;
+		rLoc = 2460;
+		rType = 0;
+		vrLen = 236;
+		vrLoc = 2224;
+	};
+	D35CAADB1055BF38000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
+		name = "NoteDetailController.m: 261";
+		rLen = 0;
+		rLoc = 8743;
+		rType = 0;
+		vrLen = 1358;
+		vrLoc = 8197;
+	};
+	D35CAADC1055BF38000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D3028ABB1050A3E000E5A99D /* NotesMapViewController.m */;
+		name = "NotesMapViewController.m: 81";
+		rLen = 0;
+		rLoc = 2460;
+		rType = 0;
+		vrLen = 1274;
+		vrLoc = 1617;
+	};
+	D35CAADD1055BF38000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D3028ABB1050A3E000E5A99D /* NotesMapViewController.m */;
+		name = "NotesMapViewController.m: 176";
+		rLen = 0;
+		rLoc = 5636;
+		rType = 0;
+		vrLen = 1292;
+		vrLoc = 4711;
+	};
+	D35CAADE1055BF38000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
+		name = "NoteDetailController.m: 574";
+		rLen = 0;
+		rLoc = 19377;
+		rType = 0;
+		vrLen = 906;
+		vrLoc = 16903;
+	};
+	D35CAAE61055C798000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D3028ABB1050A3E000E5A99D /* NotesMapViewController.m */;
+		name = "NotesMapViewController.m: 182";
+		rLen = 0;
+		rLoc = 5833;
+		rType = 0;
+		vrLen = 1313;
+		vrLoc = 4745;
+	};
+	D35CAAE71055C798000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28C286E00D94DF7D0034E888 /* NotesViewController.m */;
+		name = "NotesViewController.m: 400";
+		rLen = 812;
+		rLoc = 14915;
+		rType = 0;
+		vrLen = 1424;
+		vrLoc = 14175;
+	};
+	D35CAAE81055C798000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
+		name = "NoteDetailController.m: 604";
+		rLen = 33;
+		rLoc = 20302;
+		rType = 0;
+		vrLen = 1277;
+		vrLoc = 17545;
+	};
+	D35CAAE91055C798000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
+		name = "NoteDetailController.m: 644";
+		rLen = 0;
+		rLoc = 21328;
+		rType = 0;
+		vrLen = 1084;
+		vrLoc = 20645;
+	};
+	D35CAAEA1055C798000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
+		name = "NoteDetailController.m: 574";
+		rLen = 0;
+		rLoc = 19377;
+		rType = 0;
+		vrLen = 906;
+		vrLoc = 16903;
+	};
+	D35CAAF31055C88A000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
+		name = "NoteDetailController.m: 653";
+		rLen = 0;
+		rLoc = 21810;
+		rType = 0;
+		vrLen = 781;
+		vrLoc = 21101;
+	};
+	D35CAAF41055C88A000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
+		name = "NoteDetailController.m: 574";
+		rLen = 0;
+		rLoc = 19377;
+		rType = 0;
+		vrLen = 905;
+		vrLoc = 16903;
+	};
+	D35CAAF91055C936000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28C286E00D94DF7D0034E888 /* NotesViewController.m */;
+		rLen = 0;
+		rLoc = 7004;
+		rType = 0;
+	};
+	D35CAB071055CAF2000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D3028ABB1050A3E000E5A99D /* NotesMapViewController.m */;
+		name = "NotesMapViewController.m: 52";
+		rLen = 26;
+		rLoc = 1490;
+		rType = 0;
+		vrLen = 1384;
+		vrLoc = 901;
+	};
+	D35CAB081055CAF2000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
+		name = "NoteDetailController.m: 653";
+		rLen = 0;
+		rLoc = 21810;
+		rType = 0;
+		vrLen = 1212;
+		vrLoc = 20455;
+	};
+	D35CAB091055CAF2000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
+		name = "NoteDetailController.m: 654";
+		rLen = 0;
+		rLoc = 21810;
+		rType = 0;
+		vrLen = 1081;
+		vrLoc = 20644;
+	};
+	D35CAB0C1055CAF2000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28C286E00D94DF7D0034E888 /* NotesViewController.m */;
+		name = "NotesViewController.m: 199";
+		rLen = 0;
+		rLoc = 7004;
+		rType = 0;
+		vrLen = 1602;
+		vrLoc = 6247;
+	};
+	D35CAB0D1055CAF2000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
+		name = "NoteDetailController.m: 574";
+		rLen = 0;
+		rLoc = 19377;
+		rType = 0;
+		vrLen = 905;
+		vrLoc = 16903;
+	};
+	D35CAB1B1055CC74000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
+		name = "NoteDetailController.m: 524";
+		rLen = 0;
+		rLoc = 17540;
+		rType = 0;
+		vrLen = 1197;
+		vrLoc = 17207;
+	};
+	D35CAB1C1055CC74000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D360D122101D246B0095ED7B /* NoteDetailController.h */;
+		name = "NoteDetailController.h: 58";
+		rLen = 0;
+		rLoc = 1718;
+		rType = 0;
+		vrLen = 1071;
+		vrLoc = 758;
+	};
+	D35CAB1D1055CC74000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D360D122101D246B0095ED7B /* NoteDetailController.h */;
+		name = "NoteDetailController.h: 58";
+		rLen = 0;
+		rLoc = 1718;
+		rType = 0;
+		vrLen = 1069;
+		vrLoc = 759;
+	};
+	D35CAB1E1055CC74000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28C286E00D94DF7D0034E888 /* NotesViewController.m */;
+		name = "NotesViewController.m: 199";
+		rLen = 0;
+		rLoc = 7004;
+		rType = 0;
+		vrLen = 1602;
+		vrLoc = 6247;
+	};
+	D35CAB1F1055CC74000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
+		name = "NoteDetailController.m: 576";
+		rLen = 0;
+		rLoc = 19377;
+		rType = 0;
+		vrLen = 783;
+		vrLoc = 16903;
+	};
+	D35CAB2A1055CDB9000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D360D122101D246B0095ED7B /* NoteDetailController.h */;
+		name = "NoteDetailController.h: 58";
+		rLen = 0;
+		rLoc = 1718;
+		rType = 0;
+		vrLen = 1067;
+		vrLoc = 153;
+	};
+	D35CAB2B1055CDB9000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
+		name = "NoteDetailController.m: 524";
+		rLen = 0;
+		rLoc = 17540;
+		rType = 0;
+		vrLen = 1198;
+		vrLoc = 17133;
+	};
+	D35CAB2C1055CDB9000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0C599F77102A446800E66315 /* QuickAddViewController.m */;
+		name = "QuickAddViewController.m: 95";
+		rLen = 170;
+		rLoc = 2931;
+		rType = 0;
+		vrLen = 1183;
+		vrLoc = 2415;
+	};
+	D35CAB2D1055CDB9000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28C286DF0D94DF7D0034E888 /* NotesViewController.h */;
+		name = "NotesViewController.h: 47";
+		rLen = 0;
+		rLoc = 1464;
+		rType = 0;
+		vrLen = 1372;
+		vrLoc = 232;
+	};
+	D35CAB2E1055CDB9000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28C286E00D94DF7D0034E888 /* NotesViewController.m */;
+		name = "NotesViewController.m: 206";
+		rLen = 0;
+		rLoc = 7031;
+		rType = 0;
+		vrLen = 1789;
+		vrLoc = 5735;
+	};
+	D35CAB2F1055CDB9000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28C286E00D94DF7D0034E888 /* NotesViewController.m */;
+		name = "NotesViewController.m: 200";
+		rLen = 0;
+		rLoc = 5736;
+		rType = 0;
+		vrLen = 1708;
+		vrLoc = 5816;
+	};
+	D35CAB301055CDB9000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28C286E00D94DF7D0034E888 /* NotesViewController.m */;
+		name = "NotesViewController.m: 204";
+		rLen = 0;
+		rLoc = 7004;
+		rType = 0;
+		vrLen = 1438;
+		vrLoc = 6247;
+	};
+	D35CAB311055CDB9000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
+		name = "NoteDetailController.m: 576";
+		rLen = 0;
+		rLoc = 19377;
+		rType = 0;
+		vrLen = 783;
+		vrLoc = 16903;
+	};
+	D35CAB431055D0F6000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28C286E00D94DF7D0034E888 /* NotesViewController.m */;
+		name = "NotesViewController.m: 177";
+		rLen = 0;
+		rLoc = 5864;
+		rType = 0;
+		vrLen = 1552;
+		vrLoc = 5593;
+	};
+	D35CAB441055D0F6000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28C286E00D94DF7D0034E888 /* NotesViewController.m */;
+		name = "NotesViewController.m: 203";
+		rLen = 0;
+		rLoc = 7004;
+		rType = 0;
+		vrLen = 1322;
+		vrLoc = 5906;
+	};
+	D35CAB451055D0F6000682BD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
+		name = "NoteDetailController.m: 576";
+		rLen = 0;
+		rLoc = 19377;
+		rType = 0;
+		vrLen = 783;
+		vrLoc = 16903;
+	};
 	D360D122101D246B0095ED7B /* NoteDetailController.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1293, 945}}";
-			sepNavSelRange = "{1414, 0}";
-			sepNavVisRange = "{492, 1140}";
+			sepNavIntBoundsRect = "{{0, 0}, {1293, 960}}";
+			sepNavSelRange = "{1718, 0}";
+			sepNavVisRange = "{153, 1067}";
 			sepNavWindowFrame = "{{15, 166}, {946, 607}}";
 		};
 	};
 	D360D123101D246B0095ED7B /* NoteDetailController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {936, 9645}}";
-			sepNavSelRange = "{19253, 0}";
-			sepNavVisRange = "{16903, 906}";
+			sepNavIntBoundsRect = "{{0, 0}, {936, 10125}}";
+			sepNavSelRange = "{19377, 0}";
+			sepNavVisRange = "{16903, 783}";
 			sepNavWindowFrame = "{{15, 166}, {946, 607}}";
 		};
 	};
@@ -2749,7 +3130,7 @@
 		fRef = 28C286E00D94DF7D0034E888 /* NotesViewController.m */;
 		name = "NotesViewController.m: 317";
 		rLen = 0;
-		rLoc = 12435;
+		rLoc = 12564;
 		rType = 0;
 		vrLen = 1745;
 		vrLoc = 10338;
@@ -2787,7 +3168,7 @@
 		fRef = D360D122101D246B0095ED7B /* NoteDetailController.h */;
 		name = "NoteDetailController.h: 55";
 		rLen = 0;
-		rLoc = 1757;
+		rLoc = 1821;
 		rType = 0;
 		vrLen = 1146;
 		vrLoc = 459;
@@ -2815,7 +3196,7 @@
 		comments = "Invalid operands to binary + (have 'id' and 'double')";
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		rLen = 1;
-		rLoc = 573;
+		rLoc = 575;
 		rType = 1;
 	};
 	D36EA25510539E3700776556 /* PBXTextBookmark */ = {
@@ -2843,7 +3224,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 532";
 		rLen = 0;
-		rLoc = 19185;
+		rLoc = 19309;
 		rType = 0;
 		vrLen = 1409;
 		vrLoc = 17107;
@@ -2863,7 +3244,7 @@
 		fRef = D360D123101D246B0095ED7B /* NoteDetailController.m */;
 		name = "NoteDetailController.m: 551";
 		rLen = 0;
-		rLoc = 19253;
+		rLoc = 19377;
 		rType = 0;
 		vrLen = 995;
 		vrLoc = 16522;

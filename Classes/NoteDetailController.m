@@ -517,7 +517,11 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == 0 && tableView.editing) {
+	[self didSelectInsertRowAtIndexPath:indexPath];
+}
+
+- (void)didSelectInsertRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (indexPath.section == 0 && self.tableView.editing) {
 		if (indexPath.row == 0) {
 			// note description
 			[self editDesc];
@@ -527,17 +531,15 @@
 			groupsViewController.view.backgroundColor = [UIColor clearColor];
 			
 			groupsViewController.selectedNote = selectedNote;
-
+			
 			//[groupsViewController setEditing:YES animated:NO];
 			[self.navigationController pushViewController:groupsViewController animated:YES];
-
+			
 			[groupsViewController release];
 		}
 	} else {
 		[[self.tableView cellForRowAtIndexPath:indexPath] setSelected:NO animated:YES];
 	}
-		
-
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
@@ -622,6 +624,40 @@
 	// For this view we don't want to indent the cells so return NO
 	return YES;
 }
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle 
+forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Remove the value in the field that was clicked
+		NSManagedObjectContext *context = selectedNote.managedObjectContext;
+		
+		if (indexPath.section == 0) {
+			switch (indexPath.row) {
+				case 0:
+					[selectedNote setDetails:nil];
+					break;
+				case 1:
+					[selectedNote setGroup:nil];
+					break;
+				default:
+					break;
+			}
+		}
+		
+		// Save the context.
+		NSError *error;
+		if (![context save:&error]) {
+			// Handle the error...
+			NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
+		}
+		// reload the row that was deleted
+		[tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationFade];
+	} else if (editingStyle == UITableViewCellEditingStyleInsert) {
+		[self didSelectInsertRowAtIndexPath:indexPath];
+	}
+}
+
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.

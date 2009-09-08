@@ -43,7 +43,6 @@
 		D35CAA38105597DF000682BD /* icon_map-zoom-out.png in Resources */ = {isa = PBXBuildFile; fileRef = D35CAA35105597DF000682BD /* icon_map-zoom-out.png */; };
 		D35CAA39105597DF000682BD /* icon_map-zoom-in.png in Resources */ = {isa = PBXBuildFile; fileRef = D35CAA36105597DF000682BD /* icon_map-zoom-in.png */; };
 		D35CAA3A105597DF000682BD /* img_title-background-high.png in Resources */ = {isa = PBXBuildFile; fileRef = D35CAA37105597DF000682BD /* img_title-background-high.png */; };
-		D35CAA6910559C63000682BD /* TestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D35CAA6810559C63000682BD /* TestView.xib */; };
 		D35CAAB71055A8A9000682BD /* img_photo-edit.png in Resources */ = {isa = PBXBuildFile; fileRef = D35CAAB61055A8A9000682BD /* img_photo-edit.png */; };
 		D360D124101D246B0095ED7B /* NoteDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = D360D123101D246B0095ED7B /* NoteDetailController.m */; };
 		D36712F3102F62D6000A046B /* NoteDescViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D36712F1102F62D6000A046B /* NoteDescViewController.m */; };
@@ -134,7 +133,6 @@
 		D35CAA35105597DF000682BD /* icon_map-zoom-out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_map-zoom-out.png"; path = "Images/icon_map-zoom-out.png"; sourceTree = "<group>"; };
 		D35CAA36105597DF000682BD /* icon_map-zoom-in.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_map-zoom-in.png"; path = "Images/icon_map-zoom-in.png"; sourceTree = "<group>"; };
 		D35CAA37105597DF000682BD /* img_title-background-high.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "img_title-background-high.png"; path = "Images/img_title-background-high.png"; sourceTree = "<group>"; };
-		D35CAA6810559C63000682BD /* TestView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestView.xib; sourceTree = "<group>"; };
 		D35CAAB61055A8A9000682BD /* img_photo-edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "img_photo-edit.png"; path = "Images/img_photo-edit.png"; sourceTree = "<group>"; };
 		D360D122101D246B0095ED7B /* NoteDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteDetailController.h; sourceTree = "<group>"; };
 		D360D123101D246B0095ED7B /* NoteDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteDetailController.m; sourceTree = "<group>"; };
@@ -304,8 +302,6 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				D36EA0251051B9EC00776556 /* NotesCell.xib */,
-				D35CAA6810559C63000682BD /* TestView.xib */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -336,6 +332,7 @@
 				D3F992BB1046465A00066E1D /* TextViewCell.xib */,
 				D3028AC51050AC6500E5A99D /* NotesMapView.xib */,
 				D3028966104F17B100E5A99D /* GroupsTitle.xib */,
+				D36EA0251051B9EC00776556 /* NotesCell.xib */,
 				D36EA0071051A58D00776556 /* NoteableDev-Info.plist */,
 				D36EA0081051A58D00776556 /* NoteableBeta-Info.plist */,
 				D3028C241051803600E5A99D /* Entitlements.plist */,
@@ -464,7 +461,6 @@
 				D35CAA38105597DF000682BD /* icon_map-zoom-out.png in Resources */,
 				D35CAA39105597DF000682BD /* icon_map-zoom-in.png in Resources */,
 				D35CAA3A105597DF000682BD /* img_title-background-high.png in Resources */,
-				D35CAA6910559C63000682BD /* TestView.xib in Resources */,
 				D35CAAB71055A8A9000682BD /* img_photo-edit.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
