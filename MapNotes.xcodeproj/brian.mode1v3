@@ -216,7 +216,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>D35CAB441055D0F6000682BD</string>
+						<string>D35CAB6B10571C44000682BD</string>
 						<key>history</key>
 						<array>
 							<string>D35CAAF91055C936000682BD</string>
@@ -256,7 +256,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>D35CAB451055D0F6000682BD</string>
+						<string>D35CAB6C10571C44000682BD</string>
 						<key>history</key>
 						<array>
 							<string>D36EA2AE1055603400776556</string>
@@ -360,13 +360,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>27</integer>
-									<integer>2</integer>
+									<integer>68</integer>
+									<integer>67</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {191, 618}}</string>
+							<string>{{0, 668}, {191, 618}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -403,7 +403,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>NotesViewController.m</string>
+								<string>GroupsViewController.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -411,11 +411,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>NotesViewController.m</string>
+										<string>GroupsViewController.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>D35CAB431055D0F6000682BD</string>
+										<string>D35CAB6A10571C44000682BD</string>
 										<key>history</key>
 										<array>
 											<string>D360D12D101D2BD70095ED7B</string>
@@ -462,7 +462,6 @@
 											<string>D3028B241050BDCB00E5A99D</string>
 											<string>D3028BD31050DE1E00E5A99D</string>
 											<string>D3028BF71050E3EB00E5A99D</string>
-											<string>D3028C28105180C600E5A99D</string>
 											<string>D36EA02D1051C10600776556</string>
 											<string>D36EA0321051C10600776556</string>
 											<string>D36EA03B1051C17900776556</string>
@@ -503,7 +502,8 @@
 											<string>D35CAB2B1055CDB9000682BD</string>
 											<string>D35CAB2C1055CDB9000682BD</string>
 											<string>D35CAB2D1055CDB9000682BD</string>
-											<string>D35CAB2E1055CDB9000682BD</string>
+											<string>D35CAB4C1056EF1F000682BD</string>
+											<string>D35CAB4D1056EF1F000682BD</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -713,14 +713,14 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>D35CAB461055D0F6000682BD</string>
+		<string>D35CAB511056EF1F000682BD</string>
+		<string>1C530D57069F1CE1000CFCEE</string>
 		<string>D35CAADF1055BF38000682BD</string>
 		<string>D35CAAE01055BF38000682BD</string>
 		<string>D3857099101A9E7200949DAD</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>D36EA25910539E3700776556</string>
 		<string>D35CAB0A1055CAF2000682BD</string>
-		<string>1C530D57069F1CE1000CFCEE</string>
 		<string>/Users/brian/Projects/Development/MapNotes/MapNotes.xcodeproj</string>
 		<string>1C78EAAD065D492600B07095</string>
 	</array>
@@ -1030,7 +1030,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C530D57069F1CE1000CFCEE</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>Identifier</key>

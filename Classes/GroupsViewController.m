@@ -202,9 +202,19 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	if (section == 0) {
-		id <NSFetchedResultsSectionInfo> sectionInfo = [[fetchedResultsController sections] objectAtIndex:section];
-		return [sectionInfo numberOfObjects];
-		return 0;
+		// Old way (from template) that was crashing in 3.0
+		//id <NSFetchedResultsSectionInfo> sectionInfo = [[fetchedResultsController sections] objectAtIndex:section];
+		//return [sectionInfo numberOfObjects];
+		//return 0;
+		
+		NSArray *sections = [fetchedResultsController sections];
+		NSUInteger count = 0;
+		
+		if ([sections count]) {
+			id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:section];
+			count = [sectionInfo numberOfObjects];
+		}
+		return count;
 	} else {
 		return 1;
 	}
