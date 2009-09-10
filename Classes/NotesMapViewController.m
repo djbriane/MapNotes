@@ -45,8 +45,8 @@
 	
 	// add zoom controls
 	// Create the sort control as a UISegmentedControl
-	UIImage *zoomInIcon = [UIImage imageNamed:@"icon_map-zoom-in.png"];
-	UIImage *zoomOutIcon = [UIImage imageNamed:@"icon_map-zoom-out.png"];
+	UIImage *zoomInIcon = [UIImage imageNamed:@"img_plus.png"];
+	UIImage *zoomOutIcon = [UIImage imageNamed:@"img_minus.png"];
 
 	UISegmentedControl *sortControl = [[UISegmentedControl alloc] initWithItems: 
 									   [NSArray arrayWithObjects: zoomInIcon, zoomOutIcon, nil]];
