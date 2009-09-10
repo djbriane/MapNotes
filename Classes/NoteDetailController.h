@@ -9,6 +9,7 @@
 #define kTakePhotoButtonText	@"Take Photo"
 #define kChoosePhotoButtonText	@"Choose Existing Photo"
 #define kDeletePhotoButtonText	@"Delete Photo"
+#define kDeleteNoteButtonText	@"Delete Note"
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
@@ -33,6 +34,7 @@
 	UIButton *photoEditButton;
 	UIButton *photoButton;
 	UIButton *deleteButton;
+	UIButton *shareButton;
 	UIButton *takePictureButton;
 	UIButton *selectFromCameraRollButton;
 	
@@ -50,14 +52,17 @@
 @property (nonatomic, retain) IBOutlet UIButton *photoEditButton;
 @property (nonatomic, retain) IBOutlet UIButton *photoButton;
 @property (nonatomic, retain) IBOutlet UIButton *deleteButton;
+@property (nonatomic, retain) IBOutlet UIButton *shareButton;
 
 @property (nonatomic, retain) IBOutlet UIButton *nameTextField;
 
 - (void)updatePhotoInfo;
 - (void)initializeMap;
 - (void)didSelectInsertRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)deleteExistingNote;
 - (IBAction)editPhoto:(id)sender;
 - (IBAction)editTitle:(id)sender;
 - (IBAction)deleteNote:(id)sender;
+- (IBAction)shareNote:(id)sender;
 
 @end

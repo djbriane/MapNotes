@@ -48,7 +48,7 @@
 							<object class="IBUITextView" id="686049519">
 								<reference key="NSNextResponder" ref="465191313"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{5, 4}, {300, 137}}</string>
+								<string key="NSFrame">{{5, 5}, {300, 171}}</string>
 								<reference key="NSSuperview" ref="465191313"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -63,7 +63,7 @@
 								</object>
 							</object>
 						</object>
-						<string key="NSFrameSize">{320, 149}</string>
+						<string key="NSFrameSize">{320, 180}</string>
 						<reference key="NSSuperview" ref="181017416"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -75,7 +75,7 @@
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 					</object>
 				</object>
-				<string key="NSFrameSize">{320, 150}</string>
+				<string key="NSFrameSize">{320, 180}</string>
 				<reference key="NSSuperview"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
@@ -148,7 +148,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>UIResponder</string>
 					<string>TextViewCell</string>
-					<string>{{341, 551}, {320, 150}}</string>
+					<string>{{341, 521}, {320, 180}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>

@@ -11,7 +11,7 @@
 #import "Note.h"
 
 //Text View contstants
-#define kUITextViewCellRowHeight 150.0
+#define kUITextViewCellRowHeight 180.0
 
 @implementation NoteDescViewController
 
@@ -27,7 +27,7 @@
 	} else {
 		self.navigationItem.title = @"Add Description";
 	}
-	self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"StripedBG.png"]];
+	self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"img_bkgnd.png"]];
 	
     UIBarButtonItem *cancelButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancel)];
     self.navigationItem.leftBarButtonItem = cancelButtonItem;
@@ -96,7 +96,7 @@
 	
     // Set up the cell...
     cell.textView.text = note.details;
-	[cell.textView setReturnKeyType:UIReturnKeyDone];
+	//[cell.textView setReturnKeyType:UIReturnKeyDone];
     [cell.textView becomeFirstResponder];
     cell.textView.delegate = self;
     return cell;
@@ -108,11 +108,13 @@
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+	/*
 	if ([text isEqualToString:@"\n"]) {
 		//[textView resignFirstResponder];
 		[self save];
 		return NO;
 	}
+	 */
 	return YES;
 }
 

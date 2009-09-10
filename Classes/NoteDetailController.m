@@ -18,7 +18,7 @@
 #import "StringHelper.h"
 
 //Note Description View contstants
-#define kTextViewFontSize        14.0
+#define kTextViewFontSize        15.0
 #define kTextViewFontSizeDefault 17.0
 #define kDefaultNoteLabel        @"Description"
 #define kDefaultGroupLabel		 @"Group"
@@ -33,7 +33,7 @@
 @synthesize mapView = _mapView;
 @synthesize noteAnnotation;
 @synthesize tableHeaderView, tableFooterView;
-@synthesize photoEditButton, photoButton, deleteButton, nameTextField;
+@synthesize photoEditButton, photoButton, deleteButton, shareButton, nameTextField;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -113,30 +113,30 @@
         // change view to an editable view
 		nameTextField.enabled = YES;
 		//[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
-		deleteButton.hidden = NO;
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-
+		
 		[UIView setAnimationDuration:0.4];
 		[UIView setAnimationDelegate:self];
 		//[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:deleteButton cache:YES];
+		[shareButton setAlpha:0.0];
 		[deleteButton setAlpha:1.0];
 		[UIView commitAnimations];
-		
+		deleteButton.hidden = NO;
+		[deleteButton setEnabled:YES];
 	}
     else {
         // save the changes if needed and change view to noneditable
 		nameTextField.enabled = NO;
-		
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 		[UIView setAnimationDuration:0.4];
 		[UIView setAnimationDelegate:self];
 		//[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:deleteButton cache:YES];
 		[deleteButton setAlpha:0.0];
-		//deleteButton.hidden = YES;
+		[shareButton setAlpha:1.0];
 		[UIView commitAnimations];
-		//
+		[deleteButton setEnabled:NO];
     }
 	
 	// Adjust note desc label width
@@ -194,9 +194,36 @@
 }
 
 - (IBAction)deleteNote:(id)sender {
+	if (deleteButton.enabled) {
+		
+		UIActionSheet *actionSheet = [[UIActionSheet alloc]
+									  initWithTitle:@"Are you sure?"
+									  delegate:self
+									  cancelButtonTitle:@"Cancel"
+									  destructiveButtonTitle:kDeleteNoteButtonText
+									  otherButtonTitles:nil];
+				
+		//actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+		[actionSheet showInView:self.view];
+		[actionSheet release];		
+	}
+}
+
+- (IBAction)shareNote:(id)sender {
+	if (shareButton.enabled) {
+		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"What the Tweet?"
+															message:@"Send your Note+Photo+Location to Twitter Coming Soon!"
+														   delegate:nil
+												  cancelButtonTitle:@"Okay"
+												  otherButtonTitles:nil];
+		[alertView show];
+		[alertView release];
+	}
+}
+
+- (void)deleteExistingNote {
 	NSManagedObjectContext *context = selectedNote.managedObjectContext;
-	
-	// TODO: Should present a confirmation alert before deleting
+
 	[context deleteObject:selectedNote];		
 	
 	// Save the context.
@@ -355,6 +382,9 @@
 	} 
 	else if ([actionSheet buttonTitleAtIndex:buttonIndex] == kDeletePhotoButtonText) {
 		[self deleteExistingPhoto];
+	} 
+	else if ([actionSheet buttonTitleAtIndex:buttonIndex] == kDeleteNoteButtonText) {
+		[self deleteExistingNote];
 	}
 }
 

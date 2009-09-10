@@ -43,7 +43,7 @@
 					<object class="IBUIButton" id="735204908">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{10, 10}, {64, 64}}</string>
+						<string key="NSFrame">{{18, 10}, {64, 64}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -80,7 +80,7 @@
 					<object class="IBUIButton" id="70108154">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{82, 18}, {230, 48}}</string>
+						<string key="NSFrame">{{94, 10}, {216, 64}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="255892345">
 							<int key="NSColorSpace">3</int>
@@ -115,7 +115,7 @@
 						<reference key="IBUINormalTitleShadowColor" ref="255892345"/>
 						<object class="NSCustomResource" key="IBUIHighlightedBackgroundImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">img_title-background-high.png</string>
+							<string key="NSResourceName">img_title-bkgnd-blue.png</string>
 						</object>
 						<object class="NSCustomResource" key="IBUIDisabledBackgroundImage">
 							<string key="NSClassName">NSImage</string>
@@ -123,13 +123,13 @@
 						</object>
 						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">img_title-background.png</string>
+							<string key="NSResourceName">img_title-bkgnd.png</string>
 						</object>
 					</object>
 					<object class="IBUIButton" id="286838053">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrame">{{10, 52}, {64, 22}}</string>
+						<string key="NSFrame">{{18, 52}, {64, 22}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -287,7 +287,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>NoteDetailController</string>
 					<string>UIResponder</string>
-					<string>{{636, 381}, {321, 80}}</string>
+					<string>{{398, 485}, {321, 80}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -325,9 +325,11 @@
 							<string>deleteNote:</string>
 							<string>editPhoto:</string>
 							<string>editTitle:</string>
+							<string>shareNote:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -342,6 +344,7 @@
 							<string>nameTextField</string>
 							<string>photoButton</string>
 							<string>photoEditButton</string>
+							<string>shareButton</string>
 							<string>tableFooterView</string>
 							<string>tableHeaderView</string>
 						</object>
@@ -349,6 +352,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIButton</string>
 							<string>MKMapView</string>
+							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>

@@ -35,11 +35,28 @@
 	self.myTableView.rowHeight = 44;
 	self.myTableView.backgroundColor = [UIColor clearColor];
 	
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
+    /*
+	UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
 																			   target:self 
 																			   action:@selector(showQuickAddView:)];
     self.navigationItem.rightBarButtonItem = addButton;
     [addButton release];
+	 */
+	UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+	[button setBackgroundImage:[UIImage imageNamed:@"btn_plus-orange.png"] forState:UIControlStateNormal];
+	button.titleLabel.font = [UIFont boldSystemFontOfSize: 13];
+	//[button setTitleEdgeInsets:UIEdgeInsetsMake(-2.0, -3.0, 0, 0)];
+	
+	//[button setImage:[UIImage imageNamed:@"btn_all-notes.png"] forState:UIControlStateNormal];
+	//[button setTitle:@"All Notes" forState:UIControlStateNormal];
+	button.bounds = CGRectMake(0,0,33, 30);
+	[button addTarget:self action:@selector(showQuickAddView:) forControlEvents:UIControlEventTouchUpInside];
+	UIBarButtonItem *quickAddItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+	
+	self.navigationItem.rightBarButtonItem = quickAddItem;
+	
+	[quickAddItem release];
+	
 	
 	if (selectedGroup == nil) {
 		self.navigationItem.title = @"All Notes";
