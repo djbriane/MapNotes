@@ -2,7 +2,7 @@
 //  Group.h
 //  MapNotes
 //
-//  Created by Brian Erickson on 9/14/09.
+//  Created by Brian Erickson on 8/29/09.
 //  Copyright 2009 WRKSHP, LLC. All rights reserved.
 //
 
@@ -15,10 +15,7 @@
 }
 
 @property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSNumber * marker;
 @property (nonatomic, retain) NSSet* notes;
-
-- (UIImage *)getPinImage;
 
 @end
 

@@ -108,7 +108,19 @@
 			// create an annotation
 			NoteAnnotation *aNoteAnnotation;
 			aNoteAnnotation = [NoteAnnotation annotationWithNote:aNote];
-			aNoteAnnotation.title = aNote.title;
+			if ([aNote.title length] != 0) {
+				aNoteAnnotation.title = aNote.title;
+			} else if ([aNote.details length] != 0) {
+				aNoteAnnotation.title = aNote.details;
+			} else {
+				static NSDateFormatter *dateFormatter = nil;
+				if (dateFormatter == nil) {
+					dateFormatter = [[NSDateFormatter alloc] init];
+					[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+					[dateFormatter setDateStyle:NSDateFormatterShortStyle];
+				}
+				aNoteAnnotation.title = [dateFormatter stringFromDate:[aNote dateCreated]];
+			}
 			[self.mapView addAnnotation:aNoteAnnotation];
 		}
 	}
@@ -194,17 +206,31 @@
 #pragma mark MKMapView Delegate Methods
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
-	MKPinAnnotationView *view = nil;
+	MKAnnotationView *view = nil;
 	if(annotation != mapView.userLocation) {
-		view = (MKPinAnnotationView *)
+		view = (MKAnnotationView *)
         [mapView dequeueReusableAnnotationViewWithIdentifier:@"identifier"];
-		if(nil == view) {
-			view = [[[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"identifier"] autorelease];
+		
+		//if(nil == view) {
+			view = [[[MKAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"identifier"] autorelease];
 			view.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+			
+			// add the note thumbnail to the flyout
+			NoteAnnotation *noteAnnotation = (NoteAnnotation *)annotation;
+			if (noteAnnotation.note.thumbnail != nil) {
+				UIImageView *photoView = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)] autorelease];
+				view.leftCalloutAccessoryView = photoView;
+				photoView.image = noteAnnotation.note.thumbnail;
+			}
+		//}
+		if (noteAnnotation.note.group != nil) {
+			[view setImage:[noteAnnotation.note.group getPinImage]];	
+		} else {
+			[view setImage:[UIImage imageNamed:@"node_orange.png"]];
 		}
-		[view setPinColor:MKPinAnnotationColorRed];
+		//[view setPinColor:MKPinAnnotationColorRed];
 		[view setCanShowCallout:YES];
-		[view setAnimatesDrop:YES];
+		//[view setAnimatesDrop:YES];
 	} else {
 		CLLocation *location = [[CLLocation alloc] initWithLatitude:annotation.coordinate.latitude longitude:annotation.coordinate.longitude];
 		[self setCurrentLocation:location];
@@ -228,6 +254,7 @@
 	[self presentModalViewController:nav animated:YES];
 	 */
 	NoteAnnotation *ann = (NoteAnnotation *)view.annotation;
+
 	NoteDetailController *noteDetailController = [[NoteDetailController alloc] initWithStyle:UITableViewStyleGrouped];
 	noteDetailController.view.backgroundColor = [UIColor clearColor];
 	noteDetailController.selectedNote = ann.note;

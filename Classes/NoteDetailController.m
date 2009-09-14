@@ -33,7 +33,7 @@
 @synthesize mapView = _mapView;
 @synthesize noteAnnotation;
 @synthesize tableHeaderView, tableFooterView;
-@synthesize photoEditButton, photoButton, deleteButton, shareButton, nameTextField;
+@synthesize photoEditButton, photoButton, deleteButton, shareButton, nameTextField, photoBorderImage;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -68,16 +68,17 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	
 	self.navigationItem.rightBarButtonItem = [self editButtonItem];
 
-	if (selectedNote.title != nil) {
+	if ([selectedNote.title length] != 0) {
 		self.navigationItem.title = selectedNote.title;
 		[nameTextField setTitle:[selectedNote title] forState:UIControlStateNormal];
+		UIColor *myDarkGray = [UIColor colorWithRed:(45.0/255.0) green:(48.0/255.0) blue:(51.0/255.0) alpha:1.0];
+		[nameTextField setTitleColor:myDarkGray forState:UIControlStateDisabled];
 		[nameTextField setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-		[nameTextField setTitleColor:[UIColor blackColor] forState:UIControlStateDisabled];
 	} else {
-		[nameTextField setTitle:@"Note Title" forState:UIControlStateNormal];
+		self.navigationItem.title = selectedNote.details;
+		[nameTextField setTitle:@"Add Title" forState:UIControlStateNormal];
 		//nameTextField.titleLabel.font = [UIFont boldSystemFontOfSize:18];
 		[nameTextField setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
 		[nameTextField setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
@@ -99,7 +100,6 @@
 // If the setEditing: parameter is YES, the view should display editable controls; 
 // otherwise, it should display noneditable controls.
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
-	NSString *noteDesc;
 	NSArray *visibleCells;
 	UITableViewCell *currentCell;
 	//UIImageView *detailsDescIcon;
@@ -141,7 +141,6 @@
 	
 	// Adjust note desc label width
 	if ([selectedNote.details length] != 0) {
-		noteDesc = selectedNote.details;
 		visibleCells = [self.tableView visibleCells];
 		currentCell = [visibleCells objectAtIndex:0];
 		NSArray *rowToReload = [NSArray arrayWithObject:[self.tableView indexPathForCell:currentCell]];
@@ -166,7 +165,6 @@
 			NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 			abort();
 		}
-
 	}
 	
 }
@@ -189,7 +187,6 @@
 	descController.note = self.selectedNote;
 	
     [self.navigationController pushViewController:descController animated:YES];
-	
     [descController release];
 }
 
@@ -257,6 +254,7 @@
 	if (didSave) {
 		self.selectedNote = note;
 	}
+	//[self.tableView setEditing:YES animated:NO];
 	[self.navigationController popViewControllerAnimated:YES];
 	//[self.tableView reloadData];
 	[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
@@ -314,13 +312,15 @@
 		[photoEditButton setHidden:YES];
 	}
 	
+	[photoBorderImage setHidden:YES];
 	if (image) {
+		[photoBorderImage setHidden:NO];
 		[photoButton setImage:image forState:UIControlStateNormal];
 	} else if (self.editing) {
 		image = [UIImage imageNamed:@"img_photo-add.png"];
 		[photoButton setImage:image forState:UIControlStateNormal];
 	} else {
-		image = [UIImage imageNamed:@"img_photo-blank.png"];
+		image = [UIImage imageNamed:@"img_no-photo.png"];
 		[photoButton setImage:image forState:UIControlStateNormal];		
 	}
 }
@@ -354,6 +354,7 @@
 	region.span.latitudeDelta = 0.005f;
 	
 	[self.mapView setRegion:region animated:NO];
+	[self.mapView removeAnnotation:self.noteAnnotation];
 	[self.mapView addAnnotation:self.noteAnnotation];
 	// Done adding Note to map
 	
@@ -394,6 +395,9 @@
 - (void)imagePickerController:(UIImagePickerController *)picker 
 		didFinishPickingImage:(UIImage *)selectedImage 
 				  editingInfo:(NSDictionary *)editingInfo {
+	
+	// Save the image to the users album
+	UIImageWriteToSavedPhotosAlbum(selectedImage, nil, nil, nil);
 	
 	// Delete Existing Photo
 	[self deleteExistingPhoto];
@@ -499,7 +503,7 @@
         case 0:
 			// If the cell is enabled, the accessory view tracks touches and, if tapped, sends the data-source object
 			// a tableView:accessoryButtonTappedForRowWithIndexPath: message.
-			cell.accessoryType = UITableViewCellAccessoryNone;
+			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 			cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
 			cell.selectionStyle = UITableViewCellSelectionStyleBlue;
 
@@ -551,7 +555,7 @@
 }
 
 - (void)didSelectInsertRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == 0 && self.tableView.editing) {
+	if (indexPath.section == 0) {
 		if (indexPath.row == 0) {
 			// note description
 			[self editDesc];
@@ -559,14 +563,12 @@
 			// change group
 			GroupsViewController *groupsViewController = [[GroupsViewController alloc] initWithStyle:UITableViewStyleGrouped];
 			groupsViewController.view.backgroundColor = [UIColor clearColor];
-			
 			groupsViewController.selectedNote = selectedNote;
 			
-			//[groupsViewController setEditing:YES animated:NO];
 			[self.navigationController pushViewController:groupsViewController animated:YES];
-			
 			[groupsViewController release];
 		}
+		//[self setEditing:YES animated:NO];
 	} else {
 		[[self.tableView cellForRowAtIndexPath:indexPath] setSelected:NO animated:YES];
 	}
@@ -603,7 +605,7 @@
 		NSString *label = selectedNote.details;
 		CGFloat fontSize = kTextViewFontSize;
 
-		CGFloat height = [label RAD_textHeightForSystemFontOfSize:fontSize] + 20.0;
+		CGFloat height = [label RAD_textHeightForSystemFontOfSize:fontSize] + 20.0;	
 		return height;
 	}
 	// return default
@@ -688,6 +690,30 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 	}
 }
 
+#pragma mark -
+#pragma mark MKMapView Delegate Methods
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+	MKAnnotationView *view = nil;
+
+	view = (MKAnnotationView *)
+	[mapView dequeueReusableAnnotationViewWithIdentifier:@"identifier"];
+	
+	if(nil == view) {
+		view = [[[MKAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"identifier"] autorelease];
+	}
+	//UIImage *pinImage = (UIImage *)[ autorelease];
+	/*if (selectedNote.group != nil) {
+		[view setImage:[selectedNote.group getPinImage]];	
+	} else {
+		[view setImage:[UIImage imageNamed:@"node_orange.png"]];
+	} */
+	[view setImage:[UIImage imageNamed:@"node_orange.png"]];
+	//[view setPinColor:MKPinAnnotationColorRed];
+	[view setCanShowCallout:NO];
+	
+	return view;
+}
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.

@@ -27,7 +27,7 @@
 	} else {
 		self.navigationItem.title = @"Add Description";
 	}
-	self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"img_bkgnd.png"]];
+	self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"img_desc-edit_bkgnd.png"]];
 	
     UIBarButtonItem *cancelButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancel)];
     self.navigationItem.leftBarButtonItem = cancelButtonItem;

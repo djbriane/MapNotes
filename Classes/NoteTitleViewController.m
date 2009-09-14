@@ -12,7 +12,7 @@
 @implementation NoteTitleViewController
 
 @synthesize note;
-@synthesize titleTextField;
+@synthesize titleTextField, charCountLabel;
 @synthesize delegate;
 
 - (void)viewDidLoad {
@@ -34,6 +34,12 @@
     self.navigationItem.rightBarButtonItem = saveButtonItem;
     [saveButtonItem release];
 	
+	if (note != nil) {
+		charCountLabel.text = [NSString stringWithFormat:@"%d", (kMaxTitleLength - note.title.length)];
+	} else {
+		charCountLabel.text = [NSString stringWithFormat:@"%d", (kMaxTitleLength)];
+	}
+	
 	[titleTextField becomeFirstResponder];
 }
 
@@ -49,6 +55,27 @@
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+	//NSLog([NSString stringWithFormat:@"Length (Pre): %d", textField.text.length]);
+	//NSLog([NSString stringWithFormat:@"Length (Post): %d", string.length]);
+	//NSLog([NSString stringWithFormat:@"Range: %d", range.length]);
+
+	if (textField.text.length >= kMaxTitleLength && range.length == 0) {
+        charCountLabel.text = @"0";	
+		return NO; // return NO to not change text
+    } else {
+		NSInteger charCount;
+		if (range.length > 0) {
+			charCount = kMaxTitleLength - textField.text.length + range.length;
+		} else {
+			charCount = kMaxTitleLength - textField.text.length - string.length;
+		}
+
+		charCountLabel.text = [NSString stringWithFormat:@"%d", charCount];
+		return YES;
+	}
+
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	if (textField == titleTextField) {
@@ -64,7 +91,6 @@
 
 - (void)save {
 	note.title = titleTextField.text;
-
 	[self.delegate noteTitleViewController:self didSetTitle:note didSave:YES];
 }
 

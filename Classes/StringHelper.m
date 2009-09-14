@@ -15,7 +15,7 @@
 	//Calculate the expected size based on the font and linebreak mode of your label
 	CGFloat maxWidth = [UIScreen mainScreen].bounds.size.width - 90.0;
 	CGFloat maxHeight = 9999;
-	CGFloat minHeight = 21;
+	CGFloat minHeight = 24;
 	
 	CGSize maximumLabelSize = CGSizeMake(maxWidth,maxHeight);
 	

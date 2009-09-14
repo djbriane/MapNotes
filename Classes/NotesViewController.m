@@ -28,11 +28,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	// Default sorting to date created descending (most recent at top)
-	sortOrder = @"dateCreated";
 	sortAscending = NO;
 	
-	self.myTableView.rowHeight = 44;
+	self.myTableView.rowHeight = 56;
 	self.myTableView.backgroundColor = [UIColor clearColor];
 	
     /*
@@ -63,6 +61,11 @@
 	} else {
 		self.navigationItem.title = selectedGroup.name;
 	}
+	
+	// TODO: Sort order isn't being stored on application load
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSString *sortOrderPref = [defaults stringForKey:@"sort_order"];
+	NSLog(@"Sort Order %@", sortOrderPref);
 	
 	// Create the sort control as a UISegmentedControl
 	/*
@@ -98,9 +101,25 @@
 	[super viewWillAppear:animated];
 	self.navigationController.navigationBarHidden = NO;
 	self.navigationItem.backBarButtonItem = nil;
-	// set the sort to date created
-	// TODO: Change this to remember the preferred sort (with fallback to date if no location)
-	[sortControl setSelectedSegmentIndex:0];
+
+	// Default sorting to date created descending (most recent at top)
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSString *sortOrderPref = [defaults stringForKey:@"sort_order"];
+	NSLog(@"Sort Order %@", sortOrderPref);
+	self.sortOrder = [defaults objectForKey:@"sort_order"];
+
+	if (self.sortOrder == @"title") {
+		// A - Z
+		[sortControl setSelectedSegmentIndex:1];
+	} else if (self.sortOrder == @"geoDistance") {
+		// Distance
+		[sortControl setSelectedSegmentIndex:2];
+	} else {
+		// Date Created
+		[sortControl setSelectedSegmentIndex:0];
+	}
+
+	//sortOrder = @"dateCreated";
 	
 	// disable distance sort if no location
 	CLLocation *location = [[LocationController sharedInstance] currentLocation];
@@ -118,11 +137,15 @@
     [super viewDidAppear:animated];
 }
 */
-/*
+
 - (void)viewWillDisappear:(BOOL)animated {
+	// save current sort as default
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setObject:self.sortOrder forKey:@"sort_order"];
+	
 	[super viewWillDisappear:animated];
 }
-*/
+
 /*
 - (void)viewDidDisappear:(BOOL)animated {
 	[super viewDidDisappear:animated];
@@ -149,6 +172,27 @@
 	// e.g. self.myOutlet = nil;
 }
 
+- (NSSortDescriptor *)getCurrentSortDescriptor {
+	CLLocation *location = [[LocationController sharedInstance] currentLocation];
+
+	if ([self.sortOrder length] == 0) {
+		self.sortOrder = @"dateCreated";
+	}
+	if (!location && self.sortOrder == @"geoDistance") {
+		// set the sort order to date created since we don't have a location
+		self.sortOrder == @"dateCreated";
+	}
+	
+	// Set self's events array to the mutable array, then clean up.
+	NSSortDescriptor *sortDescriptor;
+	if (self.sortOrder == @"geoDistance") {
+		sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"location" ascending:YES selector:@selector(compareToLocation:)];
+	} else {
+		sortDescriptor = [[NSSortDescriptor alloc] initWithKey:self.sortOrder ascending:self.sortAscending];
+	}
+	return sortDescriptor;
+}
+
 - (void)fetchExistingNotes {
 	/*
 	 Fetch existing events.
@@ -160,6 +204,7 @@
 	
 	// Order the notes by creation date, most recent first.
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:NO];
+	//NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:self.sortOrder ascending:NO];
 	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
 	[request setSortDescriptors:sortDescriptors];
 	[sortDescriptor release];
@@ -181,14 +226,17 @@
 	
 	// Set self's events array to the mutable array, then clean up.
 	[self setNotesArray:mutableFetchResults];	
-	
 	[mutableFetchResults release];
 	[request release];
+	
+	// sort the notes
+	[self sortExistingNotes:NO];
 }
 
-- (void)sortExistingNotes {
-	CLLocation *location = [[LocationController sharedInstance] currentLocation];
+- (void)sortExistingNotes:(BOOL)animated {
+	//CLLocation *location = [[LocationController sharedInstance] currentLocation];
 	if ([notesArray count] != 0) {
+		/*
 		if (!location && self.sortOrder == @"geoDistance") {
 			// set the sort order to date created since we don't have a location
 			self.sortOrder == @"dateCreated";
@@ -200,22 +248,24 @@
 			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"location" ascending:YES selector:@selector(compareToLocation:)];
 		} else {
 			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:self.sortOrder ascending:self.sortAscending];
-		}	
-		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+		}	*/
+		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:[self getCurrentSortDescriptor], nil];
 		NSMutableArray *sortedNotesArray = [[self.notesArray sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
 		[self setNotesArray:sortedNotesArray];
 		
-		[sortDescriptor release];
+		//[sortDescriptor release];
 		[sortDescriptors release];
 		//[sortedNotesArray release];
 		
 		//[self.myTableView reloadData];
-		NSIndexPath *indPath = [NSIndexPath indexPathForRow:0 inSection:0];
-		[self.myTableView scrollToRowAtIndexPath:indPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
-		[NSTimer scheduledTimerWithTimeInterval:.02 target:self 
-									   selector:@selector(reloadSections) 
-									   userInfo:nil 
-										repeats:NO];
+		if (animated) {
+			NSIndexPath *indPath = [NSIndexPath indexPathForRow:0 inSection:0];
+			[self.myTableView scrollToRowAtIndexPath:indPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+			[NSTimer scheduledTimerWithTimeInterval:.02 target:self 
+										   selector:@selector(reloadSections) 
+										   userInfo:nil 
+											repeats:NO];
+		}
 	}
 }
 
@@ -259,6 +309,7 @@
 	switch (selectedIndex) {
 		case 1:
 			// sort by alpha
+			// TODO: Now that description is used we need a custom sort descriptor
 			self.sortOrder = @"title";
 			self.sortAscending = YES;
 			break;
@@ -277,7 +328,7 @@
 	}
 	
 	// invalidate and re-run the fetch with the new sort descriptor
-	[self sortExistingNotes];
+	[self sortExistingNotes:YES];
 }
 
 - (IBAction)showMapView:(id)sender {
@@ -316,7 +367,29 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	// disable sort and map view, show message
+	if ([self.notesArray count] == 0) {
+		// Date Created
+		[self.sortControl setEnabled:NO forSegmentAtIndex:0];
+		// A - Z
+		[self.sortControl setEnabled:NO forSegmentAtIndex:1];
+		// Distance
+		[self.sortControl setEnabled:NO forSegmentAtIndex:2];
+		[self.mapViewButton setEnabled:NO];
+	} else {
+		// Date Created
+		[self.sortControl setEnabled:YES forSegmentAtIndex:0];
+		// A-Z
+		[self.sortControl setEnabled:YES forSegmentAtIndex:1];
+		// Distance (only if we have a valid location)
+		if ([[LocationController sharedInstance] currentLocation]) {
+			[self.sortControl setEnabled:YES forSegmentAtIndex:2];
+		}
+		[self.mapViewButton setEnabled:YES];
+	}
+	
 	return [notesArray count];
+
 }
 
 
@@ -331,27 +404,28 @@
     if (cell == nil) {
         //cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
 		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+		//cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		
 		// set up custom cell
-		photoView = [[[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 34, 34)] autorelease];
+		photoView = [[[UIImageView alloc] initWithFrame:CGRectMake(6, 4, 48, 48)] autorelease];
 		[cell.contentView addSubview:photoView];
 		photoView.tag = kPhotoViewTag;
 		//photo.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
 		
-		titleLabel = [[[UILabel alloc] initWithFrame:CGRectMake(45, 2, 187, 40)] autorelease];
+		titleLabel = [[[UILabel alloc] initWithFrame:CGRectMake(62, 6, 237, 24)] autorelease];
 		[cell.contentView addSubview:titleLabel];
 		titleLabel.textAlignment = UITextAlignmentLeft;
 		titleLabel.highlightedTextColor = [UIColor whiteColor];
-		titleLabel.font = [UIFont boldSystemFontOfSize:18];
+		titleLabel.font = [UIFont boldSystemFontOfSize:16];
 		titleLabel.tag = kTitleViewTag;
 		
-		detailsLabel = [[[UILabel alloc] initWithFrame:CGRectMake(237, 2, 55, 40)] autorelease];
+		detailsLabel = [[[UILabel alloc] initWithFrame:CGRectMake(62, 28, 237, 21)] autorelease];
 		[cell.contentView addSubview:detailsLabel];
-		detailsLabel.textAlignment = UITextAlignmentRight;
-		titleLabel.highlightedTextColor = [UIColor whiteColor];
+		detailsLabel.textAlignment = UITextAlignmentLeft;
+		detailsLabel.highlightedTextColor = [UIColor whiteColor];
 		detailsLabel.font = [UIFont systemFontOfSize:14];
-		detailsLabel.textColor = [UIColor darkGrayColor];
+		detailsLabel.textColor = [UIColor grayColor];
 		detailsLabel.tag = kDetailsViewTag;
 		
 	}
@@ -359,40 +433,67 @@
 	// Configure the cell.
 	Note *note = (Note *)[notesArray objectAtIndex:indexPath.row];
 	
+	// if no image is set, adjust the frame
+	//if (note.thumbnail == nil) {
+	//	titleLabel.frame = CGRectMake(6, 6, 293, 24);
+	//	detailsLabel.frame = CGRectMake(6, 28, 293, 21);
+	//}
+	
 	titleLabel = (UILabel *)[cell viewWithTag:kTitleViewTag];
-	if (note.title != nil) {
+	if ([note.title length] != 0) {
 		titleLabel.text = note.title;
 		titleLabel.textColor = [UIColor blackColor];
+	} else if ([note.details length] != 0) {
+		titleLabel.text = note.details;
+		titleLabel.textColor = [UIColor blackColor];
 	} else {
-		//titleLabel.font = [UIFont italicSystemFontOfSize:18];
+		//titleLabel.font = [UIFont italicSystemFontOfSize:16];
 		titleLabel.textColor = [UIColor grayColor];
 		titleLabel.text = @"No Title";
 	}
 
 	photoView = (UIImageView *)[cell viewWithTag:kPhotoViewTag];
-	photoView.image = note.thumbnail;
-	
+	if (note.thumbnail != nil) {
+		photoView.image = note.thumbnail;
+	} else {
+		photoView.image = [UIImage imageNamed:@"img_no-photo_thumb.png"];
+	}
+	//[cell.imageView.image drawInRect:CGRectMake(4, 4, 48, 48)];
+
 	detailsLabel = (UILabel *)[cell viewWithTag:kDetailsViewTag];
+	CLLocation *location = [[LocationController sharedInstance] currentLocation];
+	NSString *geoLabel;
+	NSString *dateLabel;
+	if (!location || !note.location) {
+		geoLabel = nil;
+	} else {
+		geoLabel = [NSString stringWithFormat:@"%1.1f mi", ([note.location getDistanceFrom:location] * 0.000621371192)];
+	}
+	
+	// A date formatter for the creation/modified dates.
+	static NSDateFormatter *dateFormatter = nil;
+	if (dateFormatter == nil) {
+		dateFormatter = [[NSDateFormatter alloc] init];
+		[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+		[dateFormatter setDateStyle:NSDateFormatterShortStyle];
+	}
+	dateLabel = [dateFormatter stringFromDate:[note dateCreated]];
+
 	if (self.sortOrder == @"geoDistance") {
 		// show distance if sorted by distance
-		CLLocation *location = [[LocationController sharedInstance] currentLocation];
-		if (!location || !note.location) {
+		if (geoLabel == nil) {
 			return cell;
 		}
-		detailsLabel.text = [NSString stringWithFormat:@"%4.1f mi", ([note.location getDistanceFrom:location] * 0.000621371192)];
+		detailsLabel.text = geoLabel;
 	} else if (self.sortOrder == @"dateCreated") {
-		// A date formatter for the creation/modified dates.
-		static NSDateFormatter *dateFormatter = nil;
-		if (dateFormatter == nil) {
-			dateFormatter = [[NSDateFormatter alloc] init];
-			[dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-			[dateFormatter setDateStyle:NSDateFormatterShortStyle];
-		}
-		
 		// return the created date if its the first section
-		detailsLabel.text = [dateFormatter stringFromDate:[note dateCreated]];
+		detailsLabel.text = dateLabel;
 	} else {
-		detailsLabel.text = nil;
+		if (geoLabel == nil) {
+			detailsLabel.text = dateLabel;
+		} else {
+			detailsLabel.text = [NSString stringWithFormat:@"%@ - %@", dateLabel, geoLabel];
+		}
 	}
 
     return cell;

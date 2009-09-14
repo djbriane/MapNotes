@@ -11,8 +11,8 @@
 
 @implementation GroupNameViewController
 
-@synthesize group;
-@synthesize titleTextField;
+@synthesize group, isNewGroup;
+@synthesize titleTextField, charCountLabel, markerTypeControl;
 @synthesize delegate;
 
 - (void)viewDidLoad {
@@ -21,10 +21,11 @@
     if (group.name != nil) {
 		self.navigationItem.title = @"Edit Name";
 	} else {
-		self.navigationItem.title = @"Add Group";
+		self.navigationItem.title = @"New Group";
 	}
 	if (group != nil) {
 		titleTextField.text = group.name;
+		[markerTypeControl setSelectedSegmentIndex:[group.marker intValue]];
 	}
 	self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"img_bkgnd.png"]];
 	
@@ -35,6 +36,12 @@
     UIBarButtonItem *saveButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(save)];
     self.navigationItem.rightBarButtonItem = saveButtonItem;
     [saveButtonItem release];
+	
+	if (group != nil) {
+		charCountLabel.text = [NSString stringWithFormat:@"%d", (kMaxGroupLength - group.name.length)];
+	} else {
+		charCountLabel.text = [NSString stringWithFormat:@"%d", (kMaxGroupLength)];
+	}
 	
 	[titleTextField becomeFirstResponder];
 }
@@ -51,6 +58,22 @@
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+	if (textField.text.length >= kMaxGroupLength && range.length == 0) {
+        charCountLabel.text = @"0";	
+		return NO; // return NO to not change text
+    } else {
+		NSInteger charCount;
+		if (range.length > 0) {
+			charCount = kMaxGroupLength - textField.text.length + range.length;
+		} else {
+			charCount = kMaxGroupLength - textField.text.length - string.length;
+		}
+		
+		charCountLabel.text = [NSString stringWithFormat:@"%d", charCount];
+		return YES;
+	}
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	if (textField == titleTextField) {
@@ -65,14 +88,16 @@
 }
 
 - (void)save {
-	group.name = titleTextField.text;
-	
-	[self.delegate groupNameViewController:self didSetTitle:group didSave:YES];
+	[group setName:titleTextField.text];
+	//NSNumber selectedIndex = [markerTypeControl selectedSegmentIndex];
+	[group setMarker:[NSNumber numberWithInteger:[markerTypeControl selectedSegmentIndex]]];
+	//[group setMarker:(NSNumber *)[markerTypeControl selectedSegmentIndex]];
+	[self.delegate groupNameViewController:self didSetTitle:group didSave:YES newGroup:isNewGroup];
 }
 
 
 - (void)cancel {
-    [self.delegate groupNameViewController:self didSetTitle:group didSave:NO];
+    [self.delegate groupNameViewController:self didSetTitle:group didSave:NO newGroup:isNewGroup];
 }
 
 

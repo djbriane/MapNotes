@@ -14,11 +14,9 @@
 {
 }
 
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSNumber * marker;
-@property (nonatomic, retain) NSSet* notes;
-
-- (UIImage *)getPinImage;
+@property (nonatomic, retain) NSString *name;
+@property (nonatomic, retain) NSNumber *marker;
+@property (nonatomic, retain) NSSet *notes;
 
 @end
 

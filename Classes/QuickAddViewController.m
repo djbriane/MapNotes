@@ -123,7 +123,7 @@
 		// TODO: Should throw an error here.
 		return;
 	}
-
+	/*
 	NoteTitleViewController *titleController = [[NoteTitleViewController alloc] initWithNibName:@"EditTitle" bundle:nil];
     titleController.delegate = self;
 	titleController.note = note;
@@ -134,6 +134,18 @@
     
     [navigationController release];
     [titleController release];
+	*/
+	
+	NoteDescViewController *descController = [[NoteDescViewController alloc] initWithNibName:@"EditDesc" bundle:nil];
+    descController.delegate = self;
+	descController.note = note;
+	
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:descController];
+	navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.4902 green:0.5098 blue:.5294 alpha:1.0];
+    [self presentModalViewController:navigationController animated:YES];
+    
+    [navigationController release];	
+    [descController release];
 }
 
 - (IBAction)addPhotoNote:(id)sender {
@@ -198,6 +210,9 @@
 		didFinishPickingImage:(UIImage *)selectedImage 
 				  editingInfo:(NSDictionary *)editingInfo {
 	
+	// Save the image to the users album
+	UIImageWriteToSavedPhotosAlbum(selectedImage, nil, nil, nil);
+	
 	// Create a new note
 	Note *note = [self createNewNote];
 	if (!note) {
@@ -247,11 +262,15 @@
 }
 
 #pragma mark -
-#pragma mark Note Title View Controller Methods
+#pragma mark Note Description View Controller Methods
 
-- (void)noteTitleViewController:(NoteTitleViewController *)controller 
-					didSetTitle:(Note *)note
-						didSave:(BOOL)didSave {
+//- (void)noteTitleViewController:(NoteTitleViewController *)controller 
+//					didSetTitle:(Note *)note
+//						didSave:(BOOL)didSave {
+	
+- (void)noteDescViewController:(NoteDescViewController *)controller 
+					didSetDesc:(Note *)note
+					   didSave:(BOOL)didSave {
 
 	if (didSave == NO) {
 		[note.managedObjectContext deleteObject:note];
@@ -259,11 +278,6 @@
 
 	NSError *error = nil;
 	if (![note.managedObjectContext save:&error]) {
-		/*
-		 Replace this implementation with code to handle the error appropriately.
-		 
-		 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
-		 */
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		abort();
 	}

@@ -22,6 +22,9 @@
 	// add 'Edit' button to Nav Bar (left)
 	self.navigationItem.leftBarButtonItem = [self editButtonItem];
 
+	self.tableView.allowsSelectionDuringEditing = YES;
+	accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
 	// add 'All Notes' button to Nav Bar (right)
 	// Obtain a UIButton object and set its background to the UIImage object
 	UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -38,6 +41,12 @@
 	self.navigationItem.rightBarButtonItem = allNotesItem;
 
 	[allNotesItem release];
+}
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    [super setEditing:editing animated:animated];
+	
+	// TODO: Hide the 'All Notes' navigation bar button when in edit mode
 }
 
 - (void)showAllNotes {

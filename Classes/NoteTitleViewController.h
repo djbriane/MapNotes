@@ -6,6 +6,8 @@
 //  Copyright 2009 WRKSHP, LLC. All rights reserved.
 //
 
+#define kMaxTitleLength 35
+
 #import <UIKit/UIKit.h>
 
 @protocol NoteTitleDelegate;
@@ -15,11 +17,13 @@
 	@private
 		Note *note;
 		UITextField *titleTextField;
+		UILabel *charCountLabel;
 		id <NoteTitleDelegate> delegate;
 }
 
 @property(nonatomic, retain) Note *note;
 @property(nonatomic, retain) IBOutlet UITextField *titleTextField;
+@property (nonatomic, retain) IBOutlet UILabel *charCountLabel;
 @property(nonatomic, assign) id <NoteTitleDelegate> delegate;
 
 - (IBAction)doneButtonOnKeyboardPressed:(id)sender;

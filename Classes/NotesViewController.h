@@ -41,7 +41,8 @@
 //@property (nonatomic, retain) NoteDetailController *noteDetailController;
 
 - (void)fetchExistingNotes;
-- (void)sortExistingNotes;
+- (void)sortExistingNotes:(BOOL)animated ;
+- (NSSortDescriptor *)getCurrentSortDescriptor;
 - (void)showQuickAddView:(BOOL)animated;
 - (void)changeSortOrder:(id)sender;
 - (void)reloadSections;

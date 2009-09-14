@@ -17,6 +17,7 @@
 @implementation GroupsViewController
 
 @synthesize fetchedResultsController, managedObjectContext, selectedNote;
+@synthesize tableFooterView, newGroupButton, accessoryType;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -34,7 +35,7 @@
 	if (managedObjectContext == nil) {
 		managedObjectContext = [((MapNotesAppDelegate *)[UIApplication sharedApplication].delegate).managedObjectContext retain];
 	}
-
+	accessoryType = UITableViewCellAccessoryNone;
 	
 	//self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	self.tableView.backgroundColor = [UIColor clearColor];
@@ -42,6 +43,13 @@
 	
 	self.navigationItem.title = @"Groups";
 
+	if (tableFooterView == nil) {
+		[[NSBundle mainBundle] loadNibNamed:@"GroupsFooter" owner:self options:nil];
+		self.tableView.tableFooterView = tableFooterView;
+	}
+	
+	[newGroupButton setAlpha:1.0];
+	
 	NSError *error;
 	if (![[self fetchedResultsController] performFetch:&error]) {
 		// Handle the error...
@@ -60,9 +68,26 @@
 #pragma mark Editing
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
-    
     [super setEditing:editing animated:animated];
-    	
+   
+	if (editing == YES){
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+		
+		[UIView setAnimationDuration:0.4];
+		[UIView setAnimationDelegate:self];
+		[newGroupButton setAlpha:0.0];
+		[UIView commitAnimations];
+	} else {
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+		
+		[UIView setAnimationDuration:0.4];
+		[UIView setAnimationDelegate:self];
+		[newGroupButton setAlpha:1.0];
+		[UIView commitAnimations];
+	}
+	
 	/*
 	 If editing is finished, save the managed object context.
 	 */
@@ -125,12 +150,14 @@
 - (void)editTitle:(Group *)group {
 	GroupNameViewController *nameController = [[GroupNameViewController alloc] initWithNibName:@"EditName" bundle:nil];
     nameController.delegate = self;
+	nameController.isNewGroup = NO;
 	
 	// Make a new group
-	//Group *group;
 	if (group == nil) {
 		group = (Group *)[NSEntityDescription insertNewObjectForEntityForName:@"Group"
 													   inManagedObjectContext:managedObjectContext];
+		group.marker = 0;
+		nameController.isNewGroup = YES;
 	}
 	
 	nameController.group = group;
@@ -153,10 +180,15 @@
 	[group addNotesObject:note];
 }
 
+- (IBAction)addNewGroup:(id)sender {
+	[self editTitle:nil];
+}
+
 - (void)groupNameViewController:(GroupNameViewController *)controller 
 					didSetTitle:(Group *)group
-						didSave:(BOOL)didSave {
-	if (didSave == NO) {
+						didSave:(BOOL)didSave
+					   newGroup:(BOOL)newGroup {
+	if (didSave == NO && newGroup) {
 		// delete the group before saving
 		[managedObjectContext deleteObject:group];
 	} else if (selectedNote != nil) {
@@ -196,7 +228,7 @@
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 1;
 }
 
 
@@ -225,53 +257,24 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	static NSString *CellIdentifier = @"CellIdentifier";
-	static NSString *AddCellIdentifier = @"AddCellIdentifier";
 	UITableViewCell *cell;
-    UIImageView *icon;
 	
-	if (indexPath.section == 1) {
-		// set up add group cell
-		cell = [tableView dequeueReusableCellWithIdentifier:AddCellIdentifier];
-		if (cell == nil) {
-			//cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:NoteCellIdentifier] autorelease];
-			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:AddCellIdentifier] autorelease];
-			
-			icon = [[[UIImageView alloc] initWithFrame:CGRectMake(10.0, 10.0, 27.0, 27.0)] autorelease];
-			icon.tag = kIconImageTag;
-			//photo.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
-			[cell.contentView addSubview:icon];
-		} else {
-			icon = (UIImageView *)[cell.contentView viewWithTag:kIconImageTag];
-		}
-		
-	} else {
-		// All Other Cell Setup
-		cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-		if (cell == nil) {
-			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-		}
+	// All Other Cell Setup
+	cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	if (cell == nil) {
+		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
 	}
     
 	// Configure the cell.
 	cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-	cell.accessoryType = UITableViewCellAccessoryNone;
-	
-	if (indexPath.section == 0) {	
-		Group *group = [fetchedResultsController objectAtIndexPath:indexPath];
-		/* Not possible to load a table view with a row selected so just ignore this for now
-		if (selectedNote != nil && selectedNote.group != nil && [selectedNote.group.name compare:group.name] == NSOrderedSame) {
+	cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	cell.accessoryType = accessoryType;
 
-			//[cell setSelected:YES animated:YES];
-			//cell.selected = YES;
-			//cell.highlighted = YES;
-		} */
-		cell.textLabel.text = group.name;
-		// TODO: If this is the root view, set the accessoryType to disclosure
-	} else {
-		//cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-		cell.textLabel.text = @"New Group";
-		cell.imageView.image = [UIImage imageNamed:@"icon_group.png"];
-	}
+	Group *group = [fetchedResultsController objectAtIndexPath:indexPath];
+	cell.textLabel.text = group.name;
+	
+	// disable until padding can be corrected
+	//cell.imageView.image = [group getPinImage];
 	
     return cell;
 }
@@ -291,8 +294,10 @@
     [self.navigationController pushViewController:notesViewController animated:YES];
 	[notesViewController release];
 	*/
-	if (indexPath.section == 0) {
-		Group *group = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+	Group *group = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+	if (indexPath.section == 0 && self.editing) {
+		[self editTitle:group];
+	} else {
 		if (selectedNote != nil) {
 			// selected an existing group
 			[self addToGroup:group withNote:selectedNote];
@@ -301,10 +306,7 @@
 			// show list of notes
 			[self showAllNotesWithGroup:group];
 		}
-	} else {
-		[self editTitle:nil];
-	}
-
+	} 
 }
 
 /*
