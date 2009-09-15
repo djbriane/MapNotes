@@ -69,6 +69,7 @@
 		D3D952971034536400C39C92 /* MapTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3D952961034536400C39C92 /* MapTableCell.xib */; };
 		D3E5B437105EA91200B87B81 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E5B436105EA91200B87B81 /* Group.m */; };
 		D3E5B50A105ED1EC00B87B81 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D3E5B509105ED1EC00B87B81 /* Settings.bundle */; };
+		D3E5B6B2105F1ABC00B87B81 /* btn_delete-high.png in Resources */ = {isa = PBXBuildFile; fileRef = D3E5B6B1105F1ABC00B87B81 /* btn_delete-high.png */; };
 		D3F991A41044D9A200066E1D /* img_note_footer_bkgnd.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F991921044D9A200066E1D /* img_note_footer_bkgnd.png */; };
 		D3F991A51044D9A200066E1D /* img_main_bkgnd.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F991931044D9A200066E1D /* img_main_bkgnd.png */; };
 		D3F991A61044D9A200066E1D /* img_map-blank.png in Resources */ = {isa = PBXBuildFile; fileRef = D3F991941044D9A200066E1D /* img_map-blank.png */; };
@@ -109,7 +110,7 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* MapNotesAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapNotesAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* MapNotesAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapNotesAppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* NoteableDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoteableDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* Noteable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Noteable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		28860B760F44E54D00985440 /* MapNotes.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = MapNotes.xcdatamodel; sourceTree = "<group>"; };
 		28860BE40F44EE6400985440 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -178,6 +179,7 @@
 		D3E5B435105EA91200B87B81 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Group.h; path = "Model Classes/Group.h"; sourceTree = "<group>"; };
 		D3E5B436105EA91200B87B81 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Group.m; path = "Model Classes/Group.m"; sourceTree = "<group>"; };
 		D3E5B509105ED1EC00B87B81 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		D3E5B6B1105F1ABC00B87B81 /* btn_delete-high.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_delete-high.png"; path = "Images/btn_delete-high.png"; sourceTree = "<group>"; };
 		D3F991921044D9A200066E1D /* img_note_footer_bkgnd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_note_footer_bkgnd.png; path = Images/img_note_footer_bkgnd.png; sourceTree = "<group>"; };
 		D3F991931044D9A200066E1D /* img_main_bkgnd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_main_bkgnd.png; path = Images/img_main_bkgnd.png; sourceTree = "<group>"; };
 		D3F991941044D9A200066E1D /* img_map-blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "img_map-blank.png"; path = "Images/img_map-blank.png"; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 		0C251CA81023893200C05768 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D3E5B6B1105F1ABC00B87B81 /* btn_delete-high.png */,
 				D387E0DD105B09B300111FB0 /* node_yellow.png */,
 				D387E0DE105B09B300111FB0 /* node_purple.png */,
 				D387E0DF105B09B300111FB0 /* node_orange.png */,
@@ -325,7 +328,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* NoteableDev.app */,
+				1D6058910D05DD3D006BFB54 /* Noteable.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -425,7 +428,7 @@
 			);
 			name = MapNotes;
 			productName = MapNotes;
-			productReference = 1D6058910D05DD3D006BFB54 /* NoteableDev.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* Noteable.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -514,6 +517,7 @@
 				D387E1FF105C5A2200111FB0 /* ShareDetails.xib in Resources */,
 				D387E243105CA58900111FB0 /* GroupsFooter.xib in Resources */,
 				D3E5B50A105ED1EC00B87B81 /* Settings.bundle in Resources */,
+				D3E5B6B2105F1ABC00B87B81 /* btn_delete-high.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
