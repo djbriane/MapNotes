@@ -70,7 +70,7 @@
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
     [super setEditing:editing animated:animated];
    
-	if (editing == YES){
+	if (editing == YES) {
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 		
@@ -274,7 +274,7 @@
 	cell.textLabel.text = group.name;
 	
 	// disable until padding can be corrected
-	//cell.imageView.image = [group getPinImage];
+	cell.imageView.image = [group getPinImage];
 	
     return cell;
 }
@@ -375,11 +375,11 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 - (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == 1) {
-		return 0;
-	} else {
-		return 0;
-	}
+	return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return 50;
 }
 
 /*

@@ -104,7 +104,7 @@ static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWi
 // Scale down the image and rotate it to account for camera orientation
 // Code obtained from: http://discussions.apple.com/message.jspa?messageID=7276709
 + (UIImage *)scaleAndRotateImage:(UIImage *)image {	
-	int kMaxResolution = 320; // Or whatever
+	int kMaxResolution = 800; // Or whatever
 	
 	CGImageRef imgRef = image.CGImage;
 	

@@ -96,7 +96,7 @@
 					</object>
 					<object class="IBUISegmentedControl" id="200200064">
 						<reference key="NSNextResponder" ref="219559437"/>
-						<int key="NSvFlags">-2147483356</int>
+						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 123}, {280, 44}}</string>
 						<reference key="NSSuperview" ref="219559437"/>
 						<bool key="IBUIOpaque">NO</bool>

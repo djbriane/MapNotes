@@ -228,9 +228,12 @@
 		} else {
 			[view setImage:[UIImage imageNamed:@"node_orange.png"]];
 		}
-		//[view setPinColor:MKPinAnnotationColorRed];
+		CGPoint offsetPixels;
+		offsetPixels.x = 10;
+		offsetPixels.y = -16;
+		view.centerOffset = offsetPixels;
+		
 		[view setCanShowCallout:YES];
-		//[view setAnimatesDrop:YES];
 	} else {
 		CLLocation *location = [[CLLocation alloc] initWithLatitude:annotation.coordinate.latitude longitude:annotation.coordinate.longitude];
 		[self setCurrentLocation:location];

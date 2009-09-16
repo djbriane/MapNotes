@@ -25,6 +25,10 @@
 	self.tableView.allowsSelectionDuringEditing = YES;
 	accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
+	[self showAllNotesItem:NO];
+}
+
+- (void)showAllNotesItem:(BOOL)animated {
 	// add 'All Notes' button to Nav Bar (right)
 	// Obtain a UIButton object and set its background to the UIImage object
 	UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -38,15 +42,19 @@
 	[button addTarget:self action:@selector(showAllNotes) forControlEvents:UIControlEventTouchUpInside];
 	UIBarButtonItem *allNotesItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 	
-	self.navigationItem.rightBarButtonItem = allNotesItem;
-
+	[self.navigationItem setRightBarButtonItem:allNotesItem animated:animated];
 	[allNotesItem release];
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
     [super setEditing:editing animated:animated];
 	
-	// TODO: Hide the 'All Notes' navigation bar button when in edit mode
+	// Hide the 'All Notes' navigation bar button when in edit mode
+	if (editing) {
+		[self.navigationItem setRightBarButtonItem:nil animated:YES];
+	} else {
+		[self showAllNotesItem:YES];	
+	}
 }
 
 - (void)showAllNotes {

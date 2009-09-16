@@ -15,7 +15,7 @@
 
 @synthesize window;
 @synthesize navigationController;
-//@synthesize locationManager;
+@synthesize sortOrder, sortAscending;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -61,6 +61,9 @@
 	//[notesViewController showQuickAddView:NO];
 	[rootViewController showAllNotesWithQuickAdd];
 
+	sortOrder = @"dateCreated";
+	sortAscending = NO;
+	
 	[window makeKeyAndVisible];
 	
 	//[notesViewController release];
@@ -176,13 +179,13 @@
 #pragma mark Memory management
 
 - (void)dealloc {
-	
     [managedObjectContext release];
     [managedObjectModel release];
     [persistentStoreCoordinator release];
     
 	[navigationController release];
-
+	[sortOrder release];
+	
 	[window release];
 	[super dealloc];
 }

@@ -6,6 +6,8 @@
 //  Copyright 2009 WRKSHP, LLC. All rights reserved.
 //
 
+#define kMinLabelHeight 24
+
 #import "StringHelper.h"
 
 @implementation NSString (StringHelper)
@@ -15,15 +17,14 @@
 	//Calculate the expected size based on the font and linebreak mode of your label
 	CGFloat maxWidth = [UIScreen mainScreen].bounds.size.width - 90.0;
 	CGFloat maxHeight = 9999;
-	CGFloat minHeight = 24;
 	
 	CGSize maximumLabelSize = CGSizeMake(maxWidth,maxHeight);
 	
 	CGSize expectedLabelSize = [self sizeWithFont:[UIFont systemFontOfSize:size] 
 								constrainedToSize:maximumLabelSize 
 									lineBreakMode:UILineBreakModeWordWrap]; 
-	if (expectedLabelSize.height < minHeight) {
-		return minHeight;
+	if (expectedLabelSize.height < kMinLabelHeight) {
+		return kMinLabelHeight;
 	} else {
 		return expectedLabelSize.height;
 	}

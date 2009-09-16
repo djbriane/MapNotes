@@ -20,10 +20,11 @@
     NSManagedObjectContext *managedObjectContext;	    
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
 	
-	//CLLocationManager *locationManager;
-
     UIWindow *window;
     UINavigationController *navigationController;
+	
+	NSString *sortOrder;
+	BOOL sortAscending;
 }
 
 - (IBAction)saveAction:sender;
@@ -34,7 +35,9 @@
 
 @property (nonatomic, readonly) NSString *applicationDocumentsDirectory;
 
-//@property (nonatomic, retain) CLLocationManager *locationManager;
+@property (nonatomic, retain) NSString *sortOrder;
+@property (nonatomic, assign) BOOL sortAscending;
+
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 

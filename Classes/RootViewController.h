@@ -14,6 +14,7 @@
 
 @property (nonatomic, retain) IBOutlet UIView *groupsTitleView;
 
+- (void)showAllNotesItem:(BOOL)animated;
 - (void)showAllNotes;
 - (void)showAllNotesWithQuickAdd;
 

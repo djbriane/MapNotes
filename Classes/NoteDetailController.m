@@ -354,9 +354,19 @@
 	region.span.latitudeDelta = 0.005f;
 	
 	[self.mapView setRegion:region animated:NO];
-	[self.mapView removeAnnotation:self.noteAnnotation];
 	[self.mapView addAnnotation:self.noteAnnotation];
 	// Done adding Note to map
+	
+	NSArray *annotations = [self.mapView annotations];
+	if ([annotations objectAtIndex:0] != nil) {
+		MKAnnotationView *anAnnotation = [self.mapView viewForAnnotation:[annotations objectAtIndex:0]];
+		//UIImage *pinImage = (UIImage *)[ autorelease];
+		if (selectedNote.group != nil) {
+			[anAnnotation setImage:[selectedNote.group getPinImage]];	
+		} else {
+			[anAnnotation setImage:[UIImage imageNamed:@"node_orange.png"]];
+		}
+	}
 	
 }
 
@@ -696,20 +706,22 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
 	MKAnnotationView *view = nil;
 
-	view = (MKAnnotationView *)
-	[mapView dequeueReusableAnnotationViewWithIdentifier:@"identifier"];
+	view = (MKAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"identifier"];
 	
 	if(nil == view) {
 		view = [[[MKAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"identifier"] autorelease];
 	}
-	//UIImage *pinImage = (UIImage *)[ autorelease];
-	/*if (selectedNote.group != nil) {
+
+	if (selectedNote.group != nil) {
 		[view setImage:[selectedNote.group getPinImage]];	
 	} else {
 		[view setImage:[UIImage imageNamed:@"node_orange.png"]];
-	} */
-	[view setImage:[UIImage imageNamed:@"node_orange.png"]];
-	//[view setPinColor:MKPinAnnotationColorRed];
+	} 
+	CGPoint offsetPixels;
+	offsetPixels.x = 10;
+	offsetPixels.y = -16;
+	view.centerOffset = offsetPixels;
+	
 	[view setCanShowCallout:NO];
 	
 	return view;

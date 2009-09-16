@@ -8,13 +8,14 @@
 
 @class Note;
 
-@interface NotePhotoViewController : UIViewController {
+@interface NotePhotoViewController : UIViewController <UIScrollViewDelegate> {
     @private
         Note *note;
-        UIImageView *imageView;
+        //UIImageView *imageView;
+	    UIScrollView *imageScrollView;
 }
 
 @property(nonatomic, retain) Note *note;
-@property(nonatomic, retain) UIImageView *imageView;
+@property(nonatomic, retain) UIScrollView *imageScrollView;
 
 @end

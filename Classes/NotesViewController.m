@@ -7,11 +7,11 @@
 //
 
 #import "NotesViewController.h"
+#import "MapNotesAppDelegate.h"
 #import "NoteDetailController.h"
 #import "NotesMapViewController.h"
 #import "CLLocation+DistanceComparison.h"
 #import "LocationController.h"
-#import "RoundedRectView.h"
 #import "Note.h"
 #import "Group.h"
 
@@ -22,14 +22,12 @@
 @implementation NotesViewController
 
 @synthesize managedObjectContext, selectedGroup, notesArray;
-@synthesize myTableView, toolbar, sortOrder, sortAscending;
+@synthesize myTableView, toolbar;
 @synthesize sortControl, mapViewButton;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
-	sortAscending = NO;
-	
+
 	self.myTableView.rowHeight = 56;
 	self.myTableView.backgroundColor = [UIColor clearColor];
 	
@@ -62,38 +60,8 @@
 		self.navigationItem.title = selectedGroup.name;
 	}
 	
-	// TODO: Sort order isn't being stored on application load
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSString *sortOrderPref = [defaults stringForKey:@"sort_order"];
-	NSLog(@"Sort Order %@", sortOrderPref);
+	NSLog(@"Sort Order (load): %@", UIAppDelegate.sortOrder);
 	
-	// Create the sort control as a UISegmentedControl
-	/*
-	NSArray *itemsArray;
-	UISegmentedControl *sortControl = [[UISegmentedControl alloc] initWithItems: [NSArray arrayWithObjects: @"Date", @"A - Z", @"Distance", nil]];
-
-	sortControl.segmentedControlStyle = UISegmentedControlStyleBar;
-	sortControl.backgroundColor = [UIColor clearColor];
-	sortControl.tintColor = [UIColor darkGrayColor];
-	// default to date sort, should change this to remember sort preference
-	sortControl.selectedSegmentIndex = 0;
-	
-	[sortControl addTarget:self action:@selector(changeSortOrder:) forControlEvents:UIControlEventValueChanged];
-	
-	sortControl.frame = CGRectMake(10, 6, 250,30);
-	
-	UIBarButtonItem *mapViewButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_map.png"] 
-																	  style:UIBarButtonItemStylePlain 
-																	 target:self 
-																	 action:nil];
-	
-	itemsArray = [NSArray arrayWithObjects:sortControl, mapViewButton, nil];
-	
-	//[toolbar setItems:itemsArray animated:NO];
-	toolbar.items = itemsArray;
-	[sortControl release];
-	[mapViewButton release];
-	 */
 	[sortControl addTarget:self action:@selector(changeSortOrder:) forControlEvents:UIControlEventValueChanged];
 }
 
@@ -103,15 +71,15 @@
 	self.navigationItem.backBarButtonItem = nil;
 
 	// Default sorting to date created descending (most recent at top)
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSString *sortOrderPref = [defaults stringForKey:@"sort_order"];
-	NSLog(@"Sort Order %@", sortOrderPref);
-	self.sortOrder = [defaults objectForKey:@"sort_order"];
+	//NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	//NSString *sortOrderPref = [defaults stringForKey:@"sort_order"];
+	NSLog(@"Sort Order (appear): %@", UIAppDelegate.sortOrder);
+	//self.sortOrder = [defaults objectForKey:@"sort_order"];
 
-	if (self.sortOrder == @"title") {
+	if ([UIAppDelegate.sortOrder isEqual:@"title"]) {
 		// A - Z
 		[sortControl setSelectedSegmentIndex:1];
-	} else if (self.sortOrder == @"geoDistance") {
+	} else if ([UIAppDelegate.sortOrder isEqual:@"geoDistance"]) {
 		// Distance
 		[sortControl setSelectedSegmentIndex:2];
 	} else {
@@ -140,8 +108,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
 	// save current sort as default
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setObject:self.sortOrder forKey:@"sort_order"];
+	//NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	//[defaults setObject:self.sortOrder forKey:@"sort_order"];
 	
 	[super viewWillDisappear:animated];
 }
@@ -175,20 +143,20 @@
 - (NSSortDescriptor *)getCurrentSortDescriptor {
 	CLLocation *location = [[LocationController sharedInstance] currentLocation];
 
-	if ([self.sortOrder length] == 0) {
-		self.sortOrder = @"dateCreated";
+	if ([UIAppDelegate.sortOrder length] == 0) {
+		UIAppDelegate.sortOrder = @"dateCreated";
 	}
-	if (!location && self.sortOrder == @"geoDistance") {
+	if (!location && UIAppDelegate.sortOrder == @"geoDistance") {
 		// set the sort order to date created since we don't have a location
-		self.sortOrder == @"dateCreated";
+		UIAppDelegate.sortOrder == @"dateCreated";
 	}
 	
 	// Set self's events array to the mutable array, then clean up.
 	NSSortDescriptor *sortDescriptor;
-	if (self.sortOrder == @"geoDistance") {
+	if (UIAppDelegate.sortOrder == @"geoDistance") {
 		sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"location" ascending:YES selector:@selector(compareToLocation:)];
 	} else {
-		sortDescriptor = [[NSSortDescriptor alloc] initWithKey:self.sortOrder ascending:self.sortAscending];
+		sortDescriptor = [[NSSortDescriptor alloc] initWithKey:UIAppDelegate.sortOrder ascending:UIAppDelegate.sortAscending];
 	}
 	return sortDescriptor;
 }
@@ -309,21 +277,20 @@
 	switch (selectedIndex) {
 		case 1:
 			// sort by alpha
-			// TODO: Now that description is used we need a custom sort descriptor
-			self.sortOrder = @"title";
-			self.sortAscending = YES;
+			UIAppDelegate.sortOrder = @"title";
+			UIAppDelegate.sortAscending = YES;
 			break;
 		case 2:
 			if ([[LocationController sharedInstance] currentLocation]) {
 				// sort by distance
-				self.sortOrder = @"geoDistance";
-				self.sortAscending = YES;
+				UIAppDelegate.sortOrder = @"geoDistance";
+				UIAppDelegate.sortAscending = YES;
 				break;			
 			}
 		default:
 			// default to sort by date
-			self.sortOrder = @"dateCreated";
-			self.sortAscending = NO;
+			UIAppDelegate.sortOrder = @"dateCreated";
+			UIAppDelegate.sortAscending = NO;
 			break;
 	}
 	
@@ -443,9 +410,6 @@
 	if ([note.title length] != 0) {
 		titleLabel.text = note.title;
 		titleLabel.textColor = [UIColor blackColor];
-	} else if ([note.details length] != 0) {
-		titleLabel.text = note.details;
-		titleLabel.textColor = [UIColor blackColor];
 	} else {
 		//titleLabel.font = [UIFont italicSystemFontOfSize:16];
 		titleLabel.textColor = [UIColor grayColor];
@@ -479,13 +443,13 @@
 	}
 	dateLabel = [dateFormatter stringFromDate:[note dateCreated]];
 
-	if (self.sortOrder == @"geoDistance") {
+	if (UIAppDelegate.sortOrder == @"geoDistance") {
 		// show distance if sorted by distance
 		if (geoLabel == nil) {
 			return cell;
 		}
 		detailsLabel.text = geoLabel;
-	} else if (self.sortOrder == @"dateCreated") {
+	} else if (UIAppDelegate.sortOrder == @"dateCreated") {
 		// return the created date if its the first section
 		detailsLabel.text = dateLabel;
 	} else {
@@ -607,7 +571,6 @@
 */
 
 - (void)dealloc {
-	[sortOrder release];
 	[toolbar release];
 	[managedObjectContext release];
 	[notesArray release];

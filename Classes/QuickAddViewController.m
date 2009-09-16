@@ -123,7 +123,7 @@
 		// TODO: Should throw an error here.
 		return;
 	}
-	/*
+	
 	NoteTitleViewController *titleController = [[NoteTitleViewController alloc] initWithNibName:@"EditTitle" bundle:nil];
     titleController.delegate = self;
 	titleController.note = note;
@@ -134,8 +134,8 @@
     
     [navigationController release];
     [titleController release];
-	*/
 	
+	/*
 	NoteDescViewController *descController = [[NoteDescViewController alloc] initWithNibName:@"EditDesc" bundle:nil];
     descController.delegate = self;
 	descController.note = note;
@@ -146,6 +146,7 @@
     
     [navigationController release];	
     [descController release];
+	 */
 }
 
 - (IBAction)addPhotoNote:(id)sender {
@@ -264,13 +265,9 @@
 #pragma mark -
 #pragma mark Note Description View Controller Methods
 
-//- (void)noteTitleViewController:(NoteTitleViewController *)controller 
-//					didSetTitle:(Note *)note
-//						didSave:(BOOL)didSave {
-	
-- (void)noteDescViewController:(NoteDescViewController *)controller 
-					didSetDesc:(Note *)note
-					   didSave:(BOOL)didSave {
+- (void)noteTitleViewController:(NoteTitleViewController *)controller 
+					didSetTitle:(Note *)note
+						didSave:(BOOL)didSave {
 
 	if (didSave == NO) {
 		[note.managedObjectContext deleteObject:note];

@@ -8,6 +8,8 @@
 
 #import "QuickAddViewController.h"
 
+#define kFilename @"prefs.plist"
+
 @class QuickAddViewController;
 @class Note;
 @class Group;
@@ -22,8 +24,8 @@
 	IBOutlet UISegmentedControl *sortControl;
 	IBOutlet UIBarButtonItem *mapViewButton;
 
-	NSString *sortOrder;
-	BOOL sortAscending;
+	//NSString *sortOrder;
+	//BOOL sortAscending;
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
@@ -35,8 +37,8 @@
 @property (nonatomic, retain) IBOutlet UISegmentedControl *sortControl;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *mapViewButton;
 
-@property (nonatomic, retain) NSString *sortOrder;
-@property (nonatomic, assign) BOOL sortAscending;
+//@property (nonatomic, retain) NSString *sortOrder;
+//@property (nonatomic, assign) BOOL sortAscending;
 
 //@property (nonatomic, retain) NoteDetailController *noteDetailController;
 
