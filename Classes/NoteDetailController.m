@@ -10,6 +10,7 @@
 #import "Group.h"
 
 #import "NoteDetailController.h"
+#import "MapNotesAppDelegate.h"
 #import "NotePhotoViewController.h"
 #import "NoteAnnotation.h"
 #import "RoundedRectView.h"
@@ -24,7 +25,8 @@
 @synthesize mapView = _mapView;
 @synthesize noteAnnotation;
 @synthesize tableHeaderView, tableFooterView;
-@synthesize photoEditButton, photoButton, deleteButton, nameTextField, photoBorderImage;
+@synthesize gestureStartPoint;
+@synthesize photoEditButton, photoButton, deleteButton, infoLabelButton, nameTextField, photoBorderImage;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -56,7 +58,6 @@
 	 }
 	 
 	 self.tableView.sectionHeaderHeight = 5.0;
-	 
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -76,6 +77,13 @@
 		[nameTextField setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
 
 	}
+	
+	if (UIAppDelegate.infoDisplay == 0) {
+		[self setCreatedDateLabel];
+	} else {
+		[self setLocationInfoLabel];
+	}
+	
 	[self initializeMap];
 	[self updatePhotoInfo];
 	[self.tableView reloadData];
@@ -212,6 +220,58 @@
 		[alertView show];
 		[alertView release];
 }
+
+- (IBAction)rotateInfoLabel:(id)sender {
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+	[UIView setAnimationDuration:0.4];
+	[UIView setAnimationDelegate:self];
+	[infoLabelButton setAlpha:0.0];
+	[UIView commitAnimations];
+	
+	if (UIAppDelegate.infoDisplay == 0) {
+		[self setLocationInfoLabel];
+		UIAppDelegate.infoDisplay = 1;
+	} else {
+		[self setCreatedDateLabel];
+		UIAppDelegate.infoDisplay = 0;
+	}
+	
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+	[UIView setAnimationDuration:0.4];
+	[UIView setAnimationDelegate:self];
+	[infoLabelButton setAlpha:1.0];
+	[UIView commitAnimations];
+}
+
+- (void)setCreatedDateLabel {
+	NSString *createdDate;
+	
+	// A date formatter for the creation/modified dates.
+	static NSDateFormatter *dateFormatter = nil;
+	if (dateFormatter == nil) {
+		dateFormatter = [[NSDateFormatter alloc] init];
+		[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+		[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+	}
+		
+	// return the created date if its the first section
+	createdDate = [NSString stringWithFormat:@"Created: %@", [dateFormatter stringFromDate:[selectedNote dateCreated]]];
+	[infoLabelButton setTitle:createdDate forState:UIControlStateNormal];
+	infoLabelButton.titleLabel.font = [UIFont systemFontOfSize: 15];
+}
+	 
+- (void)setLocationInfoLabel {
+	NSString *locationInfo;
+	CLLocation *noteLocation = [selectedNote location];
+	
+	// return the created date if its the first section
+	locationInfo = [NSString stringWithFormat:@"Loc: %1.2f, %1.2f Acc: %1.0fm Alt: %1.0fm ", noteLocation.coordinate.latitude, noteLocation.coordinate.longitude, noteLocation.horizontalAccuracy, noteLocation.altitude];
+	[infoLabelButton setTitle:locationInfo forState:UIControlStateNormal];
+	infoLabelButton.titleLabel.font = [UIFont systemFontOfSize: 13];
+
+}	 
 
 - (void)deleteExistingNote {
 	NSManagedObjectContext *context = selectedNote.managedObjectContext;
@@ -769,6 +829,32 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 	return view;
 }
 
+#pragma mark -
+#pragma mark Animation Methods
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+	UITouch *touch = [touches anyObject];
+	gestureStartPoint = [touch locationInView:self.view];
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+	UITouch *touch = [touches anyObject];
+	CGPoint currentPosition = [touch locationInView:self.view];
+	CGFloat deltaX = fabsf(gestureStartPoint.x - currentPosition.x);
+	CGFloat deltaY = fabsf(gestureStartPoint.y - currentPosition.y);
+	if (deltaX >= kMinimumGestureLength && deltaY <= kMaximumVariance) {
+		//label.text = @"Horizontal swipe detected";
+		//[self rotateInfoLabel];
+		NSLog(@"Drag Detected");
+	}
+	/*
+	else if (deltaY >= kMinimumGestureLength &&
+			 deltaX <= kMaximumVariance){
+		label.text = @"Vertical swipe detected";
+		[self performSelector:@selector(eraseText) withObject:nil
+				   afterDelay:2];
+	} */
+}
+
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
@@ -780,13 +866,27 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
 	self.mapView = nil;
+	self.selectedNote = nil;
 	self.tableHeaderView = nil;
 	self.tableFooterView = nil;
+	self.photoEditButton = nil;
+	self.photoButton = nil;
+	self.deleteButton = nil;
+	self.infoLabelButton = nil;
 }
 
 - (void)dealloc {
 	self.mapView = nil;
-	self.selectedNote = nil;
+	//self.selectedNote = nil;
+	[selectedNote release];
+	[tableHeaderView release];
+	[tableFooterView release];
+	[photoEditButton release];
+	[photoButton release];
+	[deleteButton release];
+	[infoLabelButton release];
+	[nameTextField release];
+	[photoBorderImage release];
     [super dealloc];
 }
 

@@ -48,6 +48,7 @@
 	UIButton *photoEditButton;
 	UIButton *photoButton;
 	UIButton *deleteButton;
+	UIButton *infoLabelButton;
 	UIButton *takePictureButton;
 	UIButton *selectFromCameraRollButton;
 	UIImageView *photoBorderImage;
@@ -67,6 +68,7 @@
 @property (nonatomic, retain) IBOutlet UIButton *photoEditButton;
 @property (nonatomic, retain) IBOutlet UIButton *photoButton;
 @property (nonatomic, retain) IBOutlet UIButton *deleteButton;
+@property (nonatomic, retain) IBOutlet UIButton *infoLabelButton;
 
 @property (nonatomic, retain) IBOutlet UIButton *nameTextField;
 @property (nonatomic, retain) IBOutlet UIImageView *photoBorderImage;
@@ -75,9 +77,12 @@
 - (void)initializeMap;
 - (void)didSelectInsertRowAtIndexPath:(NSIndexPath *)indexPath;
 - (void)deleteExistingNote;
+- (void)setCreatedDateLabel;
+- (void)setLocationInfoLabel;
 - (IBAction)editPhoto:(id)sender;
 - (IBAction)editTitle:(id)sender;
 - (IBAction)deleteNote:(id)sender;
 - (IBAction)shareNote:(id)sender;
+- (IBAction)rotateInfoLabel:(id)sender;
 
 @end

@@ -25,6 +25,7 @@
 	
 	NSString *sortOrder;
 	BOOL sortAscending;
+	NSInteger infoDisplay;
 }
 
 - (IBAction)saveAction:sender;
@@ -37,6 +38,7 @@
 
 @property (nonatomic, retain) NSString *sortOrder;
 @property (nonatomic, assign) BOOL sortAscending;
+@property (nonatomic, assign) NSInteger infoDisplay;
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;

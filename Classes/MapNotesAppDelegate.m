@@ -15,7 +15,7 @@
 
 @synthesize window;
 @synthesize navigationController;
-@synthesize sortOrder, sortAscending;
+@synthesize sortOrder, sortAscending, infoDisplay;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -63,6 +63,7 @@
 
 	sortOrder = @"dateCreated";
 	sortAscending = NO;
+	infoDisplay = 0;
 	
 	[window makeKeyAndVisible];
 	
