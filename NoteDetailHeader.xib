@@ -43,7 +43,7 @@
 					<object class="IBUIButton" id="735204908">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{9, 10}, {64, 64}}</string>
+						<string key="NSFrame">{{9, 15}, {64, 64}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -80,7 +80,7 @@
 					<object class="IBUIButton" id="70108154">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{90, 10}, {221, 64}}</string>
+						<string key="NSFrame">{{90, 15}, {221, 64}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="255892345">
 							<int key="NSColorSpace">3</int>
@@ -130,7 +130,7 @@
 					<object class="IBUIImageView" id="441585866">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{9, 10}, {64, 64}}</string>
+						<string key="NSFrame">{{9, 15}, {64, 64}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -144,7 +144,7 @@
 					<object class="IBUIButton" id="286838053">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrame">{{9, 10}, {64, 64}}</string>
+						<string key="NSFrame">{{9, 15}, {64, 64}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -166,7 +166,7 @@
 						<reference key="IBUINormalBackgroundImage" ref="700214425"/>
 					</object>
 				</object>
-				<string key="NSFrameSize">{321, 80}</string>
+				<string key="NSFrameSize">{321, 89}</string>
 				<reference key="NSSuperview"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
@@ -321,7 +321,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>NoteDetailController</string>
 					<string>UIResponder</string>
-					<string>{{636, 554}, {321, 80}}</string>
+					<string>{{636, 545}, {321, 89}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -380,7 +380,6 @@
 							<string>photoBorderImage</string>
 							<string>photoButton</string>
 							<string>photoEditButton</string>
-							<string>shareButton</string>
 							<string>tableFooterView</string>
 							<string>tableHeaderView</string>
 						</object>
@@ -390,7 +389,6 @@
 							<string>MKMapView</string>
 							<string>UIButton</string>
 							<string>UIImageView</string>
-							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIView</string>

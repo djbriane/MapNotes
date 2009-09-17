@@ -68,7 +68,7 @@
 					<object class="IBUIButton" id="110904240">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{18, 238}, {282, 58}}</string>
+						<string key="NSFrame">{{18, 236}, {282, 58}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -84,6 +84,7 @@
 							<double key="NSSize">18</double>
 							<int key="NSfFlags">16</int>
 						</object>
+						<bool key="IBUIAdjustsImageWhenDisabled">NO</bool>
 						<object class="NSColor" key="IBUIHighlightedTitleColor" id="623235319">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -108,7 +109,7 @@
 					<object class="IBUIButton" id="594973260">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{19, 303}, {282, 58}}</string>
+						<string key="NSFrame">{{19, 301}, {282, 58}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -120,6 +121,7 @@
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<reference key="IBUIFont" ref="178459735"/>
+						<bool key="IBUIAdjustsImageWhenDisabled">NO</bool>
 						<reference key="IBUIHighlightedTitleColor" ref="623235319"/>
 						<object class="NSColor" key="IBUIDisabledTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -135,7 +137,7 @@
 					<object class="IBUIButton" id="409638200">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{19, 368}, {282, 58}}</string>
+						<string key="NSFrame">{{19, 366}, {282, 58}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -161,7 +163,7 @@
 					<object class="IBUIButton" id="175234671">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{252, 183}, {42, 42}}</string>
+						<string key="NSFrame">{{252, 182}, {42, 42}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -193,7 +195,7 @@
 					<object class="IBUIActivityIndicatorView" id="538898688">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{263, 193}, {20, 20}}</string>
+						<string key="NSFrame">{{263, 192}, {20, 20}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -203,7 +205,7 @@
 					<object class="IBUIButton" id="335074513">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{138, 422}, {44, 51}}</string>
+						<string key="NSFrame">{{137, 421.306}, {44, 58.6944}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -476,7 +478,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>QuickAddViewController</string>
 					<string>UIResponder</string>
-					<string>{{610, 192}, {320, 480}}</string>
+					<string>{{629, 192}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>

@@ -11,6 +11,19 @@
 #define kDeletePhotoButtonText	@"Delete Photo"
 #define kDeleteNoteButtonText	@"Delete Note"
 
+//Note Description View contstants
+#define kTextViewFontSize        15.0
+#define kTextViewFontSizeDefault 17.0
+#define kDefaultNoteLabel        @"Description"
+#define kDefaultGroupLabel		 @"Group"
+#define kMainLabelTag 1
+#define kIconImageTag 2
+#define kDetailsInfoLabelTag 3
+#define kDetailsDescLabel 15
+
+#define kMinimumGestureLength 25
+#define kMaximumVariance 5
+
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
@@ -30,11 +43,11 @@
 	
 	UIView *tableHeaderView;
 	UIView *tableFooterView;
+	CGPoint gestureStartPoint;
 	
 	UIButton *photoEditButton;
 	UIButton *photoButton;
 	UIButton *deleteButton;
-	UIButton *shareButton;
 	UIButton *takePictureButton;
 	UIButton *selectFromCameraRollButton;
 	UIImageView *photoBorderImage;
@@ -49,11 +62,11 @@
 
 @property (nonatomic, retain) IBOutlet UIView *tableHeaderView;
 @property (nonatomic, retain) IBOutlet UIView *tableFooterView;
+@property CGPoint gestureStartPoint;
 
 @property (nonatomic, retain) IBOutlet UIButton *photoEditButton;
 @property (nonatomic, retain) IBOutlet UIButton *photoButton;
 @property (nonatomic, retain) IBOutlet UIButton *deleteButton;
-@property (nonatomic, retain) IBOutlet UIButton *shareButton;
 
 @property (nonatomic, retain) IBOutlet UIButton *nameTextField;
 @property (nonatomic, retain) IBOutlet UIImageView *photoBorderImage;

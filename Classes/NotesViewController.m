@@ -227,7 +227,7 @@
 		
 		//[self.myTableView reloadData];
 		if (animated) {
-			NSIndexPath *indPath = [NSIndexPath indexPathForRow:0 inSection:0];
+			NSIndexPath *indPath = [NSIndexPath indexPathForRow:NSNotFound inSection:0];
 			[self.myTableView scrollToRowAtIndexPath:indPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
 			[NSTimer scheduledTimerWithTimeInterval:.02 target:self 
 										   selector:@selector(reloadSections) 

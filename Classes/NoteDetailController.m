@@ -17,15 +17,6 @@
 #import "GroupsViewController.h"
 #import "StringHelper.h"
 
-//Note Description View contstants
-#define kTextViewFontSize        15.0
-#define kTextViewFontSizeDefault 17.0
-#define kDefaultNoteLabel        @"Description"
-#define kDefaultGroupLabel		 @"Group"
-#define kMainLabelTag 1
-#define kIconImageTag 2
-#define kDetailsDescLabel 15
-
 @implementation NoteDetailController
 
 @synthesize selectedNote;
@@ -33,7 +24,7 @@
 @synthesize mapView = _mapView;
 @synthesize noteAnnotation;
 @synthesize tableHeaderView, tableFooterView;
-@synthesize photoEditButton, photoButton, deleteButton, shareButton, nameTextField, photoBorderImage;
+@synthesize photoEditButton, photoButton, deleteButton, nameTextField, photoBorderImage;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -64,20 +55,21 @@
 		self.tableView.tableFooterView = tableFooterView;
 	 }
 	 
+	 self.tableView.sectionHeaderHeight = 5.0;
+	 
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	self.navigationItem.rightBarButtonItem = [self editButtonItem];
+	self.navigationItem.title = @"Note";
 
 	if ([selectedNote.title length] != 0) {
-		self.navigationItem.title = selectedNote.title;
 		[nameTextField setTitle:[selectedNote title] forState:UIControlStateNormal];
 		UIColor *myDarkGray = [UIColor colorWithRed:(45.0/255.0) green:(48.0/255.0) blue:(51.0/255.0) alpha:1.0];
 		[nameTextField setTitleColor:myDarkGray forState:UIControlStateDisabled];
 		[nameTextField setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 	} else {
-		self.navigationItem.title = selectedNote.details;
 		[nameTextField setTitle:@"Add Title" forState:UIControlStateNormal];
 		//nameTextField.titleLabel.font = [UIFont boldSystemFontOfSize:18];
 		[nameTextField setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
@@ -119,7 +111,6 @@
 		[UIView setAnimationDuration:0.4];
 		[UIView setAnimationDelegate:self];
 		//[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:deleteButton cache:YES];
-		[shareButton setAlpha:0.0];
 		[deleteButton setAlpha:1.0];
 		[UIView commitAnimations];
 		deleteButton.hidden = NO;
@@ -134,19 +125,25 @@
 		[UIView setAnimationDelegate:self];
 		//[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:deleteButton cache:YES];
 		[deleteButton setAlpha:0.0];
-		[shareButton setAlpha:1.0];
 		[UIView commitAnimations];
 		[deleteButton setEnabled:NO];
     }
 	
+	visibleCells = [self.tableView visibleCells];
 	// Adjust note desc label width
 	if ([selectedNote.details length] != 0) {
-		visibleCells = [self.tableView visibleCells];
 		currentCell = [visibleCells objectAtIndex:0];
 		NSArray *rowToReload = [NSArray arrayWithObject:[self.tableView indexPathForCell:currentCell]];
 		[self.tableView reloadRowsAtIndexPaths:rowToReload withRowAnimation:UITableViewRowAnimationFade];  
 	}
-		
+	
+	// show and hide the share button
+	if (editing && [visibleCells count] == 3) {
+		[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationRight];
+	} else if ([visibleCells count] == 2) {
+		[self.tableView insertSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationLeft];
+	}
+
 	// Update photo display accordingly
 	[self updatePhotoInfo];
 	
@@ -207,7 +204,6 @@
 }
 
 - (IBAction)shareNote:(id)sender {
-	if (shareButton.enabled) {
 		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"What the Tweet?"
 															message:@"Send your Note+Photo+Location to Twitter Coming Soon!"
 														   delegate:nil
@@ -215,7 +211,6 @@
 												  otherButtonTitles:nil];
 		[alertView show];
 		[alertView release];
-	}
 }
 
 - (void)deleteExistingNote {
@@ -453,7 +448,10 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // There are three sections, for note details, move folders and share
-    return 1;
+	if (tableView.editing) {
+		return 1; 
+	}
+	return 2;
 }
 
 
@@ -468,6 +466,10 @@
 			// Details and Group
 			rows = 2;
 			break;
+		case 1:
+			rows = 1;
+			break;
+
         default:
             break;
     }
@@ -554,6 +556,19 @@
 					break;
 			}
             break;
+		case 1: {
+			// set up share cell
+			UIImageView *bgView;
+			bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"btn_share.png"]];
+			cell.backgroundView = bgView;
+			[bgView release];
+			bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"btn_share-high.png"]];			
+			cell.selectedBackgroundView = bgView;
+			[bgView release];
+			
+			//cell.textLabel.text = @"Email";
+			cell.contentView.alpha = 0.0;
+			break; }
         default:
             break;
     }
@@ -583,11 +598,13 @@
 		[[self.tableView cellForRowAtIndexPath:indexPath] setSelected:NO animated:YES];
 	}
 }
-
-- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+/*
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
 	if (section != 0) {
 		return nil;
 	}
+	NSString *createdDate;
+	UIView *footerView;
 	
 	// A date formatter for the creation/modified dates.
 	static NSDateFormatter *dateFormatter = nil;
@@ -598,16 +615,38 @@
 	}
 	
 	// return the created date if its the first section
-	return [NSString stringWithFormat:@"Created: %@", [dateFormatter stringFromDate:[selectedNote dateCreated]]];
-
+	createdDate = [NSString stringWithFormat:@"Created: %@", [dateFormatter stringFromDate:[selectedNote dateCreated]]];
+	footerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,320,30)];
+				  
+	UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(10,0,300, 30)] autorelease];
+	[footerView addSubview:label];
+	
+	label.font = [UIFont systemFontOfSize:15];
+	label.textAlignment = UITextAlignmentCenter;
+	label.textColor = [UIColor darkGrayColor];
+	label.tag = kDetailsInfoLabelTag;
+	label.text = createdDate;
+	//[button addTarget:self action:@selector(showAllNotes) forControlEvents:UIControlEventTouchUpInside];
+	
+	return footerView;
 }
 
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+	if (section == 0) {
+		return 30.0;
+	}
+	return self.tableView.sectionFooterHeight;
+} 
+*/
+/*
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 	if (section == 0) {
-		return 0.0;
+		return 10.0;
 	} 
+	//return 0.0;
 	return self.tableView.sectionHeaderHeight;
-}
+} */
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	// return dynamic size for note description
@@ -664,7 +703,10 @@
 
 - (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
 	// For this view we don't want to indent the cells so return NO
-	return YES;
+	if (indexPath.section == 0) {
+		return YES;
+	}
+	return NO;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle 
