@@ -334,7 +334,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>D331776E10620B2800F5AF1A</string>
+										<string>D331778C10620FAE00F5AF1A</string>
 										<key>history</key>
 										<array>
 											<string>D360D12D101D2BD70095ED7B</string>
@@ -431,11 +431,11 @@
 											<string>D33176C01061F7D900F5AF1A</string>
 											<string>D33176EB1061FD2E00F5AF1A</string>
 											<string>D33176EE1061FD2E00F5AF1A</string>
-											<string>D331773C1062076100F5AF1A</string>
 											<string>D3317741106207EB00F5AF1A</string>
 											<string>D3317742106207EB00F5AF1A</string>
 											<string>D331775C1062098B00F5AF1A</string>
-											<string>D331775D1062098B00F5AF1A</string>
+											<string>D331778610620ED900F5AF1A</string>
+											<string>D331777F10620DF700F5AF1A</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -645,13 +645,14 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>D331778D10620FAE00F5AF1A</string>
 		<string>D33175891060BEA200F5AF1A</string>
 		<string>D33175921060BF0600F5AF1A</string>
 		<string>D33175931060BF0600F5AF1A</string>
 		<string>D3857099101A9E7200949DAD</string>
 		<string>1CD10A99069EF8BA00B06720</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>/Users/brian/Projects/Development/MapNotes/MapNotes.xcodeproj</string>
+		<string>1C78EAAD065D492600B07095</string>
 	</array>
 	<key>WindowString</key>
 	<string>3 106 1115 672 0 0 1280 778 </string>
@@ -675,7 +676,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>NoteDetailController.m</string>
+								<string>ImageManipulator.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>

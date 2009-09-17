@@ -138,6 +138,13 @@
     }
 	
 	visibleCells = [self.tableView visibleCells];
+	// show and hide the share button
+	if (editing && [visibleCells count] == 3) {
+		[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationRight];
+	} else if ([visibleCells count] == 2) {
+		[self.tableView insertSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationLeft];
+	}
+	
 	// Adjust note desc label width
 	if ([selectedNote.details length] != 0) {
 		currentCell = [visibleCells objectAtIndex:0];
@@ -145,12 +152,7 @@
 		[self.tableView reloadRowsAtIndexPaths:rowToReload withRowAnimation:UITableViewRowAnimationFade];  
 	}
 	
-	// show and hide the share button
-	if (editing && [visibleCells count] == 3) {
-		[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationRight];
-	} else if ([visibleCells count] == 2) {
-		[self.tableView insertSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationLeft];
-	}
+
 
 	// Update photo display accordingly
 	[self updatePhotoInfo];
@@ -544,7 +546,7 @@
 	UILabel *mainLabel;
     UIImageView *photo;
 	
-	if (indexPath.row == 0 && !tableView.editing && [selectedNote.details length] != 0 ) {
+	if (indexPath.section == 0 && indexPath.row == 0 && !tableView.editing && [selectedNote.details length] != 0 ) {
 		// set up note description cell
 		cell = [tableView dequeueReusableCellWithIdentifier:NoteCellIdentifier];
 		if (cell == nil) {
@@ -710,7 +712,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	// return dynamic size for note description
-	if (indexPath.row == 0 && !tableView.editing && [selectedNote.details length] != 0) {
+	if (indexPath.section == 0 && indexPath.row == 0 && !tableView.editing && [selectedNote.details length] != 0) {
 		NSString *label = selectedNote.details;
 		CGFloat fontSize = kTextViewFontSize;
 
