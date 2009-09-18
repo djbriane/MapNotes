@@ -18,6 +18,8 @@
 	NSManagedObjectContext *managedObjectContext;
 	Group *selectedGroup;
 	NSMutableArray *notesArray;
+	NSMutableDictionary *sectionedDictionaryByFirstLetter;
+	NSArray *keys;
 	
 	IBOutlet UIToolbar *toolbar;
 	IBOutlet UITableView *myTableView;
@@ -31,6 +33,8 @@
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) Group *selectedGroup;
 @property (nonatomic, retain) NSMutableArray *notesArray;
+@property (nonatomic, retain) NSMutableDictionary *sectionedDictionaryByFirstLetter;
+@property (nonatomic, retain) NSArray *keys;
 
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, retain) IBOutlet UITableView *myTableView;

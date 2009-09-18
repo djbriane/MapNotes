@@ -183,7 +183,7 @@
 	MKCoordinateRegion region = {{0.0f, 0.0f}, {0.0f, 0.0f}};
 	region.center.longitude = (minCoord.longitude + maxCoord.longitude) / 2.0;
 	region.center.latitude = (minCoord.latitude + maxCoord.latitude) / 2.0;
-	// TODO: Added 0.05f to give it some padding, probably need to tune this a bit
+	// Added 0.05f to give it some padding
 	CGFloat longDelta = maxCoord.longitude - minCoord.longitude + 0.005f;
 	CGFloat latDelta = maxCoord.latitude - minCoord.latitude + 0.005f;
 	

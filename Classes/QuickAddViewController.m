@@ -11,14 +11,17 @@
 #import "MapNotesAppDelegate.h"
 #import "ImageManipulator.h"
 #import "LocationController.h"
+#import "NoteDetailController.h"
+#import "NoteAnnotation.h"
 #import "Note.h"
 #import "Group.h"
+#import "Photo.h"
 
 @implementation QuickAddViewController
 
 @synthesize delegate;
 @synthesize mapView = _mapView;
-@synthesize locationTimer, managedObjectContext, selectedGroup;
+@synthesize locationTimer, managedObjectContext, selectedGroup, notesArray;
 @synthesize addTextNoteButton, addPhotoNoteButton, viewNotesButton, updateLocationButton, updateLocationActivity;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -32,6 +35,9 @@
 
 	// update location
 	[self startUpdatingLocation];
+	
+	// get notes
+	[self fetchExistingNotes];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -60,27 +66,57 @@
 		self.addTextNoteButton.enabled = NO;
 		self.addPhotoNoteButton.enabled = NO;
 		return;
-	} else {
-		MKCoordinateRegion region = {{0.0f, 0.0f}, {0.0f, 0.0f}};
-		CLLocation *location = [[LocationController sharedInstance] currentLocation];
-		region.center = location.coordinate;
-		region.span.longitudeDelta = 0.02f;
-		region.span.latitudeDelta = 0.02f;
-
-		[self.mapView setRegion:region animated:NO];
-		self.mapView.hidden = NO;
-		
-		// Update UI to reflect we have a good location
-		[self.updateLocationActivity stopAnimating];
-		self.updateLocationButton.enabled = YES;
-		self.addTextNoteButton.enabled = YES;
-		self.addPhotoNoteButton.enabled = YES;
-		
-		[[LocationController sharedInstance] stop];
-		[self.locationTimer invalidate];
 	} 
-}
+	
+	CLLocation *location = [[LocationController sharedInstance] currentLocation];
+	MKCoordinateRegion region = {{0.0f, 0.0f}, {0.0f, 0.0f}};
+	
+	region.center = location.coordinate;
+	region.span.longitudeDelta = 0.01f;
+	region.span.latitudeDelta = 0.01f;
 
+	// Load annotations
+	if(nil != self.notesArray) {
+		for (Note *aNote in self.notesArray) {
+			// create an annotation
+			NoteAnnotation *aNoteAnnotation;
+			aNoteAnnotation = [NoteAnnotation annotationWithNote:aNote];
+			if ([aNote.title length] != 0) {
+				aNoteAnnotation.title = aNote.title;
+			} else if ([aNote.details length] != 0) {
+				aNoteAnnotation.title = aNote.details;
+			} else {
+				static NSDateFormatter *dateFormatter = nil;
+				if (dateFormatter == nil) {
+					dateFormatter = [[NSDateFormatter alloc] init];
+					[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+					[dateFormatter setDateStyle:NSDateFormatterShortStyle];
+				}
+				aNoteAnnotation.title = [dateFormatter stringFromDate:[aNote dateCreated]];
+			}
+			[self.mapView addAnnotation:aNoteAnnotation];
+		}
+	}
+	
+	[self.mapView setRegion:region animated:NO];
+	self.mapView.hidden = NO;
+	
+	// Update UI to reflect we have a good location
+	[self.updateLocationActivity stopAnimating];
+	self.updateLocationButton.enabled = YES;
+	self.addTextNoteButton.enabled = YES;
+	self.addPhotoNoteButton.enabled = YES;
+	
+	[self.locationTimer invalidate];
+	
+	// continue checking for a new location
+	/*
+	self.locationTimer = [NSTimer scheduledTimerWithTimeInterval:.1 target:self 
+														selector:@selector(pollAndUpdateLocation) 
+														userInfo:nil 
+														 repeats:YES];
+	 */
+}
 
 - (void)startUpdatingLocation {
 	// invalidate any existing timer
@@ -97,6 +133,43 @@
 														userInfo:nil 
 														 repeats:YES];
 }
+
+- (void)fetchExistingNotes {
+	/*
+	 Fetch existing events.
+	 Create a fetch request; find the Event entity and assign it to the request; add a sort descriptor; then execute the fetch.
+	 */
+	NSFetchRequest *request = [[NSFetchRequest alloc] init];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:managedObjectContext];
+	[request setEntity:entity];
+	
+	// Order the notes by creation date, most recent first.
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:NO];
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+	[request setSortDescriptors:sortDescriptors];
+	[sortDescriptor release];
+	[sortDescriptors release];
+	
+	// set up a Predicate if a group has been selected
+	if (self.selectedGroup != nil) {
+		NSPredicate *pred = [NSPredicate predicateWithFormat:@"(group = %@)", self.selectedGroup];
+		[request setPredicate: pred];
+	} 
+	
+	// Execute the fetch -- create a mutable copy of the result.
+	NSError *error = nil;
+	NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+	if (mutableFetchResults == nil) {
+		// Handle the error.
+		NSLog(@"%@:%s Error fetching context: %@", [self class], _cmd, [error localizedDescription]);
+	}
+	
+	// Set self's events array to the mutable array, then clean up.
+	[self setNotesArray:mutableFetchResults];	
+	[mutableFetchResults release];
+	[request release];
+}
+
 
 - (Note *)createNewNote {
 	CLLocation *myLocation = [[LocationController sharedInstance] currentLocation];
@@ -178,7 +251,18 @@
 }
 
 - (IBAction)updateLocation:(id)sender {
-	[self startUpdatingLocation];
+	if ([[LocationController sharedInstance] locationKnown]) {
+		CLLocation *location = [[LocationController sharedInstance] currentLocation];
+		[self.mapView setCenterCoordinate:location.coordinate animated:YES];
+	} else {
+		[self startUpdatingLocation];
+	}
+	
+	// Close annotation callouts
+	for(NoteAnnotation *aMKAnn in  [self.mapView selectedAnnotations]) {
+		[self.mapView deselectAnnotation:aMKAnn animated:YES];
+    }
+	
 }
 
 #pragma mark -
@@ -212,7 +296,9 @@
 				  editingInfo:(NSDictionary *)editingInfo {
 	
 	// Save the image to the users album
-	UIImageWriteToSavedPhotosAlbum(selectedImage, nil, nil, nil);
+	if (picker.sourceType = UIImagePickerControllerSourceTypeCamera) {
+		UIImageWriteToSavedPhotosAlbum(selectedImage, nil, nil, nil);
+	}
 	
 	// Create a new note
 	Note *note = [self createNewNote];
@@ -222,7 +308,7 @@
 	}
 	
 	// Create a new photo object and associate it with the event.
-	NSManagedObject *photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" 
+	Photo *photo = (Photo *)[NSEntityDescription insertNewObjectForEntityForName:@"Photo" 
 														   inManagedObjectContext:note.managedObjectContext];
 	
 	
@@ -311,6 +397,56 @@
 didSelectSearchResult:(id)result
   userInitiated:(BOOL)userInitiated {
 }
+
+#pragma mark -
+#pragma mark MKMapView Delegate Methods
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+	MKAnnotationView *view = nil;
+	if(annotation != mapView.userLocation) {
+		view = (MKAnnotationView *)
+        [mapView dequeueReusableAnnotationViewWithIdentifier:@"identifier"];
+		
+		//if(nil == view) {
+		view = [[[MKAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"identifier"] autorelease];
+		view.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+
+		
+		// add the note thumbnail to the flyout
+		NoteAnnotation *noteAnnotation = (NoteAnnotation *)annotation;
+		if (noteAnnotation.note.thumbnail != nil) {
+			UIImageView *photoView = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)] autorelease];
+			view.leftCalloutAccessoryView = photoView;
+			photoView.image = noteAnnotation.note.thumbnail;
+		}
+		//}
+		if (noteAnnotation.note.group != nil) {
+			[view setImage:[noteAnnotation.note.group getPinImage]];	
+		} else {
+			[view setImage:[UIImage imageNamed:@"node_orange.png"]];
+		}
+		CGPoint offsetPixels;
+		offsetPixels.x = 10;
+		offsetPixels.y = -16;
+		view.centerOffset = offsetPixels;
+		
+		[view setCanShowCallout:YES];
+	} 
+	return view;
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+	NoteAnnotation *ann = (NoteAnnotation *)view.annotation;
+
+	NoteDetailController *noteDetailController = [[NoteDetailController alloc] initWithStyle:UITableViewStyleGrouped];
+	noteDetailController.view.backgroundColor = [UIColor clearColor];
+	noteDetailController.selectedNote = ann.note;
+	[noteDetailController setEditing:NO animated:NO];
+    [UIAppDelegate.navigationController pushViewController:noteDetailController animated:NO];
+	[noteDetailController release];
+	[self dismissModalViewControllerAnimated:YES];
+}
+
 
 #pragma mark -
 #pragma mark Memory / Dealloc Methods

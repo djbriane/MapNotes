@@ -26,6 +26,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import <MessageUI/MessageUI.h>
 #import <CoreLocation/CoreLocation.h>
 #import "NoteTitleViewController.h"
 #import "NoteDescViewController.h"
@@ -35,7 +36,7 @@
 @class NoteAnnotation;
 @class RoundedRectView;
 
-@interface NoteDetailController : UITableViewController <MKMapViewDelegate, UINavigationControllerDelegate, NoteTitleDelegate, NoteDescDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate> {
+@interface NoteDetailController : UITableViewController <MKMapViewDelegate, MFMailComposeViewControllerDelegate, UINavigationControllerDelegate, NoteTitleDelegate, NoteDescDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate> {
 	Note *selectedNote;
 
 	MKMapView *_mapView;
@@ -43,11 +44,13 @@
 	
 	UIView *tableHeaderView;
 	UIView *tableFooterView;
-	CGPoint gestureStartPoint;
+	UIView *tableShareView;
 	
 	UIButton *photoEditButton;
 	UIButton *photoButton;
 	UIButton *deleteButton;
+	UIButton *emailButton;
+	UIButton *shareButton;
 	UIButton *infoLabelButton;
 	UIButton *takePictureButton;
 	UIButton *selectFromCameraRollButton;
@@ -63,12 +66,14 @@
 
 @property (nonatomic, retain) IBOutlet UIView *tableHeaderView;
 @property (nonatomic, retain) IBOutlet UIView *tableFooterView;
-@property CGPoint gestureStartPoint;
+@property (nonatomic, retain) IBOutlet UIView *tableShareView;
 
 @property (nonatomic, retain) IBOutlet UIButton *photoEditButton;
 @property (nonatomic, retain) IBOutlet UIButton *photoButton;
 @property (nonatomic, retain) IBOutlet UIButton *deleteButton;
 @property (nonatomic, retain) IBOutlet UIButton *infoLabelButton;
+@property (nonatomic, retain) IBOutlet UIButton *emailButton;
+@property (nonatomic, retain) IBOutlet UIButton *shareButton;
 
 @property (nonatomic, retain) IBOutlet UIButton *nameTextField;
 @property (nonatomic, retain) IBOutlet UIImageView *photoBorderImage;
@@ -79,10 +84,12 @@
 - (void)deleteExistingNote;
 - (void)setCreatedDateLabel;
 - (void)setLocationInfoLabel;
+- (void)showComposeEmailViewWithNote:(Note *)note;
 - (IBAction)editPhoto:(id)sender;
 - (IBAction)editTitle:(id)sender;
 - (IBAction)deleteNote:(id)sender;
 - (IBAction)shareNote:(id)sender;
+- (IBAction)emailNote:(id)sender;
 - (IBAction)rotateInfoLabel:(id)sender;
 
 @end

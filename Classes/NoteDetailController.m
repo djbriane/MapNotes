@@ -8,6 +8,7 @@
 
 #import "Note.h"
 #import "Group.h"
+#import "Photo.h"
 
 #import "NoteDetailController.h"
 #import "MapNotesAppDelegate.h"
@@ -24,9 +25,8 @@
 
 @synthesize mapView = _mapView;
 @synthesize noteAnnotation;
-@synthesize tableHeaderView, tableFooterView;
-@synthesize gestureStartPoint;
-@synthesize photoEditButton, photoButton, deleteButton, infoLabelButton, nameTextField, photoBorderImage;
+@synthesize tableHeaderView, tableFooterView, tableShareView;
+@synthesize photoEditButton, photoButton, deleteButton, emailButton, shareButton, infoLabelButton, nameTextField, photoBorderImage;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -40,24 +40,37 @@
 
 
  // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
- - (void)viewDidLoad {
-	 [super viewDidLoad];
-	 self.tableView.backgroundColor = [UIColor clearColor];
+- (void)viewDidLoad {
+	[super viewDidLoad];
+	self.tableView.backgroundColor = [UIColor clearColor];
 
-	 //self.editing = NO; // Initially displays an Edit button and noneditable view
-	 self.tableView.allowsSelectionDuringEditing = YES;
+	//self.editing = NO; // Initially displays an Edit button and noneditable view
+	self.tableView.allowsSelectionDuringEditing = YES;
 
-	 // Create and set the table header / footer view.
-	 if (tableHeaderView == nil) {
-		 [[NSBundle mainBundle] loadNibNamed:@"NoteDetailHeader" owner:self options:nil];
-		 self.tableView.tableHeaderView = tableHeaderView;
-	 }
-	 if (tableFooterView == nil) {
+	// Create and set the table header / footer view.
+	if (tableHeaderView == nil) {
+		[[NSBundle mainBundle] loadNibNamed:@"NoteDetailHeader" owner:self options:nil];
+		self.tableView.tableHeaderView = tableHeaderView;
+	}
+
+	UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 290)];
+	self.tableView.tableFooterView = footerView;
+	[footerView release];
+	
+	if (tableFooterView == nil) {
 		[[NSBundle mainBundle] loadNibNamed:@"NoteDetailFooter" owner:self options:nil];
-		self.tableView.tableFooterView = tableFooterView;
-	 }
-	 
-	 self.tableView.sectionHeaderHeight = 5.0;
+		tableFooterView.frame = CGRectMake(0, 59, 320, 228);
+	}
+	[self.tableView.tableFooterView addSubview:tableFooterView];
+	
+	if (tableShareView == nil) {	
+		[[NSBundle mainBundle] loadNibNamed:@"NoteDetailShare" owner:self options:nil];
+		
+		[self.tableView.tableFooterView addSubview:tableShareView];
+	}
+	[self.tableView.tableFooterView addSubview:tableShareView];
+
+	self.tableView.sectionHeaderHeight = 5.0;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -75,7 +88,10 @@
 		//nameTextField.titleLabel.font = [UIFont boldSystemFontOfSize:18];
 		[nameTextField setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
 		[nameTextField setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
-
+	}
+	
+	if (![MFMailComposeViewController canSendMail]) {
+		[self.emailButton setEnabled:NO];
 	}
 	
 	if (UIAppDelegate.infoDisplay == 0) {
@@ -109,7 +125,7 @@
 
 	nameTextField.enabled = editing;
 	
-    if (editing == YES){
+    if (editing == YES){		
         // change view to an editable view
 		nameTextField.enabled = YES;
 		//[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
@@ -119,19 +135,26 @@
 		[UIView setAnimationDuration:0.4];
 		[UIView setAnimationDelegate:self];
 		//[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:deleteButton cache:YES];
+		[tableShareView setAlpha:0.0];
+		tableFooterView.frame = CGRectMake(0, 0, 320, 228);
 		[deleteButton setAlpha:1.0];
 		[UIView commitAnimations];
 		deleteButton.hidden = NO;
 		[deleteButton setEnabled:YES];
+		[tableShareView removeFromSuperview];
+
 	}
     else {
         // save the changes if needed and change view to noneditable
 		nameTextField.enabled = NO;
+		[self.tableView.tableFooterView addSubview:tableShareView];
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 		[UIView setAnimationDuration:0.4];
 		[UIView setAnimationDelegate:self];
 		//[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:deleteButton cache:YES];
+		[tableShareView setAlpha:1.0];
+		tableFooterView.frame = CGRectMake(0, 59, 320, 172);
 		[deleteButton setAlpha:0.0];
 		[UIView commitAnimations];
 		[deleteButton setEnabled:NO];
@@ -139,11 +162,12 @@
 	
 	visibleCells = [self.tableView visibleCells];
 	// show and hide the share button
+	/*
 	if (editing && [visibleCells count] == 3) {
 		[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationRight];
 	} else if ([visibleCells count] == 2) {
 		[self.tableView insertSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationLeft];
-	}
+	} */
 	
 	// Adjust note desc label width
 	if ([selectedNote.details length] != 0) {
@@ -339,7 +363,7 @@
 		
 		// Delete Button
 		if (nil != selectedNote.photo) {
-			[actionSheet addButtonWithTitle:kDeletePhotoButtonText];
+			actionSheet.destructiveButtonIndex = [actionSheet addButtonWithTitle:kDeletePhotoButtonText];
 		}
 		
 		// Cancel Button
@@ -360,7 +384,6 @@
 }
 
 - (void)updatePhotoInfo {
-	
 	// Synchronize the photo image view and the text on the photo button with the event's photo.
 	UIImage *image = selectedNote.thumbnail;
 	if (image && self.editing) {
@@ -407,8 +430,8 @@
 	
 	MKCoordinateRegion region = {{0.0f, 0.0f}, {0.0f, 0.0f}};
 	region.center = selectedNote.location.coordinate;
-	region.span.longitudeDelta = 0.005f;
-	region.span.latitudeDelta = 0.005f;
+	region.span.longitudeDelta = 0.004f;
+	region.span.latitudeDelta = 0.004f;
 	
 	[self.mapView setRegion:region animated:NO];
 	[self.mapView addAnnotation:self.noteAnnotation];
@@ -462,17 +485,19 @@
 - (void)imagePickerController:(UIImagePickerController *)picker 
 		didFinishPickingImage:(UIImage *)selectedImage 
 				  editingInfo:(NSDictionary *)editingInfo {
-	
-	// Save the image to the users album
-	UIImageWriteToSavedPhotosAlbum(selectedImage, nil, nil, nil);
-	
+
 	// Delete Existing Photo
 	[self deleteExistingPhoto];
 	
 	// Create a new photo object and associate it with the event.
-	NSManagedObject *photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" 
+	Photo *photo = (Photo *)[NSEntityDescription insertNewObjectForEntityForName:@"Photo" 
 														   inManagedObjectContext:selectedNote.managedObjectContext];
 	
+	
+	// Save the image to the users album
+	if (picker.sourceType = UIImagePickerControllerSourceTypeCamera) {
+		UIImageWriteToSavedPhotosAlbum(selectedImage, nil, nil, nil);
+	}
 	
 	// Scale the image to a manageable size and rotate it properly to account for camera
 	UIImage *image = [[ImageManipulator scaleAndRotateImage:selectedImage] retain];
@@ -496,8 +521,7 @@
 	
 	// Update the user interface appropriately.
 	[self updatePhotoInfo];
-	
-    [self dismissModalViewControllerAnimated:YES];
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -510,10 +534,10 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // There are three sections, for note details, move folders and share
-	if (tableView.editing) {
-		return 1; 
-	}
-	return 2;
+	//if (tableView.editing) {
+	//	return 1; 
+	//}
+	return 1;
 }
 
 
@@ -596,6 +620,7 @@
 						mainLabel.tag = kMainLabelTag;
 						[cell.contentView addSubview:mainLabel];
 						photo.image = [UIImage imageNamed:@"icon_desc.png"];
+						photo.highlightedImage = [UIImage imageNamed:@"icon_desc-high.png"];
 						break;
 					} else if ([selectedNote.details length] != 0) {
 						cellText = selectedNote.details;
@@ -603,6 +628,7 @@
 						cellText = kDefaultNoteLabel;
 					}
 					cell.imageView.image = [UIImage imageNamed:@"icon_desc.png"];
+					cell.imageView.highlightedImage = [UIImage imageNamed:@"icon_desc-high.png"];
 					cell.textLabel.text = cellText;	
 					break;
 				case 1:
@@ -612,6 +638,7 @@
 						cellText = kDefaultGroupLabel;
 					}
 					cell.imageView.image = [UIImage imageNamed:@"icon_group.png"];
+					cell.imageView.highlightedImage = [UIImage imageNamed:@"icon_group-high.png"];
 					cell.textLabel.text = cellText;
 					break;
 				default:
@@ -656,10 +683,9 @@
 			[groupsViewController release];
 		}
 		//[self setEditing:YES animated:NO];
-	} else {
-		[[self.tableView cellForRowAtIndexPath:indexPath] setSelected:NO animated:YES];
 	}
 }
+
 /*
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
 	if (section != 0) {
@@ -776,7 +802,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Remove the value in the field that was clicked
-		NSManagedObjectContext *context = selectedNote.managedObjectContext;
+		NSManagedObjectContext *context = UIAppDelegate.managedObjectContext;
 		
 		if (indexPath.section == 0) {
 			switch (indexPath.row) {
@@ -832,29 +858,64 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 #pragma mark -
-#pragma mark Animation Methods
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-	UITouch *touch = [touches anyObject];
-	gestureStartPoint = [touch locationInView:self.view];
+#pragma mark Mail Delegate Methods
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {	
+	if (result == MFMailComposeResultFailed) {
+		// Handle the error 
+		NSString *errorMsg;
+		if (error == MFMailComposeErrorCodeSaveFailed) {
+			errorMsg = @"Failed to Save Mail Message.";
+		} else {
+			errorMsg = @"Failed to Send Mail Message.";
+		}
+		UIAlertView *mailFailedAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:errorMsg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+		[mailFailedAlert show];
+		[mailFailedAlert release];
+	}
+	// dismiss the mail dialog
+	[self dismissModalViewControllerAnimated:YES];
 }
 
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-	UITouch *touch = [touches anyObject];
-	CGPoint currentPosition = [touch locationInView:self.view];
-	CGFloat deltaX = fabsf(gestureStartPoint.x - currentPosition.x);
-	CGFloat deltaY = fabsf(gestureStartPoint.y - currentPosition.y);
-	if (deltaX >= kMinimumGestureLength && deltaY <= kMaximumVariance) {
-		//label.text = @"Horizontal swipe detected";
-		//[self rotateInfoLabel];
-		NSLog(@"Drag Detected");
+- (IBAction)emailNote:(id)sender {
+	[self showComposeEmailViewWithNote:selectedNote];
+}
+
+- (void)showComposeEmailViewWithNote:(Note *)note {
+	NSString *noteableSig = @"Sent from Noteable for iPhone\r\nhttp://appwrkshp.com/noteable";
+	NSString *mapInfo;
+	NSString *mapLink;
+	NSString *mapLinkEscaped;
+	NSString *bodyMessage;
+	
+	MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
+	mailComposeViewController.navigationBar.tintColor = [UIColor colorWithRed:(129.0/255.0) green:(137.0/255.0) blue:(149.0/255.0) alpha:1.0];
+	mailComposeViewController.mailComposeDelegate = self;
+	[mailComposeViewController setSubject:note.title];
+	
+	if ([note.title length] == 0 && [note.details length] == 0) {
+		mapInfo = [NSString stringWithFormat:@"(Location from Noteable)", note.title];
+	} else if ([note.details length] == 0) {
+		mapInfo = [NSString stringWithFormat:@"(%@)", note.title];
+	} else {
+		if ([note.details length] > 25) {
+			mapInfo = [NSString stringWithFormat:@"(%@ - %@)", note.title, [note.details substringToIndex:25]];		
+		} else {
+			mapInfo = [NSString stringWithFormat:@"(%@ - %@)", note.title, note.details];
+		}
 	}
-	/*
-	else if (deltaY >= kMinimumGestureLength &&
-			 deltaX <= kMaximumVariance){
-		label.text = @"Vertical swipe detected";
-		[self performSelector:@selector(eraseText) withObject:nil
-				   afterDelay:2];
-	} */
+	mapLink = [NSString stringWithFormat:@"http://maps.google.com/?q=%1.6f,%1.6f %@", note.location.coordinate.latitude, note.location.coordinate.longitude, mapInfo];
+	mapLinkEscaped = [mapLink stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+	
+	if ([note.details length] != 0) {
+		bodyMessage = [NSString stringWithFormat:@"%@\r\n\r\n%@\r\n\r\n%@", note.details, mapLinkEscaped, noteableSig];
+	} else {
+		bodyMessage = [NSString stringWithFormat:@"%@\r\n\r\n%@", mapLinkEscaped, noteableSig];;
+	}
+	[mailComposeViewController setMessageBody:bodyMessage isHTML:NO];
+	
+	NSData *imageData = UIImageJPEGRepresentation([note.photo valueForKey:@"image"], 1);
+	[mailComposeViewController addAttachmentData:imageData mimeType:@"image/jpeg" fileName:@"noteable_photo.jpg"];
+	[self presentModalViewController:mailComposeViewController animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -868,9 +929,9 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
 	self.mapView = nil;
-	self.selectedNote = nil;
-	self.tableHeaderView = nil;
-	self.tableFooterView = nil;
+	//self.selectedNote = nil;
+	//self.tableHeaderView = nil;
+	//self.tableFooterView = nil;
 	self.photoEditButton = nil;
 	self.photoButton = nil;
 	self.deleteButton = nil;
@@ -880,7 +941,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 - (void)dealloc {
 	self.mapView = nil;
 	//self.selectedNote = nil;
-	[selectedNote release];
+	//[selectedNote release];
 	[tableHeaderView release];
 	[tableFooterView release];
 	[photoEditButton release];

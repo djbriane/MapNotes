@@ -36,8 +36,8 @@ static LocationController *sharedInstance;
         locationManager = [[CLLocationManager alloc] init];
 		
 		// location manager config
-		//locationManager.distanceFilter = 10.0f;
-		//locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+		locationManager.distanceFilter = 10.0f;
+		locationManager.desiredAccuracy = kCLLocationAccuracyBest;
 		locationManager.delegate = self;
         [self start];
     }
@@ -61,8 +61,8 @@ static LocationController *sharedInstance;
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
 	//if the time interval returned from core location is more than two minutes we ignore it because it might be from an old session
-    if ( abs([newLocation.timestamp timeIntervalSinceDate: [NSDate date]]) < 120) {             
-        self.currentLocation = newLocation;
+    if ( abs([newLocation.timestamp timeIntervalSinceDate: [NSDate date]]) < 120) {
+			self.currentLocation = newLocation;
     }
 }
 

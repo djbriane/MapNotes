@@ -21,7 +21,7 @@
 
 @implementation NotesViewController
 
-@synthesize managedObjectContext, selectedGroup, notesArray;
+@synthesize managedObjectContext, selectedGroup, notesArray, keys, sectionedDictionaryByFirstLetter;
 @synthesize myTableView, toolbar;
 @synthesize sortControl, mapViewButton;
 
@@ -220,6 +220,40 @@
 		NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:[self getCurrentSortDescriptor], nil];
 		NSMutableArray *sortedNotesArray = [[self.notesArray sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
 		[self setNotesArray:sortedNotesArray];
+		/*
+		if (UIAppDelegate.sortOrder == @"title") {
+			// Create a set of the first letters used by the strings in CommonName and sort them			
+			NSMutableSet *firstCharacters = [NSMutableSet setWithCapacity:0];
+			for( NSString *string in [tableDataSource valueForKey:@"CommonName"] ) {
+                [firstCharacters addObject:[string substringToIndex:1]];
+			}
+			self.keys = [[firstCharacters allObjects] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+			self.sectionedDictionaryByFirstLetter = [NSMutableDictionary dictionary]; 
+			
+			// All data sorted in sections by initial letter of "CommonName"			
+			NSDictionary *eachItemList;  //PUTS ALL THE DATA FOR EACH ITEM IN IT'S OWN SECTION
+			for (eachItemList in tableDataSource)   //eachElementList is an array with a section for each item
+			{
+                NSDictionary *aDictionary = [[NSDictionary alloc] initWithDictionary:eachItemList];
+                NSString *firstLetterString;
+                firstLetterString = [[aDictionary valueForKey:@"CommonName"]substringToIndex:1];
+				
+                NSMutableArray *existingArray;
+				
+                if (existingArray = [sectionedDictionaryByFirstLetter valueForKey:firstLetterString]) 
+                {
+					[existingArray addObject:eachItemList];
+                } else {
+					NSMutableArray *tempArray = [NSMutableArray array];
+					[sectionedDictionaryByFirstLetter setObject:tempArray forKey:firstLetterString];
+					[tempArray addObject:eachItemList];
+                }
+                [aDictionary release];
+                [eachItemList release];
+                NSLog(@"nameIndexesDictionary:%@", sectionedDictionaryByFirstLetter);
+			}
+		}
+		 */
 		
 		//[sortDescriptor release];
 		[sortDescriptors release];
@@ -329,6 +363,10 @@
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+	/*
+	if (UIAppDelegate.sortOrder == @"title") {
+		return [keys count];
+	} */
     return 1;
 }
 
@@ -354,7 +392,14 @@
 		}
 		[self.mapViewButton setEnabled:YES];
 	}
-	
+	/*
+	if (UIAppDelegate.sortOrder == @"title") {
+		NSString *key = [keys objectAtIndex:section];
+		// TODO: 
+		NSArray *nameSection = [names objectForKey:key];
+		return [nameSection count];
+	}
+	 */
 	return [notesArray count];
 
 }
@@ -392,9 +437,8 @@
 		detailsLabel.textAlignment = UITextAlignmentLeft;
 		detailsLabel.highlightedTextColor = [UIColor whiteColor];
 		detailsLabel.font = [UIFont systemFontOfSize:14];
-		detailsLabel.textColor = [UIColor grayColor];
+		detailsLabel.textColor = [UIColor colorWithRed:(8.0/255.0) green:(119.0/255.0) blue:(238.0/255.0) alpha:1.0];
 		detailsLabel.tag = kDetailsViewTag;
-		
 	}
     
 	// Configure the cell.
@@ -453,11 +497,17 @@
 		// return the created date if its the first section
 		detailsLabel.text = dateLabel;
 	} else {
+		if ([note.title length] != 0) {
+			detailsLabel.text = [[note.title substringToIndex:1] uppercaseString];
+		} else {
+			detailsLabel.text = nil;
+		}
+		/*
 		if (geoLabel == nil) {
 			detailsLabel.text = dateLabel;
 		} else {
 			detailsLabel.text = [NSString stringWithFormat:@"%@ - %@", dateLabel, geoLabel];
-		}
+		} */
 	}
 
     return cell;

@@ -28,6 +28,7 @@
 	MKMapView *_mapView;
 	NSTimer *locationTimer;
 	Group *selectedGroup;
+	NSMutableArray *notesArray;
 	
 	IBOutlet UILabel *locationInfoLabel;
 	IBOutlet UIButton *addTextNoteButton;
@@ -43,6 +44,7 @@
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) NSTimer *locationTimer;
 @property (nonatomic, retain) Group *selectedGroup;
+@property (nonatomic, retain) NSMutableArray *notesArray;
 
 @property (nonatomic, retain) IBOutlet UIButton *addTextNoteButton;
 @property (nonatomic, retain) IBOutlet UIButton *addPhotoNoteButton;
@@ -53,6 +55,7 @@
 - (void)checkAndUpdateLocation;
 - (void)startUpdatingLocation;
 - (Note *)createNewNote;
+- (void)fetchExistingNotes;
 
 - (IBAction)addPhotoNote:(id)sender;
 - (IBAction)addTextNote:(id)sender;
