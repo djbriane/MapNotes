@@ -14,6 +14,7 @@
 #import "LocationController.h"
 #import "Note.h"
 #import "Group.h"
+#import "Beacon.h"
 
 #define kPhotoViewTag		11
 #define kTitleViewTag		12
@@ -60,7 +61,7 @@
 		self.navigationItem.title = selectedGroup.name;
 	}
 	
-	NSLog(@"Sort Order (load): %@", UIAppDelegate.sortOrder);
+	//NSLog(@"Sort Order (load): %@", UIAppDelegate.sortOrder);
 	
 	[sortControl addTarget:self action:@selector(changeSortOrder:) forControlEvents:UIControlEventValueChanged];
 }
@@ -73,7 +74,7 @@
 	// Default sorting to date created descending (most recent at top)
 	//NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	//NSString *sortOrderPref = [defaults stringForKey:@"sort_order"];
-	NSLog(@"Sort Order (appear): %@", UIAppDelegate.sortOrder);
+	//NSLog(@"Sort Order (appear): %@", UIAppDelegate.sortOrder);
 	//self.sortOrder = [defaults objectForKey:@"sort_order"];
 
 	if ([UIAppDelegate.sortOrder isEqual:@"title"]) {
@@ -154,9 +155,9 @@
 	// Set self's events array to the mutable array, then clean up.
 	NSSortDescriptor *sortDescriptor;
 	if (UIAppDelegate.sortOrder == @"geoDistance") {
-		sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"location" ascending:YES selector:@selector(compareToLocation:)];
+		sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"location" ascending:YES selector:@selector(compareToLocation:)] autorelease];
 	} else {
-		sortDescriptor = [[NSSortDescriptor alloc] initWithKey:UIAppDelegate.sortOrder ascending:UIAppDelegate.sortAscending];
+		sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:UIAppDelegate.sortOrder ascending:UIAppDelegate.sortAscending] autorelease];
 	}
 	return sortDescriptor;
 }
@@ -261,8 +262,10 @@
 		
 		//[self.myTableView reloadData];
 		if (animated) {
-			NSIndexPath *indPath = [NSIndexPath indexPathForRow:NSNotFound inSection:0];
-			[self.myTableView scrollToRowAtIndexPath:indPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+			//NSIndexPath *indPath = [NSIndexPath indexPathForRow:NSNotFound inSection:0];
+			//[self.myTableView scrollToRowAtIndexPath:indPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+			[self.myTableView scrollRectToVisible:CGRectMake(0, 0, 320, 44) animated:NO];
+
 			[NSTimer scheduledTimerWithTimeInterval:.02 target:self 
 										   selector:@selector(reloadSections) 
 										   userInfo:nil 
@@ -284,6 +287,9 @@
 		aQuickAddViewController.selectedGroup = selectedGroup;
 	}
 	aQuickAddViewController.delegate = self;
+	if (!animated) {
+		aQuickAddViewController.loadingImageView.hidden	= NO;
+	}
 	//[aQuickAddViewController.view setFrame: [[UIScreen mainScreen] bounds]];
 	//[aQuickAddViewController.view setFrame:[[UIScreen mainScreen] applicationFrame]];
 	//[aQuickAddViewController.view setFrame: [[UIScreen mainScreen] bounds]];
@@ -293,6 +299,7 @@
 	[self presentModalViewController:aQuickAddViewController animated:animated];
 
 	[aQuickAddViewController release];
+	[[Beacon shared] startSubBeaconWithName:@"Notes - Show Quick Add" timeSession:NO];
 }
 
 - (void)pushNoteDetailViewController:(Note *)note editing:(BOOL)editing animated:(BOOL)animated {
@@ -330,6 +337,7 @@
 	
 	// invalidate and re-run the fetch with the new sort descriptor
 	[self sortExistingNotes:YES];
+	[[Beacon shared] startSubBeaconWithName:@"Notes - Change Sort Order" timeSession:NO];
 }
 
 - (IBAction)showMapView:(id)sender {
@@ -346,14 +354,16 @@
 	
     [self.navigationController pushViewController:aNotesMapViewController animated:YES];
 	[aNotesMapViewController release];
+	[[Beacon shared] startSubBeaconWithName:@"Notes - Clicked Map View" timeSession:NO];
 }
 
 #pragma mark -
 #pragma mark Quick Add View Controller Methods
 
 - (void)quickAddViewController:(QuickAddViewController *)controller 
-				   showNewNote:(Note *)note {
-	[self pushNoteDetailViewController:note	editing:YES animated:NO];
+					  showNote:(Note *)note 
+					   editing:(BOOL)editing {
+	[self pushNoteDetailViewController:note	editing:editing animated:NO];
 	
 	[[UIApplication sharedApplication] setStatusBarHidden:NO animated:YES];
 	[self dismissModalViewControllerAnimated:YES];
@@ -395,7 +405,6 @@
 	/*
 	if (UIAppDelegate.sortOrder == @"title") {
 		NSString *key = [keys objectAtIndex:section];
-		// TODO: 
 		NSArray *nameSection = [names objectForKey:key];
 		return [nameSection count];
 	}
@@ -437,7 +446,7 @@
 		detailsLabel.textAlignment = UITextAlignmentLeft;
 		detailsLabel.highlightedTextColor = [UIColor whiteColor];
 		detailsLabel.font = [UIFont systemFontOfSize:14];
-		detailsLabel.textColor = [UIColor colorWithRed:(8.0/255.0) green:(119.0/255.0) blue:(238.0/255.0) alpha:1.0];
+		detailsLabel.textColor = [UIColor colorWithRed:(0.0/255.0) green:(102.0/255.0) blue:(255/255.0) alpha:1.0];
 		detailsLabel.tag = kDetailsViewTag;
 	}
     

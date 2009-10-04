@@ -44,7 +44,7 @@
 
 - (UILabel *)RAD_newSizedCellLabelWithSystemFontOfSize:(CGFloat)size {
 	UILabel *cellLabel = [[UILabel alloc] initWithFrame:[self RAD_frameForCellLabelWithSystemFontOfSize:size]];
-	cellLabel.textColor = [UIColor blackColor];
+	cellLabel.textColor = [UIColor colorWithRed:(51.0/255.0) green:(51.0/255.0) blue:(51.0/255.0) alpha:1.0];
 	cellLabel.highlightedTextColor = [UIColor whiteColor];
 	cellLabel.backgroundColor = [UIColor clearColor];
 	cellLabel.textAlignment = UITextAlignmentLeft;

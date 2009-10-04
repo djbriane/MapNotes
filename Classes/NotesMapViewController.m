@@ -11,6 +11,7 @@
 #import "NoteAnnotation.h"
 #import "Note.h"
 #import "Group.h"
+#import "Beacon.h"
 
 @implementation NotesMapViewController
 
@@ -97,6 +98,7 @@
 			[self.mapView setRegion:region animated:TRUE];
         }
 	}	
+	[[Beacon shared] startSubBeaconWithName:@"Map - Zoom Buttons" timeSession:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -211,25 +213,26 @@
 		view = (MKAnnotationView *)
         [mapView dequeueReusableAnnotationViewWithIdentifier:@"identifier"];
 		
-		//if(nil == view) {
+		if(nil == view) {
 			view = [[[MKAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"identifier"] autorelease];
 			view.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-			
-			// add the note thumbnail to the flyout
-			NoteAnnotation *noteAnnotation = (NoteAnnotation *)annotation;
-			if (noteAnnotation.note.thumbnail != nil) {
-				UIImageView *photoView = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)] autorelease];
-				view.leftCalloutAccessoryView = photoView;
-				photoView.image = noteAnnotation.note.thumbnail;
-			}
-		//}
+		}	
+
+		// add the note thumbnail to the flyout
+		NoteAnnotation *noteAnnotation = (NoteAnnotation *)annotation;
+		if (noteAnnotation.note.thumbnail != nil) {
+			UIImageView *photoView = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)] autorelease];
+			view.leftCalloutAccessoryView = photoView;
+			photoView.image = noteAnnotation.note.thumbnail;
+		}
+
 		if (noteAnnotation.note.group != nil) {
 			[view setImage:[noteAnnotation.note.group getPinImage]];	
 		} else {
 			[view setImage:[UIImage imageNamed:@"node_orange.png"]];
 		}
 		CGPoint offsetPixels;
-		offsetPixels.x = 10;
+		offsetPixels.x = 0;
 		offsetPixels.y = -16;
 		view.centerOffset = offsetPixels;
 		
@@ -263,6 +266,7 @@
 	noteDetailController.selectedNote = ann.note;
     [self.navigationController pushViewController:noteDetailController animated:YES];
 	[noteDetailController release];
+	[[Beacon shared] startSubBeaconWithName:@"Map - View Note" timeSession:NO];
 }
 
 - (void)dealloc {

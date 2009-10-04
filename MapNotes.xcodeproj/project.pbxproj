@@ -33,6 +33,9 @@
 		D3028C251051803600E5A99D /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3028C241051803600E5A99D /* Entitlements.plist */; };
 		D303F2A61026ACE000528192 /* UIImageToDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = D303F2A41026ACE000528192 /* UIImageToDataTransformer.m */; };
 		D30D71B0102997F000AF4AFF /* NotePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D30D71AF102997F000AF4AFF /* NotePhotoViewController.m */; };
+		D31C44A61067313800413D7F /* img_index-bkgnd2.png in Resources */ = {isa = PBXBuildFile; fileRef = D31C44A41067313800413D7F /* img_index-bkgnd2.png */; };
+		D31C44A71067313800413D7F /* icon_noteable.png in Resources */ = {isa = PBXBuildFile; fileRef = D31C44A51067313800413D7F /* icon_noteable.png */; };
+		D31C45131067EDA500413D7F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D31C45121067EDA500413D7F /* Default.png */; };
 		D32912F610586F8F00994671 /* mapnodes.png in Resources */ = {isa = PBXBuildFile; fileRef = D32912F510586F8F00994671 /* mapnodes.png */; };
 		D32913091058900700994671 /* img_bkgnd.png in Resources */ = {isa = PBXBuildFile; fileRef = D32912FF1058900700994671 /* img_bkgnd.png */; };
 		D329130A1058900700994671 /* img_note_map-delete.png in Resources */ = {isa = PBXBuildFile; fileRef = D32913001058900700994671 /* img_note_map-delete.png */; };
@@ -59,6 +62,10 @@
 		D331796B106338D100F5AF1A /* icon_email.png in Resources */ = {isa = PBXBuildFile; fileRef = D3317965106338D100F5AF1A /* icon_email.png */; };
 		D331796C106338D100F5AF1A /* icon_group-high.png in Resources */ = {isa = PBXBuildFile; fileRef = D3317966106338D100F5AF1A /* icon_group-high.png */; };
 		D331796D106338D100F5AF1A /* icon_desc-high.png in Resources */ = {isa = PBXBuildFile; fileRef = D3317967106338D100F5AF1A /* icon_desc-high.png */; };
+		D3317AF4106476E000F5AF1A /* NoteDetailEmail.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3317AF3106476E000F5AF1A /* NoteDetailEmail.xib */; };
+		D3317B1C10649A8500F5AF1A /* libPMAnalytics-r69.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3317B1B10649A8500F5AF1A /* libPMAnalytics-r69.a */; };
+		D3317B2C10649AB000F5AF1A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3317B2B10649AB000F5AF1A /* SystemConfiguration.framework */; };
+		D3317B3010649AC400F5AF1A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D3317B2F10649AC400F5AF1A /* libsqlite3.dylib */; };
 		D342E6D4103A5BCA002382B7 /* CLLocation+DistanceComparison.m in Sources */ = {isa = PBXBuildFile; fileRef = D342E6D3103A5BCA002382B7 /* CLLocation+DistanceComparison.m */; };
 		D345E74C10229C4B0070C491 /* NoteDetailFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = D345E74B10229C4B0070C491 /* NoteDetailFooter.xib */; };
 		D345E7541022A07C0070C491 /* RoundedRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = D345E7531022A07C0070C491 /* RoundedRectView.m */; };
@@ -121,7 +128,7 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* MapNotesAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapNotesAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* MapNotesAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapNotesAppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* Noteable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Noteable.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* NoteableDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoteableDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		28860B760F44E54D00985440 /* MapNotes.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = MapNotes.xcdatamodel; sourceTree = "<group>"; };
 		28860BE40F44EE6400985440 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -144,6 +151,9 @@
 		D303F2A51026ACE000528192 /* UIImageToDataTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIImageToDataTransformer.h; path = Classes/UIImageToDataTransformer.h; sourceTree = "<group>"; };
 		D30D71AE102997F000AF4AFF /* NotePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotePhotoViewController.h; sourceTree = "<group>"; };
 		D30D71AF102997F000AF4AFF /* NotePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotePhotoViewController.m; sourceTree = "<group>"; };
+		D31C44A41067313800413D7F /* img_index-bkgnd2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "img_index-bkgnd2.png"; path = "Images/img_index-bkgnd2.png"; sourceTree = "<group>"; };
+		D31C44A51067313800413D7F /* icon_noteable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_noteable.png; path = Images/icon_noteable.png; sourceTree = "<group>"; };
+		D31C45121067EDA500413D7F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Images/Default.png; sourceTree = "<group>"; };
 		D32912F510586F8F00994671 /* mapnodes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mapnodes.png; path = Images/mapnodes.png; sourceTree = "<group>"; };
 		D32912FF1058900700994671 /* img_bkgnd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_bkgnd.png; path = Images/img_bkgnd.png; sourceTree = "<group>"; };
 		D32913001058900700994671 /* img_note_map-delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "img_note_map-delete.png"; path = "Images/img_note_map-delete.png"; sourceTree = "<group>"; };
@@ -171,6 +181,11 @@
 		D3317965106338D100F5AF1A /* icon_email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_email.png; path = Images/icon_email.png; sourceTree = "<group>"; };
 		D3317966106338D100F5AF1A /* icon_group-high.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_group-high.png"; path = "Images/icon_group-high.png"; sourceTree = "<group>"; };
 		D3317967106338D100F5AF1A /* icon_desc-high.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_desc-high.png"; path = "Images/icon_desc-high.png"; sourceTree = "<group>"; };
+		D3317AF3106476E000F5AF1A /* NoteDetailEmail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteDetailEmail.xib; sourceTree = "<group>"; };
+		D3317B1A10649A8500F5AF1A /* Beacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Beacon.h; sourceTree = "<group>"; };
+		D3317B1B10649A8500F5AF1A /* libPMAnalytics-r69.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPMAnalytics-r69.a"; path = "Classes/libPMAnalytics-r69.a"; sourceTree = "<group>"; };
+		D3317B2B10649AB000F5AF1A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D3317B2F10649AC400F5AF1A /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		D342E6D2103A5BCA002382B7 /* CLLocation+DistanceComparison.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CLLocation+DistanceComparison.h"; path = "Classes/CLLocation+DistanceComparison.h"; sourceTree = "<group>"; };
 		D342E6D3103A5BCA002382B7 /* CLLocation+DistanceComparison.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CLLocation+DistanceComparison.m"; path = "Classes/CLLocation+DistanceComparison.m"; sourceTree = "<group>"; };
 		D345E74B10229C4B0070C491 /* NoteDetailFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteDetailFooter.xib; sourceTree = "<group>"; };
@@ -246,6 +261,9 @@
 				0CB2F165101A3DE10087C6F6 /* CoreLocation.framework in Frameworks */,
 				0CB2F167101A3DE60087C6F6 /* MapKit.framework in Frameworks */,
 				D33177BA1062A04E00F5AF1A /* MessageUI.framework in Frameworks */,
+				D3317B1C10649A8500F5AF1A /* libPMAnalytics-r69.a in Frameworks */,
+				D3317B2C10649AB000F5AF1A /* SystemConfiguration.framework in Frameworks */,
+				D3317B3010649AC400F5AF1A /* libsqlite3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +307,9 @@
 		0C251CA81023893200C05768 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D31C45121067EDA500413D7F /* Default.png */,
+				D31C44A41067313800413D7F /* img_index-bkgnd2.png */,
+				D31C44A51067313800413D7F /* icon_noteable.png */,
 				D3317962106338D100F5AF1A /* icon_share-high.png */,
 				D3317963106338D100F5AF1A /* icon_share.png */,
 				D3317964106338D100F5AF1A /* icon_email-high.png */,
@@ -362,7 +383,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* Noteable.app */,
+				1D6058910D05DD3D006BFB54 /* NoteableDev.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -376,8 +397,6 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				D33177B91062A04D00F5AF1A /* MessageUI.framework */,
-				D33179091062ED1300F5AF1A /* NoteDetailShare.xib */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -404,6 +423,8 @@
 				0C3551F61020D690006C7ED7 /* NoteDetailHeader.xib */,
 				D345E74B10229C4B0070C491 /* NoteDetailFooter.xib */,
 				D33178DC1062E63C00F5AF1A /* NoteDetailFooterNew.xib */,
+				D33179091062ED1300F5AF1A /* NoteDetailShare.xib */,
+				D3317AF3106476E000F5AF1A /* NoteDetailEmail.xib */,
 				0C599FB6102A536400E66315 /* RootView.xib */,
 				D3D952961034536400C39C92 /* MapTableCell.xib */,
 				D3F992BB1046465A00066E1D /* TextViewCell.xib */,
@@ -422,6 +443,10 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D3317B1B10649A8500F5AF1A /* libPMAnalytics-r69.a */,
+				D33177B91062A04D00F5AF1A /* MessageUI.framework */,
+				D3317B2B10649AB000F5AF1A /* SystemConfiguration.framework */,
+				D3317B2F10649AC400F5AF1A /* libsqlite3.dylib */,
 				0CB2F166101A3DE60087C6F6 /* MapKit.framework */,
 				0CB2F164101A3DE10087C6F6 /* CoreLocation.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
@@ -435,6 +460,7 @@
 		D3F9938C104709E300066E1D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				D3317B1A10649A8500F5AF1A /* Beacon.h */,
 				D36C287010437CAA00AFB7A8 /* LocationController.h */,
 				D36C287110437CAA00AFB7A8 /* LocationController.m */,
 				D345E7521022A07C0070C491 /* RoundedRectView.h */,
@@ -464,7 +490,7 @@
 			);
 			name = MapNotes;
 			productName = MapNotes;
-			productReference = 1D6058910D05DD3D006BFB54 /* Noteable.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* NoteableDev.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -563,6 +589,10 @@
 				D331796B106338D100F5AF1A /* icon_email.png in Resources */,
 				D331796C106338D100F5AF1A /* icon_group-high.png in Resources */,
 				D331796D106338D100F5AF1A /* icon_desc-high.png in Resources */,
+				D3317AF4106476E000F5AF1A /* NoteDetailEmail.xib in Resources */,
+				D31C44A61067313800413D7F /* img_index-bkgnd2.png in Resources */,
+				D31C44A71067313800413D7F /* icon_noteable.png in Resources */,
+				D31C45131067EDA500413D7F /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -614,6 +644,10 @@
 				GCC_PREFIX_HEADER = MapNotes_Prefix.pch;
 				INFOPLIST_FILE = "NoteableDev-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Classes\"",
+				);
 				PRODUCT_NAME = NoteableDev;
 			};
 			name = Debug;
@@ -626,6 +660,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MapNotes_Prefix.pch;
 				INFOPLIST_FILE = "MapNotes-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Classes\"",
+				);
 				PRODUCT_NAME = MapNotes;
 			};
 			name = Release;
@@ -681,6 +719,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MapNotes_Prefix.pch;
 				INFOPLIST_FILE = "NoteableBeta-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Classes\"",
+				);
 				PRODUCT_NAME = Noteable;
 			};
 			name = Distribution;

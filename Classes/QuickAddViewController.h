@@ -30,7 +30,8 @@
 	Group *selectedGroup;
 	NSMutableArray *notesArray;
 	
-	IBOutlet UILabel *locationInfoLabel;
+	IBOutlet UIImageView *loadingImageView;
+	//IBOutlet UILabel *locationInfoLabel;
 	IBOutlet UIButton *addTextNoteButton;
 	IBOutlet UIButton *addPhotoNoteButton;
 	IBOutlet UIButton *viewNotesButton;
@@ -51,6 +52,7 @@
 @property (nonatomic, retain) IBOutlet UIButton *viewNotesButton;
 @property (nonatomic, retain) IBOutlet UIButton *updateLocationButton;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *updateLocationActivity;
+@property (nonatomic, retain) IBOutlet UIImageView *loadingImageView;
 
 - (void)checkAndUpdateLocation;
 - (void)startUpdatingLocation;
@@ -68,6 +70,6 @@
 
 @optional
 
-- (void)quickAddViewController:(QuickAddViewController *)controller showNewNote:(Note *)note;
+- (void)quickAddViewController:(QuickAddViewController *)controller showNote:(Note *)note editing:(BOOL)editing;
 
 @end

@@ -17,12 +17,15 @@
 #import "Group.h"
 #import "Photo.h"
 
+// Pinch Analytics
+#import "Beacon.h"
+
 @implementation QuickAddViewController
 
 @synthesize delegate;
 @synthesize mapView = _mapView;
 @synthesize locationTimer, managedObjectContext, selectedGroup, notesArray;
-@synthesize addTextNoteButton, addPhotoNoteButton, viewNotesButton, updateLocationButton, updateLocationActivity;
+@synthesize addTextNoteButton, addPhotoNoteButton, viewNotesButton, updateLocationButton, updateLocationActivity, loadingImageView;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
@@ -32,7 +35,9 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	[UIApplication sharedApplication].statusBarHidden = YES;
-
+	[self.viewNotesButton setEnabled:YES];
+	//[self.mapView setAlpha:0.0];
+	
 	// update location
 	[self startUpdatingLocation];
 	
@@ -69,6 +74,9 @@
 	} 
 	
 	CLLocation *location = [[LocationController sharedInstance] currentLocation];
+	// Send location info to Pinch Analytics
+	[[Beacon shared] setBeaconLocation:location];
+
 	MKCoordinateRegion region = {{0.0f, 0.0f}, {0.0f, 0.0f}};
 	
 	region.center = location.coordinate;
@@ -99,6 +107,12 @@
 	}
 	
 	[self.mapView setRegion:region animated:NO];
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];	
+	[UIView setAnimationDuration:0.4];
+	[UIView setAnimationDelegate:self];
+	[self.loadingImageView setAlpha:1.0];
+	[UIView commitAnimations];
 	self.mapView.hidden = NO;
 	
 	// Update UI to reflect we have a good location
@@ -124,7 +138,7 @@
 	
 	// disable the location button and start animating
 	self.updateLocationButton.enabled = NO;
-	[self.updateLocationActivity startAnimating];
+	//[self.updateLocationActivity startAnimating];
 	
 	// tell the location controller to start updating and set up a timer 
 	[[LocationController sharedInstance] start];
@@ -193,7 +207,7 @@
 - (IBAction)addTextNote:(id)sender {
 	Note *note = [self createNewNote];
 	if (!note) {
-		// TODO: Should throw an error here.
+		// TODO: Should throw an error here? Something went horribly wrong if we get here
 		return;
 	}
 	
@@ -207,7 +221,9 @@
     
     [navigationController release];
     [titleController release];
-	
+
+	[[Beacon shared] startSubBeaconWithName:@"QuickAdd - New Text Note" timeSession:NO];
+
 	/*
 	NoteDescViewController *descController = [[NoteDescViewController alloc] initWithNibName:@"EditDesc" bundle:nil];
     descController.delegate = self;
@@ -248,6 +264,7 @@
 - (IBAction)viewNotes:(id)sender {
 	[[UIApplication sharedApplication] setStatusBarHidden:NO animated:YES];
 	[self.parentViewController dismissModalViewControllerAnimated:YES];
+	[[Beacon shared] startSubBeaconWithName:@"Quick Add - View Notes" timeSession:NO];
 }
 
 - (IBAction)updateLocation:(id)sender {
@@ -277,6 +294,7 @@
 		imagePicker.delegate = self;
 		[self presentModalViewController:imagePicker animated:YES];
 		[imagePicker release];
+		[[Beacon shared] startSubBeaconWithName:@"QuickAdd - Take Photo" timeSession:YES];
 	} 
 	else if ([actionSheet buttonTitleAtIndex:buttonIndex] == kChoosePhotoButtonText) {
 		// Choose Existing
@@ -284,7 +302,8 @@
 		imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 		imagePicker.delegate = self;
 		[self presentModalViewController:imagePicker animated:YES];
-		[imagePicker release];		
+		[imagePicker release];
+		[[Beacon shared] startSubBeaconWithName:@"QuickAdd - Choose Photo" timeSession:YES];
 	} 
 }
 
@@ -296,7 +315,7 @@
 				  editingInfo:(NSDictionary *)editingInfo {
 	
 	// Save the image to the users album
-	if (picker.sourceType = UIImagePickerControllerSourceTypeCamera) {
+	if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
 		UIImageWriteToSavedPhotosAlbum(selectedImage, nil, nil, nil);
 	}
 	
@@ -332,14 +351,18 @@
 		NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
 	}
 	
-    if ([self.delegate respondsToSelector:@selector (quickAddViewController:showNewNote:)]) {
-		[self.delegate quickAddViewController:self showNewNote:note];
+    if ([self.delegate respondsToSelector:@selector (quickAddViewController:showNote:editing:)]) {
+		[self.delegate quickAddViewController:self showNote:note editing:YES];
 	}
+	[[Beacon shared] endSubBeaconWithName:@"QuickAdd - Take Photo"];
+	[[Beacon shared] endSubBeaconWithName:@"QuickAdd - Choose Photo"];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
 	// The user canceled -- simply dismiss the image picker.
 	[self dismissModalViewControllerAnimated:YES];
+	[[Beacon shared] endSubBeaconWithName:@"QuickAdd - Take Photo"];
+	[[Beacon shared] endSubBeaconWithName:@"QuickAdd - Choose Photo"];
 }
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
@@ -366,8 +389,8 @@
 	}
 	
 	if (didSave) {
-		if ([self.delegate respondsToSelector:@selector (quickAddViewController:showNewNote:)]) {
-			[self.delegate quickAddViewController:self showNewNote:note];
+		if ([self.delegate respondsToSelector:@selector (quickAddViewController:showNote:editing:)]) {
+			[self.delegate quickAddViewController:self showNote:note editing:YES];
 		}
 	} else {
 		[self dismissModalViewControllerAnimated:YES];
@@ -404,14 +427,13 @@ didSelectSearchResult:(id)result
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
 	MKAnnotationView *view = nil;
 	if(annotation != mapView.userLocation) {
-		view = (MKAnnotationView *)
-        [mapView dequeueReusableAnnotationViewWithIdentifier:@"identifier"];
+		view = (MKAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"identifier"];
 		
-		//if(nil == view) {
-		view = [[[MKAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"identifier"] autorelease];
-		view.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-
-		
+		if(nil == view) {
+			view = [[[MKAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"identifier"] autorelease];
+			view.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+		}
+			
 		// add the note thumbnail to the flyout
 		NoteAnnotation *noteAnnotation = (NoteAnnotation *)annotation;
 		if (noteAnnotation.note.thumbnail != nil) {
@@ -419,14 +441,14 @@ didSelectSearchResult:(id)result
 			view.leftCalloutAccessoryView = photoView;
 			photoView.image = noteAnnotation.note.thumbnail;
 		}
-		//}
+
 		if (noteAnnotation.note.group != nil) {
 			[view setImage:[noteAnnotation.note.group getPinImage]];	
 		} else {
 			[view setImage:[UIImage imageNamed:@"node_orange.png"]];
 		}
 		CGPoint offsetPixels;
-		offsetPixels.x = 10;
+		offsetPixels.x = 0;
 		offsetPixels.y = -16;
 		view.centerOffset = offsetPixels;
 		
@@ -437,14 +459,20 @@ didSelectSearchResult:(id)result
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
 	NoteAnnotation *ann = (NoteAnnotation *)view.annotation;
-
+/*
 	NoteDetailController *noteDetailController = [[NoteDetailController alloc] initWithStyle:UITableViewStyleGrouped];
 	noteDetailController.view.backgroundColor = [UIColor clearColor];
 	noteDetailController.selectedNote = ann.note;
 	[noteDetailController setEditing:NO animated:NO];
     [UIAppDelegate.navigationController pushViewController:noteDetailController animated:NO];
 	[noteDetailController release];
+
 	[self dismissModalViewControllerAnimated:YES];
+ */
+	if ([self.delegate respondsToSelector:@selector (quickAddViewController:showNote:editing:)]) {
+		[self.delegate quickAddViewController:self showNote:ann.note editing:NO];
+	}
+	[[Beacon shared] startSubBeaconWithName:@"QuickAdd - View Note from Map" timeSession:NO];
 }
 
 

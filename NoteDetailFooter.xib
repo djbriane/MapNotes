@@ -325,11 +325,13 @@
 							<string>deleteNote:</string>
 							<string>editPhoto:</string>
 							<string>editTitle:</string>
+							<string>emailNote:</string>
 							<string>rotateInfoLabel:</string>
 							<string>shareNote:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -342,12 +344,14 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>deleteButton</string>
+							<string>emailButton</string>
 							<string>infoLabelButton</string>
 							<string>mapView</string>
 							<string>nameTextField</string>
 							<string>photoBorderImage</string>
 							<string>photoButton</string>
 							<string>photoEditButton</string>
+							<string>shareButton</string>
 							<string>tableFooterView</string>
 							<string>tableHeaderView</string>
 							<string>tableShareView</string>
@@ -356,9 +360,11 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIButton</string>
 							<string>UIButton</string>
+							<string>UIButton</string>
 							<string>MKMapView</string>
 							<string>UIButton</string>
 							<string>UIImageView</string>
+							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIView</string>

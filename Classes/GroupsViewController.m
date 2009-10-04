@@ -181,6 +181,14 @@
 }
 
 - (IBAction)addNewGroup:(id)sender {
+	[NSTimer scheduledTimerWithTimeInterval:.01 target:self 
+								   selector:@selector(addNewGroup) 
+								   userInfo:nil 
+									repeats:NO];
+	//[self editTitle:nil];
+}
+
+- (void)addNewGroup {
 	[self editTitle:nil];
 }
 

@@ -21,6 +21,8 @@
 	[super loadView];
 
 	self.title = @"Photo";
+	[self.view setBackgroundColor:[UIColor blackColor]];
+	
 	/*
 	scrollView = [[UIScrollView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
     imageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];

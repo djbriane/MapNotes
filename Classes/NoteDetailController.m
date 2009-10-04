@@ -18,6 +18,7 @@
 #import "ImageManipulator.h"
 #import "GroupsViewController.h"
 #import "StringHelper.h"
+#import "Beacon.h"
 
 @implementation NoteDetailController
 
@@ -26,17 +27,71 @@
 @synthesize mapView = _mapView;
 @synthesize noteAnnotation;
 @synthesize tableHeaderView, tableFooterView, tableShareView;
-@synthesize photoEditButton, photoButton, deleteButton, emailButton, shareButton, infoLabelButton, nameTextField, photoBorderImage;
+@synthesize photoEditButton, photoButton, nameTextField, photoBorderImage;
+@synthesize deleteButton, emailButton, shareButton, infoLabelButton;
 
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
- - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
- if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
- // Custom initialization
- }
- return self;
- }
- */
+- (void)dealloc {
+	self.mapView = nil;
+	[noteAnnotation release];
+	//[selectedNote release];
+
+	[photoEditButton release];
+	[photoButton release];
+	[nameTextField release];
+	[photoBorderImage release];
+	[tableHeaderView release];
+	
+	[deleteButton release];
+	[emailButton release];
+	[shareButton release];
+	[infoLabelButton release];
+	
+	[tableShareView release];
+	[tableFooterView release];
+
+    [super dealloc];
+}
+
+
+- (void)viewDidUnload {
+	// Release any retained subviews of the main view.
+	// e.g. self.myOutlet = nil;
+	self.mapView = nil;
+	self.noteAnnotation = nil;
+	//self.selectedNote = nil;
+	
+	self.photoEditButton = nil;
+	self.photoButton = nil;
+	self.nameTextField = nil;
+	self.photoBorderImage = nil;
+	self.tableHeaderView = nil;
+	
+	self.deleteButton = nil;
+	self.emailButton = nil;
+	self.shareButton = nil;
+	self.infoLabelButton = nil;
+	
+	self.tableShareView = nil;
+	self.tableFooterView = nil;
+}
+
+- (void)didReceiveMemoryWarning {
+	NSLog(@"NoteDetailController - Received Memory Warning");
+	// Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+	
+	// Release any cached data, images, etc that aren't in use.
+	/*
+	 self.mapView = nil;
+	 self.photoEditButton = nil;
+	 self.photoButton = nil;
+	 self.deleteButton = nil;
+	 self.infoLabelButton = nil;
+	 */
+	self.tableHeaderView = nil;
+	self.tableShareView = nil;
+	self.tableFooterView = nil;
+}
 
 
  // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -44,15 +99,41 @@
 	[super viewDidLoad];
 	self.tableView.backgroundColor = [UIColor clearColor];
 
+	[self loadTableHeaderAndFooterViews];
+	
 	//self.editing = NO; // Initially displays an Edit button and noneditable view
 	self.tableView.allowsSelectionDuringEditing = YES;
+	self.tableView.sectionHeaderHeight = 5.0;
+}
 
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	self.navigationItem.rightBarButtonItem = [self editButtonItem];
+	self.navigationItem.title = @"Note Detail";
+	
+	if (![MFMailComposeViewController canSendMail]) {
+		[self.emailButton setEnabled:NO];
+	}
+
+	if (UIAppDelegate.infoDisplay == 0) {
+		[self setCreatedDateLabel];
+	} else {
+		[self setLocationInfoLabel];
+	}
+	
+	[self initializeMap];
+	[self.tableView reloadData];
+	[self updatePhotoInfo];
+}
+
+- (void)loadTableHeaderAndFooterViews {
 	// Create and set the table header / footer view.
+	/*
 	if (tableHeaderView == nil) {
 		[[NSBundle mainBundle] loadNibNamed:@"NoteDetailHeader" owner:self options:nil];
 		self.tableView.tableHeaderView = tableHeaderView;
-	}
-
+	} */
+	
 	UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 290)];
 	self.tableView.tableFooterView = footerView;
 	[footerView release];
@@ -64,46 +145,12 @@
 	[self.tableView.tableFooterView addSubview:tableFooterView];
 	
 	if (tableShareView == nil) {	
-		[[NSBundle mainBundle] loadNibNamed:@"NoteDetailShare" owner:self options:nil];
-		
+		//[[NSBundle mainBundle] loadNibNamed:@"NoteDetailShare" owner:self options:nil];
+		[[NSBundle mainBundle] loadNibNamed:@"NoteDetailEmail" owner:self options:nil];
 		[self.tableView.tableFooterView addSubview:tableShareView];
 	}
 	[self.tableView.tableFooterView addSubview:tableShareView];
-
-	self.tableView.sectionHeaderHeight = 5.0;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
-	self.navigationItem.rightBarButtonItem = [self editButtonItem];
-	self.navigationItem.title = @"Note";
-
-	if ([selectedNote.title length] != 0) {
-		[nameTextField setTitle:[selectedNote title] forState:UIControlStateNormal];
-		UIColor *myDarkGray = [UIColor colorWithRed:(45.0/255.0) green:(48.0/255.0) blue:(51.0/255.0) alpha:1.0];
-		[nameTextField setTitleColor:myDarkGray forState:UIControlStateDisabled];
-		[nameTextField setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-	} else {
-		[nameTextField setTitle:@"Add Title" forState:UIControlStateNormal];
-		//nameTextField.titleLabel.font = [UIFont boldSystemFontOfSize:18];
-		[nameTextField setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-		[nameTextField setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
-	}
-	
-	if (![MFMailComposeViewController canSendMail]) {
-		[self.emailButton setEnabled:NO];
-	}
-	
-	if (UIAppDelegate.infoDisplay == 0) {
-		[self setCreatedDateLabel];
-	} else {
-		[self setLocationInfoLabel];
-	}
-	
-	[self initializeMap];
-	[self updatePhotoInfo];
-	[self.tableView reloadData];
-}
+}	
 
 /*
  // Override to allow orientations other than the default portrait orientation.
@@ -122,12 +169,19 @@
 	//UILabel *detailsDescLabel;
     [super setEditing:editing animated:animated];
 	[self.navigationItem setHidesBackButton:editing animated:YES];
-
-	nameTextField.enabled = editing;
 	
     if (editing == YES){		
         // change view to an editable view
-		nameTextField.enabled = YES;
+		[nameTextField setEnabled:YES];
+		
+		// set state for photo button
+		[photoButton setEnabled:YES];
+		if (selectedNote.thumbnail) {
+			[photoEditButton setHidden:NO];
+		} else {
+			[photoEditButton setHidden:YES];
+		}
+
 		//[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
@@ -146,7 +200,16 @@
 	}
     else {
         // save the changes if needed and change view to noneditable
-		nameTextField.enabled = NO;
+		[nameTextField setEnabled:NO];
+		
+		// set state for photo button
+		if (selectedNote.thumbnail) {
+			[photoButton setEnabled:YES];
+		} else {
+			[photoButton setEnabled:NO];
+		}
+		[photoEditButton setHidden:YES];
+		
 		[self.tableView.tableFooterView addSubview:tableShareView];
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
@@ -160,26 +223,16 @@
 		[deleteButton setEnabled:NO];
     }
 	
-	visibleCells = [self.tableView visibleCells];
-	// show and hide the share button
-	/*
-	if (editing && [visibleCells count] == 3) {
-		[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationRight];
-	} else if ([visibleCells count] == 2) {
-		[self.tableView insertSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationLeft];
-	} */
-	
 	// Adjust note desc label width
+	visibleCells = [self.tableView visibleCells];
 	if ([selectedNote.details length] != 0) {
 		currentCell = [visibleCells objectAtIndex:0];
 		NSArray *rowToReload = [NSArray arrayWithObject:[self.tableView indexPathForCell:currentCell]];
 		[self.tableView reloadRowsAtIndexPaths:rowToReload withRowAnimation:UITableViewRowAnimationFade];  
 	}
 	
-
-
 	// Update photo display accordingly
-	[self updatePhotoInfo];
+	//[self updatePhotoInfo];
 	
 	/*
 	 If editing is finished, save the managed object context.
@@ -210,6 +263,7 @@
     [self.navigationController pushViewController:titleController animated:YES];
 	
     [titleController release];
+	[[Beacon shared] startSubBeaconWithName:@"Details - Edit Title" timeSession:NO];
 }
 
 - (void)editDesc {
@@ -219,6 +273,7 @@
 	
     [self.navigationController pushViewController:descController animated:YES];
     [descController release];
+	[[Beacon shared] startSubBeaconWithName:@"Details - Edit Description" timeSession:NO];
 }
 
 - (IBAction)deleteNote:(id)sender {
@@ -234,6 +289,7 @@
 		//actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
 		[actionSheet showInView:self.view];
 		[actionSheet release];		
+		[[Beacon shared] startSubBeaconWithName:@"Details - Delete Note" timeSession:NO];
 	}
 }
 
@@ -269,6 +325,7 @@
 	[UIView setAnimationDelegate:self];
 	[infoLabelButton setAlpha:1.0];
 	[UIView commitAnimations];
+	[[Beacon shared] startSubBeaconWithName:@"Details - Rotate Info Label" timeSession:NO];
 }
 
 - (void)setCreatedDateLabel {
@@ -293,7 +350,13 @@
 	CLLocation *noteLocation = [selectedNote location];
 	
 	// return the created date if its the first section
-	locationInfo = [NSString stringWithFormat:@"Loc: %1.2f, %1.2f Acc: %1.0fm Alt: %1.0fm ", noteLocation.coordinate.latitude, noteLocation.coordinate.longitude, noteLocation.horizontalAccuracy, noteLocation.altitude];
+	// convert altitude to feet
+	if (noteLocation.verticalAccuracy > 0) {
+		CGFloat altitude = noteLocation.altitude * 3.2808399;
+		locationInfo = [NSString stringWithFormat:@"Loc: %1.2f, %1.2f Acc: %1.0fm Alt: %1.0fft", noteLocation.coordinate.latitude, noteLocation.coordinate.longitude, noteLocation.horizontalAccuracy, altitude];
+	} else {
+		locationInfo = [NSString stringWithFormat:@"Loc: %1.2f, %1.2f Accuracy: %1.0fm", noteLocation.coordinate.latitude, noteLocation.coordinate.longitude, noteLocation.horizontalAccuracy];
+	}
 	[infoLabelButton setTitle:locationInfo forState:UIControlStateNormal];
 	infoLabelButton.titleLabel.font = [UIFont systemFontOfSize: 13];
 
@@ -381,11 +444,14 @@
 		[self.navigationController pushViewController:notePhotoViewController animated:YES];
 		[notePhotoViewController release];
 	}
+	[[Beacon shared] startSubBeaconWithName:@"Details - Edit Photo" timeSession:NO];
+
 }
 
 - (void)updatePhotoInfo {
 	// Synchronize the photo image view and the text on the photo button with the event's photo.
 	UIImage *image = selectedNote.thumbnail;
+	/*
 	if (image && self.editing) {
 		[photoEditButton setHidden:NO];
 	} else {
@@ -393,15 +459,23 @@
 	}
 	
 	[photoBorderImage setHidden:YES];
+	 */
 	if (image) {
 		[photoBorderImage setHidden:NO];
 		[photoButton setImage:image forState:UIControlStateNormal];
-	} else if (self.editing) {
-		image = [UIImage imageNamed:@"img_photo-add.png"];
-		[photoButton setImage:image forState:UIControlStateNormal];
+		if (self.editing) {
+			[photoEditButton setHidden:NO];
+		} else {
+			[photoEditButton setHidden:YES];
+		}
 	} else {
-		image = [UIImage imageNamed:@"img_no-photo.png"];
-		[photoButton setImage:image forState:UIControlStateNormal];		
+		[photoBorderImage setHidden:YES];
+		[photoEditButton setHidden:YES];
+		[photoButton setImage:[UIImage imageNamed:@"img_photo-add.png"] forState:UIControlStateNormal];
+		[photoButton setImage:[UIImage imageNamed:@"img_no-photo.png"] forState:UIControlStateDisabled];
+		//image = [UIImage imageNamed:@"img_no-photo.png"];
+		//[photoButton setImage:image forState:UIControlStateNormal];
+		//[photoButton setEnabled:NO];
 	}
 }
 
@@ -462,6 +536,7 @@
 		imagePicker.delegate = self;
 		[self presentModalViewController:imagePicker animated:YES];
 		[imagePicker release];
+		[[Beacon shared] startSubBeaconWithName:@"Details - Take Photo" timeSession:YES];
 	} 
 	else if ([actionSheet buttonTitleAtIndex:buttonIndex] == kChoosePhotoButtonText) {
 		// Choose Existing
@@ -469,7 +544,9 @@
 		imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 		imagePicker.delegate = self;
 		[self presentModalViewController:imagePicker animated:YES];
-		[imagePicker release];		
+		[imagePicker release];
+		[[Beacon shared] startSubBeaconWithName:@"Details - Choose Photo" timeSession:YES];
+
 	} 
 	else if ([actionSheet buttonTitleAtIndex:buttonIndex] == kDeletePhotoButtonText) {
 		[self deleteExistingPhoto];
@@ -486,6 +563,8 @@
 		didFinishPickingImage:(UIImage *)selectedImage 
 				  editingInfo:(NSDictionary *)editingInfo {
 
+	[self dismissModalViewControllerAnimated:YES];
+	
 	// Delete Existing Photo
 	[self deleteExistingPhoto];
 	
@@ -495,7 +574,7 @@
 	
 	
 	// Save the image to the users album
-	if (picker.sourceType = UIImagePickerControllerSourceTypeCamera) {
+	if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
 		UIImageWriteToSavedPhotosAlbum(selectedImage, nil, nil, nil);
 	}
 	
@@ -521,45 +600,29 @@
 	
 	// Update the user interface appropriately.
 	[self updatePhotoInfo];
-	[self dismissModalViewControllerAnimated:YES];
+	
+	//[self dismissModalViewControllerAnimated:YES];
+	[[Beacon shared] endSubBeaconWithName:@"Details - Take Photo"];
+	[[Beacon shared] endSubBeaconWithName:@"Details - Choose Photo"];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
 	// The user canceled -- simply dismiss the image picker.
 	[self dismissModalViewControllerAnimated:YES];
+	[[Beacon shared] endSubBeaconWithName:@"Details - Take Photo"];
+	[[Beacon shared] endSubBeaconWithName:@"Details - Choose Photo"];
 }
 
 #pragma mark -
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // There are three sections, for note details, move folders and share
-	//if (tableView.editing) {
-	//	return 1; 
-	//}
 	return 1;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-	/*
-	 The number of rows varies by section.
-	 */
-    NSInteger rows = 0;
-    switch (section) {
-        case 0:
-			// Details and Group
-			rows = 2;
-			break;
-		case 1:
-			rows = 1;
-			break;
-
-        default:
-            break;
-    }
-    return rows;
+    return 2;
 }
 
 
@@ -592,7 +655,6 @@
 		}
 	}
 
-	
     // Set the text in the cell for the section/row.    
     NSString *cellText = nil;
 	CGFloat fontSize;
@@ -619,6 +681,7 @@
 						mainLabel = [cellText RAD_newSizedCellLabelWithSystemFontOfSize:fontSize];
 						mainLabel.tag = kMainLabelTag;
 						[cell.contentView addSubview:mainLabel];
+						[mainLabel release];
 						photo.image = [UIImage imageNamed:@"icon_desc.png"];
 						photo.highlightedImage = [UIImage imageNamed:@"icon_desc-high.png"];
 						break;
@@ -629,6 +692,7 @@
 					}
 					cell.imageView.image = [UIImage imageNamed:@"icon_desc.png"];
 					cell.imageView.highlightedImage = [UIImage imageNamed:@"icon_desc-high.png"];
+					cell.textLabel.textColor = [UIColor colorWithRed:(51.0/255.0) green:(51.0/255.0) blue:(51.0/255.0) alpha:1.0];
 					cell.textLabel.text = cellText;	
 					break;
 				case 1:
@@ -640,6 +704,7 @@
 					cell.imageView.image = [UIImage imageNamed:@"icon_group.png"];
 					cell.imageView.highlightedImage = [UIImage imageNamed:@"icon_group-high.png"];
 					cell.textLabel.text = cellText;
+					cell.textLabel.textColor = [UIColor colorWithRed:(51.0/255.0) green:(51.0/255.0) blue:(51.0/255.0) alpha:1.0];
 					break;
 				default:
 					break;
@@ -681,60 +746,83 @@
 			
 			[self.navigationController pushViewController:groupsViewController animated:YES];
 			[groupsViewController release];
+			[[Beacon shared] startSubBeaconWithName:@"Details - Edit Group" timeSession:NO];
 		}
 		//[self setEditing:YES animated:NO];
 	}
 }
 
-/*
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-	if (section != 0) {
-		return nil;
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+	if (section == 0) {
+		if (tableHeaderView == nil) {
+			// tableHeaderView
+			UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 89)];
+			tableHeaderView = headerView;
+
+			// photo button
+			UIButton *setPhotoButton = [[UIButton alloc] initWithFrame:CGRectMake(9, 15, 64, 64)];
+			[setPhotoButton setImage:[UIImage imageNamed:@"img_no-photo.png"] forState:UIControlStateDisabled];
+			[setPhotoButton setImage:[UIImage imageNamed:@"img_photo-add.png"] forState:UIControlStateNormal];
+			[setPhotoButton addTarget:self action:@selector(editPhoto:) forControlEvents:UIControlEventTouchUpInside];
+			photoButton = setPhotoButton;
+			[headerView addSubview:setPhotoButton];
+			
+			// photo border
+			UIImageView *photoBorder = [[UIImageView alloc] initWithFrame:CGRectMake(9, 15, 64, 64)];
+			photoBorder.image = [UIImage imageNamed:@"img_photo-border.png"];
+			[photoBorder setHidden:YES];
+			photoBorderImage = photoBorder;
+			[headerView addSubview:photoBorder];
+			
+			// edit overlay
+			UIButton *editOverlay = [[UIButton alloc] initWithFrame:CGRectMake(9, 15, 64, 64)];
+			[editOverlay setImage:[UIImage imageNamed:@"img_photo-edit.png"] forState:UIControlStateNormal];
+			[editOverlay addTarget:self action:@selector(editPhoto:) forControlEvents:UIControlEventTouchUpInside];
+			[editOverlay setHidden:YES];
+
+			photoEditButton = editOverlay;
+			[headerView addSubview:editOverlay];
+			
+			// title button
+			UIButton *titleButton = [[UIButton alloc] initWithFrame:CGRectMake(90, 15, 221, 64)];
+			[titleButton setBackgroundImage:[UIImage imageNamed:@"img_title-bkgnd.png"] forState:UIControlStateNormal];
+			[titleButton setBackgroundImage:[UIImage imageNamed:@"img_title-bkgnd-blue.png"] forState:UIControlStateHighlighted];
+			[titleButton setBackgroundImage:[UIImage imageNamed:@"img_blank.png"] forState:UIControlStateDisabled];
+			[titleButton addTarget:self action:@selector(editTitle:) forControlEvents:UIControlEventTouchUpInside];
+			titleButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+			titleButton.contentEdgeInsets = UIEdgeInsetsMake(3.0, 10.0, 3.0, 20.0);
+			titleButton.titleLabel.font = [UIFont boldSystemFontOfSize: 18];
+			titleButton.titleLabel.textAlignment = UITextAlignmentLeft;
+			titleButton.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
+			
+			nameTextField = titleButton;
+			NSLog(@"Note Title Label: %@", titleButton.titleLabel.text);
+			[headerView addSubview:titleButton];
+		}
+		
+		if ([selectedNote.title length] != 0) {
+			[nameTextField setTitle:[selectedNote title] forState:UIControlStateNormal];
+			UIColor *myDarkGray = [UIColor colorWithRed:(45.0/255.0) green:(48.0/255.0) blue:(51.0/255.0) alpha:1.0];
+			[nameTextField setTitleColor:myDarkGray forState:UIControlStateDisabled];
+			[nameTextField setTitleColor:myDarkGray forState:UIControlStateNormal];
+			//[nameTextField setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+		} else {
+			[nameTextField setTitle:@"Add Title" forState:UIControlStateNormal];
+			[nameTextField setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+			[nameTextField setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+		}
+		
+		return tableHeaderView;
 	}
-	NSString *createdDate;
-	UIView *footerView;
-	
-	// A date formatter for the creation/modified dates.
-	static NSDateFormatter *dateFormatter = nil;
-	if (dateFormatter == nil) {
-		dateFormatter = [[NSDateFormatter alloc] init];
-		[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-		[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-	}
-	
-	// return the created date if its the first section
-	createdDate = [NSString stringWithFormat:@"Created: %@", [dateFormatter stringFromDate:[selectedNote dateCreated]]];
-	footerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,320,30)];
-				  
-	UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(10,0,300, 30)] autorelease];
-	[footerView addSubview:label];
-	
-	label.font = [UIFont systemFontOfSize:15];
-	label.textAlignment = UITextAlignmentCenter;
-	label.textColor = [UIColor darkGrayColor];
-	label.tag = kDetailsInfoLabelTag;
-	label.text = createdDate;
-	//[button addTarget:self action:@selector(showAllNotes) forControlEvents:UIControlEventTouchUpInside];
-	
-	return footerView;
+	return nil;
 }
 
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-	if (section == 0) {
-		return 30.0;
-	}
-	return self.tableView.sectionFooterHeight;
-} 
-*/
-/*
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 	if (section == 0) {
-		return 10.0;
+		return 94.0;
 	} 
-	//return 0.0;
 	return self.tableView.sectionHeaderHeight;
-} */
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	// return dynamic size for note description
@@ -755,17 +843,7 @@
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
 	UITableViewCellEditingStyle style = UITableViewCellEditingStyleNone;
-    /*
-	static NSString *CellIdentifier = @"CellIdentifier";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
-	 */
-	/* Disable for now, don't like how this works */
-	
+
 	if (indexPath.section == 0) {
 		switch (indexPath.row) {
 			case 0:
@@ -848,7 +926,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 		[view setImage:[UIImage imageNamed:@"node_orange.png"]];
 	} 
 	CGPoint offsetPixels;
-	offsetPixels.x = 10;
+	offsetPixels.x = 0;
 	offsetPixels.y = -16;
 	view.centerOffset = offsetPixels;
 	
@@ -877,8 +955,17 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 - (IBAction)emailNote:(id)sender {
+	[NSTimer scheduledTimerWithTimeInterval:.01 target:self 
+								   selector:@selector(showEmailView) 
+								   userInfo:nil 
+									repeats:NO];
+	[[Beacon shared] startSubBeaconWithName:@"Notes - Email Note" timeSession:NO];
+}
+
+- (void)showEmailView {
 	[self showComposeEmailViewWithNote:selectedNote];
 }
+
 
 - (void)showComposeEmailViewWithNote:(Note *)note {
 	NSString *noteableSig = @"Sent from Noteable for iPhone\r\nhttp://appwrkshp.com/noteable";
@@ -903,7 +990,13 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 			mapInfo = [NSString stringWithFormat:@"(%@ - %@)", note.title, note.details];
 		}
 	}
-	mapLink = [NSString stringWithFormat:@"http://maps.google.com/?q=%1.6f,%1.6f %@", note.location.coordinate.latitude, note.location.coordinate.longitude, mapInfo];
+	mapLink = [NSString stringWithFormat:@"http://maps.google.com/?q=%1.6f,%1.6f %@&ll=%1.6f,%1.6f", 
+			   note.location.coordinate.latitude, 
+			   note.location.coordinate.longitude, 
+			   mapInfo, 
+			   note.location.coordinate.latitude, 
+			   note.location.coordinate.longitude];
+	
 	mapLinkEscaped = [mapLink stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
 	
 	if ([note.details length] != 0) {
@@ -913,44 +1006,11 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 	}
 	[mailComposeViewController setMessageBody:bodyMessage isHTML:NO];
 	
-	NSData *imageData = UIImageJPEGRepresentation([note.photo valueForKey:@"image"], 1);
-	[mailComposeViewController addAttachmentData:imageData mimeType:@"image/jpeg" fileName:@"noteable_photo.jpg"];
+	if (note.photo != nil) {
+		NSData *imageData = UIImageJPEGRepresentation([note.photo valueForKey:@"image"], 1);
+		[mailComposeViewController addAttachmentData:imageData mimeType:@"image/jpeg" fileName:@"noteable_photo.jpg"];
+	}	
 	[self presentModalViewController:mailComposeViewController animated:YES];
-}
-
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
-	self.mapView = nil;
-	//self.selectedNote = nil;
-	//self.tableHeaderView = nil;
-	//self.tableFooterView = nil;
-	self.photoEditButton = nil;
-	self.photoButton = nil;
-	self.deleteButton = nil;
-	self.infoLabelButton = nil;
-}
-
-- (void)dealloc {
-	self.mapView = nil;
-	//self.selectedNote = nil;
-	//[selectedNote release];
-	[tableHeaderView release];
-	[tableFooterView release];
-	[photoEditButton release];
-	[photoButton release];
-	[deleteButton release];
-	[infoLabelButton release];
-	[nameTextField release];
-	[photoBorderImage release];
-    [super dealloc];
 }
 
 @end

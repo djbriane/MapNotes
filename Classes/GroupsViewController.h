@@ -32,6 +32,7 @@
 
 
 - (void)editTitle:(Group *)group;
+- (void)addNewGroup;
 - (void)addToGroup:(Group *)group withNote:(Note *)note;
 - (void)showAllNotesWithGroup:(Group *)group;
 - (IBAction)addNewGroup:(id)sender;

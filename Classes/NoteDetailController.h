@@ -45,18 +45,18 @@
 	UIView *tableHeaderView;
 	UIView *tableFooterView;
 	UIView *tableShareView;
-	
-	UIButton *photoEditButton;
-	UIButton *photoButton;
+
 	UIButton *deleteButton;
 	UIButton *emailButton;
 	UIButton *shareButton;
 	UIButton *infoLabelButton;
 	UIButton *takePictureButton;
 	UIButton *selectFromCameraRollButton;
-	UIImageView *photoBorderImage;
 	
 	UIButton *nameTextField;	
+	UIButton *photoEditButton;
+	UIButton *photoButton;
+	UIImageView *photoBorderImage;
 }
 
 @property (nonatomic, retain) Note *selectedNote;
@@ -68,14 +68,14 @@
 @property (nonatomic, retain) IBOutlet UIView *tableFooterView;
 @property (nonatomic, retain) IBOutlet UIView *tableShareView;
 
-@property (nonatomic, retain) IBOutlet UIButton *photoEditButton;
-@property (nonatomic, retain) IBOutlet UIButton *photoButton;
 @property (nonatomic, retain) IBOutlet UIButton *deleteButton;
 @property (nonatomic, retain) IBOutlet UIButton *infoLabelButton;
 @property (nonatomic, retain) IBOutlet UIButton *emailButton;
 @property (nonatomic, retain) IBOutlet UIButton *shareButton;
 
 @property (nonatomic, retain) IBOutlet UIButton *nameTextField;
+@property (nonatomic, retain) IBOutlet UIButton *photoEditButton;
+@property (nonatomic, retain) IBOutlet UIButton *photoButton;
 @property (nonatomic, retain) IBOutlet UIImageView *photoBorderImage;
 
 - (void)updatePhotoInfo;
@@ -84,6 +84,8 @@
 - (void)deleteExistingNote;
 - (void)setCreatedDateLabel;
 - (void)setLocationInfoLabel;
+- (void)loadTableHeaderAndFooterViews;
+- (void)showEmailView;
 - (void)showComposeEmailViewWithNote:(Note *)note;
 - (IBAction)editPhoto:(id)sender;
 - (IBAction)editTitle:(id)sender;
