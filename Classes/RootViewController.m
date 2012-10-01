@@ -10,7 +10,6 @@
 #import "MapNotesAppDelegate.h"
 #import "NotesViewController.h"
 #import "StringHelper.h"
-#import "Beacon.h"
 
 @implementation RootViewController
 
@@ -64,7 +63,6 @@
 
 	[self.navigationController pushViewController:notesViewController animated:YES];
 	[notesViewController release];
-	[[Beacon shared] startSubBeaconWithName:@"Groups - Show All Notes" timeSession:NO];
 }
 
 - (void)showAllNotesWithQuickAdd {

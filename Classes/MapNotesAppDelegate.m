@@ -10,8 +10,7 @@
 #import "RootViewController.h"
 #import "NotesViewController.h"
 #import "LocationController.h"
-// Pinch Analytics
-#import "Beacon.h"
+
 
 @implementation MapNotesAppDelegate
 
@@ -23,12 +22,7 @@
 #pragma mark Application lifecycle
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
-	// Pinch Analytics Init Code
-    NSString *applicationCode = @"2a4a348c6628a367acb6003714124ae5";
-    [Beacon initAndStartBeaconWithApplicationCode:applicationCode
-								  useCoreLocation:NO useOnlyWiFi:NO];
-	//NSLog(@"device id: %@", [UIDevice currentDevice].uniqueIdentifier);
-    
+
 	// Override point for customization after app launch    
 	application.statusBarStyle = UIStatusBarStyleBlackOpaque;
 	//application.statusBarStyle = UIStatusBarStyleBlackTranslucent;
@@ -91,8 +85,6 @@
 			exit(-1);  // Fail
         } 
     }
-	// Pinch Analytics
-	[Beacon endBeacon];
 }
 
 #pragma mark -

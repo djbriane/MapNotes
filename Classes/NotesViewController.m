@@ -14,7 +14,6 @@
 #import "LocationController.h"
 #import "Note.h"
 #import "Group.h"
-#import "Beacon.h"
 
 #define kPhotoViewTag		11
 #define kTitleViewTag		12
@@ -149,7 +148,7 @@
 	}
 	if (!location && UIAppDelegate.sortOrder == @"geoDistance") {
 		// set the sort order to date created since we don't have a location
-		UIAppDelegate.sortOrder == @"dateCreated";
+		UIAppDelegate.sortOrder = @"dateCreated";
 	}
 	
 	// Set self's events array to the mutable array, then clean up.
@@ -190,7 +189,7 @@
 	NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
 	if (mutableFetchResults == nil) {
 		// Handle the error.
-		NSLog(@"%@:%s Error fetching context: %@", [self class], _cmd, [error localizedDescription]);
+		//NSLog(@"%@:%s Error fetching context: %@", [self class], _cmd, [error localizedDescription]);
 	}
 	
 	// Set self's events array to the mutable array, then clean up.
@@ -295,11 +294,10 @@
 	//[aQuickAddViewController.view setFrame: [[UIScreen mainScreen] bounds]];
 
 	//[UIApplication sharedApplication].statusBarHidden = YES;
-	[[UIApplication sharedApplication] setStatusBarHidden:YES animated:YES];
+	[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:YES];
 	[self presentModalViewController:aQuickAddViewController animated:animated];
 
 	[aQuickAddViewController release];
-	[[Beacon shared] startSubBeaconWithName:@"Notes - Show Quick Add" timeSession:NO];
 }
 
 - (void)pushNoteDetailViewController:(Note *)note editing:(BOOL)editing animated:(BOOL)animated {
@@ -337,7 +335,6 @@
 	
 	// invalidate and re-run the fetch with the new sort descriptor
 	[self sortExistingNotes:YES];
-	[[Beacon shared] startSubBeaconWithName:@"Notes - Change Sort Order" timeSession:NO];
 }
 
 - (IBAction)showMapView:(id)sender {
@@ -354,7 +351,6 @@
 	
     [self.navigationController pushViewController:aNotesMapViewController animated:YES];
 	[aNotesMapViewController release];
-	[[Beacon shared] startSubBeaconWithName:@"Notes - Clicked Map View" timeSession:NO];
 }
 
 #pragma mark -
@@ -365,7 +361,7 @@
 					   editing:(BOOL)editing {
 	[self pushNoteDetailViewController:note	editing:editing animated:NO];
 	
-	[[UIApplication sharedApplication] setStatusBarHidden:NO animated:YES];
+	[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:YES];
 	[self dismissModalViewControllerAnimated:YES];
 }
 
@@ -484,7 +480,7 @@
 	if (!location || !note.location) {
 		geoLabel = nil;
 	} else {
-		geoLabel = [NSString stringWithFormat:@"%1.1f mi", ([note.location getDistanceFrom:location] * 0.000621371192)];
+		geoLabel = [NSString stringWithFormat:@"%1.1f mi", ([note.location distanceFromLocation:location] * 0.000621371192)];
 	}
 	
 	// A date formatter for the creation/modified dates.
@@ -558,7 +554,7 @@
 		NSError *error;
 		if (![managedObjectContext save:&error]) {
 			// Handle the error...
-			NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
+			//NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
 		}
 		
 		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];

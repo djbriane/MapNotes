@@ -18,7 +18,6 @@
 #import "ImageManipulator.h"
 #import "GroupsViewController.h"
 #import "StringHelper.h"
-#import "Beacon.h"
 
 @implementation NoteDetailController
 
@@ -263,7 +262,6 @@
     [self.navigationController pushViewController:titleController animated:YES];
 	
     [titleController release];
-	[[Beacon shared] startSubBeaconWithName:@"Details - Edit Title" timeSession:NO];
 }
 
 - (void)editDesc {
@@ -273,7 +271,6 @@
 	
     [self.navigationController pushViewController:descController animated:YES];
     [descController release];
-	[[Beacon shared] startSubBeaconWithName:@"Details - Edit Description" timeSession:NO];
 }
 
 - (IBAction)deleteNote:(id)sender {
@@ -289,7 +286,6 @@
 		//actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
 		[actionSheet showInView:self.view];
 		[actionSheet release];		
-		[[Beacon shared] startSubBeaconWithName:@"Details - Delete Note" timeSession:NO];
 	}
 }
 
@@ -325,7 +321,6 @@
 	[UIView setAnimationDelegate:self];
 	[infoLabelButton setAlpha:1.0];
 	[UIView commitAnimations];
-	[[Beacon shared] startSubBeaconWithName:@"Details - Rotate Info Label" timeSession:NO];
 }
 
 - (void)setCreatedDateLabel {
@@ -371,7 +366,7 @@
 	NSError *error;
 	if (![context save:&error]) {
 		// Handle the error...
-		NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
+		//NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
 	}
 	
 	// return to notes view
@@ -444,7 +439,6 @@
 		[self.navigationController pushViewController:notePhotoViewController animated:YES];
 		[notePhotoViewController release];
 	}
-	[[Beacon shared] startSubBeaconWithName:@"Details - Edit Photo" timeSession:NO];
 
 }
 
@@ -492,7 +486,7 @@
 		NSError *error;
 		if (![selectedNote.managedObjectContext save:&error]) {
 			// Handle the error.
-			NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
+			//NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
 		}
 		[self updatePhotoInfo];
 	}
@@ -536,7 +530,6 @@
 		imagePicker.delegate = self;
 		[self presentModalViewController:imagePicker animated:YES];
 		[imagePicker release];
-		[[Beacon shared] startSubBeaconWithName:@"Details - Take Photo" timeSession:YES];
 	} 
 	else if ([actionSheet buttonTitleAtIndex:buttonIndex] == kChoosePhotoButtonText) {
 		// Choose Existing
@@ -545,7 +538,6 @@
 		imagePicker.delegate = self;
 		[self presentModalViewController:imagePicker animated:YES];
 		[imagePicker release];
-		[[Beacon shared] startSubBeaconWithName:@"Details - Choose Photo" timeSession:YES];
 
 	} 
 	else if ([actionSheet buttonTitleAtIndex:buttonIndex] == kDeletePhotoButtonText) {
@@ -595,22 +587,19 @@
 	NSError *error;
 	if (![selectedNote.managedObjectContext save:&error]) {
 		// Handle the error.
-		NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
+		//NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
 	}
 	
 	// Update the user interface appropriately.
 	[self updatePhotoInfo];
 	
 	//[self dismissModalViewControllerAnimated:YES];
-	[[Beacon shared] endSubBeaconWithName:@"Details - Take Photo"];
-	[[Beacon shared] endSubBeaconWithName:@"Details - Choose Photo"];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
 	// The user canceled -- simply dismiss the image picker.
 	[self dismissModalViewControllerAnimated:YES];
-	[[Beacon shared] endSubBeaconWithName:@"Details - Take Photo"];
-	[[Beacon shared] endSubBeaconWithName:@"Details - Choose Photo"];
+
 }
 
 #pragma mark -
@@ -746,7 +735,6 @@
 			
 			[self.navigationController pushViewController:groupsViewController animated:YES];
 			[groupsViewController release];
-			[[Beacon shared] startSubBeaconWithName:@"Details - Edit Group" timeSession:NO];
 		}
 		//[self setEditing:YES animated:NO];
 	}
@@ -899,7 +887,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 		NSError *error;
 		if (![context save:&error]) {
 			// Handle the error...
-			NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
+			//NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
 		}
 		// reload the row that was deleted
 		[tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationFade];
@@ -959,7 +947,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 								   selector:@selector(showEmailView) 
 								   userInfo:nil 
 									repeats:NO];
-	[[Beacon shared] startSubBeaconWithName:@"Notes - Email Note" timeSession:NO];
 }
 
 - (void)showEmailView {
@@ -980,7 +967,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 	[mailComposeViewController setSubject:note.title];
 	
 	if ([note.title length] == 0 && [note.details length] == 0) {
-		mapInfo = [NSString stringWithFormat:@"(Location from Noteable)", note.title];
+		mapInfo = [NSString stringWithFormat:@"(Location from Noteable)"];
 	} else if ([note.details length] == 0) {
 		mapInfo = [NSString stringWithFormat:@"(%@)", note.title];
 	} else {

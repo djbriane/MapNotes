@@ -17,8 +17,6 @@
 #import "Group.h"
 #import "Photo.h"
 
-// Pinch Analytics
-#import "Beacon.h"
 
 @implementation QuickAddViewController
 
@@ -74,8 +72,6 @@
 	} 
 	
 	CLLocation *location = [[LocationController sharedInstance] currentLocation];
-	// Send location info to Pinch Analytics
-	[[Beacon shared] setBeaconLocation:location];
 
 	MKCoordinateRegion region = {{0.0f, 0.0f}, {0.0f, 0.0f}};
 	
@@ -175,7 +171,7 @@
 	NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
 	if (mutableFetchResults == nil) {
 		// Handle the error.
-		NSLog(@"%@:%s Error fetching context: %@", [self class], _cmd, [error localizedDescription]);
+		//NSLog(@"%@:%s Error fetching context: %@", [self class], _cmd, [error localizedDescription]);
 	}
 	
 	// Set self's events array to the mutable array, then clean up.
@@ -222,8 +218,6 @@
     [navigationController release];
     [titleController release];
 
-	[[Beacon shared] startSubBeaconWithName:@"QuickAdd - New Text Note" timeSession:NO];
-
 	/*
 	NoteDescViewController *descController = [[NoteDescViewController alloc] initWithNibName:@"EditDesc" bundle:nil];
     descController.delegate = self;
@@ -262,9 +256,8 @@
 }
 
 - (IBAction)viewNotes:(id)sender {
-	[[UIApplication sharedApplication] setStatusBarHidden:NO animated:YES];
+	[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:YES];
 	[self.parentViewController dismissModalViewControllerAnimated:YES];
-	[[Beacon shared] startSubBeaconWithName:@"Quick Add - View Notes" timeSession:NO];
 }
 
 - (IBAction)updateLocation:(id)sender {
@@ -294,7 +287,6 @@
 		imagePicker.delegate = self;
 		[self presentModalViewController:imagePicker animated:YES];
 		[imagePicker release];
-		[[Beacon shared] startSubBeaconWithName:@"QuickAdd - Take Photo" timeSession:YES];
 	} 
 	else if ([actionSheet buttonTitleAtIndex:buttonIndex] == kChoosePhotoButtonText) {
 		// Choose Existing
@@ -303,7 +295,6 @@
 		imagePicker.delegate = self;
 		[self presentModalViewController:imagePicker animated:YES];
 		[imagePicker release];
-		[[Beacon shared] startSubBeaconWithName:@"QuickAdd - Choose Photo" timeSession:YES];
 	} 
 }
 
@@ -348,21 +339,19 @@
 	NSError *error;
 	if (![note.managedObjectContext save:&error]) {
 		// Handle the error.
-		NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
+		//NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
 	}
 	
     if ([self.delegate respondsToSelector:@selector (quickAddViewController:showNote:editing:)]) {
 		[self.delegate quickAddViewController:self showNote:note editing:YES];
 	}
-	[[Beacon shared] endSubBeaconWithName:@"QuickAdd - Take Photo"];
-	[[Beacon shared] endSubBeaconWithName:@"QuickAdd - Choose Photo"];
+
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
 	// The user canceled -- simply dismiss the image picker.
 	[self dismissModalViewControllerAnimated:YES];
-	[[Beacon shared] endSubBeaconWithName:@"QuickAdd - Take Photo"];
-	[[Beacon shared] endSubBeaconWithName:@"QuickAdd - Choose Photo"];
+
 }
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
@@ -472,7 +461,6 @@ didSelectSearchResult:(id)result
 	if ([self.delegate respondsToSelector:@selector (quickAddViewController:showNote:editing:)]) {
 		[self.delegate quickAddViewController:self showNote:ann.note editing:NO];
 	}
-	[[Beacon shared] startSubBeaconWithName:@"QuickAdd - View Note from Map" timeSession:NO];
 }
 
 

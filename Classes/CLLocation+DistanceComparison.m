@@ -13,8 +13,8 @@
 
 - (NSComparisonResult) compareToLocation:(CLLocation *)other {
 	CLLocation *myLocation = [[LocationController sharedInstance] currentLocation]; 
-	CLLocationDistance thisDistance = [self getDistanceFrom:myLocation];
-	CLLocationDistance thatDistance = [other getDistanceFrom:myLocation];
+	CLLocationDistance thisDistance = [self distanceFromLocation:myLocation];
+	CLLocationDistance thatDistance = [other distanceFromLocation:myLocation];
 	
 	if (thisDistance < thatDistance) { return NSOrderedAscending; }
 	if (thisDistance > thatDistance) { return NSOrderedDescending; }

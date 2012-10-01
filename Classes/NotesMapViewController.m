@@ -11,7 +11,6 @@
 #import "NoteAnnotation.h"
 #import "Note.h"
 #import "Group.h"
-#import "Beacon.h"
 
 @implementation NotesMapViewController
 
@@ -98,7 +97,6 @@
 			[self.mapView setRegion:region animated:TRUE];
         }
 	}	
-	[[Beacon shared] startSubBeaconWithName:@"Map - Zoom Buttons" timeSession:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -266,7 +264,6 @@
 	noteDetailController.selectedNote = ann.note;
     [self.navigationController pushViewController:noteDetailController animated:YES];
 	[noteDetailController release];
-	[[Beacon shared] startSubBeaconWithName:@"Map - View Note" timeSession:NO];
 }
 
 - (void)dealloc {

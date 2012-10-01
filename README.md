@@ -1,5 +1,7 @@
-Noteable Release Notes
+MapNotes Release Notes
 ====
+
+MapNotes is an iOS app that lets users save their location and add notes about it.
 
 Beta4 (1.04) - 9/18/2009
 ----

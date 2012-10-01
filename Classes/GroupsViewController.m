@@ -53,7 +53,7 @@
 	NSError *error;
 	if (![[self fetchedResultsController] performFetch:&error]) {
 		// Handle the error...
-		NSLog(@"%@:%s Error fetching context: %@", [self class], _cmd, [error localizedDescription]);
+		//NSLog(@"%@:%s Error fetching context: %@", [self class], _cmd, [error localizedDescription]);
 	}
 }
 
@@ -208,7 +208,7 @@
 	NSError *error;
 	if (![managedObjectContext save:&error]) {
 		// Handle the error...
-		NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
+		//NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
 	}
 	
 	// return to appropriate view
@@ -369,7 +369,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 		NSError *error;
 		if (![context save:&error]) {
 			// Handle the error...
-			NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
+			//NSLog(@"%@:%s Error saving context: %@", [self class], _cmd, [error localizedDescription]);
 		}
 		
 		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
