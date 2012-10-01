@@ -3,7 +3,7 @@
 //  MapNotes
 //
 //  Created by Brian Erickson on 7/26/09.
-//  Copyright 2009 Local Matters, Inc. All rights reserved.
+//  Copyright 2009 Brian Erickson. May be freely distributed under the MIT license.
 //
 
 @class Note;

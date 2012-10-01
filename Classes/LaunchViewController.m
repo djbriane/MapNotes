@@ -3,7 +3,7 @@
 //  MapNotes
 //
 //  Created by Brian Erickson on 7/24/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Copyright 2009 Brian Erickson. May be freely distributed under the MIT license.
 //
 
 #import "LaunchViewController.h"
